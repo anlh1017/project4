@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Content Overview -->
+	<section id="content" class="animated fadeIn pt35 pb45"
+		th:fragment="content_overview">
+		<div th:replace="sidebar::leftcontent" />
+
+		<div class="content-right table-layout">
+
+			<!-- Column Center -->
+			<div class="chute chute-center pbn">
+
+				<!-- Products Status Table -->
+				<div class="row mn">
+					<div class="col-xs-12">
+						<div class="panel">
+							<div class="panel-heading ">
+								<span class="panel-title ptn">Products Status</span>
+							</div>
+							<div class="panel-body pn mt15">
+								<div class="table-responsive">
+									<table
+										class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+										<thead>
+											<tr class="">
+												<th class=""></th>
+												<th class="">Image</th>
+												<th class="">Product Title</th>
+												<th class="">SKU</th>
+												<th class="">Price</th>
+												<th class="">Stock</th>
+												<th class="">Status</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class=""><label class="option block mn"> <input
+														type="checkbox" name="inputname" value="FR"> <span
+														class="checkbox mn"></span>
+												</label></td>
+												<td class=""><img class="img-responsive mw40 ib" alt=""
+													title="user" th:src="@{/img/pages/products/1.png}"></td>
+												<td class=""><span>Apple iPhone 5</span> <span>Apple
+														iPhone 5</span></td>
+												<td class=""><span>#123</span></td>
+												<td class=""><span>$500</span></td>
+												<td class=""><span>300</span></td>
+												<td class="">
+													<div class="btn-group text-right">
+														<button type="button"
+															class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+															data-toggle="dropdown" aria-expanded="false">
+															Active <span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu" role="menu">
+															<li><a href="#">Edit</a></li>
+															<li><a href="#">Delete</a></li>
+															<li><a href="#">Archive</a></li>
+															<li class="divider"></li>
+															<li class="active"><a href="#">Active</a></li>
+															<li><a href="#">Inactive</a></li>
+															<li><a href="#">Low Stock</a></li>
+															<li><a href="#">Out of Stock</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class=""><label class="option block mn"> <input
+														type="checkbox" name="inputname" value="FR"> <span
+														class="checkbox mn"></span>
+												</label></td>
+												<td class=""><img class="img-responsive mw40 ib"
+													title="user" alt="" src="@{/img/pages/products/3.png}"></td>
+												<td class=""><span>Apple iPad</span> <span>Apple
+														iPad</span></td>
+												<td class="">#2345</td>
+												<td class="">$400</td>
+												<td class="">300</td>
+												<td class="">
+													<div class="btn-group text-right">
+														<button type="button"
+															class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+															data-toggle="dropdown" aria-expanded="false">
+															Active <span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu" role="menu">
+															<li><a href="#">Edit</a></li>
+															<li><a href="#">Delete</a></li>
+															<li><a href="#">Archive</a></li>
+															<li class="divider"></li>
+															<li class="active"><a href="#">Active</a></li>
+															<li><a href="#">Inactive</a></li>
+															<li><a href="#">Low Stock</a></li>
+															<li><a href="#">Out of Stock</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class=""><label class="option block mn"> <input
+														type="checkbox" name="inputname" value="FR"> <span
+														class="checkbox mn"></span>
+												</label></td>
+												<td class=""><img class="img-responsive mw40 ib"
+													title="user" alt="" src="assets/img/pages/products/4.png"></td>
+												<td class=""><span>Apple iPad Air</span> <span>Apple
+														iPad Air</span></td>
+												<td class="">#4563</td>
+												<td class="">$800</td>
+												<td class="">500</td>
+												<td class="">
+													<div class="btn-group text-right">
+														<button type="button"
+															class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+															data-toggle="dropdown" aria-expanded="false">
+															Active <span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu" role="menu">
+															<li><a href="#">Edit</a></li>
+															<li><a href="#">Delete</a></li>
+															<li><a href="#">Archive</a></li>
+															<li class="divider"></li>
+															<li class="active"><a href="#">Active</a></li>
+															<li><a href="#">Inactive</a></li>
+															<li><a href="#">Low Stock</a></li>
+															<li><a href="#">Out of Stock</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class=""><label class="option block mn"> <input
+														type="checkbox" name="inputname" value="FR"> <span
+														class="checkbox mn"></span>
+												</label></td>
+												<td class=""><img class="img-responsive mw40 ib"
+													title="user" alt="" src="assets/img/pages/products/9.png"></td>
+												<td class=""><span>Apple iPhone 6S 32GB</span> <span>Apple
+														iPhone 6S 32GB</span></td>
+												<td class="">#1011</td>
+												<td class="">$1195</td>
+												<td class="text-danger"><b>0 - Sold Out</b></td>
+												<td class="">
+													<div class="btn-group text-right">
+														<button type="button"
+															class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+															data-toggle="dropdown" aria-expanded="false">
+															Sold Out <span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu" role="menu">
+															<li><a href="#">Edit</a></li>
+															<li><a href="#">Delete</a></li>
+															<li><a href="#">Archive</a></li>
+															<li class="divider"></li>
+															<li><a href="#">Active</a></li>
+															<li><a href="#">Inactive</a></li>
+															<li><a href="#">Low Stock</a></li>
+															<li class="active"><a href="#">Out of Stock</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class=""><label class="option block mn"> <input
+														type="checkbox" name="inputname" value="FR"> <span
+														class="checkbox mn"></span>
+												</label></td>
+												<td class=""><img class="img-responsive mw40 ib"
+													title="user" alt="" src="assets/img/pages/products/10.png"></td>
+												<td class=""><span>Apple iPhone 6S 64GB</span> <span>Apple
+														iPhone 6S 64GB</span></td>
+												<td class="">#1012</td>
+												<td class="">$1395</td>
+												<td class="text-danger"><b>0 - Sold Out</b></td>
+												<td class="">
+													<div class="btn-group text-right">
+														<button type="button"
+															class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+															data-toggle="dropdown" aria-expanded="false">
+															Sold Out <span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu" role="menu">
+															<li><a href="#">Edit</a></li>
+															<li><a href="#">Delete</a></li>
+															<li><a href="#">Archive</a></li>
+															<li class="divider"></li>
+															<li><a href="#">Active</a></li>
+															<li><a href="#">Inactive</a></li>
+															<li><a href="#">Low Stock</a></li>
+															<li class="active"><a href="#">Out of Stock</a></li>
+														</ul>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row mn allcp-panels">
+					<div class="col-lg-6">
+
+						<!-- Poll -->
+						<div class="panel pn" id="spy1">
+							<div class="panel-heading ">
+								<i class="icon-graphic-1"></i> <span class="panel-title">Poll</span>
+							</div>
+							<div class="panel-body p20 pb25 br-t">
+
+								<div id="donut-chart1" style="height: 350px; width: 100%;"></div>
+
+							</div>
+							<div
+								class="panel-body mtn pt30 pr10 pb25 pl15 poll-legend-bg-grey-dark">
+								<div class="col-sm-8 col-md-9 col-lg-8 xsmb15">
+									<div class="radio-custom radio-warning">
+										<input type="radio" id="browser1" name="radioExample">
+										<label for="browser1">Option 1: Google Chrome</label>
+									</div>
+									<div class="radio-custom radio-alert">
+										<input type="radio" id="browser2" name="radioExample">
+										<label for="browser2">Option 2: Mozilla FireFox</label>
+									</div>
+									<div class="radio-custom radio-info">
+										<input type="radio" id="browser3" name="radioExample">
+										<label for="browser3">Option 3: Microsoft IE</label>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-3 col-lg-4 xsmb15">
+									<div class="text-right xs-text-center  ">
+										<div class="btn btn-gradient-warning no-shadow mb10 xs-mbn ">
+											VOTE</div>
+										<div class="btn btn-gradient-grey no-shadow">Hide
+											results</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Task-list -->
+						<div class="panel panel-widget task-widget pn" id="spy11">
+							<div class="panel-heading cursor ">
+								<i class="icon-square1"></i> <span class="panel-title">Task-List
+									Widget</span>
+							</div>
+							<div class="panel-body p30 br-t">
+
+								<h6 class="text-muted mn mb20">
+									<span class="pl5 ff-2nd">Personal Tasks</span>
+								</h6>
+								<ul class="task-list task-current mb25">
+									<li class="task-item">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" id="task0"> <label
+													for="task0"></label>
+											</div>
+										</div>
+										<div class="task-desc">Remove announcement</div>
+										<div class="task-menu"></div>
+									</li>
+									<li class="task-item">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" id="task1"> <label
+													for="task1"></label>
+											</div>
+										</div>
+										<div class="task-desc">Post an announcement</div>
+										<div class="task-menu"></div>
+									</li>
+									<li class="task-item">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" id="task2"> <label
+													for="task2"></label>
+											</div>
+										</div>
+										<div class="task-desc">Add new products</div>
+										<div class="task-menu"></div>
+									</li>
+									<li class="task-item">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" id="task3"> <label
+													for="task3"></label>
+											</div>
+										</div>
+										<div class="task-desc">Ban a few users</div>
+										<div class="task-menu"></div>
+									</li>
+									<li class="task-item">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" id="task4"> <label
+													for="task4"></label>
+											</div>
+										</div>
+										<div class="task-desc">Clean comments</div>
+										<div class="task-menu"></div>
+									</li>
+								</ul>
+
+								<h6 class="text-muted mn mb20">
+									<span class="pl5 ff-2nd">Complete Tasks</span>
+								</h6>
+								<ul class="task-list task-completed">
+									<li class="task-item item-checked">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" checked="" id="task7"> <label
+													for="task7"></label>
+											</div>
+										</div>
+										<div class="task-desc">Add article review</div>
+										<div class="task-menu"></div>
+									</li>
+									<li class="task-item item-checked">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" checked="" id="task8"> <label
+													for="task8"></label>
+											</div>
+										</div>
+										<div class="task-desc">Add iPad review</div>
+										<div class="task-menu"></div>
+									</li>
+									<li class="task-item item-checked">
+										<div class="task-handle">
+											<div class="checkbox-custom">
+												<input type="checkbox" checked="" id="task9"> <label
+													for="task9"></label>
+											</div>
+										</div>
+										<div class="task-desc">Ban THATuser user</div>
+										<div class="task-menu"></div>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+
+						<!-- Veisitors Map -->
+						<div class="panel bg-none no-boxshadow pn" id="spy15">
+							<div class="panel-heading br5 mb25 bg-white">
+								<i class="icon-flag"></i> <span class="panel-title">Visitors
+									Map</span>
+							</div>
+							<div class="panel-body mtn pn">
+
+								<div id="map1" style="width: 100%; height: 270px;"></div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="col-lg-6">
+
+						<!-- Server Status -->
+						<div class="panel pn" id="spy10">
+							<div class="panel-heading ">
+								<i class="icon-graphic"></i> <span class="panel-title">Server
+									Status</span>
+							</div>
+							<div class="panel-body pt40 ph30 pb25 br-t">
+								<div class="progress progress-bar-lg br4 no-boxshadow">
+									<div class="progress-bar progress-bar-gradient-info"
+										role="progressbar" aria-valuenow="55" aria-valuemin="0"
+										aria-valuemax="100" style="width: 55%;">
+										<span class="pull-left">Memory Used</span> <span
+											class="pull-right ph10">55%</span>
+									</div>
+								</div>
+								<div class="progress progress-bar-lg br4 no-boxshadow">
+									<div class="progress-bar progress-bar-gradient-info"
+										role="progressbar" aria-valuenow="60" aria-valuemin="0"
+										aria-valuemax="100" style="width: 60%;">
+										<span class="pull-left">Disk dev/sda1</span> <span
+											class="pull-right ph10">60%</span>
+									</div>
+								</div>
+								<div class="progress progress-bar-lg br4 no-boxshadow">
+									<div class="progress-bar progress-bar-gradient-info"
+										role="progressbar" aria-valuenow="80" aria-valuemin="0"
+										aria-valuemax="100" style="width: 80%;">
+										<span class="pull-left">Disk dev/sda2</span> <span
+											class="pull-right ph10">80%</span>
+									</div>
+								</div>
+								<div class="progress progress-bar-lg br4 no-boxshadow">
+									<div class="progress-bar progress-bar-gradient-info"
+										role="progressbar" aria-valuenow="66" aria-valuemin="0"
+										aria-valuemax="100" style="width: 66%;">
+										<span class="pull-left">Disk dev/sda3</span> <span
+											class="pull-right ph10">66%</span>
+									</div>
+								</div>
+								<div class="progress progress-bar-lg br4 no-boxshadow">
+									<div class="progress-bar progress-bar-gradient-info"
+										role="progressbar" aria-valuenow="45" aria-valuemin="0"
+										aria-valuemax="100" style="width: 45%;">
+										<span class="pull-left">Disk dev/sda4</span> <span
+											class="pull-right ph10">45%</span>
+									</div>
+								</div>
+								<div class="progress progress-bar-lg br4 no-boxshadow">
+									<div class="progress-bar progress-bar-gradient-info"
+										role="progressbar" aria-valuenow="78" aria-valuemin="0"
+										aria-valuemax="100" style="width: 78%;">
+										<span class="pull-left">Disk dev/sda5</span> <span
+											class="pull-right ph10">78%</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Traphic Sources -->
+						<div class="panel pn" id="spy7">
+							<div class="panel-heading ">
+								<i class="icon-tool2"></i> <span class="panel-title">Traffic
+									Source</span>
+							</div>
+							<div class="panel-body pt40 ph25 pb35 br-t">
+								<div class="row">
+									<div class="col-sm-4 text-center ph10 xsmb15">
+										<div class="info-circle" id="c1" data-value="65"
+											data-circle-color="info-dr"></div>
+										<div class="text-muted fs18 fw500">Google</div>
+									</div>
+									<div class="col-sm-4 text-center ph10 xsmb15">
+										<div class="info-circle" id="c2" data-value="15"
+											data-circle-color="info-dr"></div>
+										<div class="text-muted fs18 fw500">Bing</div>
+									</div>
+									<div class="col-sm-4 text-center ph10">
+										<div class="info-circle" id="c3" data-value="40"
+											data-circle-color="info-dr"></div>
+										<div class="text-muted fs18 fw500">Twitter</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- User Project List -->
+						<div class="panel pn" id="spy6">
+							<div class="panel-heading ">
+								<i class="icon-clock"></i> <span class="panel-title">User
+									Project List Schedule</span>
+							</div>
+							<div class="panel-body br-t pt20 ph30 bp25">
+								<div class="bs-component">
+									<div class="table-responsive">
+										<table
+											class="table table-striped table-style-1 btn-gradient-grey">
+											<thead class="">
+												<tr>
+													<th class="">Project</th>
+													<th class=" hidden-xs">Start Date</th>
+													<th class="">Deadline</th>
+													<th class="">Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="wp35">#4551</td>
+													<td class="hidden-xs">10.02.2016</td>
+													<td>10.02.2016</td>
+													<td><span class="label label-info">in progress</span></td>
+												</tr>
+												<tr>
+													<td class="">#4532</td>
+													<td class="hidden-xs">23.12.2015</td>
+													<td>11.01.2016</td>
+													<td><span class="label label-primary">Done</span></td>
+												</tr>
+												<tr>
+													<td class="">#4536</td>
+													<td class="hidden-xs">16.05.2015</td>
+													<td>18.06.2015</td>
+													<td><span class="label label-danger">Failed</span></td>
+												</tr>
+												<tr>
+													<td class="">#4552</td>
+													<td class="hidden-xs">10.02.2016</td>
+													<td>10.02.2016</td>
+													<td><span class="label label-info">In Progress</span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Column Graph -->
+						<div class="panel pn" id="spy9">
+							<div class="panel-heading ">
+								<i class="icon-arrows"></i> <span class="panel-title">Traffic
+									Source</span>
+							</div>
+							<div class="panel-body br-t">
+								<div class="row mn">
+									<div class="col-sm-6 prn mt50 xsmt25">
+										<div class="progress progress-bar-lg br4 no-boxshadow mb15">
+											<div class="progress-bar progress-bar-gradient-warning"
+												role="progressbar" aria-valuenow="85" aria-valuemin="0"
+												aria-valuemax="100">
+												<span>Google</span>
+											</div>
+										</div>
+										<div class="progress progress-bar-lg br4 no-boxshadow mb15">
+											<div class="progress-bar progress-bar-gradient-info"
+												role="progressbar" aria-valuenow="35" aria-valuemin="0"
+												aria-valuemax="100">
+												<span>Bing</span>
+											</div>
+										</div>
+										<div class="progress progress-bar-lg br4 no-boxshadow">
+											<div class="progress-bar progress-bar-gradient-alert"
+												role="progressbar" aria-valuenow="65" aria-valuemin="0"
+												aria-valuemax="100">
+												<span>Twitter</span>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-sm-6 pl35 xsph10">
+										<div class="allcp-form mt10">
+											<!-- Block Widget -->
+											<div class="smart-widget br-b sm-right">
+												<label class="field"> <input type="text" name="sub"
+													id="sub" class="gui-input br-n pn"
+													placeholder="Add Data Source">
+												</label>
+												<button type="submit" class="button br-n pn">
+													<i class="allcp-icon-plus"></i>
+												</button>
+											</div>
+										</div>
+										<div class="legend-widget">
+											<ul class="legend-list">
+												<li class="legend-item danger">
+													<div class="legend-handle">
+														<i class="fa fa-circle fs21"></i>
+													</div>
+													<div class="legend-desc pl25">
+														Google <span class="legend-date">85%</span>
+													</div>
+												</li>
+												<li class="legend-item info">
+													<div class="legend-handle">
+														<i class="fa fa-circle fs21"></i>
+													</div>
+													<div class="legend-desc pl25">
+														Bing <span class="legend-date">35%</span>
+													</div>
+												</li>
+												<li class="legend-item alert">
+													<div class="legend-handle">
+														<i class="fa fa-circle fs21"></i>
+													</div>
+													<div class="legend-desc pl25">
+														Twitter <span class="legend-date">65%</span>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+
+						<!-- Quick Links -->
+						<div class="row mhn">
+							<div class="col-sm-6 pln">
+								<div class="panel panel-tile pn info-block-alt">
+									<div class="panel-heading ">
+										<i class="icon-tool text-dark"></i> <span class="panel-title">Tickets
+											Answered</span>
+									</div>
+									<div class="panel-body br-t">
+										<div class="info-block-middle text-center">
+											<h2>6.794</h2>
+
+										</div>
+										<div class="info-block-bottom text-center">
+											<h6>Answeres</h6>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 prn">
+								<div class="panel panel-tile pn info-block-alt">
+									<div class="panel-heading ">
+										<i class="icon-transport text-dark"></i> <span
+											class="panel-title">Projects Launched</span>
+									</div>
+									<div class="panel-body br-t">
+										<div class="info-block-middle text-center">
+											<h2>457</h2>
+										</div>
+										<div class="info-block-bottom text-center">
+											<h6>Projects</h6>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /Column Center -->
+		</div>
+	</section>
+	<!-- /Content Overview -->
+	<!-- Content Sales Stat Product -->
+	<section id="content" class="animated fadeIn pt35 pb45"
+		th:fragment="sales-stats-products">
+
+		<div th:replace="sidebar::leftcontent" />
+		<div class="content-right table-layout">
+
+			<!-- Column Left -->
+			<aside class="chute chute-left chute290 chute-icon-style br5"
+				data-chute-height="match">
+				<div id="sticky-anchor"></div>
+				<div id="sticky" class="chute-icon"></div>
+				<div id="sticky-anchor-chute"></div>
+				<div class="scroller-chute scroller-primary chute-fh-xs mrn">
+					<!-- Menu Block -->
+					<div class="allcp-form theme-primary">
+
+						<h5 class="pln">Filter Products</h5>
+
+						<h6 class="mb15">by SKU</h6>
+
+						<div class="section mb20">
+							<label for="order-id" class="field prepend-icon"> <input
+								type="text" name="order-id" id="order-id" class="gui-input"
+								placeholder="Product SKU #"> <span class="field-icon">
+									<i class="fa fa-tag"></i>
+							</span>
+							</label>
+						</div>
+
+						<h6 class="mb15">by price</h6>
+
+						<div class="section row mb20">
+							<div class="col-md-12 ph5">
+								<label for="price1" class="field prepend-icon mb5"> <input
+									type="text" name="price1" id="price1" class="gui-input"
+									placeholder="0"> <span class="field-icon"> <i
+										class="fa fa-usd"></i>
+								</span>
+								</label>
+							</div>
+							<div class="col-md-12 ph5">
+								<label for="price2" class="field prepend-icon"> <input
+									type="text" name="price2" id="price2" class="gui-input"
+									placeholder="1000"> <span class="field-icon"> <i
+										class="fa fa-usd"></i>
+								</span>
+								</label>
+							</div>
+						</div>
+
+						<h6 class="mb15">by date</h6>
+
+						<div class="section row mb20">
+							<div class="col-md-12 ph5">
+								<label for="datepicker1" class="field prepend-icon mb5">
+									<input type="text" id="datepicker1" name="datepicker1"
+									class="gui-input fs13" placeholder="From"> <span
+									class="field-icon"> <i class="fa fa-calendar"></i>
+								</span>
+								</label>
+							</div>
+							<div class="col-md-12 ph5">
+								<label for="datepicker2" class="field prepend-icon"> <input
+									type="text" id="datepicker2" name="datepicker2"
+									class="gui-input fs13" placeholder="To"> <span
+									class="field-icon"> <i class="fa fa-calendar"></i>
+								</span>
+								</label>
+							</div>
+						</div>
+
+						<h6 class="mb15">by category</h6>
+
+						<div class="section mb20">
+							<label class="field select"> <select
+								id="filter-categories" name="filter-categories">
+									<option value="0" selected="selected">Filter by
+										Categories</option>
+									<option value="1">iPhone</option>
+									<option value="2">iPad</option>
+									<option value="3">iMac</option>
+							</select> <i class="arrow double"></i>
+							</label>
+						</div>
+
+						<hr class="short">
+
+						<div class="section pb50 clr">
+							<button class="btn btn-primary pull-right ph30" type="button">Search</button>
+						</div>
+
+					</div>
+				</div>
+			</aside>
+			<!-- /Column Left -->
+
+			<!-- Column Center -->
+			<div class="chute chute-center">
+
+				<!-- New Product -->
+				<div class="panel mb25">
+					<div class="panel-heading">
+						<span class="panel-title hidden-xs"> Add New Product</span>
+						<ul class="nav panel-tabs-border panel-tabs">
+							<li class="active"><a href="#tab1_1" data-toggle="tab">General</a>
+							</li>
+							<li><a href="#tab1_2" data-toggle="tab">Details</a></li>
+						</ul>
+					</div>
+					<div class="panel-body pn">
+						<div class="tab-content pn br-n allcp-form theme-primary">
+							<div id="tab1_1" class="tab-pane active">
+
+								<div class="section row mbn">
+									<div class="col-md-4 ph10">
+										<div class="fileupload fileupload-new allcp-form"
+											data-provides="fileupload">
+											<div class="fileupload-preview thumbnail mb20">
+												<img data-src="holder.js/100%x140" alt="holder">
+											</div>
+											<div class="row mhn10">
+												<div class="col-xs-12 col-sm-7 pr5 ph10">
+													<input type="text" name="name2" id="name2"
+														class="text-center event-name gui-input br-light bg-light"
+														placeholder="Image tags"> <span class="field-icon"></span>
+												</div>
+												<div class="col-xs-12 col-sm-5 ph10">
+													<span class="button btn-primary btn-file btn-block br5">
+														<span class="fileupload-new">Select</span> <span
+														class="fileupload-exists">Change</span> <input type="file">
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-8 ph10">
+										<div class="section mb10">
+											<label for="name21" class="field prepend-icon"> <input
+												type="text" name="name21" id="name21"
+												class="event-name gui-input br-light light"
+												placeholder="Product Name"> <span class="field-icon">
+													<i class="fa fa-tag"></i>
+											</span>
+											</label>
+										</div>
+										<div class="section mb10">
+											<label class="field prepend-icon"> <textarea
+													style="height: 160px;"
+													class="gui-textarea br-light bg-light" id="comment"
+													name="comment" placeholder="Product Description"></textarea>
+												<span class="field-icon"> <i class="fa fa-file"></i>
+											</span>
+											</label>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+							<div id="tab1_2" class="tab-pane">
+
+								<div class="section row">
+									<div class="col-md-4 ph10">
+										<label for="product-category" class="field select"> <select
+											id="product-category" name="product-category">
+												<option value="0" selected="selected">Category...</option>
+												<option value="1">iPhone</option>
+												<option value="2">iPad</option>
+												<option value="3">iMac</option>
+										</select> <i class="arrow double"></i>
+										</label>
+									</div>
+									<!-- /section -->
+
+									<div class="col-md-4 ph10">
+										<label class="field select"> <select
+											id="product-status" name="product-status">
+												<option value="0" selected="selected">Availability</option>
+												<option value="1">Available</option>
+												<option value="2">Unavailable</option>
+												<option value="2">Preorder</option>
+												<option value="3">Discontinued</option>
+												<option value="4">Out of Stock</option>
+										</select> <i class="arrow double"></i>
+										</label>
+									</div>
+									<!-- /section -->
+
+									<div class="col-md-4 ph10">
+										<label for="product-quantity" class="field prepend-icon">
+											<input type="text" name="product-quantity"
+											id="product-quantity" class="gui-input"
+											placeholder="Quantity"> <span class="field-icon">
+												<i class="fa fa-sort-amount-desc"></i>
+										</span>
+										</label>
+									</div>
+									<!-- /section -->
+
+								</div>
+								<!-- /Section -->
+
+								<div class="section row">
+									<div class="col-md-4 ph10">
+										<label for="product-price" class="field prepend-icon">
+											<input type="text" name="product-price" id="product-price"
+											class="gui-input" placeholder="Price..."> <span
+											class="field-icon"> <i class="fa fa-usd"></i>
+										</span>
+										</label>
+									</div>
+									<!-- /section -->
+
+									<div class="col-md-4 ph10">
+										<label for="product-vendor" class="field prepend-icon">
+											<input type="text" name="product-vendor" id="product-vendor"
+											class="gui-input" placeholder="Vendor..."> <span
+											class="field-icon"> <i class="fa fa-building"></i>
+										</span>
+										</label>
+									</div>
+									<!-- /section -->
+
+									<div class="col-md-4 ph10">
+										<label for="product-sku" class="field prepend-icon"> <input
+											type="text" name="product-sku" id="product-sku"
+											class="gui-input" placeholder="SKU..."> <span
+											class="field-icon"> <i class="fa fa-barcode"></i>
+										</span>
+										</label>
+									</div>
+									<!-- /section -->
+
+								</div>
+								<!-- /Section -->
+
+								<div class="section br10">
+									<input id="tagsinput" type="text"
+										value="Apple, Device, Gadget, iPhone, iPad, iMac">
+								</div>
+								<!-- /Section -->
+
+								<hr class="short alt">
+
+								<div class="section mbn text-right">
+									<p class="text-right">
+										<button class="btn btn-primary" type="button">Add
+											product</button>
+									</p>
+								</div>
+								<!-- /section -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Recent Orders -->
+				<div class="panel mbn">
+					<div class="panel-menu p12 allcp-form theme-primary mtn">
+						<div class="row">
+							<div class="col-md-4">
+								<label class="field select"> <select id="bulk-action"
+									name="bulk-action">
+										<option value="0">Actions</option>
+										<option value="1">Edit</option>
+										<option value="2">Delete</option>
+										<option value="3">Active</option>
+										<option value="4">Inactive</option>
+								</select> <i class="arrow double"></i>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="field select"> <select
+									id="filter-category" name="filter-category">
+										<option value="0">Filter by Category</option>
+										<option value="1">iPhone</option>
+										<option value="2">iPad</option>
+										<option value="3">iMac</option>
+								</select> <i class="arrow"></i>
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="field select"> <select id="filter-status"
+									name="filter-status">
+										<option value="0">Filter by Status</option>
+										<option value="1">Active</option>
+										<option value="2">Inactive</option>
+										<option value="3">Low Stock</option>
+										<option value="4">Out of Stock</option>
+								</select> <i class="arrow"></i>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body pn">
+						<div class="table-responsive">
+							<table
+								class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+								<thead>
+									<tr class="">
+										<th class="text-center"></th>
+										<th class="">Image</th>
+										<th class="">Product Title</th>
+										<th class="">SKU</th>
+										<th class="">Price</th>
+										<th class="">Stock</th>
+										<th class="text-right">Status</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/1.png">
+										</td>
+										<td class="">Apple iPhone 5</td>
+										<td class="">#123</td>
+										<td class="">$500</td>
+										<td class="">300</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Active <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li class="active"><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/10.png">
+										</td>
+										<td class="">Apple iPhone 6</td>
+										<td class="">#1234</td>
+										<td class="">$600</td>
+										<td class="">500</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Active <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li class="active"><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/3.png">
+										</td>
+										<td class="">Apple iPad</td>
+										<td class="">#2345</td>
+										<td class="">$400</td>
+										<td class="">300</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Active <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li class="active"><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/4.png">
+										</td>
+										<td class="">Apple iPad Air</td>
+										<td class="">#4563</td>
+										<td class="">$800</td>
+										<td class="">500</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Active <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li class="active"><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/10.png">
+										</td>
+										<td class="">Apple iMac</td>
+										<td class="">#5555</td>
+										<td class="">$999</td>
+										<td class="">100</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Active <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li class="active"><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/3.png">
+										</td>
+										<td class="">Apple iMac 27"</td>
+										<td class="">#5656</td>
+										<td class="">$1999</td>
+										<td class="">300</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Active <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li class="active"><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/4.png">
+										</td>
+										<td class="">Apple iPhone 4S</td>
+										<td class="">#6666</td>
+										<td class="">$300</td>
+										<td class="text-warning"><b>15</b></td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-warning br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Disabled <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Active</a></li>
+													<li class="active"><a href="#" class="text-warning">Inactive</a>
+													</li>
+													<li><a href="#">Low Stock</a></li>
+													<li><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/3.png">
+										</td>
+										<td class="">Apple iPhone 6S 16GB</td>
+										<td class="">#1010</td>
+										<td class="">$995</td>
+										<td class="text-danger"><b>0 - Sold Out</b></td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Sold Out <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li class="active"><a href="#" class="text-warning">Out
+															of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/9.png">
+										</td>
+										<td class="">Apple iPhone 6S 32GB</td>
+										<td class="">#1011</td>
+										<td class="">$1195</td>
+										<td class="text-danger"><b>0 - Sold Out</b></td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Sold Out <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li class="active"><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="w100"><img class="img-responsive mw40 ib"
+											title="user" alt="" src="assets/img/pages/products/10.png">
+										</td>
+										<td class="">Apple iPhone 6S 64GB</td>
+										<td class="">#1012</td>
+										<td class="">$1395</td>
+										<td class="text-danger"><b>0 - Sold Out</b></td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Sold Out <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Active</a></li>
+													<li><a href="#">Inactive</a></li>
+													<li><a href="#">Low Stock</a></li>
+													<li class="active"><a href="#">Out of Stock</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- /Column Center -->
+		</div>
+	</section>
+	<!-- /Content Sales Stat Product -->
+	<!-- Content Sale Stat Client -->
+	<section id="content" class="animated fadeIn pt35 pb45"
+		th:fragment="sales-stats-clients">
+		<div th:replace="sidebar::leftcontent"></div>
+
+		<div class="content-right table-layout">
+			<!-- Column Left -->
+			<aside class="chute chute-left chute290 chute-icon-style br5"
+				data-chute-height="match">
+				<div class="chute-icon"></div>
+				<div class="scroller-chute scroller-primary chute-fh-xs mrn">
+					<div class="allcp-form theme-primary">
+
+						<h5 class="pln">Find Users</h5>
+
+						<h6 class="mb15">by ID</h6>
+
+						<div class="section mb20">
+							<label for="customer-id" class="field prepend-icon"> <input
+								type="text" name="customer-id" id="customer-id"
+								class="gui-input" placeholder="ID #"> <span
+								class="field-icon"> <i class="fa fa-user"></i>
+							</span>
+							</label>
+						</div>
+
+						<h6 class="mb15">by name</h6>
+
+						<div class="section mb20">
+							<label for="customer-name" class="field prepend-icon"> <input
+								type="text" name="customer-name" id="customer-name"
+								class="gui-input" placeholder="Name"> <span
+								class="field-icon"> <i class="fa fa-user"></i>
+							</span>
+							</label>
+						</div>
+						<h6 class="mb15">by email</h6>
+
+						<div class="section mb20">
+							<label for="customer-email" class="field prepend-icon"> <input
+								type="text" name="customer-email" id="customer-email"
+								class="gui-input" placeholder="Email"> <span
+								class="field-icon"> <i class="fa fa-envelope-o"></i>
+							</span>
+							</label>
+						</div>
+
+						<h6 class="mb15">by country</h6>
+
+						<div class="section mb20">
+							<label class="field select"> <select
+								id="customer-location" name="customer-location">
+									<option value="0" selected="selected">Location</option>
+									<option value="1">USA</option>
+									<option value="2">Canada</option>
+									<option value="3">France</option>
+									<option value="4">China</option>
+									<option value="4">Spain</option>
+							</select> <i class="arrow double"></i>
+							</label>
+						</div>
+
+						<h6 class="mb15">by date</h6>
+
+						<div class="section row mb20">
+							<div class="col-md-12 ph5">
+								<label for="datepicker1" class="field prepend-icon"> <input
+									type="text" id="datepicker1" name="datepicker1"
+									class="gui-input fs13" placeholder="From"> <span
+									class="field-icon"> <i class="fa fa-calendar"></i>
+								</span>
+								</label>
+							</div>
+							<div class="col-md-12 ph5">
+								<label for="datepicker2" class="field prepend-icon"> <input
+									type="text" id="datepicker2" name="datepicker2"
+									class="gui-input fs13" placeholder="To"> <span
+									class="field-icon"> <i class="fa fa-calendar"></i>
+								</span>
+								</label>
+							</div>
+						</div>
+
+						<hr class="short">
+
+						<div class="section clr pb30">
+							<button class="btn btn-primary pull-right ph30" type="button">Search</button>
+						</div>
+
+					</div>
+				</div>
+			</aside>
+			<!-- /Column Left -->
+
+			<!-- Column Center -->
+			<div class="chute chute-center">
+
+				<!-- Table -->
+				<div class="panel mbn">
+					<div class="panel-menu allcp-form theme-primary mtn">
+						<div class="row">
+							<div class="col-md-6">
+								<label class="field select"> <select
+									id="filter-purchases" name="filter-purchases">
+										<option value="0">Filter by Purchases</option>
+										<option value="1">1-49</option>
+										<option value="2">50-499</option>
+										<option value="1">500-999</option>
+										<option value="2">1000+</option>
+								</select> <i class="arrow double"></i>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label class="field select"> <select id="filter-group"
+									name="filter-group">
+										<option value="0">Filter by Group</option>
+										<option value="1">Clients</option>
+										<option value="2">Vendors</option>
+										<option value="3">Distributors</option>
+										<option value="4">Employees</option>
+								</select> <i class="arrow double"></i>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body pn">
+						<div class="table-responsive">
+							<table
+								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
+								<thead>
+									<tr class="">
+										<th class="text-center">Select</th>
+										<th class="">Name</th>
+										<th class="">Email</th>
+										<th class="">Group</th>
+										<th class="">Registered</th>
+										<th class="">Purchases</th>
+										<th class="">Total Spent</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">John Doe</td>
+										<td class="">mail@mail.com</td>
+										<td class="">Clients</td>
+										<td class="">11/01/2015</td>
+										<td class="">5</td>
+										<td class="">$1,000</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Jane Doe</td>
+										<td class="">trash@mail.com</td>
+										<td class="">Clients</td>
+										<td class="">11/01/2015</td>
+										<td class="">13</td>
+										<td class="">$15,885</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Doublas Abrams</td>
+										<td class="">da@mail.com</td>
+										<td class="">Clients</td>
+										<td class="">11/01/2015</td>
+										<td class="">13</td>
+										<td class="">$13,999</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Abram Douglas</td>
+										<td class="">ad@mail.com</td>
+										<td class="">Vendors</td>
+										<td class="">11/01/2015</td>
+										<td class="">10</td>
+										<td class="">$20,300</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Nesli Lislen</td>
+										<td class="">trash@mail.com</td>
+										<td class="">Distributors</td>
+										<td class="">11/01/2015</td>
+										<td class="">148</td>
+										<td class="">$230,600</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Kira Soul</td>
+										<td class="">ksoul@mail.com</td>
+										<td class="">Employes</td>
+										<td class="">11/01/2015</td>
+										<td class="">3</td>
+										<td class="">$1,200</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Abram Douglas</td>
+										<td class="">ad@mail.com</td>
+										<td class="">Vendors</td>
+										<td class="">11/01/2015</td>
+										<td class="">06</td>
+										<td class="">$1,400</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Jane Doe</td>
+										<td class="">trash@mail.com</td>
+										<td class="">Distributors</td>
+										<td class="">11/01/2015</td>
+										<td class="">16</td>
+										<td class="">$4,200</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Then Hven</td>
+										<td class="">nyam@mail.com</td>
+										<td class="">Employes</td>
+										<td class="">11/01/2015</td>
+										<td class="">1</td>
+										<td class="">$500</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">Kefi Ranet</td>
+										<td class="">net@mail.com</td>
+										<td class="">Clients</td>
+										<td class="">11/01/2015</td>
+										<td class="">10</td>
+										<td class="">$15,100</td>
+									</tr>
+									<tr>
+										<td class="text-center"><label class="option block mn">
+												<input type="checkbox" name="inputname" value="FR">
+												<span class="checkbox mn"></span>
+										</label></td>
+										<td class="">John Doe</td>
+										<td class="">mail@mail.com</td>
+										<td class="">Clients</td>
+										<td class="">11/01/2015</td>
+										<td class="">12</td>
+										<td class="">$8,555</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- /Column Center -->
+		</div>
+	</section>
+	<!-- /Content Sale Stat Client -->
+	<!-- Content Sale Stat Purchases -->
+	<section id="content" class="animated fadeIn pt35 pb45"
+		th:fragment="sales-stats-purchases">
+		<div th:replace="sidebar::leftcontent" />
+		<div class="content-right table-layout">
+			<!-- Column Left -->
+			<aside class="chute chute-left chute290 chute-icon-style br5"
+				data-chute-height="match">
+				<div class="chute-icon"></div>
+				<div class="scroller-chute scroller-primary chute-fh-xs mrn">
+					<!-- Menu Block -->
+					<div class="allcp-form theme-primary">
+
+						<h5 class="pln">Filter Orders</h5>
+
+						<h6 class="mb15">by ID</h6>
+
+						<div class="section mb20">
+							<label for="order-id" class="field prepend-icon"> <input
+								type="text" name="order-id" id="order-id" class="gui-input"
+								placeholder="Order ID #"> <span class="field-icon">
+									<i class="fa fa-tag"></i>
+							</span>
+							</label>
+						</div>
+
+						<h6 class="mb15">by price</h6>
+
+						<div class="section row mb20">
+							<div class="col-md-12 ph5">
+								<label for="price1" class="field prepend-icon mb5"> <input
+									type="text" name="price1" id="price1" class="gui-input"
+									placeholder="0"> <span class="field-icon"> <i
+										class="fa fa-usd"></i>
+								</span>
+								</label>
+							</div>
+							<div class="col-md-12 ph5">
+								<label for="price2" class="field prepend-icon mb5"> <input
+									type="text" name="price2" id="price2" class="gui-input"
+									placeholder="1000"> <span class="field-icon"> <i
+										class="fa fa-usd"></i>
+								</span>
+								</label>
+							</div>
+						</div>
+
+						<h6 class="mb15">by date</h6>
+
+						<div class="section row mb20">
+							<div class="col-md-12 ph5">
+								<label for="datepicker1" class="field prepend-icon mb5">
+									<input type="text" id="datepicker1" name="datepicker1"
+									class="gui-input fs13" placeholder="From"> <span
+									class="field-icon"> <i class="fa fa-calendar"></i>
+								</span>
+								</label>
+							</div>
+							<div class="col-md-12 ph5">
+								<label for="datepicker2" class="field prepend-icon mb5">
+									<input type="text" id="datepicker2" name="datepicker2"
+									class="gui-input fs13" placeholder="To"> <span
+									class="field-icon"> <i class="fa fa-calendar"></i>
+								</span>
+								</label>
+							</div>
+						</div>
+
+						<h6 class="mb15">by Category</h6>
+
+						<div class="section mb20">
+							<label class="field select"> <select
+								id="filter-categories" name="filter-categories">
+									<option value="0" selected="selected">Filter by
+										Categories</option>
+									<option value="1">iPhone</option>
+									<option value="2">iPad</option>
+									<option value="2">iMac</option>
+							</select> <i class="arrow double"></i>
+							</label>
+						</div>
+
+						<hr class="short">
+
+						<div class="section pb30 clr">
+							<button class="btn btn-primary pull-right ph30" type="button">Search</button>
+						</div>
+
+					</div>
+				</div>
+
+			</aside>
+			<!-- /Column Left -->
+
+			<!-- Column Center -->
+			<div class="chute chute-center">
+
+				<!-- Recent Orders -->
+				<div class="panel mbn">
+					<div class="panel-menu allcp-form theme-primary mtn">
+						<div class="row">
+							<div class="col-md-6">
+								<label for="filter-datepicker" class="field prepend-picker-icon">
+									<input type="text" value="11/01/2015" id="filter-datepicker"
+									name="filter-datepicker" class="gui-input"
+									placeholder="Filter by Date">
+								</label>
+							</div>
+							<div class="col-md-6">
+								<label class="field select"> <select id="filter-status"
+									name="filter-status">
+										<option value="0">Filter by Status</option>
+										<option value="1">Pending</option>
+										<option value="2">Canceled</option>
+										<option value="3">Completed</option>
+										<option value="4">Archived</option>
+								</select> <i class="arrow double"></i>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body pn">
+						<div class="table-responsive">
+							<table
+								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
+								<thead>
+									<tr class="">
+										<th class="text-center">Select</th>
+										<th class="">Order Date</th>
+										<th class="">Order ID</th>
+										<th class="">Customer</th>
+										<th class="">Notes</th>
+										<th class="text-center">Order Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>John Doe</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-alert br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Pending <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>John Doe</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-alert br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Pending <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Jane Doe</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-alert br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Pending <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Douglas Abrams</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-success br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Completed <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Abram Douglas</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-success br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Completed <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Chen Pok</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-success br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Completed <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Abram Douglas</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-warning br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Archived <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Chen Pok</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-warning br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Archived <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Lion Ess</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-warning br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Archived <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Chen Pok</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Canceled <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Lion Ess</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Canceled <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class=""><label class="option block mn"> <input
+												type="checkbox" name="inputname" value="FR"> <span
+												class="checkbox mn"></span>
+										</label></td>
+										<td class="">11/01/2015</td>
+										<td class="">#12345</td>
+										<td class=""><span>Lion Ess</span></td>
+										<td class="">Typi non habent claritatem insitam</td>
+										<td class="">
+											<div class="btn-group text-right">
+												<button type="button"
+													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">
+													Canceled <span class="caret ml5"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Edit</a></li>
+													<li><a href="#">Delete</a></li>
+													<li><a href="#">Archive</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Completed</a></li>
+													<li class="active"><a href="#">Pending</a></li>
+													<li><a href="#">Canceled</a></li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- /Column Center -->
+		</div>
+	</section>
+	<!-- /Content Sale Stat Purchases -->
+	<!-- Content Sale Stat Setting -->
+	<section id="content" class="animated fadeIn pt35 pb45" th:fragment="sales-stats-general-settings">
+
+		<div th:replace="sidebar::leftcontent" />
+
+		<div class="content-right table-layout">
+
+			<!-- Column Left -->
+			<aside class="chute chute-left chute290 chute-icon-style br5"
+				data-chute-height="match">
+				<div class="chute-icon"></div>
+				<div class="chute-container">
+					<!-- Menu Block -->
+					<div class="allcp-form theme-primary">
+
+						<h6 class="mb15">Store Name</h6>
+
+						<div class="section mb15">
+							<label for="store-name" class="field prepend-icon"> <input
+								type="text" name="store-name" id="store-name" class="gui-input"
+								value="My Store"> <span class="field-icon"> <i
+									class="fa fa-shopping-cart"></i>
+							</span>
+							</label>
+						</div>
+
+						<h6 class="mb15">Store URL</h6>
+
+						<div class="section mb15">
+							<label for="store-url" class="field prepend-icon"> <input
+								type="text" name="store-url" id="store-url" class="gui-input"
+								value="http://yoursite.com/shop"> <span
+								class="field-icon"> <i class="fa fa-link"></i>
+							</span>
+							</label>
+						</div>
+
+						<h6 class="mb15">Store Image</h6>
+
+						<div class="fileupload fileupload-new" data-provides="fileupload">
+							<div class="fileupload-preview thumbnail mb20">
+								<img data-src="holder.js/100%x100" alt="holder">
+							</div>
+							<span class="btn btn-primary light btn-file btn-block ph5">
+								<span class="fileupload-new">Upload image</span> <span
+								class="fileupload-exists">Upload image</span> <input type="file">
+							</span>
+						</div>
+					</div>
+				</div>
+
+			</aside>
+			<!-- /Column Left -->
+
+			<!-- Column Center -->
+			<div class="chute chute-center">
+
+				<div class="mw1000 center-block">
+
+					<!-- General Information -->
+					<div class="panel mb35">
+						<div class="panel-heading">
+							<span class="panel-title">General Information</span>
+						</div>
+						<div class="panel-body br-t">
+							<div class="allcp-form theme-primary">
+								<div class="section row mb10">
+									<label for="name"
+										class="field-label col-sm-2 ph10  text-center">Name:</label>
+
+									<div class="col-sm-10 ph10">
+										<label for="name" class="field prepend-icon"> <input
+											type="text" name="name" id="name" class="gui-input"
+											value="ThemeREX"> <span class="field-icon"> <i
+												class="fa fa-shopping-cart"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+								<div class="section row mb10">
+									<label for="store-phone"
+										class="field-label col-sm-2 ph10 text-center">Phone:</label>
+
+									<div class="col-sm-10 ph10">
+										<label for="store-phone" class="field prepend-icon"> <input
+											type="text" name="store-phone" id="store-phone"
+											class="gui-input" value="123-456-7890"> <span
+											class="field-icon"> <i class="fa fa-mobile-phone"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+								<div class="section row mb10">
+									<label for="store-email"
+										class="field-label col-sm-2 ph10 text-center">Email:</label>
+
+									<div class="col-sm-10 ph10">
+										<label for="store-email" class="field prepend-icon"> <input
+											type="text" name="store-email" id="store-email"
+											class="gui-input" value="info@site.com"> <span
+											class="field-icon"> <i class="fa fa-envelope-o"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+
+								<hr class="short alt">
+
+								<div class="section">
+									<label for="address" class="field prepend-icon"> <input
+										type="text" name="address" id="address" class="gui-input"
+										placeholder="Street address"> <span class="field-icon">
+											<i class="fa fa-building-o"></i>
+									</span>
+									</label>
+								</div>
+								<!-- /section -->
+
+								<div class="section">
+									<label class="field select"> <select id="location"
+										name="location">
+											<option value="">Select country...</option>
+											<option value="AL">Albania</option>
+											<option value="DZ">Algeria</option>
+											<option value="AD">Andorra</option>
+											<option value="AO">Angola</option>
+											<option value="AI">Anguilla</option>
+											<option value="AG">Antigua and Barbuda</option>
+											<option value="AR">Argentina</option>
+											<option value="AM">Armenia</option>
+											<option value="AW">Aruba</option>
+											<option value="AU">Australia</option>
+											<option value="AT">Austria</option>
+											<option value="AZ">Azerbaijan Republic</option>
+											<option value="BS">Bahamas</option>
+											<option value="BH">Bahrain</option>
+											<option value="BB">Barbados</option>
+											<option value="BE">Belgium</option>
+											<option value="BZ">Belize</option>
+											<option value="BJ">Benin</option>
+											<option value="BM">Bermuda</option>
+											<option value="BT">Bhutan</option>
+											<option value="BO">Bolivia</option>
+											<option value="BA">Bosnia and Herzegovina</option>
+											<option value="BW">Botswana</option>
+											<option value="BR">Brazil</option>
+											<option value="BN">Brunei</option>
+											<option value="BG">Bulgaria</option>
+											<option value="BF">Burkina Faso</option>
+											<option value="BI">Burundi</option>
+											<option value="KH">Cambodia</option>
+											<option value="CA">Canada</option>
+											<option value="CV">Cape Verde</option>
+											<option value="KY">Cayman Islands</option>
+											<option value="TD">Chad</option>
+											<option value="CL">Chile</option>
+											<option value="C2">China Worldwide</option>
+											<option value="CO">Colombia</option>
+											<option value="KM">Comoros</option>
+											<option value="CK">Cook Islands</option>
+											<option value="CR">Costa Rica</option>
+											<option value="HR">Croatia</option>
+											<option value="CY">Cyprus</option>
+											<option value="CZ">Czech Republic</option>
+											<option value="CD">Democratic Republic of the Congo</option>
+											<option value="DK">Denmark</option>
+											<option value="DJ">Djibouti</option>
+											<option value="DM">Dominica</option>
+											<option value="DO">Dominican Republic</option>
+											<option value="EC">Ecuador</option>
+											<option value="EG">Egypt</option>
+											<option value="SV">El Salvador</option>
+											<option value="ER">Eritrea</option>
+											<option value="EE">Estonia</option>
+											<option value="ET">Ethiopia</option>
+											<option value="FK">Falkland Islands</option>
+											<option value="FO">Faroe Islands</option>
+											<option value="FJ">Fiji</option>
+											<option value="FI">Finland</option>
+											<option value="FR">France</option>
+											<option value="GF">French Guiana</option>
+											<option value="PF">French Polynesia</option>
+											<option value="GA">Gabon Republic</option>
+											<option value="GM">Gambia</option>
+											<option value="GE">Georgia</option>
+											<option value="DE">Germany</option>
+											<option value="GI">Gibraltar</option>
+											<option value="GR">Greece</option>
+											<option value="GL">Greenland</option>
+											<option value="GD">Grenada</option>
+											<option value="GP">Guadeloupe</option>
+											<option value="GT">Guatemala</option>
+											<option value="GN">Guinea</option>
+											<option value="GW">Guinea Bissau</option>
+											<option value="GY">Guyana</option>
+											<option value="HN">Honduras</option>
+											<option value="HK">Hong Kong</option>
+											<option value="HU">Hungary</option>
+											<option value="IS">Iceland</option>
+											<option value="IN">India</option>
+											<option value="ID">Indonesia</option>
+											<option value="IE">Ireland</option>
+											<option value="IL">Israel</option>
+											<option value="IT">Italy</option>
+											<option value="JM">Jamaica</option>
+											<option value="JP">Japan</option>
+											<option value="JO">Jordan</option>
+											<option value="KZ">Kazakhstan</option>
+											<option value="KE">Kenya</option>
+											<option value="KI">Kiribati</option>
+											<option value="KW">Kuwait</option>
+											<option value="KG">Kyrgyzstan</option>
+											<option value="LA">Laos</option>
+											<option value="LV">Latvia</option>
+											<option value="LS">Lesotho</option>
+											<option value="LI">Liechtenstein</option>
+											<option value="LT">Lithuania</option>
+											<option value="LU">Luxembourg</option>
+											<option value="MG">Madagascar</option>
+											<option value="MW">Malawi</option>
+											<option value="MY">Malaysia</option>
+											<option value="MV">Maldives</option>
+											<option value="ML">Mali</option>
+											<option value="MT">Malta</option>
+											<option value="MH">Marshall Islands</option>
+											<option value="MQ">Martinique</option>
+											<option value="MR">Mauritania</option>
+											<option value="MU">Mauritius</option>
+											<option value="YT">Mayotte</option>
+											<option value="MX">Mexico</option>
+											<option value="FM">Micronesia</option>
+											<option value="MN">Mongolia</option>
+											<option value="MS">Montserrat</option>
+											<option value="MA">Morocco</option>
+											<option value="MZ">Mozambique</option>
+											<option value="NA">Namibia</option>
+											<option value="NR">Nauru</option>
+											<option value="NP">Nepal</option>
+											<option value="NL">Netherlands</option>
+											<option value="AN">Netherlands Antilles</option>
+											<option value="NC">New Caledonia</option>
+											<option value="NZ">New Zealand</option>
+											<option value="NI">Nicaragua</option>
+											<option value="NE">Niger</option>
+											<option value="NU">Niue</option>
+											<option value="NF">Norfolk Island</option>
+											<option value="NO">Norway</option>
+											<option value="OM">Oman</option>
+											<option value="PW">Palau</option>
+											<option value="PA">Panama</option>
+											<option value="PG">Papua New Guinea</option>
+											<option value="PE">Peru</option>
+											<option value="PH">Philippines</option>
+											<option value="PN">Pitcairn Islands</option>
+											<option value="PL">Poland</option>
+											<option value="PT">Portugal</option>
+											<option value="QA">Qatar</option>
+											<option value="CG">Republic of the Congo</option>
+											<option value="RE">Reunion</option>
+											<option value="RO">Romania</option>
+											<option value="RU">Russia</option>
+											<option value="RW">Rwanda</option>
+											<option value="KN">Saint Kitts and Nevis Anguilla</option>
+											<option value="PM">Saint Pierre and Miquelon</option>
+											<option value="VC">Saint Vincent and Grenadines</option>
+											<option value="WS">Samoa</option>
+											<option value="SM">San Marino</option>
+											<option value="ST">São Tomé and Príncipe</option>
+											<option value="SA">Saudi Arabia</option>
+											<option value="SN">Senegal</option>
+											<option value="RS">Serbia</option>
+											<option value="SC">Seychelles</option>
+											<option value="SL">Sierra Leone</option>
+											<option value="SG">Singapore</option>
+											<option value="SK">Slovakia</option>
+											<option value="SI">Slovenia</option>
+											<option value="SB">Solomon Islands</option>
+											<option value="SO">Somalia</option>
+											<option value="ZA">South Africa</option>
+											<option value="KR">South Korea</option>
+											<option value="ES">Spain</option>
+											<option value="LK">Sri Lanka</option>
+											<option value="SH">St. Helena</option>
+											<option value="LC">St. Lucia</option>
+											<option value="SR">Suriname</option>
+											<option value="SJ">Svalbard and Jan Mayen Islands</option>
+											<option value="SZ">Swaziland</option>
+											<option value="SE">Sweden</option>
+											<option value="CH">Switzerland</option>
+											<option value="TW">Taiwan</option>
+											<option value="TJ">Tajikistan</option>
+											<option value="TZ">Tanzania</option>
+											<option value="TH">Thailand</option>
+											<option value="TG">Togo</option>
+											<option value="TO">Tonga</option>
+											<option value="TT">Trinidad and Tobago</option>
+											<option value="TN">Tunisia</option>
+											<option value="TR">Turkey</option>
+											<option value="TM">Turkmenistan</option>
+											<option value="TC">Turks and Caicos Islands</option>
+											<option value="TV">Tuvalu</option>
+											<option value="UG">Uganda</option>
+											<option value="UA">Ukraine</option>
+											<option value="AE">United Arab Emirates</option>
+											<option value="GB">United Kingdom</option>
+											<option value="US">United States</option>
+											<option value="UY">Uruguay</option>
+											<option value="VU">Vanuatu</option>
+											<option value="VA">Vatican City State</option>
+											<option value="VE">Venezuela</option>
+											<option value="VN">Vietnam</option>
+											<option value="VG">Virgin Islands (British)</option>
+											<option value="WF">Wallis and Futuna Islands</option>
+											<option value="YE">Yemen</option>
+											<option value="ZM">Zambia</option>
+									</select> <i class="arrow double"></i>
+									</label>
+								</div>
+								<!-- /section -->
+
+								<div class="section row mbn mh10m">
+									<div class="col-md-3 ph10 mb5">
+										<label for="zip" class="field prepend-icon"> <input
+											type="text" name="zip" id="zip" class="gui-input"
+											placeholder="Zip"> <span class="field-icon"> <i
+												class="fa fa-tasks"></i>
+										</span>
+										</label>
+									</div>
+									<!-- /section -->
+
+									<div class="col-md-4 ph10 mb5">
+										<label for="city" class="field prepend-icon"> <input
+											type="text" name="city" id="city" class="gui-input"
+											placeholder="City"> <span class="field-icon">
+												<i class="fa fa-building-o"></i>
+										</span>
+										</label>
+									</div>
+									<!-- /section -->
+
+									<div class="col-md-5 ph10 mb5">
+										<label for="states" class="field select"> <select
+											id="states" name="states">
+												<option value="">Choose state</option>
+												<option value="AL">Alabama</option>
+												<option value="AK">Alaska</option>
+												<option value="AZ">Arizona</option>
+												<option value="AR">Arkansas</option>
+												<option value="CA">California</option>
+												<option value="CO">Colorado</option>
+												<option value="CT">Connecticut</option>
+												<option value="DE">Delaware</option>
+												<option value="DC">District Of Columbia</option>
+												<option value="FL">Florida</option>
+												<option value="GA">Georgia</option>
+												<option value="HI">Hawaii</option>
+												<option value="ID">Idaho</option>
+												<option value="IL">Illinois</option>
+												<option value="IN">Indiana</option>
+												<option value="IA">Iowa</option>
+												<option value="KS">Kansas</option>
+												<option value="KY">Kentucky</option>
+												<option value="LA">Louisiana</option>
+												<option value="ME">Maine</option>
+												<option value="MD">Maryland</option>
+												<option value="MA">Massachusetts</option>
+												<option value="MI">Michigan</option>
+												<option value="MN">Minnesota</option>
+												<option value="MS">Mississippi</option>
+												<option value="MO">Missouri</option>
+												<option value="MT">Montana</option>
+												<option value="NE">Nebraska</option>
+												<option value="NV">Nevada</option>
+												<option value="NH">New Hampshire</option>
+												<option value="NJ">New Jersey</option>
+												<option value="NM">New Mexico</option>
+												<option value="NY">New York</option>
+												<option value="NC">North Carolina</option>
+												<option value="ND">North Dakota</option>
+												<option value="OH">Ohio</option>
+												<option value="OK">Oklahoma</option>
+												<option value="OR">Oregon</option>
+												<option value="PA">Pennsylvania</option>
+												<option value="RI">Rhode Island</option>
+												<option value="SC">South Carolina</option>
+												<option value="SD">South Dakota</option>
+												<option value="TN">Tennessee</option>
+												<option value="TX">Texas</option>
+												<option value="UT">Utah</option>
+												<option value="VT">Vermont</option>
+												<option value="VA">Virginia</option>
+												<option value="WA">Washington</option>
+												<option value="WV">West Virginia</option>
+												<option value="WI">Wisconsin</option>
+												<option value="WY">Wyoming</option>
+										</select> <i class="arrow double"></i>
+										</label>
+									</div>
+									<!-- /section -->
+
+								</div>
+								<!-- /Section Row -->
+
+							</div>
+						</div>
+					</div>
+
+					<!-- Settings -->
+					<div class="panel mb35">
+						<div class="panel-heading">
+							<span class="panel-title">Settings</span>
+						</div>
+						<div class="panel-body br-t">
+							<div class="allcp-form theme-primary">
+
+								<div class="section row mb10">
+									<label class="field-label col-sm-2 ph10 text-center">Store
+										Timezone:</label>
+
+									<div class="col-sm-10 ph10">
+										<label class="field select"> <select id="set-location"
+											name="set-location">
+												<option value="0" selected="selected">(EDT) -0400
+													UTC New York/USA</option>
+												<option value="1">(EDT) -0400 UTC Washington
+													D.C./USA</option>
+												<option value="2">(PDT) -0700 UTC California/USA</option>
+										</select> <i class="arrow double"></i>
+										</label>
+									</div>
+								</div>
+
+								<div class="section row mb10">
+									<label for="store-currency"
+										class="field-label col-sm-2 ph10 text-center">Store
+										Currency:</label>
+
+									<div class="col-sm-10 ph10">
+										<label for="store-currency" class="field prepend-icon">
+											<input type="text" name="store-currency" id="store-currency"
+											class="gui-input" value="" placeholder="United States Dollar">
+											<span class="field-icon"> <i class="fa fa-usd"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="section row mb10">
+									<label for="store-units"
+										class="field-label col-sm-2 ph10 text-center">Store
+										Unit System:</label>
+
+									<div class="col-sm-10 ph10">
+										<label for="store-units" class="field prepend-icon"> <input
+											type="text" name="store-units" id="store-units"
+											class="gui-input" value="" placeholder="Metric"> <span
+											class="field-icon"> <i class="fa fa-barcode"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="section row mb10">
+									<label for="store-weight"
+										class="field-label col-sm-2 ph10 text-center">Store
+										Weight Unit:</label>
+
+									<div class="col-sm-10 ph10">
+										<label for="store-weight" class="field prepend-icon">
+											<input type="text" name="store-weight" id="store-weight"
+											class="gui-input" value="" placeholder="Pound(lb)"> <span
+											class="field-icon"> <i class="fa fa-square"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="section row mb10">
+									<label for="store-desc"
+										class="field-label col-sm-2 ph10 text-center">Store
+										Description:</label>
+
+									<div class="col-sm-10 ph10">
+										<label class="field prepend-icon"> <textarea
+												class="gui-textarea" id="store-desc" name="store-desc"
+												placeholder="Write a description"></textarea> <span
+											class="field-icon"> <i class="fa fa-file"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+					<!-- Policies -->
+					<div class="panel mbn">
+						<div class="panel-heading">
+							<span class="panel-title">Policies</span>
+						</div>
+						<div class="panel-body br-t">
+							<div class="allcp-form theme-primary">
+
+
+								<div class="section row mb25">
+									<label for="refund-policy"
+										class="field-label col-sm-2 ph10 text-center">Refund
+										Policy</label>
+
+									<div class="col-sm-10 ph10">
+										<label class="field prepend-icon"> <textarea
+												class="gui-textarea" id="refund-policy" name="refund-policy"
+												placeholder="Refund policy terms and conditions..."></textarea>
+											<span class="field-icon"> <i class="fa fa-credit-card"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="section row mb25">
+									<label for="privacy-policy"
+										class="field-label col-sm-2 ph10 text-center">Privacy
+										Policy</label>
+
+									<div class="col-sm-10 ph10">
+										<label class="field prepend-icon"> <textarea
+												class="gui-textarea" id="privacy-policy"
+												name="privacy-policy"
+												placeholder="Privacy policy terms and conditions..."></textarea>
+											<span class="field-icon"> <i class="fa fa-crosshairs"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="section row mb15">
+									<label for="store-tos"
+										class="field-label col-sm-2 ph10 text-center">Terms of
+										Service</label>
+
+									<div class="col-sm-10 ph10">
+										<label class="field prepend-icon"> <textarea
+												class="gui-textarea" id="store-tos" name="store-tos"
+												placeholder="Terms of service conditions..."></textarea> <span
+											class="field-icon"> <i class="fa fa-align-justify"></i>
+										</span>
+										</label>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /Column Center -->
+		</div>
+	</section>
+	<!-- /Content Sale Stat Setting -->
+</body>
+</html>

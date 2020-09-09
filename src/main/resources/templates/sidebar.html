@@ -319,31 +319,31 @@
          <div class="content-left" th:fragment="leftcontent">
                                         <ul class="nav nav-content">
                         <li class="" th:class="${activeSales}">
-                            <a href="sales">
+                            <a th:href="@{/sales}">
                                 <i class="fa fa-folder"></i>
                                 <span>Products</span>
                             </a>
                         </li>
                         <li th:class="${activeOverview}" class="">
-                            <a href="myapp">
+                            <a th:href="@{/}">
                                 <i class="fa fa-check-square"></i>
                                 <span>Overview</span>
                             </a>
                         </li>
                         <li th:class="${activeOrders}" class="">
-                            <a href="orders">
+                            <a th:href="@{/orders}">
                                 <i class="fa fa-briefcase"></i>
                                 <span>Orders</span>
                             </a>
                         </li>
                         <li th:class="${activeClients}" class="">
-                            <a href="clients">
+                            <a th:href="@{/clients}">
                                 <i class="fa fa-group"></i>
                                 <span>Clients</span>
                             </a>
                         </li>
                         <li th:class="${activeSetting}" class="">
-                            <a href="setting">
+                            <a th:href="@{/setting}">
                                 <i class="fa fa-gear"></i>
                                 <span>Settings</span>
                             </a>
