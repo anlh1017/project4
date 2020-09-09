@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+<!-- Meta and Title -->
+<meta charset="utf-8">
+<title>AdminK - A Responsive Bootstrap 3 Admin Dashboard
+	Template</title>
+<meta name="keywords"
+	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+<meta name="description"
+	content="AdminK - A Responsive HTML5 Admin UI Framework">
+<meta name="author" content="ThemeREX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- Plugins -->
+<link rel="stylesheet" type="text/css"
+	th:href="assets/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="assets/skin/default_skin/less/theme.css">
+
+<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+
+	<!-- Body Wrap -->
+	<div id="main">
+
+		<!-- Header  -->
+		<header th:replace="header::topheader"></header>
+		<!-- /Header -->
+
+		<!-- Sidebar  -->
+		<aside th:replace="sidebar::sidebar" id="sidebar_left"></aside>
+		<!-- /Sidebar -->
+
+		<!-- Main Wrapper -->
+		<section id="content_wrapper" class="mb80">
+
+			<section class="content_container">
+			<div th:replace="topbar::wrapper"></div>
+			<header th:replace="topbar::main" ></header>
+	
+
+				<!-- Content -->
+				<section id="content" class="animated fadeIn pt35 pb45">
+					<div th:replace="sidebar::leftcontent" ></div>
+
+					<div class="content-right table-layout">
+						<!-- Column Left -->
+						<aside class="chute chute-left chute290 chute-icon-style br5"
+							data-chute-height="match">
+							<div class="chute-icon"></div>
+							<div class="scroller-chute scroller-primary chute-fh-xs mrn">
+								<div class="allcp-form theme-primary">
+
+									<h5 class="pln">Find Users</h5>
+
+									<h6 class="mb15">by ID</h6>
+
+									<div class="section mb20">
+										<label for="customer-id" class="field prepend-icon"> <input
+											type="text" name="customer-id" id="customer-id"
+											class="gui-input" placeholder="ID #"> <span
+											class="field-icon"> <i class="fa fa-user"></i>
+										</span>
+										</label>
+									</div>
+
+									<h6 class="mb15">by name</h6>
+
+									<div class="section mb20">
+										<label for="customer-name" class="field prepend-icon">
+											<input type="text" name="customer-name" id="customer-name"
+											class="gui-input" placeholder="Name"> <span
+											class="field-icon"> <i class="fa fa-user"></i>
+										</span>
+										</label>
+									</div>
+									<h6 class="mb15">by email</h6>
+
+									<div class="section mb20">
+										<label for="customer-email" class="field prepend-icon">
+											<input type="text" name="customer-email" id="customer-email"
+											class="gui-input" placeholder="Email"> <span
+											class="field-icon"> <i class="fa fa-envelope-o"></i>
+										</span>
+										</label>
+									</div>
+
+									<h6 class="mb15">by country</h6>
+
+									<div class="section mb20">
+										<label class="field select"> <select
+											id="customer-location" name="customer-location">
+												<option value="0" selected="selected">Location</option>
+												<option value="1">USA</option>
+												<option value="2">Canada</option>
+												<option value="3">France</option>
+												<option value="4">China</option>
+												<option value="4">Spain</option>
+										</select> <i class="arrow double"></i>
+										</label>
+									</div>
+
+									<h6 class="mb15">by date</h6>
+
+									<div class="section row mb20">
+										<div class="col-md-12 ph5">
+											<label for="datepicker1" class="field prepend-icon">
+												<input type="text" id="datepicker1" name="datepicker1"
+												class="gui-input fs13" placeholder="From"> <span
+												class="field-icon"> <i class="fa fa-calendar"></i>
+											</span>
+											</label>
+										</div>
+										<div class="col-md-12 ph5">
+											<label for="datepicker2" class="field prepend-icon">
+												<input type="text" id="datepicker2" name="datepicker2"
+												class="gui-input fs13" placeholder="To"> <span
+												class="field-icon"> <i class="fa fa-calendar"></i>
+											</span>
+											</label>
+										</div>
+									</div>
+
+									<hr class="short">
+
+									<div class="section clr pb30">
+										<button class="btn btn-primary pull-right ph30" type="button">Search</button>
+									</div>
+
+								</div>
+							</div>
+						</aside>
+						<!-- /Column Left -->
+
+						<!-- Column Center -->
+						<div class="chute chute-center">
+
+							<!-- Table -->
+							<div class="panel mbn">
+								<div class="panel-menu allcp-form theme-primary mtn">
+									<div class="row">
+										<div class="col-md-6">
+											<label class="field select"> <select
+												id="filter-purchases" name="filter-purchases">
+													<option value="0">Filter by Purchases</option>
+													<option value="1">1-49</option>
+													<option value="2">50-499</option>
+													<option value="1">500-999</option>
+													<option value="2">1000+</option>
+											</select> <i class="arrow double"></i>
+											</label>
+										</div>
+										<div class="col-md-6">
+											<label class="field select"> <select
+												id="filter-group" name="filter-group">
+													<option value="0">Filter by Group</option>
+													<option value="1">Clients</option>
+													<option value="2">Vendors</option>
+													<option value="3">Distributors</option>
+													<option value="4">Employees</option>
+											</select> <i class="arrow double"></i>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body pn">
+									<div class="table-responsive">
+										<table
+											class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
+											<thead>
+												<tr class="">
+													<th class="text-center">Select</th>
+													<th class="">Name</th>
+													<th class="">Email</th>
+													<th class="">Group</th>
+													<th class="">Registered</th>
+													<th class="">Purchases</th>
+													<th class="">Total Spent</th>
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">John Doe</td>
+													<td class="">mail@mail.com</td>
+													<td class="">Clients</td>
+													<td class="">11/01/2015</td>
+													<td class="">5</td>
+													<td class="">$1,000</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Jane Doe</td>
+													<td class="">trash@mail.com</td>
+													<td class="">Clients</td>
+													<td class="">11/01/2015</td>
+													<td class="">13</td>
+													<td class="">$15,885</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Doublas Abrams</td>
+													<td class="">da@mail.com</td>
+													<td class="">Clients</td>
+													<td class="">11/01/2015</td>
+													<td class="">13</td>
+													<td class="">$13,999</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Abram Douglas</td>
+													<td class="">ad@mail.com</td>
+													<td class="">Vendors</td>
+													<td class="">11/01/2015</td>
+													<td class="">10</td>
+													<td class="">$20,300</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Nesli Lislen</td>
+													<td class="">trash@mail.com</td>
+													<td class="">Distributors</td>
+													<td class="">11/01/2015</td>
+													<td class="">148</td>
+													<td class="">$230,600</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Kira Soul</td>
+													<td class="">ksoul@mail.com</td>
+													<td class="">Employes</td>
+													<td class="">11/01/2015</td>
+													<td class="">3</td>
+													<td class="">$1,200</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Abram Douglas</td>
+													<td class="">ad@mail.com</td>
+													<td class="">Vendors</td>
+													<td class="">11/01/2015</td>
+													<td class="">06</td>
+													<td class="">$1,400</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Jane Doe</td>
+													<td class="">trash@mail.com</td>
+													<td class="">Distributors</td>
+													<td class="">11/01/2015</td>
+													<td class="">16</td>
+													<td class="">$4,200</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Then Hven</td>
+													<td class="">nyam@mail.com</td>
+													<td class="">Employes</td>
+													<td class="">11/01/2015</td>
+													<td class="">1</td>
+													<td class="">$500</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">Kefi Ranet</td>
+													<td class="">net@mail.com</td>
+													<td class="">Clients</td>
+													<td class="">11/01/2015</td>
+													<td class="">10</td>
+													<td class="">$15,100</td>
+												</tr>
+												<tr>
+													<td class="text-center"><label class="option block mn">
+															<input type="checkbox" name="inputname" value="FR">
+															<span class="checkbox mn"></span>
+													</label></td>
+													<td class="">John Doe</td>
+													<td class="">mail@mail.com</td>
+													<td class="">Clients</td>
+													<td class="">11/01/2015</td>
+													<td class="">12</td>
+													<td class="">$8,555</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /Column Center -->
+					</div>
+				</section>
+				<!-- /Content -->
+			</section>
+
+		</section>
+
+
+	</div>
+	<!-- /Body Wrap  -->
+
+
+
+	<!-- Scripts -->
+
+	<!-- jQuery -->
+	<script src="assets/js/jquery/jquery-1.12.3.min.js"></script>
+	<script src="assets/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script src="assets/fonts/animatedsvgicons/js/snap.svg-min.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons-config.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons-init.js"></script>
+
+	<!-- Scroll -->
+	<script
+		src="assets/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- Mixitup -->
+
+
+	<!-- Summernote -->
+
+
+
+	<!-- HighCharts Plugin -->
+	<script src="assets/js/plugins/highcharts/highcharts.js"></script>
+
+	<!-- Highlight JS -->
+
+
+	<!-- Date/Month - Pickers -->
+
+
+
+
+
+	<!-- Magnific Popup Plugin -->
+
+
+	<!-- FullCalendar Plugin -->
+
+
+
+	<!-- Plugins -->
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="assets/js/plugins/tagsinput/tagsinput.min.js"></script>
+
+	<!-- Google Map API -->
+
+
+
+
+
+	<!-- Jvectormap JS -->
+
+
+
+
+	<!-- Datatables JS -->
+
+
+
+
+
+	<!-- FooTable JS -->
+
+
+
+	<!-- Validate JS -->
+
+
+
+	<!-- BS Dual Listbox JS -->
+
+
+	<!-- Bootstrap Maxlength JS -->
+
+
+	<!-- Select2 JS -->
+
+
+	<!-- Typeahead JS -->
+
+
+	<!-- TagManager JS -->
+
+
+	<!-- DateRange JS -->
+
+
+	<!-- BS Colorpicker JS -->
+
+
+	<!-- MaskedInput JS -->
+
+
+	<!-- Slick Slider JS -->
+
+
+	<!-- MarkDown JS -->
+
+
+
+
+	<!-- X-edit CSS -->
+
+
+
+
+
+
+	<!-- Dropzone JS -->
+
+
+	<!-- Cropper JS -->
+
+
+	<!-- Zoom JS -->
+
+
+	<!-- Nestable JS -->
+
+
+	<!-- PNotify JS -->
+
+
+	<!-- Fancytree JSs -->
+
+
+
+
+
+
+
+	<!-- Ladda JS -->
+
+
+	<!-- NProgress JS -->
+
+
+	<!-- Countdown JS -->
+
+
+
+	<!-- CanvasBG JS -->
+
+
+	<!-- Theme Scripts -->
+	<script src="assets/js/utility/utility.js"></script>
+	<script src="assets/js/demo/demo.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/demo/widgets_sidebar.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="assets/js/pages/sales-stats-clients.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- /Scripts -->
+
+</body>
+
+</html>
+
+

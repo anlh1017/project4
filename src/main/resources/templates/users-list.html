@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Meta and Title -->
+<meta charset="utf-8">
+<title>Index</title>
+<meta name="keywords"
+	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+<meta name="description"
+	content="AdminK - A Responsive HTML5 Admin UI Framework">
+<meta name="author" content="ThemeREX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- c3charts -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/c3charts/c3.min.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+
+<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+	<!-- Body Wrap -->
+	<div id="main">
+
+		<!-- Header  -->
+		<header th:replace="header::topheader" />
+		<!-- /Header -->
+
+		<!-- Sidebar  -->
+		<aside th:replace="sidebar::sidebar" id="sidebar_left" />
+		<!-- /Sidebar -->
+
+		<!-- Main Wrapper -->
+		<section id="content_wrapper" class="mb80">
+
+
+			<section class="content_container">
+
+				<div th:replace="topbar::wrapper" />
+				<header th:replace="topbar::main" />
+
+
+
+				<!-- Content -->
+				<section id="content" class="animated fadeIn pt35 pb45">
+					<div class="content-right table-layout">
+
+						<!-- Column Center -->
+						<div class="chute chute-center pbn">
+
+							<!-- Products Status Table -->
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<span class="panel-title ptn">User List</span>
+										</div>
+										<div><a th:href="showFormForAdd" class="btn btn-rounded btn-primary">Add New User</a></div>
+										<div class="panel-body pn mt15">
+											<div class="table-responsive">
+												<table
+													class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+													<thead>
+														<tr class="">
+															<th class=""></th>
+															<th class="">Image</th>
+															<th class="">User Name</th>
+															<th class="">Authorities</th>
+															<th class="">Status</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="tempUser : ${users}">
+															<td class=""><label class="option block mn">
+																	<input type="checkbox" name="inputname" value="FR">
+																	<span class="checkbox mn"></span>
+															</label></td>
+															<td class=""><img class="img-responsive mw40 ib"
+																alt="" title="user"
+																src="@{/img/pages/products/1.png}"></td>
+															<td class="" th:text="${tempUser.username}"></td>
+															<td class="">
+																<div th:each="authority : ${tempUser.authorities}">
+																	<span th:text=${authority.authority}></span>
+																</div>
+															</td>
+															<td class="">
+																<div class="btn-group text-right">
+																	<button type="button"
+																		class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																		data-toggle="dropdown" aria-expanded="false">
+																		Active <span class="caret"></span>
+																	</button>
+																	<ul class="dropdown-menu" role="menu">
+																		<li><a href="#">Edit</a></li>
+																		<li><a href="#">Delete</a></li>
+																		<li><a href="#">Archive</a></li>
+																		<li class="divider"></li>
+																		<li class="active"><a href="#">Active</a></li>
+																		<li><a href="#">Inactive</a></li>
+																		<li><a href="#">Low Stock</a></li>
+																		<li><a href="#">Out of Stock</a></li>
+																	</ul>
+																</div>
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /Column Center -->
+					</div>
+				</section>
+				<!-- /Content -->
+
+				<!-- Page Footer -->
+				<footer id="content-footer">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+						</div>
+					</div>
+				</footer>
+				<!-- /Page Footer -->
+
+			</section>
+		</section>
+
+
+	</div>
+	<!-- /Body Wrap  -->
+
+	<!-- Scripts -->
+
+	<!-- jQuery -->
+	<script src="assets/js/jquery/jquery-1.12.3.min.js"></script>
+	<script src="assets/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script src="assets/fonts/animatedsvgicons/js/snap.svg-min.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons-config.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons-init.js"></script>
+
+	<!-- Scroll -->
+	<script
+		src="assets/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- Mixitup -->
+
+
+	<!-- Summernote -->
+
+
+
+	<!-- HighCharts Plugin -->
+	<script src="assets/js/plugins/highcharts/highcharts.js"></script>
+
+	<!-- Highlight JS -->
+
+
+	<!-- Date/Month - Pickers -->
+
+
+
+
+
+	<!-- Magnific Popup Plugin -->
+
+
+	<!-- FullCalendar Plugin -->
+
+
+
+	<!-- Plugins -->
+
+
+	<script src="assets/js/plugins/c3charts/d3.min.js"></script>
+	<script src="assets/js/plugins/c3charts/c3.min.js"></script>
+
+
+
+
+
+	<script src="assets/js/plugins/circles/circles.js"></script>
+
+
+
+
+	<!-- Google Map API -->
+
+
+
+
+
+	<!-- Jvectormap JS -->
+	<script src="assets/js/plugins/jvectormap/jquery.jvectormap.min.js"></script>
+	<script
+		src="assets/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js"></script>
+	<script
+		src="assets/js/plugins/jvectormap/assets/jquery-jvectormap-world-mill-en.js"></script>
+
+	<!-- Datatables JS -->
+
+
+
+
+
+	<!-- FooTable JS -->
+
+
+
+	<!-- Validate JS -->
+
+
+
+	<!-- BS Dual Listbox JS -->
+
+
+	<!-- Bootstrap Maxlength JS -->
+
+
+	<!-- Select2 JS -->
+
+
+	<!-- Typeahead JS -->
+
+
+	<!-- TagManager JS -->
+
+
+	<!-- DateRange JS -->
+
+
+	<!-- BS Colorpicker JS -->
+
+
+	<!-- MaskedInput JS -->
+
+
+	<!-- Slick Slider JS -->
+
+
+	<!-- MarkDown JS -->
+
+
+
+
+	<!-- X-edit CSS -->
+
+
+
+
+
+
+	<!-- Dropzone JS -->
+
+
+	<!-- Cropper JS -->
+
+
+	<!-- Zoom JS -->
+
+
+	<!-- Nestable JS -->
+
+
+	<!-- PNotify JS -->
+
+
+	<!-- Fancytree JSs -->
+
+
+
+
+
+
+
+	<!-- Ladda JS -->
+
+
+	<!-- NProgress JS -->
+
+
+	<!-- Countdown JS -->
+
+
+
+	<!-- CanvasBG JS -->
+
+
+	<!-- Theme Scripts -->
+	<script src="assets/js/utility/utility.js"></script>
+	<script src="assets/js/demo/demo.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/demo/widgets_sidebar.js"></script>
+
+
+
+
+
+
+	<script src="assets/js/pages/dashboard2.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="assets/js/demo/charts/highcharts.js"></script>
+
+
+
+	<!-- /Scripts -->
+
+</body>
+
+</html>
+
+
+

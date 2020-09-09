@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Meta and Title -->
+<meta charset="utf-8">
+<title>AdminK - A Responsive Bootstrap 3 Admin Dashboard
+	Template</title>
+<meta name="keywords"
+	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+<meta name="description"
+	content="AdminK - A Responsive HTML5 Admin UI Framework">
+<meta name="author" content="ThemeREX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- c3charts -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/c3charts/c3.min.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+
+
+<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="utility-page sb-l-c sb-r-c">
+
+	<!-- Body Wrap -->
+	<div id="main" class="animated fadeIn">
+
+		<!-- Main Wrapper -->
+		<section id="content_wrapper">
+
+			<div id="canvas-wrapper">
+				<canvas id="demo-canvas"></canvas>
+			</div>
+
+			<!-- Content -->
+			<section id="content">
+
+				<div class="center-block mt70" style="max-width: 450px">
+
+					<div class="bg-danger text-center mb20 br3 pt15 pb10">
+						<img th:src="@{/img/logo.png}" alt="" />
+					</div>
+					<div class="panel panel-danger mt15">
+						<div class="panel-heading pn">
+							<div class="panel-title">Access Denied!!</div>
+						</div>
+						<div class="panel-body pn pt30 pbn">
+
+
+							<p class="dropcap dropcap-danger">
+								Your account does not have permission to access this page. <br />Please
+								log in or contact IT support.
+							</p>
+
+							<p class="text-right mt20">
+								<a th:href="@{/showMyLoginPage}" class="btn btn-success ph40"
+									type="button">SIGN IN</a>
+							</p>
+
+						</div>
+					</div>
+
+				</div>
+
+			</section>
+			<!-- /Content -->
+
+		</section>
+		<!-- /Main Wrapper -->
+
+	</div>
+	<!-- /Body Wrap  -->
+
+
+
+
+	<!-- Scripts -->
+
+	<!-- jQuery -->
+	<script th:src="@{/js/jquery/jquery-1.12.3.min.js}"></script>
+	<script th:src="@{/js/jquery/jquery_ui/jquery-ui.min.js}"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+	<!-- Scroll -->
+	<script
+		th:src="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+	<!-- HighCharts Plugin -->
+	<script th:src="@{/js/plugins/highcharts/highcharts.js}"></script>
+
+
+	<!-- CanvasBG JS -->
+	<script th:src="@{/js/plugins/canvasbg/canvasbg.js}"></script>
+
+	<!-- Theme Scripts -->
+	<script th:src="@{/js/utility/utility.js}"></script>
+	<script th:src="@{/js/demo/demo.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/demo/widgets_sidebar.js}"></script>
+
+	<script th:src="@{/js/pages/dashboard_init.js}"></script>
+
+	<!-- /Scripts -->
+
+</body>
+
+</html>
+
+
