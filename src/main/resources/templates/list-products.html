@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<a th:href="@{/ingredient/create}">Add New Ingredient</a>
+<table>
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> Name </th>
+            <th>Vendor </th>
+             <th>Action </th>
+        </tr>
+    </thead>
+    <tbody>
+	<tr th:if="${products.empty}">
+            <td colspan="2"> No Ingredients Available </td>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td><span th:text="${product.id}"> Id </span></td>
+            <td><span th:text="${product.productName}"> Name </span></td>
+                <td><span th:text="${product.description}"> Vendor Name </span></td>
+                  <td><a th:href="@{/product/update/{id}(id=${product.id})}">Update</a></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

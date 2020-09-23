@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>Add Employee</h2>
+	<form th:action="@{/ingredient/create}" th:object="${ingredient}"
+		method="post">
+		<input th:field="*{id}" type="hidden"/>
+		<table>
+			<tr>
+				<td>Name</td>
+				<td><input th:field="*{ingredientName}" /></td>
+			</tr>
+			<tr>
+				<td>Vendor Name</td>
+				<td><input th:field="*{vendorName}" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form>
+	<a th:href="@{/ingredient/list}">Go Back To Ingredient</a>
+</body>
+</html>

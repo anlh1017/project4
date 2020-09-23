@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import vn.aptech.project4.entity.User;
 import vn.aptech.project4.repository.UserRepository;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping(value = "/users")
 public class UserController {
 	private UserRepository userRepository;
 	@Autowired

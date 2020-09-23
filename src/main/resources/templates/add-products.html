@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>Add Employee</h2>
+	<form th:action="@{/product/create/{id}/ingredient(id=${product.id})}"
+		method="post">
+		<table>
+			<tr>
+				<td>Name</td>
+				<td><p th:text="${product.productName}" /></td>
+			</tr>
+			<tr>
+				<td>Vendor Name</td>
+				<td><p th:text="${product.description}" /></td>
+			</tr>
+			<tr th:each="tempIngredient,i :${product.productIngredients}">
+				<td>Ingredient Name</td>
+				<td><p th:text="${tempIngredient.ingredient.ingredientName}" /></td>
+				<td>Ingredient Quantity</td>
+				<td><p th:text="${tempIngredient.quantity}" /></td>
+			</tr>
+			<tr>
+				<select class="form-control" name="ingredientId">
+					<option th:each="temp:${ingredients}" th:value="${temp.id}"
+						th:text="${temp.ingredientName}"></option>
+				</select>
+			</tr>
+			<tr>
+				<td>Quantity</td>
+				<td><input name="quantity" type="number"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form>
+	<a th:href="@{/ingredient/list}">Go Back To Ingredient</a>
+</body>
+</html>
