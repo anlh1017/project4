@@ -76,15 +76,25 @@ public class ProductController {
 		Product pro2 = new Product();
 		if (pro != null) {
 			if (!pro.hasIngredient(ingre)) {
-				pro.getProductIngredients().add(new ProductIngredient(ingre,pro,quantity));
-				pro2 = productRepository.findById(id).get();
-				pro2.setProductIngredients(pro.getProductIngredients());
+				/*
+				 * pro.getProductIngredients().add(new ProductIngredient(ingre,pro,quantity));
+				 * pro2 = productRepository.findById(id).get();
+				 * pro2.setProductIngredients(pro.getProductIngredients());
+				 */
+				productRepository.saveIngredient(ingredientId, id, quantity);
 			}
 			System.out.println(pro2);
 			System.out.println(pro2.getProductIngredients());
-			productRepository.save(pro2);
-			return "redirect:/update/" + id;
 		}
-		return "redirect:/update/" + id;
+		return "redirect:/product/list";
+	}
+	@GetMapping("/delete/{id}")
+	public String deleteProduct(@PathVariable(value = "id") int theId, Model theModel) {
+		Optional<Product> tempProduct = productRepository.findById(theId);
+		if (tempProduct.isPresent()) {
+			Product theProduct = tempProduct.get();
+			productRepository.delete(theProduct);
+		}
+		return "redirect:/product/list";
 	}
 }
