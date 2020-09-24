@@ -55,6 +55,15 @@ public class Product {
 	public String toString() {
 		return "Product [id=" + id + ", productName=" + productName + ", description=" + description + ", category="
 				+ category + "]";
+	}
+
+	public Product(int id, String productName, String description, int category,
+			List<ProductIngredient> productIngredients) {
+		this.id = id;
+		this.productName = productName;
+		this.description = description;
+		this.category = category;
+		this.productIngredients = productIngredients;
 	}	
 	
 }

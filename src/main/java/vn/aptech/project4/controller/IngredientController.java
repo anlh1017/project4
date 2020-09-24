@@ -19,33 +19,48 @@ import vn.aptech.project4.repository.IngredientRepository;
 @RequestMapping("/ingredient")
 public class IngredientController {
 	private IngredientRepository ingredientRepository;
+
 	@Autowired
 	public IngredientController(IngredientRepository ingredientRepository) {
 		this.ingredientRepository = ingredientRepository;
 	}
+
 	@GetMapping("/list")
 	public String showIngredients(Model theModel) {
-		theModel.addAttribute("ingredients",ingredientRepository.findAll());
+		theModel.addAttribute("ingredients", ingredientRepository.findAll());
 		return "list-ingredients";
 	}
+
 	@GetMapping("/create")
 	public String addIngredient(Model theModel) {
-		theModel.addAttribute("ingredient",new Ingredient());
-		return "add-ingredients";
+		theModel.addAttribute("ingredient", new Ingredient());
+		return "form-ingredient";
 	}
+
 	@PostMapping("/create")
-	public String addIngredient(@ModelAttribute(value="ingredient")Ingredient ingredient, ModelMap theModelMap) {
-		theModelMap.addAttribute("ingredient",ingredient);
+	public String addIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap) {
+		theModelMap.addAttribute("ingredient", ingredient);
 		ingredientRepository.save(ingredient);
 		return "redirect:/ingredient/list";
 	}
+
 	@GetMapping("/update/{id}")
-	public String editIngredient(@PathVariable(value = "id")int theId, Model theModel) {
+	public String editIngredient(@PathVariable(value = "id") int theId, Model theModel) {
 		Optional<Ingredient> theIngredient1 = ingredientRepository.findById(theId);
-		if(theIngredient1.isPresent()) {
+		if (theIngredient1.isPresent()) {
 			Ingredient theIngredient = theIngredient1.get();
-			theModel.addAttribute("ingredient",theIngredient);
+			theModel.addAttribute("ingredient", theIngredient);
 		}
-		return "add-ingredients";
+		return "redirect:/ingredient/list";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteIngredient(@PathVariable(value = "id") int theId, Model theModel) {
+		Optional<Ingredient> theIngredient1 = ingredientRepository.findById(theId);
+		if (theIngredient1.isPresent()) {
+			Ingredient theIngredient = theIngredient1.get();
+			ingredientRepository.delete(theIngredient);
+		}
+		return "redirect:/ingredient/list";
 	}
 }

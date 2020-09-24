@@ -87,47 +87,78 @@
 								<div class="col-xs-12">
 									<div class="panel">
 										<div class="panel-heading ">
-											<span class="panel-title ptn">Ingredient List</span>
+											<span class="panel-title ptn">Recipe List</span>
 										</div>
 										<div>
-											<a th:href="create"
+											<a th:href="@{/ingredient/create"
 												class="btn btn-rounded btn-primary">Add New Ingredient</a>
 										</div>
 										<div class="panel-body pn mt15">
 											<div class="table-responsive">
-												<table
-													class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-													<thead>
-														<tr class="">
-															<th class="">Ingredient Name</th>
-															<th class="">Vendor Name</th>
-															<th class="">Action</th>
+												<div class="col-md-6">
+													<p>Product Name:</p>
+													<p th:text="${product.productName}"></p>
+												</div>
+												<form
+													th:action="@{/product/create/{id}/ingredient(id=${product.id})}"
+													method="post">
+													<table
+														class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+														<thead>
+															<tr class="">
+																<th class="">Ingredient Name</th>
+																<th class="">Ingredient Quantity</th>
+																<th class="">Action</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr
+																th:each="tempIngredient :${product.productIngredients}">
+																<td class=""
+																	th:text="${tempIngredient.ingredient.ingredientName}"></td>
+																<td class="" th:text="${tempIngredient.quantity}"></td>
+																<td class="">
+																	<div class="btn-group text-right">
+																		<button type="button"
+																			class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																			data-toggle="dropdown" aria-expanded="false">
+																			Action <span class="caret"></span>
+																		</button>
+																		<ul class="dropdown-menu" role="menu">
+																			<li><a href="@{/ingredient/edit/}">Edit</a></li>
+																			<li><a href="#">Delete</a></li>
+																			<li class="divider"></li>
+																		</ul>
+																	</div>
+																</td>
+															</tr>
+															<tr>
 
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:each="ingredient : ${ingredients}">
-														
-															<td class="" th:text="${ingredient.ingredientName}"></td>
-														<td class="" th:text="${ingredient.vendorName}"></td>
-															<td class="">
-																<div class="btn-group text-right">
-																	<button type="button"
-																		class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-																		data-toggle="dropdown" aria-expanded="false">
-																		Action <span class="caret"></span>
-																	</button>
-																	<ul class="dropdown-menu" role="menu">
-																		<li><a th:href="@{/ingredient/update/{id}(id=${ingredient.id})}">Edit</a></li>
-																		<li><a th:href="@{/ingredient/delete/{id}(id=${ingredient.id})}">Delete</a></li>
-	
-																	</ul>
-																</div>
-															</td>
-														</tr>
+																<td>
+																	<div class="row">
+																		<div class="col-md-4">
+																			<div class="section">
+																				<label class="field select"> <select
+																					id="ingredientId" name="ingredientId">
+																						<option th:each="temp:${ingredients}"
+																							th:value="${temp.id}"
+																							th:text="${temp.ingredientName}"></option>
 
-													</tbody>
-												</table>
+																				</select> <i class="arrow"></i>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+
+																<td>Quantity: <input name="quantity" type="number"></td>
+																<td colspan="2"><input type="submit" value="Submit" /></td>
+															</tr>
+														</tbody>
+													</table>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -196,6 +227,7 @@
 	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
 	<!-- /Scripts -->
 
+	<!-- /Scripts -->
 
 </body>
 

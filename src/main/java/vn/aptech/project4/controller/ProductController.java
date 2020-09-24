@@ -1,6 +1,5 @@
 package vn.aptech.project4.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import vn.aptech.project4.entity.Ingredient;
 import vn.aptech.project4.entity.Product;
-import vn.aptech.project4.entity.ProductIngredient;
 import vn.aptech.project4.repository.IngredientRepository;
 import vn.aptech.project4.repository.ProductRepository;
 
@@ -59,7 +57,7 @@ public class ProductController {
 			theModel.addAttribute("product", theProduct);
 		}
 		theModel.addAttribute("ingredients", ingredientRepository.findAll());
-		return "add-products";
+		return "add-ingredient-product";
 	}
 
 	@PostMapping("/create/{id}/ingredient")
@@ -67,13 +65,9 @@ public class ProductController {
 			@RequestParam(value = "ingredientId") int ingredientId, @RequestParam(value = "quantity") int quantity,
 			Model theModel) {
 		Product pro = productRepository.findById(id).get();
-		System.out.println(pro);
 		System.out.println("Product ID: " + id);
 		Ingredient ingre = ingredientRepository.findById(ingredientId).get();
 		System.out.println("Ingredient ID: " + ingredientId);
-		System.out.println(ingre);
-		System.out.println(pro.getProductIngredients());
-		Product pro2 = new Product();
 		if (pro != null) {
 			if (!pro.hasIngredient(ingre)) {
 				/*
@@ -81,12 +75,11 @@ public class ProductController {
 				 * pro2 = productRepository.findById(id).get();
 				 * pro2.setProductIngredients(pro.getProductIngredients());
 				 */
+		
 				productRepository.saveIngredient(ingredientId, id, quantity);
 			}
-			System.out.println(pro2);
-			System.out.println(pro2.getProductIngredients());
 		}
-		return "redirect:/product/list";
+		return "redirect:/product/update/"+id;
 	}
 	@GetMapping("/delete/{id}")
 	public String deleteProduct(@PathVariable(value = "id") int theId, Model theModel) {

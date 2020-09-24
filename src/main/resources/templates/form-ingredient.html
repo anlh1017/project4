@@ -77,66 +77,57 @@
 
 				<!-- Content -->
 				<section id="content" class="animated fadeIn pt35 pb45">
-					<div class="content-right table-layout">
+					<!-- Content -->
+					<div id="content" class="animated fadeIn">
+						<div class="row">
+							<div class="col-md-6">
+								<!-- Standard Fields -->
+								<div class="panel">
+									<div class="panel-heading">
+										<span class="panel-title">Create New Ingredient</span>
+									</div>
+									<div class="panel-body">
 
-						<!-- Column Center -->
-						<div class="chute chute-center pbn">
+										<form class="form-horizontal"
+											th:action="@{/ingredient/create}" th:object="${ingredient}"
+											method="post">
+											<input th:field="*{id}" type="hidden" />
+											<div class="form-group">
+												<label for="ingredientName" class="col-lg-3 control-label">Ingredient Name</label>
 
-							<!-- Products Status Table -->
-							<div class="row mn">
-								<div class="col-xs-12">
-									<div class="panel">
-										<div class="panel-heading ">
-											<span class="panel-title ptn">Ingredient List</span>
-										</div>
-										<div>
-											<a th:href="create"
-												class="btn btn-rounded btn-primary">Add New Ingredient</a>
-										</div>
-										<div class="panel-body pn mt15">
-											<div class="table-responsive">
-												<table
-													class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-													<thead>
-														<tr class="">
-															<th class="">Ingredient Name</th>
-															<th class="">Vendor Name</th>
-															<th class="">Action</th>
-
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:each="ingredient : ${ingredients}">
-														
-															<td class="" th:text="${ingredient.ingredientName}"></td>
-														<td class="" th:text="${ingredient.vendorName}"></td>
-															<td class="">
-																<div class="btn-group text-right">
-																	<button type="button"
-																		class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-																		data-toggle="dropdown" aria-expanded="false">
-																		Action <span class="caret"></span>
-																	</button>
-																	<ul class="dropdown-menu" role="menu">
-																		<li><a th:href="@{/ingredient/update/{id}(id=${ingredient.id})}">Edit</a></li>
-																		<li><a th:href="@{/ingredient/delete/{id}(id=${ingredient.id})}">Delete</a></li>
-	
-																	</ul>
-																</div>
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" id="ingredientName" class="form-control" th:field="*{ingredientName}"
+															placeholder="Type Here...">
+													</div>
+												</div>
 											</div>
-										</div>
+											<div class="form-group">
+												<label for="vendorName" class="col-lg-3 control-label">Vendor Name</label>
+
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" id="vendorName" class="form-control" th:field="*{vendorName}"
+															placeholder="Type Here...">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="submit" id=""
+															class="btn-primary form-control" />
+													</div>
+												</div>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-
 						</div>
-						<!-- /Column Center -->
 					</div>
+					<!-- /Content -->
+
 				</section>
 				<!-- /Content -->
 
@@ -196,6 +187,7 @@
 	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
 	<!-- /Scripts -->
 
+	<!-- /Scripts -->
 
 </body>
 
