@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a th:href="@{/clients}">
+                            <a th:href="@{/customer/list}">
                                 Clients 
                             </a>
                         </li>
@@ -63,6 +63,15 @@
                         <span class="sidebar-title">User Management</span>
                     </a>
                 </li>
+                
+                 <li>
+                    <a th:href="@{/membership/list}">
+                        <span class="caret"></span>
+                        <span class="sb-menu-icon fa fa-check-square-o"></span>
+                        <span class="sidebar-title">MemberShip</span>
+                    </a>
+                </li>
+                
                 <li>
                     <a class="accordion-toggle" href="#">
                         <span class="caret"></span>
@@ -337,7 +346,7 @@
                             </a>
                         </li>
                         <li th:class="${activeClients}" class="">
-                            <a th:href="@{/clients}">
+                            <a th:href="@{/customer/list}">
                                 <i class="fa fa-group"></i>
                                 <span>Clients</span>
                             </a>
