@@ -14,45 +14,36 @@
             <!-- Sidebar Menu  -->
             <ul class="nav sidebar-menu">
 
-                <li class="active">
-                    <a th:href="@{/}">
-                        <span class="caret"></span>
-                        <span class="sb-menu-icon fa fa-dashboard"></span>
-                        <span class="sidebar-title">Dashboards</span>
-                    </a>
-                </li>
+           
                 <li class="">
-                    <a class="accordion-toggle" th:href="sales">
+                    <a class="accordion-toggle" href="#">
                         <span class="caret"></span>
                         <span class="sb-menu-icon fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Sales stats</span>
+                        <span class="sidebar-title">Management</span>
                     </a>
                     <ul class="nav sub-nav">
-                        <li>
-                            <a th:href="@{/}">
-                                Overview 
-                            </a>
-                        </li>
+                   
                         <li class="">
-                            <a th:href="@{/sales}">
+                            <a th:href="@{/admin/product/list}">
                                 Products 
                             </a>
                         </li>
                         <li class="">
-                            <a th:href="@{/orders}">
-                                Purchases 
+                            <a th:href="@{/admin/order/list}">
+                                Order
                             </a>
                         </li>
                         <li class="">
-                            <a th:href="@{/customer/list}">
+                            <a th:href="@{/admin/customer/list}">
                                 Clients 
                             </a>
                         </li>
                         <li class="">
-                            <a th:href="@{/setting}">
-                                General Settings 
+                            <a th:href="@{/admin/review/list}">
+                                Review 
                             </a>
                         </li>
+      
                     </ul>
                 </li>
               
@@ -65,257 +56,30 @@
                 </li>
                 
                  <li>
-                    <a th:href="@{/membership/list}">
+                    <a th:href="@{/admin/membership/list}">
                         <span class="caret"></span>
                         <span class="sb-menu-icon fa fa-check-square-o"></span>
                         <span class="sidebar-title">MemberShip</span>
                     </a>
                 </li>
+                      <li>
+                    <a th:href="@{/admin/ingredient/list}">
+                        <span class="caret"></span>
+                        <span class="sb-menu-icon fa fa-leaf"></span>
+                        <span class="sidebar-title">Ingredient</span>
+                    </a>
+                </li>
+                          <li>
+                    <a th:href="@{/admin/inventory}">
+                        <span class="caret"></span>
+                        <span class="sb-menu-icon fa fa-building"></span>
+                        <span class="sidebar-title">Inventory</span>
+                    </a>
+                </li>
                 
-                <li>
-                    <a class="accordion-toggle" href="#">
-                        <span class="caret"></span>
-                        <span class="sb-menu-icon fa fa-file-text-o"></span>
-                        <span class="sidebar-title">User Forms</span>
-                    </a>
-                    <ul class="nav sub-nav">
-                        <li>
-                            <a href="user-forms-standart-inputs.html">
-                                Standart Inputs 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-additional-inputs.html">
-                                Additional Inputs
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-editors.html">
-                                Editors 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-treeview.html">
-                                Treeview 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-nestable.html">
-                                Nestable 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-image-tools.html">
-                                Image Tools
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-file-uploaders.html">
-                                File Uploaders 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-notifications.html">
-                                Notifications 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user-forms-content-sliders.html">
-                                Content Sliders 
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="accordion-toggle" href="#">
-                        <span class="caret"></span>
-                        <span class="sb-menu-icon fa fa-sitemap"></span>
-                        <span class="sidebar-title">Plugins</span>
-                    </a>
-                    <ul class="nav sub-nav">
-                        <li>
-                            <a class="accordion-toggle" href="#">
-                                <span class="caret"></span>
-                                Maps
-                            </a>
-                            <ul class="nav sub-nav">
-                                <li>
-                                    <a href="maps-basic.html">
-                                        Basic
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="maps-vector.html">
-                                        Vector
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="maps-full.html">
-                                        Full
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="accordion-toggle" href="#">
-                                <span class="caret"></span>
-                                Charts
-                            </a>
-                            <ul class="nav sub-nav">
-                                <li>
-                                    <a href="charts-highcharts.html">
-                                        Highcharts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="charts-d3.html">
-                                        D3 Charts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="charts-flot.html">
-                                        Flot Charts
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="accordion-toggle" href="#">
-                                <span class="caret"></span>
-                                Tables
-                            </a>
-                            <ul class="nav sub-nav">
-                                <li>
-                                    <a href="tables-basic.html"> 
-                                        Basic 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tables-datatables.html"> 
-                                        Data 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tables-sortable.html"> 
-                                        Sortable 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tables-pricing.html"> 
-                                        Pricing 
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="accordion-toggle" href="#">
-                        <span class="caret"></span>
-                        <span class="sb-menu-icon fa fa-book"></span>
-                        <span class="sidebar-title">Pages</span>
-                    </a>
-                    <ul class="nav sub-nav">
-                        <li>
-                            <a class="accordion-toggle" href="#">
-                                <span class="caret"></span>
-                                Utility
-                            </a>
-                            <ul class="nav sub-nav">
-                                <li>
-                                    <a href="utility-confirmation.html" target="_blank"> 
-                                        Confirmation 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="utility-login.html" target="_blank"> 
-                                        Login 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="utility-register.html" target="_blank"> 
-                                        Register 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="utility-forgot-password.html" target="_blank"> 
-                                        Forgot Password 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="utility-coming-soon.html" target="_blank"> 
-                                        Coming Soon
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="utility-404-error.html"> 
-                                        404 Error 
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="accordion-toggle" href="#">
-                                <span class="caret"></span>
-                                Basic
-                            </a>
-                            <ul class="nav sub-nav">
-                                <li>
-                                    <a href="basic-search-results.html">
-                                        Search Results 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="basic-profile.html"> 
-                                        Profile 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="basic-timeline.html"> 
-                                        Timeline 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="basic-faq-page.html"> 
-                                        FAQ Page 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="basic-messages.html"> 
-                                        Messages 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="basic-gallery.html"> 
-                                        Gallery 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="basic-invoice.html"> 
-                                        Invoice 
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="new-email" href="email-layouts.html">
-                                <span class="sidebar-title">New Emails</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="basic-calendar.html">
-                                <span class="sidebar-title">Calendar</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="doc/index.html">
-                                <span class="sidebar-title">Documentation</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
+               
+                
+                
             </ul>
             <!-- /Sidebar Menu  -->
 
@@ -328,35 +92,25 @@
          <div class="content-left" th:fragment="leftcontent">
                                         <ul class="nav nav-content">
                         <li class="" th:class="${activeSales}">
-                            <a th:href="@{/sales}">
+                            <a th:href="@{/admin/product/list}">
                                 <i class="fa fa-folder"></i>
                                 <span>Products</span>
                             </a>
                         </li>
-                        <li th:class="${activeOverview}" class="">
-                            <a th:href="@{/}">
-                                <i class="fa fa-check-square"></i>
-                                <span>Overview</span>
-                            </a>
-                        </li>
+           
                         <li th:class="${activeOrders}" class="">
-                            <a th:href="@{/orders}">
+                            <a th:href="@{/admin/order/list}">
                                 <i class="fa fa-briefcase"></i>
                                 <span>Orders</span>
                             </a>
                         </li>
                         <li th:class="${activeClients}" class="">
-                            <a th:href="@{/customer/list}">
+                            <a th:href="@{/admin/customer/list}">
                                 <i class="fa fa-group"></i>
                                 <span>Clients</span>
                             </a>
                         </li>
-                        <li th:class="${activeSetting}" class="">
-                            <a th:href="@{/setting}">
-                                <i class="fa fa-gear"></i>
-                                <span>Settings</span>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
 </body>

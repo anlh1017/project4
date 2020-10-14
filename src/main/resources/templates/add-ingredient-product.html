@@ -87,79 +87,122 @@
 								<div class="col-xs-12">
 									<div class="panel">
 										<div class="panel-heading ">
-											<span class="panel-title ptn">Recipe List</span>
+											<span class="panel-title ptn">Recipe</span>
 										</div>
 										<div>
-											<a th:href="@{/ingredient/create"
+											<a th:href="@{/admin/ingredient/create}"
 												class="btn btn-rounded btn-primary">Add New Ingredient</a>
 										</div>
 										<div class="panel-body pn mt15">
-											<div class="table-responsive">
-												<div class="col-md-6">
-													<p>Product Name:</p>
-													<p th:text="${product.productName}"></p>
-												</div>
-												<form
-													th:action="@{/product/create/{id}/ingredient(id=${product.id})}"
-													method="post">
-													<table
-														class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-														<thead>
-															<tr class="">
-																<th class="">Ingredient Name</th>
-																<th class="">Ingredient Quantity</th>
-																<th class="">Action</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr
-																th:each="tempIngredient :${product.productIngredients}">
-																<td class=""
-																	th:text="${tempIngredient.ingredient.ingredientName}"></td>
-																<td class="" th:text="${tempIngredient.quantity}"></td>
-																<td class="">
-																	<div class="btn-group text-right">
-																		<button type="button"
-																			class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-																			data-toggle="dropdown" aria-expanded="false">
-																			Action <span class="caret"></span>
-																		</button>
-																		<ul class="dropdown-menu" role="menu">
-																			<li><a href="@{/ingredient/edit/}">Edit</a></li>
-																			<li><a href="#">Delete</a></li>
-																			<li class="divider"></li>
-																		</ul>
-																	</div>
-																</td>
-															</tr>
-															<tr>
 
-																<td>
-																	<div class="row">
-																		<div class="col-md-4">
-																			<div class="section">
-																				<label class="field select"> <select
-																					id="ingredientId" name="ingredientId">
-																						<option th:each="temp:${ingredients}"
-																							th:value="${temp.id}"
-																							th:text="${temp.ingredientName}"></option>
-
-																				</select> <i class="arrow"></i>
-																				</label>
-																			</div>
-																		</div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-
-																<td>Quantity: <input name="quantity" type="number"></td>
-																<td colspan="2"><input type="submit" value="Submit" /></td>
-															</tr>
-														</tbody>
-													</table>
-												</form>
+											<div class="section">
+												<p>Product Name:</p>
+												<p th:text="${product.productName}"></p>
 											</div>
+
+											<div class="panel p25">
+												<div class="panel-heading">
+													<ul
+														class="nav panel-tabs-border panel-tabs panel-tabs-left">
+														<th:block th:each="temp,stat :${size}">
+															<li th:class="${stat.first} ? 'active' : ''"><a
+																th:href="'#tab1_'+${temp.id}" data-toggle="tab"
+																aria-expanded="true"><span th:text="${temp.name}"></span></a></li>
+														</th:block>
+
+													</ul>
+												</div>
+												<div class="panel-body mt25">
+													<div class="tab-content pn br-n">
+														<th:block th:each="tempSize,stat :${size}">
+															<div th:id="'tab1_'+${tempSize.id}" class="tab-pane"
+																th:classappend="${stat.first} ? 'active' : ''">
+																<div class="table-responsive">
+																	<table
+																		class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+																		<thead>
+																			<tr class="">
+																				<th class="">Ingredient Name</th>
+																				<th class="">Ingredient Quantity</th>
+																				<th class="">Action</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																		
+																				<th:block
+																					th:each="tempRecipe:${recipes}">
+											
+																					<tr>
+																						<th:block
+																							th:if="${tempSize.id}==${tempRecipe.size.id}">
+																							<td class=""
+																								th:text="${tempRecipe.productIngredient.ingredient.ingredientName}"></td>
+
+																							<td class="" th:text="${tempRecipe.quantity}"></td>
+
+
+																							<td class="">
+																								<div class="btn-group text-right">
+																									<button type="button"
+																										class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																										data-toggle="dropdown" aria-expanded="false">
+																										Action <span class="caret"></span>
+																									</button>
+																									<ul class="dropdown-menu" role="menu">
+
+
+																										<li><a
+																											th:href="@{/admin/recipe/update/{id}(id=${tempRecipe.id})}">Edit</a></li>
+
+																										<li><a th:href="@{/admin/recipe/delete/{id}(id=${tempRecipe.id})}">Delete</a></li>
+																										<li class="divider"></li>
+																									</ul>
+																								</div>
+																							</td>
+																						</th:block>
+																					</tr>
+																				</th:block>
+																
+
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</th:block>
+													</div>
+												</div>
+											</div>
+											<form
+												th:action="@{/admin/recipe/create/{id}/ingredient(id=${product.id})}"
+												method="POST">
+												<div class="section">
+													<label class="field select">Ingredient <select
+														id="ingredientId" name="ingredientId">
+															<option th:each="temp:${ingredients}"
+																th:value="${temp.id}" th:text="${temp.ingredientName}"></option>
+
+													</select> <i class="arrow"></i>
+													</label>
+												</div>
+
+
+
+												<div class="section">
+													<label class="field select"> Size <select
+														id="sizeId" name="sizeId">
+															<option th:each="temp:${size}" th:value="${temp.id}"
+																th:text="${temp.name}"></option>
+
+													</select> <i class="arrow"></i>
+													</label>
+												</div>
+												<div class="section">
+													Quantity: <input name="quantity" type="number">
+
+												</div>
+												<input type="submit" value="Submit" name="submit" />
+											</form>
+
 										</div>
 									</div>
 								</div>

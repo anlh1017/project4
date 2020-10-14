@@ -100,7 +100,7 @@
 													<thead>
 														<tr class="">
 															<th class="">Ingredient Name</th>
-															<th class="">Vendor Name</th>
+															<th class="">UOM</th>
 															<th class="">Action</th>
 
 														</tr>
@@ -109,7 +109,7 @@
 														<tr th:each="ingredient : ${ingredients}">
 														
 															<td class="" th:text="${ingredient.ingredientName}"></td>
-														<td class="" th:text="${ingredient.vendorName}"></td>
+														<td class="" th:text="${ingredient.uMO}"></td>
 															<td class="">
 																<div class="btn-group text-right">
 																	<button type="button"
@@ -118,8 +118,8 @@
 																		Action <span class="caret"></span>
 																	</button>
 																	<ul class="dropdown-menu" role="menu">
-																		<li><a th:href="@{/ingredient/update/{id}(id=${ingredient.id})}">Edit</a></li>
-																		<li><a th:href="@{/ingredient/delete/{id}(id=${ingredient.id})}">Delete</a></li>
+																		<li><a th:href="@{/admin/ingredient/update/{id}(id=${ingredient.id})}">Edit</a></li>
+																		<li><a th:href="@{/admin/ingredient/delete/{id}(id=${ingredient.id})}" onclick="return confirm('Are you sure?')">Delete</a></li>
 	
 																	</ul>
 																</div>
@@ -144,7 +144,7 @@
 				<footer id="content-footer">
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<span class="footer-legal">© 2016 All rights reserved. <a
+							<span class="footer-legal">© 2020 All rights reserved. <a
 								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
 						</div>
 					</div>

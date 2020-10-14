@@ -1,5 +1,7 @@
 package vn.aptech.project4.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +16,7 @@ import vn.aptech.project4.entity.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Transactional
 	@Modifying
-	@Query(value = "INSERT INTO product_ingredient (ingredient_id,product_id,quantity) VALUES (:ingredient_id,:product_id,:quantity)", nativeQuery = true)
-	void saveIngredient(@Param("ingredient_id") int ingredient_id, @Param("product_id") int product_id,
-			@Param("quantity") int quantity);
+	@Query("delete From ProductIngredient p Where p.id=:id")
+	void deleteRecipeAndProductIngredient(@Param("id") int id);
+	
 }

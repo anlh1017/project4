@@ -1,10 +1,6 @@
 package vn.aptech.project4.config;
 
 
-import java.util.logging.Logger;
-
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
@@ -17,11 +13,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
-import lombok.var;
+import javax.sql.DataSource;
+import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
@@ -63,7 +61,7 @@ public class AppConfig implements WebMvcConfigurer {
 	    @Bean
 	    public SpringResourceTemplateResolver templateResolver() {
 
-	        var templateResolver = new SpringResourceTemplateResolver();
+	        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
 
 	        templateResolver.setApplicationContext(applicationContext);
 	        templateResolver.setPrefix("classpath:/templates/");
@@ -75,8 +73,9 @@ public class AppConfig implements WebMvcConfigurer {
 	    @Bean
 	    public SpringTemplateEngine templateEngine() {
 
-	        var templateEngine = new SpringTemplateEngine();
+	        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 	        templateEngine.setTemplateResolver(templateResolver());
+	        templateEngine.addDialect(new SpringSecurityDialect());
 	        templateEngine.setEnableSpringELCompiler(true);
 
 	        return templateEngine;
@@ -84,8 +83,8 @@ public class AppConfig implements WebMvcConfigurer {
 	    @Bean
 	    public ViewResolver viewResolver() {
 
-	        var resolver = new ThymeleafViewResolver();
-	        var registry = new ViewResolverRegistry(null, applicationContext);
+	        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+	        ViewResolverRegistry registry = new ViewResolverRegistry(null, applicationContext);
 
 	        resolver.setTemplateEngine(templateEngine());
 	        registry.viewResolver(resolver);
@@ -99,6 +98,8 @@ public class AppConfig implements WebMvcConfigurer {
 	        registry.addResourceHandler("/allcp/**").addResourceLocations("classpath:/static/allcp/");
 	        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/");
 	        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+	        registry.addResourceHandler("/vendor/**").addResourceLocations("classpath:/static/vendor/");
+			registry.addResourceHandler("/files/**").addResourceLocations("file:upload-dir/");
 	    }
 		
 }

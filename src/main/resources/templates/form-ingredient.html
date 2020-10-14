@@ -89,7 +89,7 @@
 									<div class="panel-body">
 
 										<form class="form-horizontal"
-											th:action="@{/ingredient/create}" th:object="${ingredient}"
+											th:action="@{/admin/ingredient/create}" th:object="${ingredient}"
 											method="post">
 											<input th:field="*{id}" type="hidden" />
 											<div class="form-group">
@@ -103,11 +103,11 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="vendorName" class="col-lg-3 control-label">Vendor Name</label>
+												<label for="vendorName" class="col-lg-3 control-label">Unit</label>
 
 												<div class="col-lg-8">
 													<div class="bs-component">
-														<input type="text" id="vendorName" class="form-control" th:field="*{vendorName}"
+														<input type="text" id="vendorName" class="form-control" th:field="*{uMO}"
 															placeholder="Type Here...">
 													</div>
 												</div>

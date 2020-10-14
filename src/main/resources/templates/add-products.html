@@ -7,7 +7,7 @@
 <body>
 
 	<h2>Add Employee</h2>
-	<form th:action="@{/product/create/{id}/ingredient(id=${product.id})}"
+	<form th:action="@{/admin/product/create/{id}/ingredient(id=${product.id})}"
 		method="post">
 		<table>
 			<tr>
@@ -39,6 +39,6 @@
 			</tr>
 		</table>
 	</form>
-	<a th:href="@{/ingredient/list}">Go Back To Ingredient</a>
+	<a th:href="@{/admin/ingredient/list}">Go Back To Ingredient</a>
 </body>
 </html>

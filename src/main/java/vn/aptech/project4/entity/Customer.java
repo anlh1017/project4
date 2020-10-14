@@ -23,16 +23,21 @@ public class Customer {
 	@Column(name = "customer_id")
 	private int customer_id;
 	@Column(name = "customer_email")
-	private String customer_email;
+	private String customerEmail;
 	@Column(name = "customer_password")
 	private String customer_password;
 	@Column(name = "customer_name")
 	private String customer_name;
 	@Column(name = "customer_phone")
 	private int customer_phone;
+	@Column(name = "address")
+	private String address;
 	@Column(name = "total_expense")
 	private int total_expense;
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name="membership_id")
 	private Membership membership;
+	@Column(name="authority")
+	private String authority;
+	
 }

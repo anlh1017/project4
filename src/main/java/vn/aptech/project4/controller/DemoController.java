@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DemoController {
 	//create a mapping for "/hello"
-	@GetMapping("/")
-	public String index(Model theModel) {
-		theModel.addAttribute("activeOverview",new String("active"));
-		theModel.addAttribute("content_view", new String("content_overview"));
-		return "index";
+	@GetMapping("/admin")
+	public String showAdmin(Model theModel) {
+		theModel.addAttribute("activeSales",new String("active"));
+		theModel.addAttribute("content_view", new String("sales-stats-products"));
+		return "redirect:/admin/customer/list";
 	}
 	@GetMapping("/sales")
 	public String showSaleStats(Model theModel) {

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Coffee</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+</head>
+<body>
+<header th:replace="guest/headerClient::header"></header>
+	<!-- #header -->
+
+	<section class="generic-banner relative">
+		<div class="container">
+			<div class="row height align-items-center justify-content-center">
+				<div class="col-lg-10">
+					<div class="generic-banner-content">
+						<h2 class="text-white">The Generic Page</h2>
+						<p class="text-white">
+							It won’t be a bigger problem to find one video game lover in your
+							<br> neighbor. Since the introduction of Virtual Game.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
+
+	<!-- About Generic Start -->
+	<div class="main-wrapper">
+
+
+		<!-- Start Generic Area -->
+		<section class="menu-area section-gap" id="coffee">
+			<select class="float-right" id="category" name="category" th:onchange="showByCategory(this)">
+			<option value="0" selected>All</option>
+				<option th:each="temp:${category}" th:value="${temp.id}" th:text="${temp.name}"></option>
+			</select>
+			<div class="container">
+
+				<div class="row" id="listProduct">
+					<div class="col-lg-4" th:each="tempProduct : ${products}">
+						<div class="single-menu">
+							<div class="title-div justify-content-between d-flex">
+						<h4 th:text="${tempProduct.productName}"></h4>
+								<br>
+							</div>
+							<a
+								th:href="@{/ProductDetail/{id}(id=${tempProduct.productId})}"
+								class="price float-right btn "><img class="img-fluid" alt=""
+								title="user"
+								th:src="@{${'/img/pages/products/'+ tempProduct.image}}"></a>
+							<div class="container">
+								<p class="price float-right"
+									th:text="${tempProduct.description}"></p>
+								
+								<p th:text="'S: '+${tempProduct.sizeS}"></p>
+								<p th:text="'M: '+${tempProduct.sizeM}"></p>
+								<p th:text="'L: '+${tempProduct.sizeL}"></p>
+								<p>
+									<a class="btn btn-rounded btn-danger"
+										th:href="@{/user/addcartnew/{id}(id=${tempProduct.productId})}">
+										Add To Cart</a>
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- End Generic Start -->
+		<!-- start footer Area -->
+		<footer th:replace="guest/footerClient"></footer>
+		<!-- End footer Area -->
+		<script>
+		function showByCategory() {
+			var id = $("#category").val();
+			$.get("/showByCategory", {
+				id : id,
+			}).done(function(fragment) { // get from controller
+		        $("#listProduct").replaceWith(fragment); // update snippet of page
+		    });
+		}
+	</script>
+		<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+		<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+		<script th:src="@{/js/cart.js}"></script>
+</body>
+</html>

@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import vn.aptech.project4.entity.Ingredient;
+import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.repository.IngredientRepository;
+import vn.aptech.project4.repository.InventoryRepository;
 
 @Controller
-@RequestMapping("/ingredient")
+@RequestMapping("/admin/ingredient")
 public class IngredientController {
 	private IngredientRepository ingredientRepository;
+	private InventoryRepository inventoryRepository;
 
 	@Autowired
-	public IngredientController(IngredientRepository ingredientRepository) {
+	public IngredientController(IngredientRepository ingredientRepository,InventoryRepository inventoryRepository) {
 		this.ingredientRepository = ingredientRepository;
+		this.inventoryRepository = inventoryRepository;
 	}
 
 	@GetMapping("/list")
@@ -41,7 +45,14 @@ public class IngredientController {
 	public String addIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap) {
 		theModelMap.addAttribute("ingredient", ingredient);
 		ingredientRepository.save(ingredient);
-		return "redirect:/ingredient/list";
+		Inventory inventory = new Inventory();
+		inventory.setAvailable(0);
+		inventory.setIngredient(ingredient);
+		inventory.setQuantity(0);
+		inventory.setuMO("N/A");
+		inventory.setVendorName("N/A");
+		inventoryRepository.save(inventory);
+		return "redirect:/admin/ingredient/list";
 	}
 
 	@GetMapping("/update/{id}")
@@ -51,7 +62,7 @@ public class IngredientController {
 			Ingredient theIngredient = theIngredient1.get();
 			theModel.addAttribute("ingredient", theIngredient);
 		}
-		return "redirect:/ingredient/list";
+		return "update-ingredient";
 	}
 
 	@GetMapping("/delete/{id}")
@@ -61,6 +72,12 @@ public class IngredientController {
 			Ingredient theIngredient = theIngredient1.get();
 			ingredientRepository.delete(theIngredient);
 		}
-		return "redirect:/ingredient/list";
+		return "redirect:/admin/ingredient/list";
+	}
+	@PostMapping("/update")
+	public String updateIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap) {
+		theModelMap.addAttribute("ingredient", ingredient);
+		ingredientRepository.save(ingredient);
+		return "redirect:/admin/ingredient/list";
 	}
 }

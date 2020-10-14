@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/elements/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="colorlib">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Confirm</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+<style>
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+a {
+	color: #5D6975;
+	text-decoration: underline;
+}
+
+body {
+	position: relative;
+/* 	width: 10cm;
+	height: 29.7cm; */
+	margin: 0 auto;
+	color: #001028;
+	background: #FFFFFF;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	font-family: Arial;
+}
+
+session {
+	padding: 10px 0;
+	margin-bottom: 30px;
+}
+
+#logo {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#logo img {
+	width: 90px;
+}
+
+h1 {
+	border-top: 1px solid #5D6975;
+	border-bottom: 1px solid #5D6975;
+	color: #5D6975;
+	font-size: 2.4em;
+	line-height: 1.4em;
+	font-weight: normal;
+	text-align: center;
+	margin: 0 0 20px 0;
+	background: url(../images/dimension.png);
+}
+
+#project {
+	float: left;
+}
+
+#project span {
+	color: #5D6975;
+	text-align: right;
+	width: 52px;
+	margin-right: 10px;
+	display: inline-block;
+	font-size: 0.8em;
+}
+
+#company {
+	float: right;
+	text-align: right;
+}
+
+#project div, #company div {
+	white-space: nowrap;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin-bottom: 20px;
+}
+
+table tr:nth-child(2n-1) td {
+	background: #F5F5F5;
+}
+
+table th, table td {
+	text-align: center;
+}
+
+table th {
+	padding: 5px 20px;
+	color: #5D6975;
+	border-bottom: 1px solid #C1CED9;
+	white-space: nowrap;
+	font-weight: normal;
+}
+
+table .service, table .desc {
+	text-align: left;
+}
+
+table td {
+	padding: 20px;
+	text-align: right;
+}
+
+table td.service, table td.desc {
+	vertical-align: top;
+}
+
+table td.unit, table td.qty, table td.total {
+	font-size: 1.2em;
+}
+
+table td.grand {
+	border-top: 1px solid #5D6975;;
+}
+
+#notices .notice {
+	color: #5D6975;
+	font-size: 1.2em;
+}
+
+</style>
+<body>
+<header th:replace = "@{guest/headerClient}::header"></header>
+	<section class="generic-banner relative">
+		<div class="container">
+			<div class="row height align-items-center justify-content-center">
+				<div class="col-lg-10">
+					<div class="generic-banner-content">
+						<h2 class="text-white">Confirm Checkout</h2>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="clearfix">
+
+		<div class="" style="background-color: white">
+		<div class="col-lg-5 col-md-6 col-sm-6">
+			<div class="">
+				<h2 style="color: navy">Information</h2>
+				<i th:text="${message}"></i>
+				<h6>Full Name: <span th:text="${customer.customer_name}"></span>
+				</h6>
+				<br>
+				<h6>Email: <span th:text="${customer.customerEmail}"></span>
+				</h6>
+				<br>
+				<h6>Address: <span th:text="${customer.address}"></span></h6>
+				<br>
+				<h6>Phone Number: <span th:text="${customer.customer_phone}"></span></h6>
+				<br>
+				<h6>Order Date: <span th:text="${date}"></span></h6>
+				<br>
+			</div>
+		</div>
+	</div>
+	</section>
+	<br><br>
+	<section>
+	
+	<form th:action=@{/save}>
+		<table>
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th class="service">Product Name</th>
+					<th>Size</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th>SubTotal</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tempProduct,stat : ${carts}">
+					<td class="unit" th:text="${stat.count}"></td>
+					<td class="service" th:text="${tempProduct.productName}"></td>
+					<td class="unit" th:text="${tempProduct.sizeName}"></td>
+					<td class="qty" th:text="${tempProduct.quantity}"></td>
+					<td class="qty" th:text="${tempProduct.price} + ' VND'"></td>
+					<td class="total"
+						th:text="${tempProduct.quantity}*${tempProduct.price} + ' VND'"></td>
+				</tr>
+				<tr>
+					<td colspan="5" class="grand total">GRAND TOTAL</td>
+					<td th:text="${tong} + ' VND'"></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+		<div id="notices">
+			<div>Payment:</div>
+			<div class="notice">Cash on Delivery</div>
+		</div>
+		<div style="text-align: center">
+							<button class="btn btn-success" type="submit" onclick="return Confirm();">Checkout</button>
+						</div>
+		</form>
+	</section>
+	<footer class="footer-area section-gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5 col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>About Us</h6>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+						<p class="footer-text">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							All rights reserved | This template is made with <i
+								class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-5  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Newsletter</h6>
+						<p>Stay update with our latest</p>
+						<div class="" id="mc_embed_signup">
+							<form target="_blank" novalidate="true"
+								action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+								method="get" class="form-inline">
+								<input class="form-control" name="EMAIL"
+									placeholder="Enter Email" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Enter Email '" required=""
+									type="email">
+								<button class="click-btn btn btn-default">
+									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+								</button>
+								<div style="position: absolute; left: -5000px;">
+									<input name="b_36c4fd991d266f23781ded980_aefe40901a"
+										tabindex="-1" value="" type="text">
+								</div>
+
+								<div class="info pt-20"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+					<div class="single-footer-widget">
+						<h6>Follow Us</h6>
+						<p>Let us be social</p>
+						<div class="footer-social d-flex align-items-center">
+							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+								class="fa fa-twitter"></i></a> <a href="#"><i
+								class="fa fa-dribbble"></i></a> <a href="#"><i
+								class="fa fa-behance"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script>
+    function Confirm()
+    {
+      var x = confirm("Are you sure you want to Checkout?");
+      if (x)
+          return true;
+      else
+        return false;
+    }
+	</script>
+	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script th:src="@{/js/easing.min.js}"></script>
+	<script th:src="@{/js/hoverIntent.js}"></script>
+	<script th:src="@{/js/superfish.min.js}"></script>
+	<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.sticky.js}"></script>
+	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/js/parallax.min.js}"></script>
+	<script th:src="@{/js/waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.counterup.min.js}"></script>
+	<script th:src="@{/js/mail-script.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

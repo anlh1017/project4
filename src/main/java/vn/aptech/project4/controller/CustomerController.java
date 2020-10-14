@@ -21,7 +21,7 @@ import vn.aptech.project4.service.CustomerService1;
 
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/admin/customer")
 public class CustomerController {
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -50,7 +50,7 @@ public class CustomerController {
 	public String saveCustomer(@ModelAttribute("customer") Customer customer) {
 		customer.getMembership();
 		customerRepository.save(customer);
-		return"redirect:/customer/list";
+		return"redirect:/admin/customer/list";
 	}
 	
 	@GetMapping("/editCustomer/{id}")
@@ -64,8 +64,7 @@ public class CustomerController {
 	@GetMapping("/deleteCustomer/{id}")
 	public String deleteCustomer(@PathVariable (value = "id") int id) {
 		this.customerRepository.deleteById(id);
-		return"redirect:/customer/list";
+		return"redirect:/admin/customer/list";
 	}
 	
-
 }

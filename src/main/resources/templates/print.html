@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>BuiNguyenHai</title>
+
+
+</head>
+
+<body>
+	<div class="container" id="main">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="page-header">
+					abcdeafgfg (ko in cai nay)
+				</div>
+				
+				<div class="panel panel-default" id="content2">
+					
+					<div class="panel-heading mid">
+						<div id="vi">							
+							<h1 class="blue">SƠ YẾU LÝ LỊCH</h1>
+						</div>
+						
+					</div>
+					
+					<div class="panel-body" style="padding:15px; ">
+						<div id="vi2">
+							<div class="col-sm-5 verticalLine">
+								
+								<div class="mid col-sm-12 blue">
+									<h3><b id="abcd">Bùi Nguyên Hải</b></h3>
+								</div>
+
+								<div class=" col-sm-12">
+									
+									<table >
+										<tr>
+											<th class="table-top">afdf</td>
+											<th>&nbsp;:<i> def</i></td>
+										</tr>
+										<tr>
+											<td class="table-top">Bui</td>
+											<td>&nbsp;:<i class="break"> phuocson1781@gmail.com</i></td>
+										</tr>
+										
+									</table>
+								</div>
+								
+							</div>							
+						<h1>Print Section Example</h1>
+       <div id="div1">Div 1</div>
+       <div id="div2">Div 2</div>
+       <div id="div3">Div 3</div>
+       <div id="div4">Div 4</div>
+       <div id="div5">Div 5</div>
+       <div id="div6">Div 6</div>
+						</div>
+					</div>
+				</div>
+				
+				
+      
+				<div class="btnndiv">
+					<p id="btnn">						
+						<input type="submit" value="Tải PDF Về" id="cmd2">
+						<input type="button" onclick="printDiv('content2')" value="print a div!" />
+						 <p><input id="btnSubmit" type="button" value="Print full page" onclick="divPrint();" /></p>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+		integrity="sha256-c9vxcXyAG4paArQG3xk6DjyW/9aHxai2ef9RpMWO44A=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+	
+	
+<script>
+//in 1 goc div
+function printDiv(divName) {
+
+var printContents = document.getElementById(divName).innerHTML;
+
+var originalContents = document.body.innerHTML;
+
+document.body.innerHTML = printContents;
+
+window.print();
+
+document.body.innerHTML = originalContents;
+
+}
+
+</script>
+       <script type="text/javascript">
+	   //pdf export
+		$('#cmd2').click(function () {
+			domtoimage.toPng(document.getElementById('content2'))
+				.then(function (blob) {
+					var pdf = new jsPDF('l', 'pt', [$('#content2').width(), $('#content2').height()]);
+
+					pdf.addImage(blob, 'PNG', 0, 0, $('#content2').width(), $('#content2').height());
+					pdf.save("print.pdf");
+
+					that.options.api.optionsChanged();
+				});
+		});
+		//in full page
+         function divPrint() {
+           // Some logic determines which div should be printed...
+           // This example uses div3.
+           window.print();
+         }
+       </script>
+</body>
+<footer>
+	<p style="text-align: right; padding-right: 15px;">Author: <b class="blue">Bùi Nguyên Hải</b> </p>
+
+</footer>
+
+</html>

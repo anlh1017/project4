@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="codepixer">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Coffee</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+</head>
+
+<body>
+<header th:replace = "guest/headerClient::header"></header>
+	
+	<!-- #header -->
+
+	<!-- start banner Area -->
+	<section class="banner-area" id="home">
+		<div class="container">
+			<div
+				class="row fullscreen d-flex align-items-center justify-content-start">
+				<div class="banner-content col-lg-7">
+					<h6 class="text-white text-uppercase">Now you can feel the
+						Energy</h6>
+					<h1>
+						Start your day with <br> a black Coffee
+					</h1>
+					<a th:href="@{/ShowListProducts}" class="primary-btn text-uppercase">Buy Now</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
+	<!-- Start video-sec Area -->
+	<section class="video-sec-area pb-100 pt-40" id="about">
+		<div class="container">
+			<div class="row justify-content-start align-items-center">
+				<div
+					class="col-lg-6 video-right justify-content-center align-items-center d-flex">
+					<div class="overlay overlay-bg"></div>
+					<a class="play-btn"
+						href="https://www.youtube.com/watch?v=ARA0AxrnHdM"><img
+						class="img-fluid" src="img/play-icon.png" alt=""></a>
+				</div>
+				<div class="col-lg-6 video-left">
+					<h6>Live Coffee making process.</h6>
+					<h1>
+						We Telecast our <br> Coffee Making Live
+					</h1>
+					<p>
+						<span>We are here to listen from you deliver exellence</span>
+					</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod temp or incididunt ut labore et dolore magna
+						aliqua. Ut enim ad minim.</p>
+					<img class="img-fluid" src="img/signature.png" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End video-sec Area -->
+
+	<!-- Start menu Area -->
+	<section class="menu-area section-gap" id="coffee">
+		<div class="container">
+			<section class='shop'></section>
+
+		</div>
+		<!-- End menu Area -->
+
+		<!-- Start gallery Area -->
+		<section class="gallery-area section-gap" id="gallery">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="menu-content pb-60 col-lg-10">
+						<div class="title text-center">
+							<h1 class="mb-10">What kind of Coffee we serve for you</h1>
+							<p>Who are in extremely love with eco friendly system.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<a href="img/g1.jpg" class="img-pop-home"> <img
+							class="img-fluid" src="img/g1.jpg" alt="">
+						</a> <a href="img/g2.jpg" class="img-pop-home"> <img
+							class="img-fluid" src="img/g2.jpg" alt="">
+						</a>
+					</div>
+					<div class="col-lg-8">
+						<a href="img/g3.jpg" class="img-pop-home"> <img
+							class="img-fluid" src="img/g3.jpg" alt="">
+						</a>
+						<div class="row">
+							<div class="col-lg-6">
+								<a href="img/g4.jpg" class="img-pop-home"> <img
+									class="img-fluid" src="img/g4.jpg" alt="">
+								</a>
+							</div>
+							<div class="col-lg-6">
+								<a href="img/g5.jpg" class="img-pop-home"> <img
+									class="img-fluid" src="img/g5.jpg" alt="">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End gallery Area -->
+
+		<!-- Start review Area -->
+		<section class="gallery-area section-gap" id="review">
+		
+						<div class="title text-center">
+							<h1 class="mb-10">Review</h1>
+							
+						</div>
+					
+	<div class="container">
+			   <div class="row height align-items-center">
+					<div class="col-lg-6" th:each="tempReview : ${review}" >
+   							<h6><span th:text="${tempReview.email}"></span></h6>
+  							<span th:text="${tempReview.content}"></span>
+  							Date:<span class="unit" th:text="${tempReview.date}"></span>
+					</div>
+				<br>
+				<div class="col-lg-6 video-left">
+				<form class="login100-form validate-form"  th:action="@{/saveReview}" th:object="${review}" >
+				<i th:text="${message}"></i>
+					 <div class="wrap-input100 validate-input" data-validate="Email is required">
+						<span class="label-input100">Full Email</span>
+						<input class="input100" type="text" name="email"  required="required"  placeholder="Email...">
+						
+					</div> 
+					<div class="wrap-input100 validate-input" data-validate="Name is required">
+						<span class="label-input100">Content</span>
+						<input class="input100" type="text" name="content"  required="required"  placeholder="Content...">
+						
+					</div>
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Submit
+							</button>
+						</div>
+					</div>
+				</form>
+				</div>
+		
+			
+	</div>
+			<div class="container">
+				<div class="row counter-row">
+					<div class="col-lg-3 col-md-6 single-counter">
+						<h1 class="counter">7536</h1>
+						<p>Happy Client</p>
+					</div>
+					
+					<div class="col-lg-3 col-md-6 single-counter">
+						<h1 class="counter">10013</h1>
+						<p>Cups Coffee</p>
+					</div>
+					<div class="col-lg-3 col-md-6 single-counter">
+						<h1 class="counter">17549</h1>
+						<p>Total Submitted</p>
+					</div>
+				</div>
+			</div>
+			</div>
+		</section>
+		<!-- End review Area -->
+
+		<!-- start footer Area -->
+		<footer th:replace="guest/footerClient"></footer>
+		<!-- End footer Area -->
+
+		<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+		<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>
