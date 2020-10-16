@@ -65,7 +65,7 @@
 								th:href="@{/ProductDetail/{id}(id=${tempProduct.productId})}"
 								class="price float-right btn "><img class="img-fluid" alt=""
 								title="user"
-								th:src="@{${'/img/pages/products/'+ tempProduct.image}}"></a>
+								th:src="@{${'/files/'+ tempProduct.image}}"></a>
 							<div class="container">
 								<p class="price float-right"
 									th:text="${tempProduct.description}"></p>

@@ -26,7 +26,7 @@ public class FileSystemStorageService implements StorageService {
 
 	@Override
 	public void store(MultipartFile file) {
-		try {
+			try {
 			if (file.isEmpty()) {
 				throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
 			}
@@ -73,6 +73,16 @@ public class FileSystemStorageService implements StorageService {
 	@Override
 	public void deleteAll() {
 		FileSystemUtils.deleteRecursively(rootLocation.toFile());
+	}
+
+	@Override
+	public boolean checkFileExist(MultipartFile file) {
+		Path path = rootLocation.resolve(file.getOriginalFilename());
+	 if(Files.exists(path)){
+	 	return true;
+		}
+	 return false;
+
 	}
 
 	@Override
