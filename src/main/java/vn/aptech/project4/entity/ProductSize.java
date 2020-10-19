@@ -1,51 +1,86 @@
 package vn.aptech.project4.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="products_size")
-public class ProductSize implements Serializable {
-	@Id
-	@JoinColumn(name="ProductsId")
-	@ManyToOne(cascade = CascadeType.ALL)
+@Table(name="product_size")
+public class ProductSize {
+	@Embeddable
+	public static class ProductSizeId implements Serializable{
+		@Column(name = "fk_product")
+		protected Integer productId;
+
+		@Column(name = "fk_size")
+		protected Integer sizeId;
+
+		public ProductSizeId() {
+
+		}
+
+		public ProductSizeId(int productId, int sizeId) {
+			this.productId = productId;
+			this.sizeId = sizeId;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result
+					+ ((productId == null) ? 0 : productId.hashCode());
+			result = prime * result
+					+ ((sizeId == null) ? 0 : sizeId.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+
+			ProductSizeId other = (ProductSizeId) obj;
+
+			if (productId == null) {
+				if (other.productId != null)
+					return false;
+			} else if (!productId.equals(other.productId))
+				return false;
+
+			if (sizeId == null) {
+				if (other.sizeId != null)
+					return false;
+			} else if (!sizeId.equals(other.sizeId))
+				return false;
+			return true;
+		}
+	}
+	@EmbeddedId
+	private ProductSizeId id;
+	@ManyToOne
+	@MapsId("productId")
+	@JoinColumn(name = "fk_product", insertable = false, updatable = false)
 	private Product product;
-	@Id
-	@JoinColumn(name="SizeId")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@MapsId("sizeId")
+	@JoinColumn(name = "fk_size", insertable = false, updatable = false)
 	private Size size;
-	@Column(name="Price")
+	@Column(name="price")
 	private int price;
-	@Override
-	public boolean equals(Object obj) {
-	      if (this == obj) return true;
-	        if (obj == null || getClass() != obj.getClass()) return false;
-	        ProductSize productSize = (ProductSize) obj;
-	        return (size.getName().equals(productSize.getSize().getName()) &&
-	        		(product.getProductName().equals(productSize.getProduct().getProductName())));
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(product.getId(),size.getId());
-	}
 
 	public ProductSize() {
 	}
 	public ProductSize(Product product, Size size, int price) {
+		this.id = new ProductSizeId(product.getId(),size.getId());
 		this.product = product;
 		this.size = size;
 		this.price = price;
+		product.addSize(this);
+		size.addProduct(this);
 	}
 
 	public Product getProduct() {

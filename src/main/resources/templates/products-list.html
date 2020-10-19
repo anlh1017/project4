@@ -139,9 +139,9 @@ a {
 																		<td class="" th:text="${tempProduct.getProductName()}"></td>
 																		<td class="" th:text="${tempProduct.getDescription()}"></td>
 																		<td class="" th:text="${tempProduct.getCategory().getName()}"></td>
-																		<td class="" th:text="${tempProduct.getPrice(1)}"></td>
-																		<td class="" th:text="${tempProduct.getPrice(2)}"></td>
-																		<td class="" th:text="${tempProduct.getPrice(3)}"></td>
+																		<th:block th:each="tempSize: ${size}">
+																			<td class="" th:text="${tempProduct.getPrice(tempSize.id)}?:'0'"></td>
+																		</th:block>
 																		<td class="">
 																		
 

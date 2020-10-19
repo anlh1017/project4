@@ -1,13 +1,5 @@
 package vn.aptech.project4.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,31 +7,17 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import vn.aptech.project4.entity.Category;
-import vn.aptech.project4.entity.Customer;
-import vn.aptech.project4.entity.Membership;
-import vn.aptech.project4.entity.Order;
-import vn.aptech.project4.entity.OrderDetail;
-import vn.aptech.project4.entity.Product;
-import vn.aptech.project4.entity.ProductEntity;
-import vn.aptech.project4.entity.Products_size;
-import vn.aptech.project4.entity.Review;
-import vn.aptech.project4.repository.CategoryRepository;
-import vn.aptech.project4.repository.CustomerRepository;
-import vn.aptech.project4.repository.MembershipRepository;
-import vn.aptech.project4.repository.OrderDetailsRepository;
-import vn.aptech.project4.repository.OrderRepository;
-import vn.aptech.project4.repository.ProductRepository;
-import vn.aptech.project4.repository.ProductSizeRepository;
-import vn.aptech.project4.repository.ReviewRepository;
+import org.springframework.web.bind.annotation.*;
+import vn.aptech.project4.entity.*;
+import vn.aptech.project4.repository.*;
 import vn.aptech.project4.service.ProductService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -89,9 +67,7 @@ public class HomeController {
 			addProduct.setProductName(product.getProductName());
 			productEntitys.add(addProduct);
 		}
-		for (ProductEntity productEntity : productEntitys) {
-			eachProducts3(productEntity);
-		}
+
 		theModel.addAttribute("products", productEntitys);
 		theModel.addAttribute("category", categoryRepository.findAll());
 		return "guest/product";
@@ -126,9 +102,7 @@ public class HomeController {
 				productEntitys.add(addProduct);
 			}
 		}
-		for (ProductEntity productEntity : productEntitys) {
-			eachProducts3(productEntity);
-		}
+
 		theModel.addAttribute("products", productEntitys);
 		theModel.addAttribute("category", categoryRepository.findAll());
 		return "guest/product::#listProduct";
@@ -141,21 +115,6 @@ public class HomeController {
 	 * theModel.addAttribute("products",newproducts); return "product-category"; }
 	 */
 
-	public void eachProducts3(ProductEntity productEntity) {
-		for (Products_size productSize : productSizeRepository.findAll()) {
-			if (productSize.getProductsId() == productEntity.getProductId() && productSize.getSizeId() == 3) {
-				productEntity.setSizeL(productSize.getPrice());
-			}
-			if (productSize.getProductsId() == productEntity.getProductId() && productSize.getSizeId() == 1) {
-				productEntity.setSizeS(productSize.getPrice());
-			}
-			if (productSize.getProductsId() == productEntity.getProductId() && productSize.getSizeId() == 2) {
-				productEntity.setSizeM(productSize.getPrice());
-
-			}
-		}
-
-	}
 
 //	@GetMapping("/")
 //	public String SHowProduct(Model theModel) {
@@ -174,7 +133,7 @@ public class HomeController {
 		productEntity.setCategoryName(theProduct.getCategory().getName());
 		productEntity.setImage(theProduct.getImage());
 		productEntity.setProductName(theProduct.getProductName());
-		eachProducts3(productEntity);
+
 		theModel.addAttribute("product", productEntity);
 
 		return "guest/productDetail";

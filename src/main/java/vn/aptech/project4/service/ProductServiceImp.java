@@ -1,16 +1,14 @@
 package vn.aptech.project4.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import vn.aptech.project4.entity.Product;
 import vn.aptech.project4.repository.ProductRepository;
+
+import java.util.List;
+import java.util.Optional;
 @Service
 public class ProductServiceImp implements ProductService {
-	@Autowired
 	private ProductRepository productRepository;
 	@Autowired
 	public ProductServiceImp(ProductRepository productRepository) {

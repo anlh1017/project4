@@ -1,23 +1,19 @@
 package vn.aptech.project4.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="size")
 public class Size {
 	@Id
-	@Column(name="Id")
+	@Column(name = "Id", updatable = false, nullable = false)
 	private int id;
 	@Column(name="name")
 	private String name;
-
+	@OneToMany(mappedBy = "size")
+	private List<ProductSize> products = new ArrayList<ProductSize>();
 	public Size() {
 	}
 	public Size(int id, String name) {
@@ -40,4 +36,17 @@ public class Size {
 		this.name = name;
 	}
 
+	public List<ProductSize> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<ProductSize> products) {
+		this.products = products;
+	}
+	public void addProduct(ProductSize productSize){
+		if(products==null){
+			products = new ArrayList<>();
+		}
+		products.add(productSize);
+	}
 }
