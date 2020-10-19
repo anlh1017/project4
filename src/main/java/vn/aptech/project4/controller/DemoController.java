@@ -3,11 +3,13 @@ package vn.aptech.project4.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/admin")
 public class DemoController {
 	//create a mapping for "/hello"
-	@GetMapping("/")
+	@GetMapping("")
 	public String index(Model theModel) {
 		theModel.addAttribute("activeOverview",new String("active"));
 		theModel.addAttribute("content_view", new String("content_overview"));

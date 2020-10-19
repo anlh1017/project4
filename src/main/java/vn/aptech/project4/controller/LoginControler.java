@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginControler {
+	
 	@GetMapping("/showMyLoginPage")
 	public String showMyLoginPage() {
 		return "utility-login";
@@ -16,4 +17,9 @@ public class LoginControler {
 		return "utility-access-denied";
 				
 	}
+	@GetMapping("/loginCustomer")
+	public String showLoginCustomer() {
+		return "login-customer";
+	}
+	
 }

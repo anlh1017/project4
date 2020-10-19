@@ -1291,7 +1291,7 @@
 					<div class="allcp-form theme-primary">
 
 						<h5 class="pln">Find Customer</h5>
-						<form th:action="@{/customer/list}" method="Get">
+						<form th:action="@{/admin/customer/list}" method="Get">
 						<div class="section mb20">
 							<label for="customer-name" class="field prepend-icon">
 							 <input type="text" name="search" id="search"
@@ -1326,7 +1326,7 @@
 					</div>
 					<div class="panel-body pn">
 						<div class="table-responsive">
-						<a th:href = "@{/createCustomer}" class="btn btn-primary btn-sm mb-3">Create Customer</a>
+						<a th:href = "@{/admin/customer/createCustomer}" class="btn btn-primary btn-sm mb-3">Create Customer</a>
 							<table
 								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
 								<thead>
@@ -1336,6 +1336,7 @@
 										<th class="">Email</th>
 										
 										<th class="">Phone Number</th>
+										<th class="">Adress</th>
 										<th class="">Total Spent</th>
 										<th class="">Membership</th>
 										<th class="">Status</th>
@@ -1346,9 +1347,10 @@
 									<tr th:each="tempCustomer : ${customer}">
 										
 										<td class="" th:text="${tempCustomer.customer_name}"></td>
-										<td class="" th:text="${tempCustomer.customer_email}"></td>
-									
+										<td class="" th:text="${tempCustomer.customerEmail}"></td>
+									   
 										<td class="" th:text="${tempCustomer.customer_phone}"></td>
+										 <td class="" th:text="${tempCustomer.customer_adress}"></td>
 										<td class="" th:text="${tempCustomer.total_expense}"></td>
 										<td class="" ><span th:text="${tempCustomer.membership.membership_name}"></span></td>
 										
@@ -1360,8 +1362,8 @@
 															Action <span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu" role="menu">
-												<li><a th:href="@{/customer/editCustomer/{id}(id=${tempCustomer.customer_id})}" class="btn btn-primary btn-sm mb-3">Edit</a></li>
-												<li><a  th:href="@{/customer/deleteCustomer/{id}(id=${tempCustomer.customer_id})}" class="btn btn-danger btn-sm mb-3">Delete</a></li>
+												<li><a th:href="@{/admin/customer/editCustomer/{id}(id=${tempCustomer.customer_id})}" class="btn btn-primary btn-sm mb-3">Edit</a></li>
+												<li><a  th:href="@{/admin/customer/deleteCustomer/{id}(id=${tempCustomer.customer_id})}" class="btn btn-danger btn-sm mb-3">Delete</a></li>
 												</ul>
 												</div>
 										</td>						

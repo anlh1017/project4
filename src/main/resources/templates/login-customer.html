@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 <!-- Meta and Title -->
 <meta charset="utf-8">
@@ -47,7 +46,6 @@
     <![endif]-->
 
 </head>
-
 <body class="utility-page sb-l-c sb-r-c">
 
 	<!-- Body Wrap -->
@@ -65,13 +63,11 @@
 
 				<!-- Login Form -->
 				<div class="allcp-form theme-primary mw320" id="login">
-					<div class="bg-primary mw600 text-center mb20 br3 pt15 pb10">
-						<img th:src="@{/img/logo.png}" alt="" />
-					</div>
+					
 					<div class="panel mw320">
+					<h2>Log In</h2>
 
-						<form method="POST" th:action="@{/admin/authenticateTheUser}"
-							id="form-login">
+						<form name='login-form' th:action="@{/authenticateTheCustomer}" method='POST'>
 							<div class="panel-body pn mv10">
 
 								<div class="section">
@@ -95,15 +91,22 @@
 								<!-- /section -->
 
 								<div class="section">
-									<div class="bs-component pull-left pt5">
+									
 										<div class="radio-custom radio-primary mb5 lh25">
 											<input type="radio" id="remember" name="remember"> <label
 												for="remember">Remember me</label>
 										</div>
-									</div>
+									
 									<input type="submit" name="submit"
 										class="btn btn-bordered btn-primary pull-right" value="Log In" />
 								</div>
+								
+								<div class="section">
+								<div class="row">
+								<h3>Or With</h3>
+                                    <p><a href="/oauth2/authorize/google"><img src="http://pngimg.com/uploads/google/google_PNG19635.png" style="height:60px"></a></p>
+                                 </div>
+                                 </div>
 								<!-- /section -->
 
 							</div>
@@ -160,7 +163,4 @@
 
 
 </body>
-
 </html>
-
-

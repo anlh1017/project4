@@ -19,14 +19,10 @@ import vn.aptech.project4.repository.MembershipRepository;
 import vn.aptech.project4.service.MembershipService;
 
 @Controller
-@RequestMapping("/membership")
+@RequestMapping("/admin/membership")
 public class MembershipController {
-	private MembershipRepository membershipRepository;
-	private MembershipService membershipService;
 	@Autowired
-	public MembershipController(MembershipRepository membershipRepository) {
-		this.membershipRepository = membershipRepository;
-	}
+	private MembershipRepository membershipRepository;
 	@GetMapping("/list")
 	public String ShowMembership(Model theModel) {
 		List<Membership> membership = membershipRepository.findAll();
@@ -43,7 +39,7 @@ public class MembershipController {
 	public String saveMembership(@ModelAttribute("membership") Membership membership, ModelMap theModelMap) {
 		theModelMap.addAttribute("membership", membership);
 		membershipRepository.save(membership); 	
-		return"redirect:/membership/list";
+		return"redirect:/admin/membership/list";
 	}
 	@GetMapping("/editMembership/{id}")
 	public String editMembership(@PathVariable (value = "id") int id, Model theModel) {
@@ -55,7 +51,7 @@ public class MembershipController {
 	@GetMapping("/deleteMembership/{id}")
 	public String deleteMembership(@PathVariable (value = "id") int id) {
 		this.membershipRepository.deleteById(id);
-		return"redirect:/membership/list";
+		return"redirect:/admin/membership/list";
 	}
 
 }
