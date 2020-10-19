@@ -1,38 +1,18 @@
 package vn.aptech.project4.controller;
 
-import java.security.Principal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.aptech.project4.entity.*;
+import vn.aptech.project4.repository.*;
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import vn.aptech.project4.entity.Cart;
-import vn.aptech.project4.entity.Customer;
-import vn.aptech.project4.entity.Order;
-import vn.aptech.project4.entity.OrderDetail;
-import vn.aptech.project4.entity.Product;
-import vn.aptech.project4.entity.Products_size;
-import vn.aptech.project4.entity.Size;
-import vn.aptech.project4.repository.CategoryRepository;
-import vn.aptech.project4.repository.CustomerRepository;
-import vn.aptech.project4.repository.OrderDetailsRepository;
-import vn.aptech.project4.repository.OrderRepository;
-import vn.aptech.project4.repository.ProductRepository;
-import vn.aptech.project4.repository.ProductSizeRepository;
-import vn.aptech.project4.repository.SizeRepository;
 @Controller
 public class CartController {
 	private ProductRepository productRepository;
@@ -116,7 +96,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		// Kiem tra ton tai cua gio hang
 		Product product = foreachpro(cartadd);
 		Size sizeadd = foreachsize(cartadd);
-		Products_size prosizeadd = foreachprosize(cartadd);
+
 		
 		if (carts.size() > 0) {
 			int cartId = carts.size();
@@ -131,7 +111,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			}
 			if (testcount == 0) { // Not exist
 				cartadd.setSizeName(sizeadd.getName());
-				cartadd.setPrice(prosizeadd.getPrice());
+
 				cartadd.setIdCart(cartId+1);
 				carts.add(cartadd);
 			} else {
@@ -142,7 +122,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		} else {	
 			Cart addnew = new Cart();			
 			cartadd.setSizeName(sizeadd.getName());
-			cartadd.setPrice(prosizeadd.getPrice());		
+
 			cartadd.setIdCart(1);
 			carts.add(cartadd);
 
@@ -183,9 +163,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			Product adprodcut = foreachpro(cart);
 			orderdetail.setProductId(adprodcut);
 			orderdetail.setQuantity(cart.getQuantity());
-			Products_size addprosize = foreachprosize(cart);
-			orderdetail.setPrice(addprosize.getPrice());
-			orderdetail.setSizeId(addprosize.getSizeId());
+
 			// aaa.set()...
 			orderDetailsRepository.save(orderdetail);
 		}
@@ -211,14 +189,14 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		}
 		return sizeadd;
 	}
-	public Products_size foreachprosize(Cart cart) {
-		Products_size prosize = new Products_size();
-		for (Products_size prosizes : productSizeRepository.findAll()) {
-			if(prosizes.getProductsId()==cart.getProductId()&&prosizes.getSizeId()==cart.getSizeId()) {
-prosize=prosizes;
+	public ProductSize foreachprosize(Cart cart) {
+		ProductSize theProduct = new ProductSize();
+		for (ProductSize product : productSizeRepository.findAll()) {
+			if(product.getProduct().getId()==cart.getProductId()&&product.getSize().getId()==cart.getSizeId()) {
+				theProduct=product;
 			}
 		}
-		return prosize;
+		return theProduct;
 	}
 	@RequestMapping(value = "/remove/{id}")
 	private String remove( @PathVariable(value = "id") int id) {
@@ -252,8 +230,7 @@ prosize=prosizes;
 			if (cart2.getIdCart() == id) {
 				cart2.setSizeId(size.getId());
 				cart2.setSizeName(size.getName());
-				Products_size prosizeadd = foreachprosize(cart2);
-				cart2.setPrice(prosizeadd.getPrice());
+
 				break;
 			}
 		}

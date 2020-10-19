@@ -9,7 +9,7 @@ import java.util.List;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="productId")
+	@Column(name="productId", updatable = false, nullable = false)
 	private int Id;
 
 	public Product() {
@@ -97,14 +97,16 @@ public class Product {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ProductIngredient> productIngredients;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
-	private List<ProductSize> productSizes;
-	public List<ProductSize> getProductSizes() {
-		return productSizes;
+	private List<ProductSize> sizes;
+
+	public List<ProductSize> getSizes() {
+		return sizes;
 	}
 
-	public void setProductSizes(List<ProductSize> productSizes) {
-		this.productSizes = productSizes;
+	public void setSizes(List<ProductSize> sizes) {
+		this.sizes = sizes;
 	}
+
 	public boolean hasIngredient(Ingredient ingredient) {
 		for (ProductIngredient productIngredient: getProductIngredients()) {
 			if (productIngredient.getIngredient().getId() == ingredient.getId()) {
@@ -125,21 +127,21 @@ public class Product {
 				+ category + "]";
 	}
 	public int getPrice(int sizeId){
-		for (ProductSize temp: productSizes) {
+		for (ProductSize temp: sizes) {
 			if(temp.getSize().getId()==sizeId) {
 				return temp.getPrice();
 			}
 		}
 		return 0;
 	}
-	public void addProductSize(ProductSize productSize){
-		if(productSizes==null){
-			productSizes = new ArrayList<>();
+	public void addSize(ProductSize productSize){
+		if(sizes==null){
+			sizes = new ArrayList<>();
 		}
-		productSizes.add(productSize);
+		sizes.add(productSize);
 	}
 	public boolean hasSize(Size size){
-		for (ProductSize productSize: productSizes) {
+		for (ProductSize productSize: sizes) {
 			if (productSize.getSize().getId() == size.getId()) {
 				return true;
 			}

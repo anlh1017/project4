@@ -32,7 +32,6 @@ public class ProductController {
     private CategoryRepository categoryRepository;
     private ProductService serviceProduct;
     private SizeRepository sizeRepository;
-    private String context = "D:\\Project4\\Group1_CoffeeShop\\Group1_CoffeeShop\\src\\MyApp\\src\\main\\resources\\static\\img\\pages\\products";
 
     @Autowired
     public ProductController(ProductRepository productRepository, ProductSizeRepository productSizeRepository,
@@ -48,6 +47,7 @@ public class ProductController {
     @GetMapping("/list")
     public String ShowListProducts(Model theModel) {
         List<Product> products = productRepository.findAll();
+        theModel.addAttribute("size", sizeRepository.findAll());
         theModel.addAttribute("products", products);
         return "products-list";
     }
@@ -83,10 +83,11 @@ public class ProductController {
             theProduct.setImage("" + filename);
         }
         //-----End Upload Image
-        //-----Start check for Size
-		checkAndSaveSize(theProduct, size);
-		//-----End check for Size
+        checkAndSaveSize(theProduct,size);
         productRepository.save(theProduct);
+        //-----Start check for Size
+
+        //-----End check for Size
         return "redirect:/admin/product/list";
     }
 
@@ -98,12 +99,15 @@ public class ProductController {
 				ProductSize productSize = null;
 				if (sizeRepository.findById(size[i]).isPresent()) {
 					addSize = sizeRepository.findById(size[i]).get();
-					productSize = new ProductSize(theProduct, addSize, 0);
-					addProductSizes.add(productSize);
+					if(theProduct.hasSize(addSize)){
+                        addProductSizes = theProduct.getSizes();
+                    }else {
+                        productSize = new ProductSize(theProduct, addSize, 0);
+                        addProductSizes.add(productSize);
+                    }
 				}
 			}
-			theProduct.setProductSizes(addProductSizes);
-			theProduct.getProductSizes();
+			theProduct.setSizes(addProductSizes);
 		}
 	}
 
@@ -139,15 +143,8 @@ public class ProductController {
 			}
 		}
             //-----End Upload Image
-        productRepository.findById(product.getId()).map(product1->{
-            product1.setProductName(product.getProductName());
-            product1.setDescription(product.getDescription());
-            product1.setImage(product.getImage());
-            product1.setCategory(product.getCategory());
-            product1.setProductSizes(product.getProductSizes());
-            product1.setProductIngredients(product.getProductIngredients());
-            return productRepository.save(product1);
-        });
+
+            productRepository.save(product);
 
             return "redirect:/admin/product/list";
 

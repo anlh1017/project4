@@ -1,23 +1,9 @@
 package vn.aptech.project4.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 @Entity
 @Table(name="customer")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Customer {
 	@Id
 	@Column(name = "customer_id")
@@ -39,5 +25,79 @@ public class Customer {
 	private Membership membership;
 	@Column(name="authority")
 	private String authority;
-	
+
+	public Customer() {
+	}
+
+	public int getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
+	}
+
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
+
+	public String getCustomer_password() {
+		return customer_password;
+	}
+
+	public void setCustomer_password(String customer_password) {
+		this.customer_password = customer_password;
+	}
+
+	public String getCustomer_name() {
+		return customer_name;
+	}
+
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+
+	public int getCustomer_phone() {
+		return customer_phone;
+	}
+
+	public void setCustomer_phone(int customer_phone) {
+		this.customer_phone = customer_phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getTotal_expense() {
+		return total_expense;
+	}
+
+	public void setTotal_expense(int total_expense) {
+		this.total_expense = total_expense;
+	}
+
+	public Membership getMembership() {
+		return membership;
+	}
+
+	public void setMembership(Membership membership) {
+		this.membership = membership;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
 }
