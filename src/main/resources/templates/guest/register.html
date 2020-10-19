@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/elements/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="colorlib">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Coffee</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+</head>
+<body class="utility-page sb-l-c sb-r-c" style="background-image: url('img/header-bg.jpg');">
+
+	<header th:replace = "guest/headerClient::header"></header>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- #header -->
+
+	<section class="menu-area section-gap" id="coffee">
+		<div class="container">
+			<div class="row height align-items-center">
+				<div class="col-lg-6">
+				
+				<form class="login100-form validate-form"  th:action="@{/saveCustomerClient}" th:object="${customer}" method="Post">
+					<span class="login100-form-title p-b-59">
+						Sign Up
+					</span>
+						<i th:text="${message}"></i>
+						<input th:value="1" id="membership.membership_id" name="membership.membership_id" type="hidden"/>
+					 <div class="wrap-input100 validate-input" data-validate="Name is required">
+						<span class="label-input100">Full Name</span>
+						<input class="input100" type="text" name="name" th:field="*{customer_name}" required="required"  placeholder="Name...">
+						
+					</div> 
+					
+					<div class="wrap-input100 validate-input" data-validate="Phone is required">
+						<span class="label-input100">Phone Number</span>
+						<input class="input100" type="text" name="name" th:field="*{customer_phone}" required="required"  placeholder="Phone...">
+						
+					</div> 
+					
+					<div class="wrap-input100 validate-input" data-validate="Address is required">
+						<span class="label-input100">Address</span>
+						<input class="input100" type="text" name="name" th:field="*{address}" required="required" placeholder="Name...">
+						
+					</div> 
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<span class="label-input100">Email</span>
+						<input class="input100" type="text" name="email" th:field="*{customerEmail}" required="required" placeholder="Email addess...">
+						
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<span class="label-input100">Password</span>
+						<input class="input100" type="password" name="pass" th:field="*{customer_password}" required="required" placeholder="*************">
+						
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
+						<span class="label-input100">Confirm Password</span>
+						<input class="input100" type="password" name="repeat-pass" required="required" placeholder="*************">
+						
+					</div>
+					<input th:value="ROLL_CUSTOMER" id="customer.authority" name="customer.authority" type="hidden"/>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Sign Up
+							</button>
+						</div>
+						
+						
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<a th:href="@{/user}" class="login100-form-btn">
+							Sign in
+							
+						</a>
+						</div>
+
+						
+					</div>
+				</form>
+	
+		</div>
+	<div class="col-lg-6 video-left">
+					<h6>Live Coffee making process.</h6>
+					<h1>
+						Not a member yet? <br> JOIN N COFFEE
+					</h1>
+					<p>
+						<span>We are here to listen from you deliver exellence</span>
+					</p>
+					<p>When registering successfully, you will stay at Copper, when you buy over 1.000.000 you will go up to Silver level and receive more gifts than N COFFEE value..</p>
+					<img class="img-fluid" src="img/signature.png" alt="">
+				</div>
+	
+				
+			</div>
+		</div>
+		
+	</section>
+	
+	<footer th:replace="guest/footerClient"></footer>
+		<!-- End footer Area -->
+
+		<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+		<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+			<script th:src="@{/js/cart.js}"></script>
+</body>
+</html>

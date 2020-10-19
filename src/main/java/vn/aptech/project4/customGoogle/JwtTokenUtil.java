@@ -3,9 +3,9 @@ package vn.aptech.project4.customGoogle;
 import java.io.Serializable;
 import java.util.Date;
 
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import vn.aptech.project4.entity.Customer;
 
 public class JwtTokenUtil implements Serializable {

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/elements/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="colorlib">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Coffee</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+</head>
+<body  class="utility-page sb-l-c sb-r-c" style="background-image: url('img/header-bg.jpg');">
+
+	<header th:replace = "guest/headerClient::header"></header>
+	<br>
+	<br>
+	<br>
+
+	<!-- #header -->
+
+	<section id="content_wrapper">
+
+			<div id="canvas-wrapper">
+				<canvas id="demo-canvas"></canvas>
+			</div>
+
+			<!-- Content -->
+			<section id="content">
+
+				<!-- Login Form -->
+				<div class="allcp-form theme-primary mw320" id="login">
+					<div class="bg-primary mw600 text-center mb20 br3 pt15 pb10">
+						<img th:src="@{/img/logo1.png}" alt="" />
+					</div>
+					<div class="panel mw320">
+					<p th:if="${loginError}" style="color:red;">Wrong email or password</p>
+						<i th:text="${message}"></i>
+						<form name='login-form' th:action="@{/authenticateTheCustomer}" method='POST'>
+								<div class="section">
+									<label for="username" class="field prepend-icon"> <input
+										type="text" name="username" id="username" class="gui-input"
+										placeholder="Email..." required="required"> <span class="field-icon">
+											<i class="fa fa-user"></i>
+									</span>
+									</label>
+								</div>
+								<!-- /section -->
+
+								<div class="section">
+									<label for="password" class="field prepend-icon"> <input
+										type="password" name="password" id="password"
+										class="gui-input" placeholder="Password..." required="required"> <span
+										class="field-icon"> <i class="fa fa-lock"></i>
+									</span>
+									</label>
+								</div>
+								<!-- /section -->
+
+								<div class="section">
+										<a style="color: blue;" th:href="@{/regiter}" > Create a New Account</a>
+										<div class="radio-custom radio-primary mb5 lh25">
+											<input type="checkbox" id="remember_me" name="remember_me"> <label
+												for="remember_me">Remember me</label>
+										</div>
+									
+									<input type="submit" name="submit"
+										class="btn btn-bordered btn-primary " value="Log In" />
+									
+										<h3>Or With</h3>
+                                    <p><a href="/oauth2/authorize/google"><img src="http://pngimg.com/uploads/google/google_PNG19635.png" style="height:60px"></a></p>
+                                
+								</div>
+								
+								
+								
+								<!-- /section -->
+								</form>
+					</div>
+					<!-- /Panel -->
+				</div>
+				<!-- /Spec Form -->
+
+			</section>
+			<!-- /Content -->
+
+		</section>
+<footer th:replace="guest/footerClient"></footer>
+	<!-- End footer Area -->
+
+	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script th:src="@{/js/easing.min.js}"></script>
+	<script th:src="@{/js/hoverIntent.js}"></script>
+	<script th:src="@{/js/superfish.min.js}"></script>
+	<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.sticky.js}"></script>
+	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/js/parallax.min.js}"></script>
+	<script th:src="@{/js/waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.counterup.min.js}"></script>
+	<script th:src="@{/js/mail-script.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/cart.js}"></script>
+</body>
+</html>

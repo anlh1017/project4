@@ -30,8 +30,8 @@ public class Customer {
 	private String customer_name;
 	@Column(name = "customer_phone")
 	private int customer_phone;
-	@Column(name = "customer_adress")
-	private String customer_adress;
+	@Column(name = "address")
+	private String address;
 	@Column(name = "total_expense")
 	private int total_expense;
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

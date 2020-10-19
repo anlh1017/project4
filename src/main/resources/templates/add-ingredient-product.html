@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Meta and Title -->
+<meta charset="utf-8">
+<title>Index</title>
+<meta name="keywords"
+	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+<meta name="description"
+	content="AdminK - A Responsive HTML5 Admin UI Framework">
+<meta name="author" content="ThemeREX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- c3charts -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/c3charts/c3.min.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+
+<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+	<!-- Body Wrap -->
+	<div id="main">
+
+		<!-- Header  -->
+		<header th:replace="header::topheader" />
+		<!-- /Header -->
+
+		<!-- Sidebar  -->
+		<aside th:replace="sidebar::sidebar" id="sidebar_left" />
+		<!-- /Sidebar -->
+
+		<!-- Main Wrapper -->
+		<section id="content_wrapper" class="mb80">
+
+
+			<section class="content_container">
+
+				<div th:replace="topbar::wrapper" />
+				<header th:replace="topbar::main" />
+
+
+
+				<!-- Content -->
+				<section id="content" class="animated fadeIn pt35 pb45">
+					<div class="content-right table-layout">
+
+						<!-- Column Center -->
+						<div class="chute chute-center pbn">
+
+							<!-- Products Status Table -->
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<span class="panel-title ptn">Recipe</span>
+										</div>
+										<div>
+											<a th:href="@{/admin/ingredient/create}"
+												class="btn btn-rounded btn-primary">Add New Ingredient</a>
+										</div>
+										<div class="panel-body pn mt15">
+
+											<div class="section">
+												<p>Product Name:</p>
+												<p th:text="${product.productName}"></p>
+											</div>
+
+											<div class="panel p25">
+												<div class="panel-heading">
+													<ul
+														class="nav panel-tabs-border panel-tabs panel-tabs-left">
+														<th:block th:each="temp,stat :${size}">
+															<li th:class="${stat.first} ? 'active' : ''"><a
+																th:href="'#tab1_'+${temp.id}" data-toggle="tab"
+																aria-expanded="true"><span th:text="${temp.name}"></span></a></li>
+														</th:block>
+
+													</ul>
+												</div>
+												<div class="panel-body mt25">
+													<div class="tab-content pn br-n">
+														<th:block th:each="tempSize,stat :${size}">
+															<div th:id="'tab1_'+${tempSize.id}" class="tab-pane"
+																th:classappend="${stat.first} ? 'active' : ''">
+																<div class="table-responsive">
+																	<table
+																		class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+																		<thead>
+																			<tr class="">
+																				<th class="">Ingredient Name</th>
+																				<th class="">Ingredient Quantity</th>
+																				<th class="">Action</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																		
+																				<th:block
+																					th:each="tempRecipe:${recipes}">
+											
+																					<tr>
+																						<th:block
+																							th:if="${tempSize.id}==${tempRecipe.size.id}">
+																							<td class=""
+																								th:text="${tempRecipe.productIngredient.ingredient.ingredientName}"></td>
+
+																							<td class="" th:text="${tempRecipe.quantity}"></td>
+
+
+																							<td class="">
+																								<div class="btn-group text-right">
+																									<button type="button"
+																										class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																										data-toggle="dropdown" aria-expanded="false">
+																										Action <span class="caret"></span>
+																									</button>
+																									<ul class="dropdown-menu" role="menu">
+
+
+																										<li><a
+																											th:href="@{/admin/recipe/update/{id}(id=${tempRecipe.id})}">Edit</a></li>
+
+																										<li><a th:href="@{/admin/recipe/delete/{id}(id=${tempRecipe.id})}">Delete</a></li>
+																										<li class="divider"></li>
+																									</ul>
+																								</div>
+																							</td>
+																						</th:block>
+																					</tr>
+																				</th:block>
+																
+
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</th:block>
+													</div>
+												</div>
+											</div>
+											<form
+												th:action="@{/admin/recipe/create/{id}/ingredient(id=${product.id})}"
+												method="POST">
+												<div class="section">
+													<label class="field select">Ingredient <select
+														id="ingredientId" name="ingredientId">
+															<option th:each="temp:${ingredients}"
+																th:value="${temp.id}" th:text="${temp.ingredientName}"></option>
+
+													</select> <i class="arrow"></i>
+													</label>
+												</div>
+
+
+
+												<div class="section">
+													<label class="field select"> Size <select
+														id="sizeId" name="sizeId">
+															<option th:each="temp:${size}" th:value="${temp.id}"
+																th:text="${temp.name}"></option>
+
+													</select> <i class="arrow"></i>
+													</label>
+												</div>
+												<div class="section">
+													Quantity: <input name="quantity" type="number">
+
+												</div>
+												<input type="submit" value="Submit" name="submit" />
+											</form>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /Column Center -->
+					</div>
+				</section>
+				<!-- /Content -->
+
+				<!-- Page Footer -->
+				<footer id="content-footer">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+						</div>
+					</div>
+				</footer>
+				<!-- /Page Footer -->
+
+			</section>
+		</section>
+
+
+	</div>
+	<!-- /Body Wrap  -->
+
+	<!-- Scripts -->
+
+	<!-- jQuery -->
+	<script th:src="@{/js/jquery/jquery-1.12.3.min.js}"></script>
+	<script th:src="@{/js/jquery/jquery_ui/jquery-ui.min.js}"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+	<!-- Scroll -->
+	<script
+		th:src="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js}"></script>
+	<!-- HighCharts Plugin -->
+	<script th:src="@{/js/plugins/highcharts/highcharts.js}"></script>
+
+	<!-- Plugins -->
+	<script th:src="@{/js/plugins/c3charts/d3.min.js}"></script>
+	<script th:src="@{/js/plugins/c3charts/c3.min.js}"></script>
+	<script th:src="@{/js/plugins/circles/circles.js}"></script>
+
+	<!-- Jvectormap JS -->
+	<script th:src="@{/js/plugins/jvectormap/jquery.jvectormap.min.js}"></script>
+	<script
+		th:src="@{/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js}"></script>
+	<script
+		th:src="@{/js/plugins/jvectormap/assets/jquery-jvectormap-world-mill-en.js}"></script>
+	<!-- Theme Scripts -->
+	<script th:src="@{/js/utility/utility.js}"></script>
+	<script th:src="@{/js/demo/demo.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/demo/widgets_sidebar.js}"></script>
+	<script th:src="@{/js/pages/dashboard2.js}"></script>
+	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
+	<!-- /Scripts -->
+
+	<!-- /Scripts -->
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/elements/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="colorlib">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>History Order</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+<style>
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+a {
+	color: #5D6975;
+	text-decoration: underline;
+}
+
+body {
+	position: relative;
+/* 	width: 10cm;
+	height: 29.7cm; */
+	margin: 0 auto;
+	color: #001028;
+	background: #FFFFFF;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	font-family: Arial;
+}
+
+session {
+	padding: 10px 0;
+	margin-bottom: 30px;
+}
+
+#logo {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#logo img {
+	width: 90px;
+}
+
+h1 {
+	border-top: 1px solid #5D6975;
+	border-bottom: 1px solid #5D6975;
+	color: #5D6975;
+	font-size: 2.4em;
+	line-height: 1.4em;
+	font-weight: normal;
+	text-align: center;
+	margin: 0 0 20px 0;
+	background: url(../images/dimension.png);
+}
+
+#project {
+	float: left;
+}
+
+#project span {
+	color: #5D6975;
+	text-align: right;
+	width: 52px;
+	margin-right: 10px;
+	display: inline-block;
+	font-size: 0.8em;
+}
+
+#company {
+	float: right;
+	text-align: right;
+}
+
+#project div, #company div {
+	white-space: nowrap;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin-bottom: 20px;
+}
+
+table tr:nth-child(2n-1) td {
+	background: #F5F5F5;
+}
+
+table th, table td {
+	text-align: center;
+}
+
+table th {
+	padding: 5px 20px;
+	color: #5D6975;
+	border-bottom: 1px solid #C1CED9;
+	white-space: nowrap;
+	font-weight: normal;
+}
+
+table .service, table .desc {
+	text-align: left;
+}
+
+table td {
+	padding: 20px;
+	text-align: right;
+}
+
+table td.service, table td.desc {
+	vertical-align: top;
+}
+
+table td.unit, table td.qty, table td.total {
+	font-size: 1.2em;
+}
+
+table td.grand {
+	border-top: 1px solid #5D6975;;
+}
+
+#notices .notice {
+	color: #5D6975;
+	font-size: 1.2em;
+}
+
+</style>
+<body>
+<header th:replace = "guest/headerClient::header"></header>
+<section class="generic-banner relative">
+		<div class="container">
+			<div class="row height align-items-center justify-content-center">
+				<div class="col-lg-10">
+					<div class="generic-banner-content">
+						<h2 style="text-align: center">View History Order Detail</h2>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<section id="content" class="animated fadeIn pt35 pb45">
+					<div class="content-right table-layout">
+
+						<div class="chute chute-center">
+							<div class="panel mbn">
+							
+								<!-- Standard Fields -->
+								<div class="panel">
+									<div class="panel-body">
+
+										<div >
+
+											<table
+												class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
+												<thead>
+													<tr class="">
+														<th class="">Product Name</th>
+														<th class="">Size</th>
+														<th class="">Quantity</th>
+														<th class="">Price</th>
+														<th class="">SubTotal</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="tempOrderDetail,total : ${orderDetails}">
+														<td class=""
+															th:text="${tempOrderDetail.productId.productName}"></td>
+														<td th:switch="${tempOrderDetail.sizeId}">
+															<div class="" th:case="1">S</div>
+															<div class="" th:case="2">M</div>
+															<div class="" th:case="3">L</div>
+														</td>
+														<td class="" th:text="${tempOrderDetail.quantity}"></td>
+														<td class="" th:text="${tempOrderDetail.price} + ' VND'"></td>
+														<td class=""
+															th:text="${tempOrderDetail.price}*${tempOrderDetail.quantity} + ' VND'"></td>
+													</tr>
+
+												</tbody>
+											</table>
+											<h3 class="text-right">
+												Total: <span class="" th:text="${tong} + ' VND'"></span>
+											</h3>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</section>
+<footer th:replace="guest/footerClient"></footer>
+	<script>
+
+	</script>
+	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script th:src="@{/js/easing.min.js}"></script>
+	<script th:src="@{/js/hoverIntent.js}"></script>
+	<script th:src="@{/js/superfish.min.js}"></script>
+	<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.sticky.js}"></script>
+	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/js/parallax.min.js}"></script>
+	<script th:src="@{/js/waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.counterup.min.js}"></script>
+	<script th:src="@{/js/mail-script.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -46,10 +46,11 @@ public class SecurityConfig {
 	            .authorizeRequests()
 	                .anyRequest().hasAnyRole("EMPLOYEE","ADMIN","MANAGER")
        				.and().formLogin()
-					.loginPage("/showMyLoginPage").loginProcessingUrl("/admin/authenticateTheUser").permitAll()
-					.defaultSuccessUrl("/admin")
-					.and().logout()
-					.permitAll().and().exceptionHandling().accessDeniedPage("/access-denied");
+					.loginPage("/showMyLoginPage").loginProcessingUrl("/admin/authenticateTheUser").failureUrl("/loginErrorAdmin").permitAll()
+					.defaultSuccessUrl("/admin/customer/list")
+					.and().logout().logoutUrl("/logoutAdmin").deleteCookies("JESSIONID")
+					.permitAll().and().exceptionHandling().accessDeniedPage("/access-denied")
+					.and().rememberMe().key("uniqueAndSecret");
 					
 				
 		}
@@ -86,11 +87,14 @@ public class SecurityConfig {
 			http.authorizeRequests().antMatchers("/user/**").authenticated()
 					.and()
 					.formLogin()
-					.loginPage("/loginCustomer").loginProcessingUrl("/authenticateTheCustomer").permitAll()
+					.loginPage("/loginCustomer").loginProcessingUrl("/authenticateTheCustomer").failureUrl("/loginError").permitAll()
 					.defaultSuccessUrl("/user")
 					.and()
 					
-					.logout().permitAll().and().exceptionHandling().accessDeniedPage("/user/access-denied");
+					.logout().logoutUrl("/logoutCustomer").deleteCookies("JESSIONID")
+					.permitAll().and().exceptionHandling().accessDeniedPage("/user/access-denied")
+					.and().rememberMe().key("uniqueAndSecret");
+					
 					
 			
 			http.authorizeRequests().antMatchers("/user/**").authenticated()
@@ -113,4 +117,3 @@ public class SecurityConfig {
 	 
 	 
 }
-

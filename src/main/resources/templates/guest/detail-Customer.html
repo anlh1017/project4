@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/elements/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="colorlib">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Coffee</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+</head>
+<body>
+
+	<header th:replace = "guest/headerClient::header"></header>
+	<section class="generic-banner relative">
+		<div class="container">
+			<div class="row height align-items-center justify-content-center">
+				<div class="col-lg-10">
+					<div class="generic-banner-content">
+						<h2 class="text-white">Profile</h2>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- #header -->
+
+	<section class="menu-area section-gap" >
+		<div class="container">
+			<div class="row height align-items-center">
+				<div class="col-lg-10">
+				<form class="form-horizontal" action="#"  th:object="${customer}" method="POST">
+										
+											
+														<input type="hidden" th:field="*{customer_id}" id="id" class="form-control">
+											
+											<div class="form-group">
+												<label for="username" class="col-lg-3 control-label">Username</label>
+
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" th:field="*{customer_name}" id="username" class="form-control" readonly="readonly">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="password" class="col-lg-3 control-label">Email</label>
+
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" th:field="*{customerEmail}" id="email" class="form-control" readonly="readonly">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="phone" class="col-lg-3 control-label">Phone Number</label>
+
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" th:field="*{customer_phone}" id="phone" class="form-control" readonly="readonly">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="password" class="col-lg-3 control-label">Adress</label>
+
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" th:field="*{address}" id="email" class="form-control" readonly="readonly">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="total expense" class="col-lg-3 control-label">Total expense</label>
+
+												<div class="col-lg-8">
+													<div class="bs-component">
+													
+														<input type="text" th:field="*{total_expense}" id="total_expense" class="form-control" readonly="readonly" >VND
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="total expense" class="col-lg-3 control-label">Membership</label>
+											<div class="col-lg-8">
+												<div class="bs-component">
+														<input type="text" th:field="*{membership.membership_name}" id="total_expense" class="form-control" readonly="readonly">
+													</div>
+           									 </div>
+											</div>
+											
+										</form>
+	
+		</div>
+	
+	
+				
+			</div>
+		</div>
+		
+	</section>
+	
+<footer th:replace="guest/footerClient"></footer>
+		<!-- End footer Area -->
+
+		<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+		<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+			<script th:src="@{/js/cart.js}"></script>
+</body>
+</html>

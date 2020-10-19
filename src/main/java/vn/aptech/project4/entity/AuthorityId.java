@@ -7,13 +7,34 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class AuthorityId implements Serializable {
 	private String username;
 	private String authority;
-	
+
+	public AuthorityId() {
+	}
+
+	public AuthorityId(String username, String authority) {
+		this.username = username;
+		this.authority = authority;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 	      if (this == obj) return true;

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<header id="header" th:fragment="header">
+		<div class="header-top">
+			<div class="container">
+				<div class="row justify-content-end">
+					<div class="col-lg-8 col-sm-4 col-8 header-top-right no-padding">
+						<ul>
+							<li>Mon-Fri: 8am to 2pm</li>
+							<li>Sat-Sun: 11am to 4pm</li>
+							<li><a href="tel:(012) 6985 236 7512">(012) 6985 236
+									7512</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row align-items-center justify-content-between d-flex">
+				<div id="logo">
+					<a th:href="@{/}"><img th:src="@{/img/logo1.png}" alt=""
+						title="" /></a>
+				</div>
+				<nav id="nav-menu-container">
+					<ul class="nav-menu">
+						<li class="menu-active"><a th:href="@{/}">Home</a></li>
+						<li><a th:href="@{/#about}">About</a></li>
+						<li><a th:href="@{/ShowListProducts}">Coffee</a></li>
+						<li><a th:href="@{/#review}">Review</a></li>
+						
+						
+
+						<li sec:authorize="isAnonymous()"><a th:href="@{/user}"
+							id="loginform">Login</a></li>
+						<li sec:authorize="isAnonymous()"><a th:href="@{/regiter}">Register</a></li>
+						<li class="menu-has-children" sec:authorize="isAuthenticated()" >
+							<a style="color: white;" th:text="*{#authentication.name}"></a>
+						   
+							<ul>
+							<li><a th:href="@{|~/${#authentication.name}/detailCustomer|}" >Profile</a></li>
+							<li><a th:href="@{|~/${#authentication.name}/historyOrder|}" >History Order</a></li>
+							<li><a th:href="@{|~/${#authentication.name}/changeCustomer|}" >Change Password</a></li>
+							<li><form th:action="@{/logoutCustomer}" method="POST">
+								<input type="submit" value="Logout" class="btn btn-warning"/>
+							</form></li>
+							
+							</ul>
+							
+							</li>
+					<li sec:authorize="isAuthenticated()" ><a th:href="@{/cart}" id="cart"><i class="fa fa-shopping-cart"></i>
+								Cart <span class="badge"></span></a></li>
+					</ul>
+				</nav>
+				<!-- #nav-menu-container -->
+			</div>
+		</div>
+	</header>
+</body>
+</html>
