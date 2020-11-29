@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.aptech.project4.entity.Customer;
 import vn.aptech.project4.entity.Membership;
@@ -49,8 +50,13 @@ public class MembershipController {
 	
 	}
 	@GetMapping("/deleteMembership/{id}")
-	public String deleteMembership(@PathVariable (value = "id") int id) {
-		this.membershipRepository.deleteById(id);
+	public String deleteMembership(@PathVariable (value = "id") int id, RedirectAttributes theModel) {
+		try {
+			this.membershipRepository.deleteById(id);
+		} catch (Exception e) {
+			theModel.addAttribute("deleteMessage","Cannot delete, please check!");
+		}
+		
 		return"redirect:/admin/membership/list";
 	}
 
