@@ -109,7 +109,22 @@ public class OrderController {
 		return "invoice";
 	
 	}
-	
+	  @GetMapping("/export/pdf")
+	  public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+	  response.setContentType("application/pdf"); DateFormat dateFormatter = new
+	  SimpleDateFormat("yyyy-MM-dd_HH:mm:ss"); String currentDateTime =
+	  dateFormatter.format(new Date());
+	  
+	  String headerKey = "Content-Disposition"; String headerValue =
+	  "attachment; filename=orders_" + currentDateTime + ".pdf";
+	  response.setHeader(headerKey, headerValue);
+	  
+	  List<Order> listOrders = orderRepository.findAll();
+	  
+	  OrderPDFExporter exporter = new OrderPDFExporter(listOrders);
+	  exporter.export(response);
+	  
+	  }
 
 
 //	@GetMapping("/findByDate")
