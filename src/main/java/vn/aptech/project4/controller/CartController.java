@@ -96,7 +96,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		// Kiem tra ton tai cua gio hang
 		Product product = foreachpro(cartadd);
 		Size sizeadd = foreachsize(cartadd);
-		Products_size prosizeadd = foreachprosize(cartadd);
+		ProductSize prosizeadd = foreachprosize(cartadd);
 		
 		if (carts.size() > 0) {
 			int cartId = carts.size();
@@ -163,9 +163,9 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			Product adprodcut = foreachpro(cart);
 			orderdetail.setProductId(adprodcut);
 			orderdetail.setQuantity(cart.getQuantity());
-			Products_size addprosize = foreachprosize(cart);
+			ProductSize addprosize = foreachprosize(cart);
 			orderdetail.setPrice(addprosize.getPrice());
-			orderdetail.setSizeId(addprosize.getSizeId());
+			orderdetail.setSizeId(addprosize.getSize().getId());
 			// aaa.set()...
 			orderDetailsRepository.save(orderdetail);
 		}
@@ -191,10 +191,10 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		}
 		return sizeadd;
 	}
-	public Products_size foreachprosize(Cart cart) {
-		Products_size prosize = new Products_size();
-		for (Products_size prosizes : productSizeRepository.findAll()) {
-			if(prosizes.getProductsId()==cart.getProductId()&&prosizes.getSizeId()==cart.getSizeId()) {
+	public ProductSize foreachprosize(Cart cart) {
+		ProductSize prosize = new ProductSize();
+		for (ProductSize prosizes : productSizeRepository.findAll()) {
+			if(prosizes.getProduct().getId()==cart.getProductId()&&prosizes.getSize().getId()==cart.getSizeId()) {
 prosize=prosizes;
 			}
 		}
@@ -232,7 +232,7 @@ prosize=prosizes;
 			if (cart2.getIdCart() == id) {
 				cart2.setSizeId(size.getId());
 				cart2.setSizeName(size.getName());
-				Products_size prosizeadd = foreachprosize(cart2);
+				ProductSize prosizeadd = foreachprosize(cart2);
 				cart2.setPrice(prosizeadd.getPrice());
 				break;
 			}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -1443,7 +1443,7 @@
 										<span th:text="${tempOrder.id}"></span>
 										</a>
 										</td>
-										<td class="" th:text="${tempOrder.orderDate}"></td>																
+										<td class="" th:text="${tempOrder.orderDate}"></td>
 										<td class="" th:text="${tempOrder.customer.customer_name}"></td>
 							
 										<td class="" th:text="${tempOrder.total} + ' VND'"></td>
@@ -1747,7 +1747,7 @@
 											<option value="VC">Saint Vincent and Grenadines</option>
 											<option value="WS">Samoa</option>
 											<option value="SM">San Marino</option>
-											<option value="ST">SÃ£o TomÃ© and PrÃ­ncipe</option>
+											<option value="ST">São Tomé and Príncipe</option>
 											<option value="SA">Saudi Arabia</option>
 											<option value="SN">Senegal</option>
 											<option value="RS">Serbia</option>
