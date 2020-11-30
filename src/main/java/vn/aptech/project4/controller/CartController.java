@@ -96,7 +96,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		// Kiem tra ton tai cua gio hang
 		Product product = foreachpro(cartadd);
 		Size sizeadd = foreachsize(cartadd);
-
+		Products_size prosizeadd = foreachprosize(cartadd);
 		
 		if (carts.size() > 0) {
 			int cartId = carts.size();
@@ -111,7 +111,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			}
 			if (testcount == 0) { // Not exist
 				cartadd.setSizeName(sizeadd.getName());
-
+				cartadd.setPrice(prosizeadd.getPrice());
 				cartadd.setIdCart(cartId+1);
 				carts.add(cartadd);
 			} else {
@@ -122,7 +122,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		} else {	
 			Cart addnew = new Cart();			
 			cartadd.setSizeName(sizeadd.getName());
-
+			cartadd.setPrice(prosizeadd.getPrice());		
 			cartadd.setIdCart(1);
 			carts.add(cartadd);
 
@@ -163,7 +163,9 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			Product adprodcut = foreachpro(cart);
 			orderdetail.setProductId(adprodcut);
 			orderdetail.setQuantity(cart.getQuantity());
-
+			Products_size addprosize = foreachprosize(cart);
+			orderdetail.setPrice(addprosize.getPrice());
+			orderdetail.setSizeId(addprosize.getSizeId());
 			// aaa.set()...
 			orderDetailsRepository.save(orderdetail);
 		}
@@ -189,14 +191,14 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		}
 		return sizeadd;
 	}
-	public ProductSize foreachprosize(Cart cart) {
-		ProductSize theProduct = new ProductSize();
-		for (ProductSize product : productSizeRepository.findAll()) {
-			if(product.getProduct().getId()==cart.getProductId()&&product.getSize().getId()==cart.getSizeId()) {
-				theProduct=product;
+	public Products_size foreachprosize(Cart cart) {
+		Products_size prosize = new Products_size();
+		for (Products_size prosizes : productSizeRepository.findAll()) {
+			if(prosizes.getProductsId()==cart.getProductId()&&prosizes.getSizeId()==cart.getSizeId()) {
+prosize=prosizes;
 			}
 		}
-		return theProduct;
+		return prosize;
 	}
 	@RequestMapping(value = "/remove/{id}")
 	private String remove( @PathVariable(value = "id") int id) {
@@ -230,7 +232,8 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			if (cart2.getIdCart() == id) {
 				cart2.setSizeId(size.getId());
 				cart2.setSizeName(size.getName());
-
+				Products_size prosizeadd = foreachprosize(cart2);
+				cart2.setPrice(prosizeadd.getPrice());
 				break;
 			}
 		}

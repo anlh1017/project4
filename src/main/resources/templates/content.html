@@ -1422,7 +1422,7 @@
 				
 					<div class="">
 						<div class="">
-						
+						<a th:href="@{/admin/order/export/pdf}">Export to PDF</a>
 							<table id="default-datatable"
 								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
 								<h2>View Order</h2>
@@ -1465,24 +1465,6 @@
 															th:case="4">Canceled</div>
 													</div>
 												</div>
-
-
-												<ul class="dropdown-menu" role="menu">
-													<div th:switch="${tempOrder.status}">
-														<li th:case="1"><a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=2)}">Pending</a>
-															<a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=4)}">Canceled</a>
-														</li>
-														<li th:case="2"><a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=3)}">Completed</a>
-															<a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=4)}">Canceled</a>
-														</li>
-
-													</div>
-												</ul>
-
 											</div>
 										</td>
 									</tr>
@@ -1765,7 +1747,7 @@
 											<option value="VC">Saint Vincent and Grenadines</option>
 											<option value="WS">Samoa</option>
 											<option value="SM">San Marino</option>
-											<option value="ST">São Tomé and Príncipe</option>
+											<option value="ST">SÃ£o TomÃ© and PrÃ­ncipe</option>
 											<option value="SA">Saudi Arabia</option>
 											<option value="SN">Senegal</option>
 											<option value="RS">Serbia</option>
