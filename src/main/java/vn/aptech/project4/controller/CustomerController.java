@@ -82,7 +82,7 @@ public class CustomerController {
 	@GetMapping("/reportCustomer")
 	public String exportReport(Model theModel) throws FileNotFoundException, JRException {
 		
-        String path = "C:\\Users\\Duong\\Desktop";
+        String path = "upload-dir/report";
         List<Customer> customer = customerRepository.findAll();
         //load file and compile it	
         File file = ResourceUtils.getFile("classpath:customer.jrxml");
