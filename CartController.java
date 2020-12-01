@@ -1,18 +1,38 @@
 package vn.aptech.project4.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import vn.aptech.project4.entity.*;
-import vn.aptech.project4.repository.*;
-
-import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import vn.aptech.project4.entity.Cart;
+import vn.aptech.project4.entity.Customer;
+import vn.aptech.project4.entity.Order;
+import vn.aptech.project4.entity.OrderDetail;
+import vn.aptech.project4.entity.Product;
+import vn.aptech.project4.entity.Products_size;
+import vn.aptech.project4.entity.Size;
+import vn.aptech.project4.repository.CategoryRepository;
+import vn.aptech.project4.repository.CustomerRepository;
+import vn.aptech.project4.repository.OrderDetailsRepository;
+import vn.aptech.project4.repository.OrderRepository;
+import vn.aptech.project4.repository.ProductRepository;
+import vn.aptech.project4.repository.ProductSizeRepository;
+import vn.aptech.project4.repository.SizeRepository;
 @Controller
 public class CartController {
 	private ProductRepository productRepository;
@@ -96,7 +116,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		// Kiem tra ton tai cua gio hang
 		Product product = foreachpro(cartadd);
 		Size sizeadd = foreachsize(cartadd);
-		ProductSize prosizeadd = foreachprosize(cartadd);
+		Products_size prosizeadd = foreachprosize(cartadd);
 		
 		if (carts.size() > 0) {
 			int cartId = carts.size();
@@ -163,9 +183,9 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			Product adprodcut = foreachpro(cart);
 			orderdetail.setProductId(adprodcut);
 			orderdetail.setQuantity(cart.getQuantity());
-			ProductSize addprosize = foreachprosize(cart);
+			Products_size addprosize = foreachprosize(cart);
 			orderdetail.setPrice(addprosize.getPrice());
-			orderdetail.setSizeId(addprosize.getSize().getId());
+			orderdetail.setSizeId(addprosize.getSizeId());
 			// aaa.set()...
 			orderDetailsRepository.save(orderdetail);
 		}
@@ -191,10 +211,10 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		}
 		return sizeadd;
 	}
-	public ProductSize foreachprosize(Cart cart) {
-		ProductSize prosize = new ProductSize();
-		for (ProductSize prosizes : productSizeRepository.findAll()) {
-			if(prosizes.getProduct().getId()==cart.getProductId()&&prosizes.getSize().getId()==cart.getSizeId()) {
+	public Products_size foreachprosize(Cart cart) {
+		Products_size prosize = new Products_size();
+		for (Products_size prosizes : productSizeRepository.findAll()) {
+			if(prosizes.getProductsId()==cart.getProductId()&&prosizes.getSizeId()==cart.getSizeId()) {
 prosize=prosizes;
 			}
 		}
@@ -232,7 +252,7 @@ prosize=prosizes;
 			if (cart2.getIdCart() == id) {
 				cart2.setSizeId(size.getId());
 				cart2.setSizeName(size.getName());
-				ProductSize prosizeadd = foreachprosize(cart2);
+				Products_size prosizeadd = foreachprosize(cart2);
 				cart2.setPrice(prosizeadd.getPrice());
 				break;
 			}

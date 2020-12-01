@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -635,297 +635,18 @@
 	<section id="content" class="animated fadeIn pt35 pb45"
 		th:fragment="sales-stats-products">
 
-		<div th:replace="sidebar::leftcontent" />
+		<div th:replace="sidebar::leftcontent"></div>
 		<div class="content-right table-layout">
 
-			<!-- Column Left -->
-			<aside class="chute chute-left chute290 chute-icon-style br5"
-				data-chute-height="match">
-				<div id="sticky-anchor"></div>
-				<div id="sticky" class="chute-icon"></div>
-				<div id="sticky-anchor-chute"></div>
-				<div class="scroller-chute scroller-primary chute-fh-xs mrn">
-					<!-- Menu Block -->
-					<div class="allcp-form theme-primary">
-
-						<h5 class="pln">Filter Products</h5>
-
-						<h6 class="mb15">by SKU</h6>
-
-						<div class="section mb20">
-							<label for="order-id" class="field prepend-icon"> <input
-								type="text" name="order-id" id="order-id" class="gui-input"
-								placeholder="Product SKU #"> <span class="field-icon">
-									<i class="fa fa-tag"></i>
-							</span>
-							</label>
-						</div>
-
-						<h6 class="mb15">by price</h6>
-
-						<div class="section row mb20">
-							<div class="col-md-12 ph5">
-								<label for="price1" class="field prepend-icon mb5"> <input
-									type="text" name="price1" id="price1" class="gui-input"
-									placeholder="0"> <span class="field-icon"> <i
-										class="fa fa-usd"></i>
-								</span>
-								</label>
-							</div>
-							<div class="col-md-12 ph5">
-								<label for="price2" class="field prepend-icon"> <input
-									type="text" name="price2" id="price2" class="gui-input"
-									placeholder="1000"> <span class="field-icon"> <i
-										class="fa fa-usd"></i>
-								</span>
-								</label>
-							</div>
-						</div>
-
-						<h6 class="mb15">by date</h6>
-
-						<div class="section row mb20">
-							<div class="col-md-12 ph5">
-								<label for="datepicker1" class="field prepend-icon mb5">
-									<input type="text" id="datepicker1" name="datepicker1"
-									class="gui-input fs13" placeholder="From"> <span
-									class="field-icon"> <i class="fa fa-calendar"></i>
-								</span>
-								</label>
-							</div>
-							<div class="col-md-12 ph5">
-								<label for="datepicker2" class="field prepend-icon"> <input
-									type="text" id="datepicker2" name="datepicker2"
-									class="gui-input fs13" placeholder="To"> <span
-									class="field-icon"> <i class="fa fa-calendar"></i>
-								</span>
-								</label>
-							</div>
-						</div>
-
-						<h6 class="mb15">by category</h6>
-
-						<div class="section mb20">
-							<label class="field select"> <select
-								id="filter-categories" name="filter-categories">
-									<option value="0" selected="selected">Filter by
-										Categories</option>
-									<option value="1">iPhone</option>
-									<option value="2">iPad</option>
-									<option value="3">iMac</option>
-							</select> <i class="arrow double"></i>
-							</label>
-						</div>
-
-						<hr class="short">
-
-						<div class="section pb50 clr">
-							<button class="btn btn-primary pull-right ph30" type="button">Search</button>
-						</div>
-
-					</div>
-				</div>
-			</aside>
-			<!-- /Column Left -->
-
-			<!-- Column Center -->
 			<div class="chute chute-center">
 
 				<!-- New Product -->
-				<div class="panel mb25">
-					<div class="panel-heading">
-						<span class="panel-title hidden-xs"> Add New Product</span>
-						<ul class="nav panel-tabs-border panel-tabs">
-							<li class="active"><a href="#tab1_1" data-toggle="tab">General</a>
-							</li>
-							<li><a href="#tab1_2" data-toggle="tab">Details</a></li>
-						</ul>
-					</div>
-					<div class="panel-body pn">
-						<div class="tab-content pn br-n allcp-form theme-primary">
-							<div id="tab1_1" class="tab-pane active">
-
-								<div class="section row mbn">
-									<div class="col-md-4 ph10">
-										<div class="fileupload fileupload-new allcp-form"
-											data-provides="fileupload">
-											<div class="fileupload-preview thumbnail mb20">
-												<img data-src="holder.js/100%x140" alt="holder">
-											</div>
-											<div class="row mhn10">
-												<div class="col-xs-12 col-sm-7 pr5 ph10">
-													<input type="text" name="name2" id="name2"
-														class="text-center event-name gui-input br-light bg-light"
-														placeholder="Image tags"> <span class="field-icon"></span>
-												</div>
-												<div class="col-xs-12 col-sm-5 ph10">
-													<span class="button btn-primary btn-file btn-block br5">
-														<span class="fileupload-new">Select</span> <span
-														class="fileupload-exists">Change</span> <input type="file">
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-8 ph10">
-										<div class="section mb10">
-											<label for="name21" class="field prepend-icon"> <input
-												type="text" name="name21" id="name21"
-												class="event-name gui-input br-light light"
-												placeholder="Product Name"> <span class="field-icon">
-													<i class="fa fa-tag"></i>
-											</span>
-											</label>
-										</div>
-										<div class="section mb10">
-											<label class="field prepend-icon"> <textarea
-													style="height: 160px;"
-													class="gui-textarea br-light bg-light" id="comment"
-													name="comment" placeholder="Product Description"></textarea>
-												<span class="field-icon"> <i class="fa fa-file"></i>
-											</span>
-											</label>
-										</div>
-									</div>
-								</div>
-
-
-							</div>
-							<div id="tab1_2" class="tab-pane">
-
-								<div class="section row">
-									<div class="col-md-4 ph10">
-										<label for="product-category" class="field select"> <select
-											id="product-category" name="product-category">
-												<option value="0" selected="selected">Category...</option>
-												<option value="1">iPhone</option>
-												<option value="2">iPad</option>
-												<option value="3">iMac</option>
-										</select> <i class="arrow double"></i>
-										</label>
-									</div>
-									<!-- /section -->
-
-									<div class="col-md-4 ph10">
-										<label class="field select"> <select
-											id="product-status" name="product-status">
-												<option value="0" selected="selected">Availability</option>
-												<option value="1">Available</option>
-												<option value="2">Unavailable</option>
-												<option value="2">Preorder</option>
-												<option value="3">Discontinued</option>
-												<option value="4">Out of Stock</option>
-										</select> <i class="arrow double"></i>
-										</label>
-									</div>
-									<!-- /section -->
-
-									<div class="col-md-4 ph10">
-										<label for="product-quantity" class="field prepend-icon">
-											<input type="text" name="product-quantity"
-											id="product-quantity" class="gui-input"
-											placeholder="Quantity"> <span class="field-icon">
-												<i class="fa fa-sort-amount-desc"></i>
-										</span>
-										</label>
-									</div>
-									<!-- /section -->
-
-								</div>
-								<!-- /Section -->
-
-								<div class="section row">
-									<div class="col-md-4 ph10">
-										<label for="product-price" class="field prepend-icon">
-											<input type="text" name="product-price" id="product-price"
-											class="gui-input" placeholder="Price..."> <span
-											class="field-icon"> <i class="fa fa-usd"></i>
-										</span>
-										</label>
-									</div>
-									<!-- /section -->
-
-									<div class="col-md-4 ph10">
-										<label for="product-vendor" class="field prepend-icon">
-											<input type="text" name="product-vendor" id="product-vendor"
-											class="gui-input" placeholder="Vendor..."> <span
-											class="field-icon"> <i class="fa fa-building"></i>
-										</span>
-										</label>
-									</div>
-									<!-- /section -->
-
-									<div class="col-md-4 ph10">
-										<label for="product-sku" class="field prepend-icon"> <input
-											type="text" name="product-sku" id="product-sku"
-											class="gui-input" placeholder="SKU..."> <span
-											class="field-icon"> <i class="fa fa-barcode"></i>
-										</span>
-										</label>
-									</div>
-									<!-- /section -->
-
-								</div>
-								<!-- /Section -->
-
-								<div class="section br10">
-									<input id="tagsinput" type="text"
-										value="Apple, Device, Gadget, iPhone, iPad, iMac">
-								</div>
-								<!-- /Section -->
-
-								<hr class="short alt">
-
-								<div class="section mbn text-right">
-									<p class="text-right">
-										<button class="btn btn-primary" type="button">Add
-											product</button>
-									</p>
-								</div>
-								<!-- /section -->
-
-							</div>
-						</div>
-					</div>
-				</div>
+				
 
 				<!-- Recent Orders -->
 				<div class="panel mbn">
 					<div class="panel-menu p12 allcp-form theme-primary mtn">
-						<div class="row">
-							<div class="col-md-4">
-								<label class="field select"> <select id="bulk-action"
-									name="bulk-action">
-										<option value="0">Actions</option>
-										<option value="1">Edit</option>
-										<option value="2">Delete</option>
-										<option value="3">Active</option>
-										<option value="4">Inactive</option>
-								</select> <i class="arrow double"></i>
-								</label>
-							</div>
-							<div class="col-md-4">
-								<label class="field select"> <select
-									id="filter-category" name="filter-category">
-										<option value="0">Filter by Category</option>
-										<option value="1">iPhone</option>
-										<option value="2">iPad</option>
-										<option value="3">iMac</option>
-								</select> <i class="arrow"></i>
-								</label>
-							</div>
-							<div class="col-md-4">
-								<label class="field select"> <select id="filter-status"
-									name="filter-status">
-										<option value="0">Filter by Status</option>
-										<option value="1">Active</option>
-										<option value="2">Inactive</option>
-										<option value="3">Low Stock</option>
-										<option value="4">Out of Stock</option>
-								</select> <i class="arrow"></i>
-								</label>
-							</div>
-						</div>
+						<span class="panel-title ptn">Product List</span>
 					</div>
 					<div class="panel-body pn">
 						<div class="table-responsive">
@@ -933,339 +654,56 @@
 								class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
 								<thead>
 									<tr class="">
-										<th class="text-center"></th>
 										<th class="">Image</th>
-										<th class="">Product Title</th>
-										<th class="">SKU</th>
-										<th class="">Price</th>
-										<th class="">Stock</th>
-										<th class="text-right">Status</th>
+						            	<th class="">No.</th>
+										<th class="">ProductName</th>
+										<th class="">description</th>
+										<th class="">category</th>
+										<th class="">Size S</th>
+										<th class="">Size M</th>
+										<th class="">Size L</th>
+										<th class="">action</th>
+										<th></th>
 
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/1.png">
-										</td>
-										<td class="">Apple iPhone 5</td>
-										<td class="">#123</td>
-										<td class="">$500</td>
-										<td class="">300</td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Active <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li class="active"><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/10.png">
-										</td>
-										<td class="">Apple iPhone 6</td>
-										<td class="">#1234</td>
-										<td class="">$600</td>
-										<td class="">500</td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Active <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li class="active"><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/3.png">
-										</td>
-										<td class="">Apple iPad</td>
-										<td class="">#2345</td>
-										<td class="">$400</td>
-										<td class="">300</td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Active <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li class="active"><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/4.png">
-										</td>
-										<td class="">Apple iPad Air</td>
-										<td class="">#4563</td>
-										<td class="">$800</td>
-										<td class="">500</td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Active <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li class="active"><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/10.png">
-										</td>
-										<td class="">Apple iMac</td>
-										<td class="">#5555</td>
-										<td class="">$999</td>
-										<td class="">100</td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Active <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li class="active"><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/3.png">
-										</td>
-										<td class="">Apple iMac 27"</td>
-										<td class="">#5656</td>
-										<td class="">$1999</td>
-										<td class="">300</td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Active <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li class="active"><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/4.png">
-										</td>
-										<td class="">Apple iPhone 4S</td>
-										<td class="">#6666</td>
-										<td class="">$300</td>
-										<td class="text-warning"><b>15</b></td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-warning br2 btn-xs fs10 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Disabled <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li><a href="#">Active</a></li>
-													<li class="active"><a href="#" class="text-warning">Inactive</a>
-													</li>
-													<li><a href="#">Low Stock</a></li>
-													<li><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/3.png">
-										</td>
-										<td class="">Apple iPhone 6S 16GB</td>
-										<td class="">#1010</td>
-										<td class="">$995</td>
-										<td class="text-danger"><b>0 - Sold Out</b></td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Sold Out <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li class="active"><a href="#" class="text-warning">Out
-															of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/9.png">
-										</td>
-										<td class="">Apple iPhone 6S 32GB</td>
-										<td class="">#1011</td>
-										<td class="">$1195</td>
-										<td class="text-danger"><b>0 - Sold Out</b></td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Sold Out <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li class="active"><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="text-center"><label class="option block mn">
-												<input type="checkbox" name="inputname" value="FR">
-												<span class="checkbox mn"></span>
-										</label></td>
-										<td class="w100"><img class="img-responsive mw40 ib"
-											title="user" alt="" src="assets/img/pages/products/10.png">
-										</td>
-										<td class="">Apple iPhone 6S 64GB</td>
-										<td class="">#1012</td>
-										<td class="">$1395</td>
-										<td class="text-danger"><b>0 - Sold Out</b></td>
-										<td class="">
-											<div class="btn-group text-right">
-												<button type="button"
-													class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false">
-													Sold Out <span class="caret ml5"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a href="#">Edit</a></li>
-													<li><a href="#">Delete</a></li>
-													<li><a href="#">Archive</a></li>
-													<li class="divider"></li>
-													<li><a href="#">Active</a></li>
-													<li><a href="#">Inactive</a></li>
-													<li><a href="#">Low Stock</a></li>
-													<li class="active"><a href="#">Out of Stock</a></li>
-												</ul>
-											</div>
-										</td>
-									</tr>
+									
+									<tr th:each="tempProduct,stat : ${products}">
+
+																		<td class=""><img class="img-responsive mw40 ib"
+																			alt="" title="user"
+																			th:src="@{${'/files/'+ tempProduct.getImage()}}"></td>
+																		<td class="" th:text="${stat.count}"></td>
+																		<td class="" th:text="${tempProduct.getProductName()}"></td>
+																		<td class="" th:text="${tempProduct.getDescription()}"></td>
+																		<td class="" th:text="${tempProduct.getCategory().getName()}"></td>
+																		<th:block th:each="tempSize: ${size}">
+																			<td class="" th:text="${tempProduct.getPrice(tempSize.id)}?:'0'"></td>
+																		</th:block>
+																		<td class="">
+																		
+
+																			<button type="button"
+																				class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																				data-toggle="dropdown" aria-expanded="false">
+																				Action <span class="caret ml5"></span>
+																			</button>
+																			<ul class="dropdown-menu" role="menu">
+																			<li><a
+																					th:href="@{/admin/recipe/view/{id}(id=${tempProduct.getId()})}">View Recipe</a></li>
+																				<li><a
+																					th:href="@{/admin/product/editProduct/{id}(id=${tempProduct.getId()})}">Edit</a></li>
+																				<li><a
+																					th:href="@{/admin/product/DetailProduct/{id}(id=${tempProduct.getId()})}">Detail</a></li>
+																				<li><a													
+																					th:href="@{/admin/product/deleteProduct/{id}(id=${tempProduct.getId()})} "onclick="return confirm('Are you sure?')">Delete</a></li>
+
+																			</ul>
+
+																		</td>
+																	</tr>
+									
 								</tbody>
 							</table>
 						</div>
@@ -1422,7 +860,7 @@
 				
 					<div class="">
 						<div class="">
-						
+						<a th:href="@{/admin/order/export/pdf}">Export to PDF</a>
 							<table id="default-datatable"
 								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
 								<h2>View Order</h2>
@@ -1443,7 +881,7 @@
 										<span th:text="${tempOrder.id}"></span>
 										</a>
 										</td>
-										<td class="" th:text="${tempOrder.orderDate}"></td>																
+										<td class="" th:text="${tempOrder.orderDate}"></td>
 										<td class="" th:text="${tempOrder.customer.customer_name}"></td>
 							
 										<td class="" th:text="${tempOrder.total} + ' VND'"></td>
@@ -1465,24 +903,6 @@
 															th:case="4">Canceled</div>
 													</div>
 												</div>
-
-
-												<ul class="dropdown-menu" role="menu">
-													<div th:switch="${tempOrder.status}">
-														<li th:case="1"><a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=2)}">Pending</a>
-															<a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=4)}">Canceled</a>
-														</li>
-														<li th:case="2"><a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=3)}">Completed</a>
-															<a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=4)}">Canceled</a>
-														</li>
-
-													</div>
-												</ul>
-
 											</div>
 										</td>
 									</tr>

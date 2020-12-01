@@ -45,162 +45,177 @@
 			<div class="row height align-items-center justify-content-center">
 				<div class="col-lg-10">
 					<div class="generic-banner-content">
-						<h2 class="text-white">The Generic Page</h2>
+						<h2 class="text-white">Cart</h2>
 						<p class="text-white">
-							It won’t be a bigger problem to find one video game lover in your
-							<br> neighbor. Since the introduction of Virtual Game.
+							Please check before check out
 						</p>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="" style="background-color: white">
-		<div class="col-lg-5 col-md-6 col-sm-6">
-			<div class="">
-				<h2 style="color: navy">Information</h2>
-				<h6>
-					Full Name:<span th:text="${customer.customer_name}"></span>
-				</h6>
-				<br>
-				<h6>
-					Address:<span th:text="${customer.address}"></span>
-				</h6>
-				<br>
-				<h6>
-					Phone Number:<span th:text="${customer.customer_phone}"></span>
-				</h6>
-				<br>
+	<section style="background-color: white;"
+		class="animated fadeIn pt35 pb45" th:fragment="sales-stats-purchases">
+		<div class="content-right table-layout">
+			<!-- Column Left -->
+			<aside class="chute chute-left chute290 chute-icon-style br5"
+				data-chute-height="match">
+				<div class="chute-icon"></div>
+				<div class="scroller-chute scroller-primary chute-fh-xs mrn">
+					<!-- Menu Block -->
+					<div class="allcp-form theme-primary">
+						<div class="">
+							<h2 style="color: navy">Information</h2>
+							<h6>
+								Full Name:<span th:text="${customer.customer_name}"></span>
+							</h6>
+							<br>
+							<h6>
+								Address:<span th:text="${customer.address}"></span>
+							</h6>
+							<br>
+							<h6>
+								Phone Number:<span th:text="${customer.customer_phone}"></span>
+							</h6>
+							<br>
+						</div>
+					</div>
+				</div>
+			</aside>
+			<!-- End banner Area -->
+
+			<!-- About Generic Start -->
+			<div class="chute chute-center">
+
+
+				<div class="shopping-cart">
+
+					<div class="table-responsive">
+						<br> <br> <br>
+						<form th:action="@{/confirmcart}">
+
+							<table
+								class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+								<thead>
+									<tr class="">
+										<th style="color: black;" class="">No.</th>
+										<!-- <th style="color: black;" class="">Image</th> -->
+										<th style="color: black;" class="">ProductName</th>
+										<th style="color: black;" class="">Size</th>
+										<th style="color: black;" class="">Quantity</th>
+										<th style="color: black;" class="">Price</th>
+										<th style="color: black;" class="">Sub Total</th>
+										<th style="color: black;" class="">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr th:each="tempProduct,stat : ${carts}">
+										<td class=""><span th:text="${stat.count}"></span></td>
+										<!-- <td class=""><img class="img-responsive mw40 ib" alt=""
+											title="user"
+											th:src="@{${'/img/pages/products/'+ tempProduct.image}}"></td> -->
+										<td class=""><span th:text="${tempProduct.productName}"></span></td>
+										<td><select th:name="${tempProduct.idCart}"
+											th:id="'size'+${tempProduct.idCart}"
+											th:onchange="updateSize(this.name)">
+												<option th:each="temp:${size}" th:value="${temp.id}"
+													th:selected="${temp.id} eq ${tempProduct.sizeId}"
+													th:text="${temp.name}"></option>
+										</select></td>
+										<td class="">
+										<input
+											type="number" min="1" max="100"
+											th:value="${tempProduct.quantity}"
+											th:id="'quantity'+${tempProduct.idCart}"
+											th:name="${tempProduct.idCart}"
+											th:onchange="updateQuantity(this.name)" />
+											</td>
+
+										<td class="" th:text="${tempProduct.price} + ' VND'"></td>
+										<td class=""><span
+											th:text="${tempProduct.quantity}*${tempProduct.price} + ' VND'"></span></td>
+										<td class="">
+											<div class="btn-group text-right">
+												<a class="btn btn-danger"
+													th:href="@{/remove/{id}(id=${tempProduct.idCart})}">x</a>
+
+											</div>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+							<h3 class="text-right">
+								Total: <span class="" th:text="${tong} + ' VND'"></span>
+							</h3>
+							<div>
+								<p style="text-align: center">
+									<input class="btn btn-primary" type="submit" value="Comfirm">
+								</p>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- End banner Area -->
+	</section>
+	<!-- End video-sec Area -->
 
-	<!-- About Generic Start -->
-	<div class="main-wrapper">
+	<!-- Start Generic Area -->
 
-		<!-- Start video-sec Area -->
-		<section class="about-generic-area section-gap">
-
-
-			<div class="shopping-cart">
-
-				<div class="table-responsive">
-					<form th:action="@{/confirmcart}">
-
-						<table id="default-datatable"
-							class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-							<thead>
-								<tr class="">
-									<th class="">No.</th>
-									<!-- <th class="">Image</th> -->
-									<th class="">ProductName</th>
-									<th class="">Size</th>
-									<th class="">Quantity</th>
-									<th class="">Price</th>
-									<th class="">Sub Total</th>
-									<th class="">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr th:each="tempProduct,stat : ${carts}">
-									<td class=""><span th:text="${stat.count}"></span></td>
-								<!-- 	<td class=""><a th:src="@{${'/img/pages/products/'+ tempProduct.product.image}}"></a></td> -->
-									<td class=""><span th:text="${tempProduct.productName}"></span></td>
-									<td><select th:name="${tempProduct.idCart}"
-										th:id="'size'+${tempProduct.idCart}"
-										th:onchange="updateSize(this.name)">
-											<option th:each="temp:${size}" th:value="${temp.id}"
-												th:selected="${temp.id} eq ${tempProduct.sizeId}"
-												th:text="${temp.name}"></option>
-									</select></td>
-									<td><input type="number"
-										th:value="${tempProduct.quantity}"
-										th:id="'quantity'+${tempProduct.idCart}"
-										th:name="${tempProduct.idCart}"
-										th:onchange="updateQuantity(this.name)" /></td>
-									<td class="" th:text="${tempProduct.price}"></td>
-									<td class=""><span
-										th:text="${tempProduct.quantity}*${tempProduct.price}"></span></td>
-									<td class="">
-										<div class="btn-group text-right">
-											<a class="btn btn-danger"
-												th:href="@{/remove/{id}(id=${tempProduct.idCart})}">x</a>
-
-										</div>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-						<h3 class="text-right">
-							Sub Total:<span class="" th:text="${tong}"></span>
-						</h3>
-				</div>
-				<div class="section mbn text-right">
-					<p class="text-right">
-						<input class="btn btn-primary" type="submit" value="Check out">
-					</p>
-
-					</form>
-				</div>
-			</div>
-		</section>
-		<!-- End video-sec Area -->
-
-		<!-- Start Generic Area -->
-
-		<!-- End Generic Start -->
+	<!-- End Generic Start -->
 
 	<footer th:replace="guest/footerClient"></footer>
-		<!-- End footer Area -->
-		<script>
-			function updateQuantity(val) {
-				var idCart = val;
-				var selector = "#quantity" + val;
-				var quantity = $(selector).val();
-				$.get("updateQuantity", {
-					id : idCart,
-					quantity : quantity
-				}).done(function(html) {
-					window.location.href = "../cart";
-				});
-			}
-		</script>
-		<script>
-			function updateSize(val) {
-				var idCart = val;
-				var selector = "#size" + val;
-				var size = $(selector).val();
-				$.get("updateSize", {
-					id : idCart,
-					size : size
-				}).done(function(html) {
-					window.location.href = "../cart";
-				});
-			}
-		</script>
-		<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"></script>
-		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
-		<script type="text/javascript"
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-		<script th:src="@{/js/easing.min.js}"></script>
-		<script th:src="@{/js/hoverIntent.js}"></script>
-		<script th:src="@{/js/superfish.min.js}"></script>
-		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
-		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
-		<script th:src="@{/js/owl.carousel.min.js}"></script>
-		<script th:src="@{/js/jquery.sticky.js}"></script>
-		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
-		<script th:src="@{/js/parallax.min.js}"></script>
-		<script th:src="@{/js/waypoints.min.js}"></script>
-		<script th:src="@{/js/jquery.counterup.min.js}"></script>
-		<script th:src="@{/js/mail-script.js}"></script>
-		<script th:src="@{/js/main.js}"></script>
+	<!-- End footer Area -->
+
+	<script>
+		function updateQuantity(val) {
+			var idCart = val;
+			var selector = "#quantity" + val;
+			var quantity = $(selector).val();
+			$.get("updateQuantity", {
+				id : idCart,
+				quantity : quantity
+			}).done(function(html) {
+				window.location.href = "../cart";
+			});
+		}
+	</script>
+	<script>
+		function updateSize(val) {
+			var idCart = val;
+			var selector = "#size" + val;
+			var size = $(selector).val();
+			$.get("updateSize", {
+				id : idCart,
+				size : size
+			}).done(function(html) {
+				window.location.href = "../cart";
+			});
+		}
+	</script>
+	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script th:src="@{/js/easing.min.js}"></script>
+	<script th:src="@{/js/hoverIntent.js}"></script>
+	<script th:src="@{/js/superfish.min.js}"></script>
+	<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.sticky.js}"></script>
+	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/js/parallax.min.js}"></script>
+	<script th:src="@{/js/waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.counterup.min.js}"></script>
+	<script th:src="@{/js/mail-script.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
