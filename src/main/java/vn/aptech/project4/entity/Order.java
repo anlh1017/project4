@@ -1,20 +1,9 @@
 package vn.aptech.project4.entity;
 
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "orders")
@@ -28,7 +17,7 @@ import javax.persistence.Table;
 	    @Column(name = "order_date", columnDefinition = "date")
 	    private Date orderDate;
 
-	    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	    @JoinColumn(name = "customer_id")
 	    private Customer customer;
 	    

@@ -1,29 +1,29 @@
 package vn.aptech.project4.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
+import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import vn.aptech.project4.entity.Cart;
 import vn.aptech.project4.entity.Customer;
 import vn.aptech.project4.entity.Order;
 import vn.aptech.project4.entity.OrderDetail;
-import vn.aptech.project4.entity.Product;
+import vn.aptech.project4.entity.OrderPDFExporter;
 import vn.aptech.project4.repository.OrderDetailsRepository;
 import vn.aptech.project4.repository.OrderRepository;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/admin/order")
 public class OrderController {
@@ -109,7 +109,22 @@ public class OrderController {
 		return "invoice";
 	
 	}
-	
+    @GetMapping("/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf"); DateFormat dateFormatter = new
+                SimpleDateFormat("yyyy-MM-dd_HH:mm:ss"); String currentDateTime =
+                dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition"; String headerValue =
+                "attachment; filename=orders_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<Order> listOrders = orderRepository.findAll();
+
+        OrderPDFExporter exporter = new OrderPDFExporter(listOrders);
+        exporter.export(response);
+
+    }
 
 
 //	@GetMapping("/findByDate")

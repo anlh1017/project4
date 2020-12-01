@@ -1,27 +1,10 @@
 package vn.aptech.project4.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 @Entity
 @Table(name="products_size")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 
-@ToString
 public class Products_size {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +16,42 @@ public class Products_size {
 	
 	@Column(name="SizeId")
 	private int SizeId;  
-	
-	
+
 	@Column(name="Price")
 	private int Price;
+
+	public Products_size() {
+	}
+
+	public int getProductSizeId() {
+		return ProductSizeId;
+	}
+
+	public void setProductSizeId(int productSizeId) {
+		ProductSizeId = productSizeId;
+	}
+
+	public int getProductsId() {
+		return ProductsId;
+	}
+
+	public void setProductsId(int productsId) {
+		ProductsId = productsId;
+	}
+
+	public int getSizeId() {
+		return SizeId;
+	}
+
+	public void setSizeId(int sizeId) {
+		SizeId = sizeId;
+	}
+
+	public int getPrice() {
+		return Price;
+	}
+
+	public void setPrice(int price) {
+		Price = price;
+	}
 }

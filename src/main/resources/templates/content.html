@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -860,7 +860,7 @@
 				
 					<div class="">
 						<div class="">
-						
+						<a th:href="@{/admin/order/export/pdf}">Export to PDF</a>
 							<table id="default-datatable"
 								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
 								<h2>View Order</h2>
@@ -881,7 +881,7 @@
 										<span th:text="${tempOrder.id}"></span>
 										</a>
 										</td>
-										<td class="" th:text="${tempOrder.orderDate}"></td>																
+										<td class="" th:text="${tempOrder.orderDate}"></td>
 										<td class="" th:text="${tempOrder.customer.customer_name}"></td>
 							
 										<td class="" th:text="${tempOrder.total} + ' VND'"></td>
@@ -903,24 +903,6 @@
 															th:case="4">Canceled</div>
 													</div>
 												</div>
-
-
-												<ul class="dropdown-menu" role="menu">
-													<div th:switch="${tempOrder.status}">
-														<li th:case="1"><a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=2)}">Pending</a>
-															<a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=4)}">Canceled</a>
-														</li>
-														<li th:case="2"><a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=3)}">Completed</a>
-															<a
-															th:href="@{/admin/order/updateStatus(id=${tempOrder.id},status=4)}">Canceled</a>
-														</li>
-
-													</div>
-												</ul>
-
 											</div>
 										</td>
 									</tr>
