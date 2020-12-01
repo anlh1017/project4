@@ -27,6 +27,8 @@ public class Review {
  private String email;
 	@Column(name = "content")
  private String content;
+	@Column(name = "rating")
+private Float rating;
 	@Column(name = "date", columnDefinition = "date")
  private Date date;
 }

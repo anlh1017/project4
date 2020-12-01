@@ -169,6 +169,11 @@
 						<input class="input100" type="text" name="content"  required="required"  placeholder="Content...">
 						
 					</div>
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Rating</span>
+						<input class="rating" name="rating"  required="required" type="hidden" >
+						
+					</div>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
@@ -228,6 +233,17 @@
 		<script th:src="@{/js/jquery.counterup.min.js}"></script>
 		<script th:src="@{/js/mail-script.js}"></script>
 		<script th:src="@{/js/main.js}"></script>
+		<script>
+			function (){
+				$("rating").starRating({
+					  rating: 0,
+					  numStars: 5,
+					  maxValue: 5,
+					  halfStar: true
+					});
+			};
+		</script>
+		
 </body>
 
 </html>

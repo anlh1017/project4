@@ -49,7 +49,9 @@ public class ProductController {
         List<Product> products = productRepository.findAll();
         theModel.addAttribute("size", sizeRepository.findAll());
         theModel.addAttribute("products", products);
-        return "products-list";
+        theModel.addAttribute("activeProducts",new String("active"));
+		theModel.addAttribute("content_view", new String("sales-stats-products"));
+        return "index";
     }
 
 
