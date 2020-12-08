@@ -42,7 +42,8 @@
 <!-- CSS - theme -->
 <link rel="stylesheet" type="text/css"
 	th:href="@{/skin/default_skin/less/theme.css}">
-
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/jquery.dataTables.min.css}">
 <!-- IE8 HTML5 support -->
 <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -95,8 +96,8 @@
 										</div>
 										<div class="panel-body pn mt15">
 											<div class="table-responsive">
-												<table
-													class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+												<table id="myTable"
+													>
 													<thead>
 														<tr class="">
 															<th class="">Ingredient Name</th>
@@ -159,7 +160,11 @@
 	<!-- /Body Wrap  -->
 
 	<!-- Scripts -->
-
+	<script>
+	$(document).ready( function () {
+	$("#myTable").DataTable();
+	} );
+	</script>
 	<!-- jQuery -->
 	<script th:src="@{/js/jquery/jquery-1.12.3.min.js}"></script>
 	<script th:src="@{/js/jquery/jquery_ui/jquery-ui.min.js}"></script>
@@ -194,6 +199,8 @@
 	<script th:src="@{/js/demo/widgets_sidebar.js}"></script>
 	<script th:src="@{/js/pages/dashboard2.js}"></script>
 	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
+	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/jquery/jquery-3.5.1.js}"></script>
 	<!-- /Scripts -->
 
 

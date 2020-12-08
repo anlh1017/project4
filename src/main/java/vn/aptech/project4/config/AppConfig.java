@@ -101,5 +101,6 @@ public class AppConfig implements WebMvcConfigurer {
 	        registry.addResourceHandler("/vendor/**").addResourceLocations("classpath:/static/vendor/");
 			registry.addResourceHandler("/files/**").addResourceLocations("file:upload-dir/");
 	    }
+
 		
 }

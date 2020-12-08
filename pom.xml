@@ -91,6 +91,12 @@
 			<artifactId>jasperreports</artifactId>
 			<version>6.9.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.darrachequesne/spring-data-jpa-datatables -->
+		<dependency>
+			<groupId>com.github.darrachequesne</groupId>
+			<artifactId>spring-data-jpa-datatables</artifactId>
+			<version>5.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
