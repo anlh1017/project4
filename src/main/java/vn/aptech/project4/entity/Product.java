@@ -141,6 +141,9 @@ public class Product {
 		sizes.add(productSize);
 	}
 	public boolean hasSize(Size size){
+		if(sizes==null){
+			return false;
+		}else {
 		for (ProductSize productSize: sizes) {
 			if (productSize.getSize().getId() == size.getId()) {
 				return true;
@@ -148,5 +151,5 @@ public class Product {
 		}
 		return false;
 	}
-	
+	}
 }
