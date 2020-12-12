@@ -1,5 +1,7 @@
 package vn.aptech.project4.entity;
 
+
+import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;

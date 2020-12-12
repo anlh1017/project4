@@ -1,21 +1,16 @@
 package vn.aptech.project4.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 import vn.aptech.project4.entity.Ingredient;
 import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.repository.IngredientRepository;
 import vn.aptech.project4.repository.InventoryRepository;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/ingredient")
@@ -32,7 +27,7 @@ public class IngredientController {
 	@GetMapping("/list")
 	public String showIngredients(Model theModel) {
 		theModel.addAttribute("ingredients", ingredientRepository.findAll());
-		return "list-ingredients";
+		return "list-ingredients2";
 	}
 
 	@GetMapping("/create")

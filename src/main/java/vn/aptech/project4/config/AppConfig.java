@@ -103,5 +103,6 @@ public class AppConfig implements WebMvcConfigurer {
 	        registry.addResourceHandler("/stars/**").addResourceLocations("classpath:/static/stars/");
 
 	    }
+
 		
 }
