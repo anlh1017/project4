@@ -105,7 +105,7 @@
 													</thead>
 													<tbody>
 														<tr th:each="tempReview : ${review}">
-															<td class="" th:text="${tempReview.email}"></td>
+															<td class="" th:text="${tempReview.customer.customerEmail}"></td>
 															<td class="" th:text="${tempReview.content}"></td>
 															<td class="" th:text="${tempReview.date}"></td>
 															<td class="">

@@ -28,13 +28,13 @@ public class HomeController {
 	ProductService serviceProduct;
 	OrderRepository orderRepository;
 	OrderDetailsRepository orderDetailsRepository;
-	@Autowired
-	private ReviewRepository reviewRepository;
-	private CustomerRepository customerRepository;
-	private MembershipRepository membershipRepository;
+
+	 ReviewRepository reviewRepository;
+	 CustomerRepository customerRepository;
+	 MembershipRepository membershipRepository;
 	@Autowired
 	public HomeController(CustomerRepository customerRepository, MembershipRepository membershipRepository, ProductRepository productRepository, CategoryRepository categoryRepository,
-			ProductSizeRepository productSizeRepository, ProductService serviceProduct,OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository) {
+			ProductSizeRepository productSizeRepository, ProductService serviceProduct,OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository,  ReviewRepository reviewRepository) {
 		this.customerRepository = customerRepository;
 		this.membershipRepository = membershipRepository;
 		this.productRepository = productRepository;
@@ -43,12 +43,14 @@ public class HomeController {
 		this.serviceProduct = serviceProduct;
 		this.orderDetailsRepository = orderDetailsRepository;
 		this.orderRepository= orderRepository;
+		this.reviewRepository= reviewRepository;
 	}
 	//create a mapping for "/hello"
 		@GetMapping("/")
 		public String index(Model theModel) {
 			List<Review> review = reviewRepository.findAll();
 			theModel.addAttribute("review",review);
+			theModel.addAttribute("avgRating",getAvgRating());
 			return "guest/index";
 		}
 
@@ -266,12 +268,41 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/saveReview")
-	public String saveReview(@ModelAttribute("review") Review review,Model theModel) {
+	public String saveReview(@ModelAttribute("review") Review review,Model theModel,Authentication authentication) {
+		String cusEmail = authentication.getName();
+		Customer customer = customerRepository.findByCustomerEmail(cusEmail).get();
 		Date date = new Date();
-		theModel.addAttribute("date", date);
-		theModel.addAttribute("review", review);
+		/*
+		 * theModel.addAttribute("date", date); theModel.add
+		 * theModel.addAttribute("review", review);
+		 */
+		review.setCustomer(customer);
 		reviewRepository.save(review); 	
 		return "guest/index";
+	}
+	
+	public float getAvgRating() {
+		List<Review> reviews = new ArrayList<>();
+		int count;
+		reviews = reviewRepository.findAll();
+		count = reviews.size();
+		if(count==0) {
+			return 0;
+		}
+		float sum=0;
+		for(Review review: reviews) {
+			sum+=review.getRating();
+		}
+		float result = sum/count;
+		float roundup= (float)Math.round(result*10)/10;
+		return roundup;
+	}
+	@GetMapping("/reviewAll")
+	public String reviewAll(Model theModel) {
+		List<Review> review = reviewRepository.findAll();
+		theModel.addAttribute("review",review);
+		theModel.addAttribute("avgRating",getAvgRating());
+		return "guest/review-all";
 	}
 	
 }
