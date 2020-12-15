@@ -29,9 +29,10 @@ public class HomeController {
 	OrderRepository orderRepository;
 	OrderDetailsRepository orderDetailsRepository;
 
-	 ReviewRepository reviewRepository;
-	 CustomerRepository customerRepository;
-	 MembershipRepository membershipRepository;
+	@Autowired
+	private ReviewRepository reviewRepository;
+	private CustomerRepository customerRepository;
+	private MembershipRepository membershipRepository;
 	@Autowired
 	public HomeController(CustomerRepository customerRepository, MembershipRepository membershipRepository, ProductRepository productRepository, CategoryRepository categoryRepository,
 			ProductSizeRepository productSizeRepository, ProductService serviceProduct,OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository,  ReviewRepository reviewRepository) {
@@ -43,7 +44,6 @@ public class HomeController {
 		this.serviceProduct = serviceProduct;
 		this.orderDetailsRepository = orderDetailsRepository;
 		this.orderRepository= orderRepository;
-		this.reviewRepository= reviewRepository;
 	}
 	//create a mapping for "/hello"
 		@GetMapping("/")

@@ -5,16 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.repository.InventoryRepository;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/inventory")
@@ -27,8 +23,10 @@ public class InventoryController {
 	}
 	@GetMapping("")
 	public String showInventory(Model theModel) {
-		theModel.addAttribute("inventory", inventoryRepository.findAll());
-
+			List<Inventory> managedInventory = inventoryRepository.findAllByStatus(2);
+		List<Inventory> unmanagedInventory = inventoryRepository.findAllByStatus(1);
+			theModel.addAttribute("inventory", managedInventory);
+		theModel.addAttribute("unmanagedinventory", unmanagedInventory);
 		return "list-inventory";
 	}
 	@GetMapping("/import/{id}")
