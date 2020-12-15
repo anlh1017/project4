@@ -2,6 +2,7 @@ package vn.aptech.project4.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +84,12 @@ public class CustomerController {
 	public String exportReport(Model theModel) throws FileNotFoundException, JRException {
 		
         String path = "upload-dir/report";
+		
         List<Customer> customer = customerRepository.findAll();
+		 		/*
+		 * Customer customer = customerRepository.findById(1).get(); List<Customer> test
+		 * = new ArrayList<>(); test.add(customer);
+		 */
         //load file and compile it	
         File file = ResourceUtils.getFile("classpath:customer.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());

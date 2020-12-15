@@ -34,7 +34,8 @@ public class Customer {
 	private Membership membership;
 	@Column(name="authority")
 	private String authority;
-
+	@Column(name="password_token")
+	private String resetPasswordToken;
 	public Customer() {
 	}
 
@@ -109,4 +110,13 @@ public class Customer {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
+	
 }
