@@ -13,6 +13,7 @@
 			<style backcolor="#E6DAC3"/>
 		</conditionalStyle>
 	</style>
+	
 	<field name="customer_id" class="java.lang.Integer"/>
 	<field name="customerEmail" class="java.lang.String"/>
 	<field name="customer_name" class="java.lang.String"/>
@@ -60,6 +61,7 @@
 					<reportElement x="20" y="71" width="180" height="32" uuid="2b9b0503-505c-43d3-85ba-4042b1f91a1f"/>
 					<text><![CDATA[590 Cach Mang Thang Tam, Phuong 11, Quan 3, Thanh pho HCM]]></text>
 				</staticText>
+				
 			</frame>
 		</band>
 	</title>

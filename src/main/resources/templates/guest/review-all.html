@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="codepixer">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Coffee</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" th:href="@{/skin/css/linearicons.css}">
+<link rel="stylesheet" th:href="@{/skin/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/skin/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/skin/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/skin/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/skin/css/owl.carousel.css}">
+<link rel="stylesheet" th:href="@{/skin/css/main.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<link th:rel="stylesheet" type="text/css" th:href="@{/skin/css/star-rating.css}">
+</head>
+
+<body  class="utility-page sb-l-c sb-r-c" style="background-image: url('img/header-bg.jpg');">
+<header th:replace = "guest/headerClient::header"></header>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- #header -->
+
+	<section class="menu-area section-gap" id="coffee">
+		
+						<div class="title text-center">
+							<h1 class="mb-10">Review All</h1>
+							
+						</div>
+					
+	<div class="container">
+			   <div class="row height align-items-center">
+			      <div class="text-center col-lg-12">
+			      <span class="label-input100">Rating</span>
+						<input class="rating" name="rating"  required="required" type="hidden" readonly th:value="${avgRating}" data-glyphicon="0">
+				  </div>
+			   	
+						
+					<div class="col-lg-6" th:each="tempReview : ${review}" >
+   							<h6><span th:text="${tempReview.customer.customerEmail}"></span></h6>
+  							<span th:text="${tempReview.content}"></span>
+  									<input class="rating" name="rating"  required="required" type="hidden" readonly th:value="${tempReview.rating}" data-glyphicon="0">
+  							Date:<span class="unit" th:text="${tempReview.date}"></span>
+					</div>
+				<br>
+				
+				
+				<div class="text-center col-lg-12">
+				<form class="login100-form validate-form"  th:action="@{/saveReview}" th:object="${review}"  sec:authorize="isAuthenticated()">
+				<i th:text="${message}"></i>
+					 
+						<th:block th:each="tempCustomer:${customer}">
+												 <div class="custom-control custom-radio custom-control-inline">
+              										   <input th:id="${tempCustomer.customer_id}" th:name="${tempCustomer.customer_id}" class="custom-control-input" th:value="${tempCustomer.customer_id}" th:field="*{customer.customer_id}">
+              										  <label class="custom-control-label" th:for="${tempCustomer.customer_id}"><p th:text="${tempCustomer.customerEmail}"></p></label>
+           										 </div>
+             			</th:block>
+						
+					
+					<div class="wrap-input100 validate-input" data-validate="Content is required">
+						<span class="label-input100">Content</span>
+						<input class="input100" type="text" name="content"  required="required"  placeholder="Content...">
+						
+					</div>
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Rating</span>
+						<input class="rating" name="rating"  required="required" type="hidden" value="0" data-glyphicon="0" >
+						
+					</div>
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Submit
+							</button>
+						</div>
+					</div>
+				</form>
+				</div>
+	       </div>
+	</div>
+		</section>
+		<!-- End review Area -->
+
+		<!-- start footer Area -->
+		<footer th:replace="guest/footerClient"></footer>
+		<!-- End footer Area -->
+
+		<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+		<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+		
+		<script th:src="@{/stars/star-rating.min.js}"></script>
+		
+</body>
+
+</html>
