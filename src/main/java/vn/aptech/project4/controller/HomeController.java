@@ -28,6 +28,7 @@ public class HomeController {
 	ProductService serviceProduct;
 	OrderRepository orderRepository;
 	OrderDetailsRepository orderDetailsRepository;
+
 	@Autowired
 	private ReviewRepository reviewRepository;
 	private CustomerRepository customerRepository;
@@ -43,6 +44,7 @@ public class HomeController {
 		this.serviceProduct = serviceProduct;
 		this.orderDetailsRepository = orderDetailsRepository;
 		this.orderRepository= orderRepository;
+
 	}
 	//create a mapping for "/hello"
 		@GetMapping("/")
@@ -273,6 +275,5 @@ public class HomeController {
 		reviewRepository.save(review); 	
 		return "guest/index";
 	}
-	
 }
 

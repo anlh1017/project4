@@ -1,18 +1,6 @@
 package vn.aptech.project4.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 @Entity
 @Table(name="inventory")
@@ -21,7 +9,7 @@ public class Inventory {
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
 	@Column(name="vendor_name")
@@ -32,6 +20,9 @@ public class Inventory {
 	private int quantity;
 	@Column(name="available")
 	private int available;
+	@Column(name="status")
+	private int status;
+
 
 	public Inventory() {
 	}
@@ -90,4 +81,12 @@ public class Inventory {
 	public void setAvailable(int available) {
 		this.available = available;
 	}
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 }

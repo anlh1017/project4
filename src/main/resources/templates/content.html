@@ -650,7 +650,7 @@
 					</div>
 					<div class="panel-body pn">
 						<div class="table-responsive">
-							<table
+							<table id="myTable"
 								class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
 								<thead>
 									<tr class="">
@@ -662,48 +662,35 @@
 										<th class="">Size S</th>
 										<th class="">Size M</th>
 										<th class="">Size L</th>
-										<th class="">action</th>
-										<th></th>
-
+										<th class="">Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									
 									<tr th:each="tempProduct,stat : ${products}">
-
-																		<td class=""><img class="img-responsive mw40 ib"
-																			alt="" title="user"
-																			th:src="@{${'/files/'+ tempProduct.getImage()}}"></td>
-																		<td class="" th:text="${stat.count}"></td>
-																		<td class="" th:text="${tempProduct.getProductName()}"></td>
-																		<td class="" th:text="${tempProduct.getDescription()}"></td>
-																		<td class="" th:text="${tempProduct.getCategory().getName()}"></td>
-																		<th:block th:each="tempSize: ${size}">
-																			<td class="" th:text="${tempProduct.getPrice(tempSize.id)}?:'0'"></td>
-																		</th:block>
-																		<td class="">
-																		
-
-																			<button type="button"
-																				class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-																				data-toggle="dropdown" aria-expanded="false">
-																				Action <span class="caret ml5"></span>
-																			</button>
-																			<ul class="dropdown-menu" role="menu">
-																			<li><a
-																					th:href="@{/admin/recipe/view/{id}(id=${tempProduct.getId()})}">View Recipe</a></li>
-																				<li><a
-																					th:href="@{/admin/product/editProduct/{id}(id=${tempProduct.getId()})}">Edit</a></li>
-																				<li><a
-																					th:href="@{/admin/product/DetailProduct/{id}(id=${tempProduct.getId()})}">Detail</a></li>
-																				<li><a													
-																					th:href="@{/admin/product/deleteProduct/{id}(id=${tempProduct.getId()})} "onclick="return confirm('Are you sure?')">Delete</a></li>
-
-																			</ul>
-
-																		</td>
-																	</tr>
-									
+										<td class=""><img class="img-responsive mw40 ib"
+														  alt="" title="user"
+														  th:src="@{${'/files/'+ tempProduct.getImage()}}"></td>
+										<td class="" th:text="${stat.count}"></td>
+										<td class="" th:text="${tempProduct.getProductName()}"></td>
+										<td class="" th:text="${tempProduct.getDescription()}"></td>
+										<td class="" th:text="${tempProduct.getCategory().getName()}"></td>
+										<th:block th:each="tempSize: ${size}">
+											<td class="" th:text="${tempProduct.getPrice(tempSize.id)}?:'0'"></td>
+										</th:block>
+										<td class="">
+											<button type="button"
+													class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+													data-toggle="dropdown" aria-expanded="false">Action <span class="caret ml5"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a th:href="@{/admin/recipe/view/{id}(id=${tempProduct.getId()})}">View Recipe</a></li>
+												<li><a th:href="@{/admin/product/editProduct/{id}(id=${tempProduct.getId()})}">Edit</a></li>
+												<li><a th:href="@{/admin/product/DetailProduct/{id}(id=${tempProduct.getId()})}">Detail</a></li>
+												<li><a th:href="@{/admin/product/deleteProduct/{id}(id=${tempProduct.getId()})} "onclick="return confirm('Are you sure?')">Delete</a></li>
+											</ul>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -731,7 +718,7 @@
 						<h5 class="pln">Find Customer</h5>
 						<form th:action="@{/admin/customer/list}" method="Get">
 						<div class="section mb20">
-							<label for="customer-name" class="field prepend-icon">
+							<label for="search" class="field prepend-icon">
 							 <input type="text" name="search" id="search"
 								class="gui-input" th:value="${search}"  placeholder="Username,Email..."> <span
 								class="field-icon"> <i class="fa fa-user"></i>
@@ -766,7 +753,7 @@
 					<div class="panel-body pn">
 						<div class="table-responsive">
 						
-							<table
+							<table id="myTable"
 								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
 								<thead>
 									<tr class="">
@@ -861,7 +848,7 @@
 					<div class="">
 						<div class="">
 						<a th:href="@{/admin/order/export/pdf}">Export to PDF</a>
-							<table id="default-datatable"
+							<table id="myTable"
 								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
 								<h2>View Order</h2>
 	

@@ -27,7 +27,7 @@ public class IngredientController {
 	@GetMapping("/list")
 	public String showIngredients(Model theModel) {
 		theModel.addAttribute("ingredients", ingredientRepository.findAll());
-		return "list-ingredients2";
+		return "list-ingredients";
 	}
 
 	@GetMapping("/create")

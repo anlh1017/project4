@@ -1,23 +1,8 @@
 package vn.aptech.project4.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Table(name="ingredient")
@@ -40,6 +25,10 @@ public class Ingredient {
 	 */
 	@OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
 	private List<ProductIngredient> productIngredients = new ArrayList<>();
+	@OneToOne
+	@JoinColumn(name="id")
+	private Inventory inventory;
+
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", ingredientName=" + ingredientName + ", UMO=" + uMO
@@ -79,5 +68,13 @@ public class Ingredient {
 
 	public void setProductIngredients(List<ProductIngredient> productIngredients) {
 		this.productIngredients = productIngredients;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 }
