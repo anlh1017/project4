@@ -54,7 +54,7 @@ public class CartController {
 		return "guest/cart";
 	}
 	@GetMapping(value ="/confirmcart")
-	public String confrimcart(Authentication authentication, Model theModel) {
+	public String confrimcart(Authentication authentication, Model theModel,@RequestParam(value="addressSend")String address,@RequestParam(value="time")String time) {
 		String cusEmail = authentication.getName();
 		Customer customer = customerRepository.findByCustomerEmail(cusEmail).get();
 		theModel.addAttribute("customer", customer);
@@ -65,6 +65,8 @@ public class CartController {
 			int subtotal = cart.getPrice()*cart.getQuantity();
 			tong+= subtotal;
 		}
+		theModel.addAttribute("time",time);
+		theModel.addAttribute("shippingaddress",address);
 		theModel.addAttribute("date", date);
 		theModel.addAttribute("size",sizeRepository.findAll());
 		theModel.addAttribute("tong", tong);
@@ -132,13 +134,14 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 	}
 
 	@RequestMapping(value = "/save")
-	private String save(Authentication authentication, RedirectAttributes redirectAttributes) {
+	private String save(Authentication authentication, RedirectAttributes redirectAttributes,@RequestParam(value="shippingaddress")String shippingAddress,@RequestParam(value="time")String time) {
 		if(carts.size()==0) {
 			redirectAttributes.addAttribute("message","Cart is empty!");
 			return "redirect:/confirmcart";
 		}
 		String cusEmail = authentication.getName();
 		Customer cusadd = customerRepository.findByCustomerEmail(cusEmail).get();
+
 		int countTotal = 0;
 		for (Cart cart : carts) {
 			int subtotal = cart.getPrice()*cart.getQuantity();
@@ -148,12 +151,18 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		Date date = new Date();
 		// tao order o day
 		Order order = new Order();
-		order.setOrderDate(date);
+		order.setOrderDate(date);		
 		order.setCustomer(cusadd);
 		order.setTotal(countTotal);
 		order.setStatus(1);
+		order.setShippingaddress(shippingAddress);
+		order.setTime(time);
 		// bbb= new order();
 		orderRepository.save(order);
+		
+		//update total customer.
+		cusadd.setTotal_expense((int)order.getTotal()+cusadd.getTotal_expense());
+		customerRepository.save(cusadd);
 		
 		for (Cart cart : carts) {
 			// tao ordedetail
@@ -165,40 +174,13 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			orderdetail.setQuantity(cart.getQuantity());
 			ProductSize addprosize = foreachprosize(cart);
 			orderdetail.setPrice(addprosize.getPrice());
-			orderdetail.setSizeId(addprosize.getSize().getId());
+			orderdetail.setSizeId(cart.getSizeId());//sai o day
 			// aaa.set()...
 			orderDetailsRepository.save(orderdetail);
 		}
 
 		carts = new ArrayList<>();
-		return "redirect:/user";
-	}
-	public Product foreachpro(Cart cart) {
-		Product adprodcut = new Product();
-		for (Product pro : productRepository.findAll()) {
-			if (cart.getProductId() == pro.getId() ) {
-				adprodcut = pro;
-			}
-		}
-		return adprodcut;
-	}
-	public Size foreachsize(Cart cart) {
-		Size sizeadd = new Size();
-		for (Size size : sizeRepository.findAll()) {
-			if(cart.getSizeId()==size.getId()) {
-				sizeadd=size;
-			}
-		}
-		return sizeadd;
-	}
-	public ProductSize foreachprosize(Cart cart) {
-		ProductSize prosize = new ProductSize();
-		for (ProductSize prosizes : productSizeRepository.findAll()) {
-			if(prosizes.getProduct().getId()==cart.getProductId()&&prosizes.getSize().getId()==cart.getSizeId()) {
-prosize=prosizes;
-			}
-		}
-		return prosize;
+		return "redirect:/ShowListProducts";
 	}
 	@RequestMapping(value = "/remove/{id}")
 	private String remove( @PathVariable(value = "id") int id) {
@@ -224,6 +206,15 @@ prosize=prosizes;
 		}
 
 		return "redirect:/cart";
+	}
+	public ProductSize foreachprosize(Cart cart) {
+		ProductSize prosize = new ProductSize();
+		for (ProductSize prosizes : productSizeRepository.findAll()) {
+			if(prosizes.getProduct().getId()==cart.getProductId()&&prosizes.getSize().getId()==cart.getSizeId()) {
+prosize=prosizes;
+			}
+		}
+		return prosize;
 	}
 	@RequestMapping(value = "/updateSize")
 	private String updateSize(HttpSession session, @RequestParam(value = "id") int id, @RequestParam(value = "size") int sizeId ) {
