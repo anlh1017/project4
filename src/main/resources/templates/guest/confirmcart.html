@@ -170,6 +170,7 @@ table td.grand {
 			</div>
 		</div>
 	</section>
+	
 	<section class="clearfix">
 
 		<div class="" style="background-color: white">
@@ -183,20 +184,27 @@ table td.grand {
 				<h6>Email: <span th:text="${customer.customerEmail}"></span>
 				</h6>
 				<br>
-				<h6>Address: <span th:text="${customer.address}"></span></h6>
+				<h6>Address: <span th:text="${shippingaddress}"></span></h6>
+				<br>
+				<h6>Delivery Time: <span th:text="${time}"></span></h6>
 				<br>
 				<h6>Phone Number: <span th:text="${customer.customer_phone}"></span></h6>
 				<br>
 				<h6>Order Date: <span th:text="${date}"></span></h6>
 				<br>
 			</div>
+			<div id="notices">
+			<div>Payment:</div>
+			<div class="notice">Cash on Delivery</div>
+		</div>
 		</div>
 	</div>
 	</section>
 	<br><br>
 	<section>
-	
 	<form th:action=@{/save}>
+	<input type="hidden" id="shippingaddress" name="shippingaddress" th:value="${shippingaddress}" />
+<input type="hidden" id="shippingaddress" name="time" th:value="${time}" />
 		<table>
 			<thead>
 				<tr>
@@ -236,6 +244,7 @@ table td.grand {
 						</div>
 		</form>
 	</section>
+	
 	<footer class="footer-area section-gap">
 		<div class="container">
 			<div class="row">
