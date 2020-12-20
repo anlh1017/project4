@@ -182,7 +182,7 @@ table td.grand {
 							<div class="">
 
 								<table
-									class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
+									class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13" id="myTable">
 									<thead>
 										<tr class="">
 										<th class="">Order ID</th>
@@ -315,5 +315,11 @@ table td.grand {
 	<script th:src="@{/js/jquery.counterup.min.js}"></script>
 	<script th:src="@{/js/mail-script.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script>
+		$(document).ready( function () {
+			$('#myTable').DataTable();
+		} );
+	</script>
 </body>
 </html>
