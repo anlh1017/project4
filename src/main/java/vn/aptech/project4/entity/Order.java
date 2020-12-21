@@ -26,6 +26,13 @@ import java.util.List;
 	    
 	    @Column(name= "status",nullable = false)
 	    private int status;
+		
+	    @Column(name= "address",nullable = false)
+	    private String shippingaddress;	    
+	    
+	    @Column(name= "time",nullable = false)
+	    private String time;	
+
 	    
 	    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	    @JoinColumn(name = "order_id")
@@ -33,11 +40,13 @@ import java.util.List;
 
 	public Order() {
 	}
-	public Order(Date orderDate,Customer customer, Long total, int status) {
+	public Order(Date orderDate,Customer customer, Long total, int status, String shippingaddress,String time) {
 		this.orderDate = orderDate;
 		this.customer = customer;
 		this.total = total;
 		this.status = status;
+		this.shippingaddress= shippingaddress;
+		this.time = time;
 	}
 
 	public int getId() {
@@ -79,6 +88,20 @@ import java.util.List;
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public String getShippingaddress() {
+		return shippingaddress;
+	}
+	public void setShippingaddress(String shippingaddress) {
+		this.shippingaddress = shippingaddress;
+	}
+	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}	
 
 	public List<OrderDetail> getOrderDetails() {
 		return orderDetails;
