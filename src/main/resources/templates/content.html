@@ -5,630 +5,175 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- Content Overview -->
 	<section id="content" class="animated fadeIn pt35 pb45"
-		th:fragment="content_overview">
-		<div th:replace="sidebar::leftcontent" />
+		th:fragment="sales-stats-chart">
+		<div th:replace="sidebar::leftcontent"></div>
 
 		<div class="content-right table-layout">
-
-			<!-- Column Center -->
-			<div class="chute chute-center pbn">
-
-				<!-- Products Status Table -->
-				<div class="row mn">
-					<div class="col-xs-12">
-						<div class="panel">
-							<div class="panel-heading ">
-								<span class="panel-title ptn">Products Status</span>
-							</div>
-							<div class="panel-body pn mt15">
-								<div class="table-responsive">
-									<table
-										class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-										<thead>
-											<tr class="">
-												<th class=""></th>
-												<th class="">Image</th>
-												<th class="">Product Title</th>
-												<th class="">SKU</th>
-												<th class="">Price</th>
-												<th class="">Stock</th>
-												<th class="">Status</th>
-
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class=""><label class="option block mn"> <input
-														type="checkbox" name="inputname" value="FR"> <span
-														class="checkbox mn"></span>
-												</label></td>
-												<td class=""><img class="img-responsive mw40 ib" alt=""
-													title="user" th:src="@{/img/pages/products/1.png}"></td>
-												<td class=""><span>Apple iPhone 5</span> <span>Apple
-														iPhone 5</span></td>
-												<td class=""><span>#123</span></td>
-												<td class=""><span>$500</span></td>
-												<td class=""><span>300</span></td>
-												<td class="">
-													<div class="btn-group text-right">
-														<button type="button"
-															class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-															data-toggle="dropdown" aria-expanded="false">
-															Active <span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu" role="menu">
-															<li><a href="#">Edit</a></li>
-															<li><a href="#">Delete</a></li>
-															<li><a href="#">Archive</a></li>
-															<li class="divider"></li>
-															<li class="active"><a href="#">Active</a></li>
-															<li><a href="#">Inactive</a></li>
-															<li><a href="#">Low Stock</a></li>
-															<li><a href="#">Out of Stock</a></li>
-														</ul>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td class=""><label class="option block mn"> <input
-														type="checkbox" name="inputname" value="FR"> <span
-														class="checkbox mn"></span>
-												</label></td>
-												<td class=""><img class="img-responsive mw40 ib"
-													title="user" alt="" src="@{/img/pages/products/3.png}"></td>
-												<td class=""><span>Apple iPad</span> <span>Apple
-														iPad</span></td>
-												<td class="">#2345</td>
-												<td class="">$400</td>
-												<td class="">300</td>
-												<td class="">
-													<div class="btn-group text-right">
-														<button type="button"
-															class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-															data-toggle="dropdown" aria-expanded="false">
-															Active <span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu" role="menu">
-															<li><a href="#">Edit</a></li>
-															<li><a href="#">Delete</a></li>
-															<li><a href="#">Archive</a></li>
-															<li class="divider"></li>
-															<li class="active"><a href="#">Active</a></li>
-															<li><a href="#">Inactive</a></li>
-															<li><a href="#">Low Stock</a></li>
-															<li><a href="#">Out of Stock</a></li>
-														</ul>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td class=""><label class="option block mn"> <input
-														type="checkbox" name="inputname" value="FR"> <span
-														class="checkbox mn"></span>
-												</label></td>
-												<td class=""><img class="img-responsive mw40 ib"
-													title="user" alt="" src="assets/img/pages/products/4.png"></td>
-												<td class=""><span>Apple iPad Air</span> <span>Apple
-														iPad Air</span></td>
-												<td class="">#4563</td>
-												<td class="">$800</td>
-												<td class="">500</td>
-												<td class="">
-													<div class="btn-group text-right">
-														<button type="button"
-															class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-															data-toggle="dropdown" aria-expanded="false">
-															Active <span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu" role="menu">
-															<li><a href="#">Edit</a></li>
-															<li><a href="#">Delete</a></li>
-															<li><a href="#">Archive</a></li>
-															<li class="divider"></li>
-															<li class="active"><a href="#">Active</a></li>
-															<li><a href="#">Inactive</a></li>
-															<li><a href="#">Low Stock</a></li>
-															<li><a href="#">Out of Stock</a></li>
-														</ul>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td class=""><label class="option block mn"> <input
-														type="checkbox" name="inputname" value="FR"> <span
-														class="checkbox mn"></span>
-												</label></td>
-												<td class=""><img class="img-responsive mw40 ib"
-													title="user" alt="" src="assets/img/pages/products/9.png"></td>
-												<td class=""><span>Apple iPhone 6S 32GB</span> <span>Apple
-														iPhone 6S 32GB</span></td>
-												<td class="">#1011</td>
-												<td class="">$1195</td>
-												<td class="text-danger"><b>0 - Sold Out</b></td>
-												<td class="">
-													<div class="btn-group text-right">
-														<button type="button"
-															class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
-															data-toggle="dropdown" aria-expanded="false">
-															Sold Out <span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu" role="menu">
-															<li><a href="#">Edit</a></li>
-															<li><a href="#">Delete</a></li>
-															<li><a href="#">Archive</a></li>
-															<li class="divider"></li>
-															<li><a href="#">Active</a></li>
-															<li><a href="#">Inactive</a></li>
-															<li><a href="#">Low Stock</a></li>
-															<li class="active"><a href="#">Out of Stock</a></li>
-														</ul>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td class=""><label class="option block mn"> <input
-														type="checkbox" name="inputname" value="FR"> <span
-														class="checkbox mn"></span>
-												</label></td>
-												<td class=""><img class="img-responsive mw40 ib"
-													title="user" alt="" src="assets/img/pages/products/10.png"></td>
-												<td class=""><span>Apple iPhone 6S 64GB</span> <span>Apple
-														iPhone 6S 64GB</span></td>
-												<td class="">#1012</td>
-												<td class="">$1395</td>
-												<td class="text-danger"><b>0 - Sold Out</b></td>
-												<td class="">
-													<div class="btn-group text-right">
-														<button type="button"
-															class="btn btn-danger br2 btn-xs fs10 dropdown-toggle"
-															data-toggle="dropdown" aria-expanded="false">
-															Sold Out <span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu" role="menu">
-															<li><a href="#">Edit</a></li>
-															<li><a href="#">Delete</a></li>
-															<li><a href="#">Archive</a></li>
-															<li class="divider"></li>
-															<li><a href="#">Active</a></li>
-															<li><a href="#">Inactive</a></li>
-															<li><a href="#">Low Stock</a></li>
-															<li class="active"><a href="#">Out of Stock</a></li>
-														</ul>
-													</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+		<div class="chute chute-center">
+			<!-- Quick Links -->
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-xl-4">
+					<div class="panel panel-tile info-block">
+						<div class="panel-body">
+							<div class="info-block-top">
+								<i class="icon-tool text-dark"></i>
+								<div class="text-info">
+									<span>Total list Product</span>
 								</div>
+							</div>
+							<div class="info-block-middle text-center">
+								<h2 th:text="${products}"></h2>
+
+							</div>
+							<div class="info-block-bottom text-center">
+								<h6>Products</h6>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="row mn allcp-panels">
-					<div class="col-lg-6">
-
-						<!-- Poll -->
-						<div class="panel pn" id="spy1">
-							<div class="panel-heading ">
-								<i class="icon-graphic-1"></i> <span class="panel-title">Poll</span>
-							</div>
-							<div class="panel-body p20 pb25 br-t">
-
-								<div id="donut-chart1" style="height: 350px; width: 100%;"></div>
-
-							</div>
-							<div
-								class="panel-body mtn pt30 pr10 pb25 pl15 poll-legend-bg-grey-dark">
-								<div class="col-sm-8 col-md-9 col-lg-8 xsmb15">
-									<div class="radio-custom radio-warning">
-										<input type="radio" id="browser1" name="radioExample">
-										<label for="browser1">Option 1: Google Chrome</label>
-									</div>
-									<div class="radio-custom radio-alert">
-										<input type="radio" id="browser2" name="radioExample">
-										<label for="browser2">Option 2: Mozilla FireFox</label>
-									</div>
-									<div class="radio-custom radio-info">
-										<input type="radio" id="browser3" name="radioExample">
-										<label for="browser3">Option 3: Microsoft IE</label>
-									</div>
-								</div>
-								<div class="col-sm-4 col-md-3 col-lg-4 xsmb15">
-									<div class="text-right xs-text-center  ">
-										<div class="btn btn-gradient-warning no-shadow mb10 xs-mbn ">
-											VOTE</div>
-										<div class="btn btn-gradient-grey no-shadow">Hide
-											results</div>
-									</div>
+				<div class="col-sm-6 col-md-4 col-xl-4">
+					<div class="panel panel-tile info-block">
+						<div class="panel-body">
+							<div class="info-block-top">
+								<i class="icon-social text-dark"></i>
+								<div class="text-info">
+									<span>Total Customer</span>
 								</div>
 							</div>
-
-						</div>
-
-						<!-- Task-list -->
-						<div class="panel panel-widget task-widget pn" id="spy11">
-							<div class="panel-heading cursor ">
-								<i class="icon-square1"></i> <span class="panel-title">Task-List
-									Widget</span>
-							</div>
-							<div class="panel-body p30 br-t">
-
-								<h6 class="text-muted mn mb20">
-									<span class="pl5 ff-2nd">Personal Tasks</span>
-								</h6>
-								<ul class="task-list task-current mb25">
-									<li class="task-item">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" id="task0"> <label
-													for="task0"></label>
-											</div>
-										</div>
-										<div class="task-desc">Remove announcement</div>
-										<div class="task-menu"></div>
-									</li>
-									<li class="task-item">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" id="task1"> <label
-													for="task1"></label>
-											</div>
-										</div>
-										<div class="task-desc">Post an announcement</div>
-										<div class="task-menu"></div>
-									</li>
-									<li class="task-item">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" id="task2"> <label
-													for="task2"></label>
-											</div>
-										</div>
-										<div class="task-desc">Add new products</div>
-										<div class="task-menu"></div>
-									</li>
-									<li class="task-item">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" id="task3"> <label
-													for="task3"></label>
-											</div>
-										</div>
-										<div class="task-desc">Ban a few users</div>
-										<div class="task-menu"></div>
-									</li>
-									<li class="task-item">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" id="task4"> <label
-													for="task4"></label>
-											</div>
-										</div>
-										<div class="task-desc">Clean comments</div>
-										<div class="task-menu"></div>
-									</li>
-								</ul>
-
-								<h6 class="text-muted mn mb20">
-									<span class="pl5 ff-2nd">Complete Tasks</span>
-								</h6>
-								<ul class="task-list task-completed">
-									<li class="task-item item-checked">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" checked="" id="task7"> <label
-													for="task7"></label>
-											</div>
-										</div>
-										<div class="task-desc">Add article review</div>
-										<div class="task-menu"></div>
-									</li>
-									<li class="task-item item-checked">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" checked="" id="task8"> <label
-													for="task8"></label>
-											</div>
-										</div>
-										<div class="task-desc">Add iPad review</div>
-										<div class="task-menu"></div>
-									</li>
-									<li class="task-item item-checked">
-										<div class="task-handle">
-											<div class="checkbox-custom">
-												<input type="checkbox" checked="" id="task9"> <label
-													for="task9"></label>
-											</div>
-										</div>
-										<div class="task-desc">Ban THATuser user</div>
-										<div class="task-menu"></div>
-									</li>
-								</ul>
-							</div>
-
-						</div>
-
-						<!-- Veisitors Map -->
-						<div class="panel bg-none no-boxshadow pn" id="spy15">
-							<div class="panel-heading br5 mb25 bg-white">
-								<i class="icon-flag"></i> <span class="panel-title">Visitors
-									Map</span>
-							</div>
-							<div class="panel-body mtn pn">
-
-								<div id="map1" style="width: 100%; height: 270px;"></div>
+							<div class="info-block-middle text-center">
+								<h2 th:text="${customers}">457</h2>
 
 							</div>
-
-						</div>
-
-					</div>
-
-					<div class="col-lg-6">
-
-						<!-- Server Status -->
-						<div class="panel pn" id="spy10">
-							<div class="panel-heading ">
-								<i class="icon-graphic"></i> <span class="panel-title">Server
-									Status</span>
-							</div>
-							<div class="panel-body pt40 ph30 pb25 br-t">
-								<div class="progress progress-bar-lg br4 no-boxshadow">
-									<div class="progress-bar progress-bar-gradient-info"
-										role="progressbar" aria-valuenow="55" aria-valuemin="0"
-										aria-valuemax="100" style="width: 55%;">
-										<span class="pull-left">Memory Used</span> <span
-											class="pull-right ph10">55%</span>
-									</div>
-								</div>
-								<div class="progress progress-bar-lg br4 no-boxshadow">
-									<div class="progress-bar progress-bar-gradient-info"
-										role="progressbar" aria-valuenow="60" aria-valuemin="0"
-										aria-valuemax="100" style="width: 60%;">
-										<span class="pull-left">Disk dev/sda1</span> <span
-											class="pull-right ph10">60%</span>
-									</div>
-								</div>
-								<div class="progress progress-bar-lg br4 no-boxshadow">
-									<div class="progress-bar progress-bar-gradient-info"
-										role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										aria-valuemax="100" style="width: 80%;">
-										<span class="pull-left">Disk dev/sda2</span> <span
-											class="pull-right ph10">80%</span>
-									</div>
-								</div>
-								<div class="progress progress-bar-lg br4 no-boxshadow">
-									<div class="progress-bar progress-bar-gradient-info"
-										role="progressbar" aria-valuenow="66" aria-valuemin="0"
-										aria-valuemax="100" style="width: 66%;">
-										<span class="pull-left">Disk dev/sda3</span> <span
-											class="pull-right ph10">66%</span>
-									</div>
-								</div>
-								<div class="progress progress-bar-lg br4 no-boxshadow">
-									<div class="progress-bar progress-bar-gradient-info"
-										role="progressbar" aria-valuenow="45" aria-valuemin="0"
-										aria-valuemax="100" style="width: 45%;">
-										<span class="pull-left">Disk dev/sda4</span> <span
-											class="pull-right ph10">45%</span>
-									</div>
-								</div>
-								<div class="progress progress-bar-lg br4 no-boxshadow">
-									<div class="progress-bar progress-bar-gradient-info"
-										role="progressbar" aria-valuenow="78" aria-valuemin="0"
-										aria-valuemax="100" style="width: 78%;">
-										<span class="pull-left">Disk dev/sda5</span> <span
-											class="pull-right ph10">78%</span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Traphic Sources -->
-						<div class="panel pn" id="spy7">
-							<div class="panel-heading ">
-								<i class="icon-tool2"></i> <span class="panel-title">Traffic
-									Source</span>
-							</div>
-							<div class="panel-body pt40 ph25 pb35 br-t">
-								<div class="row">
-									<div class="col-sm-4 text-center ph10 xsmb15">
-										<div class="info-circle" id="c1" data-value="65"
-											data-circle-color="info-dr"></div>
-										<div class="text-muted fs18 fw500">Google</div>
-									</div>
-									<div class="col-sm-4 text-center ph10 xsmb15">
-										<div class="info-circle" id="c2" data-value="15"
-											data-circle-color="info-dr"></div>
-										<div class="text-muted fs18 fw500">Bing</div>
-									</div>
-									<div class="col-sm-4 text-center ph10">
-										<div class="info-circle" id="c3" data-value="40"
-											data-circle-color="info-dr"></div>
-										<div class="text-muted fs18 fw500">Twitter</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- User Project List -->
-						<div class="panel pn" id="spy6">
-							<div class="panel-heading ">
-								<i class="icon-clock"></i> <span class="panel-title">User
-									Project List Schedule</span>
-							</div>
-							<div class="panel-body br-t pt20 ph30 bp25">
-								<div class="bs-component">
-									<div class="table-responsive">
-										<table
-											class="table table-striped table-style-1 btn-gradient-grey">
-											<thead class="">
-												<tr>
-													<th class="">Project</th>
-													<th class=" hidden-xs">Start Date</th>
-													<th class="">Deadline</th>
-													<th class="">Status</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="wp35">#4551</td>
-													<td class="hidden-xs">10.02.2016</td>
-													<td>10.02.2016</td>
-													<td><span class="label label-info">in progress</span></td>
-												</tr>
-												<tr>
-													<td class="">#4532</td>
-													<td class="hidden-xs">23.12.2015</td>
-													<td>11.01.2016</td>
-													<td><span class="label label-primary">Done</span></td>
-												</tr>
-												<tr>
-													<td class="">#4536</td>
-													<td class="hidden-xs">16.05.2015</td>
-													<td>18.06.2015</td>
-													<td><span class="label label-danger">Failed</span></td>
-												</tr>
-												<tr>
-													<td class="">#4552</td>
-													<td class="hidden-xs">10.02.2016</td>
-													<td>10.02.2016</td>
-													<td><span class="label label-info">In Progress</span></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Column Graph -->
-						<div class="panel pn" id="spy9">
-							<div class="panel-heading ">
-								<i class="icon-arrows"></i> <span class="panel-title">Traffic
-									Source</span>
-							</div>
-							<div class="panel-body br-t">
-								<div class="row mn">
-									<div class="col-sm-6 prn mt50 xsmt25">
-										<div class="progress progress-bar-lg br4 no-boxshadow mb15">
-											<div class="progress-bar progress-bar-gradient-warning"
-												role="progressbar" aria-valuenow="85" aria-valuemin="0"
-												aria-valuemax="100">
-												<span>Google</span>
-											</div>
-										</div>
-										<div class="progress progress-bar-lg br4 no-boxshadow mb15">
-											<div class="progress-bar progress-bar-gradient-info"
-												role="progressbar" aria-valuenow="35" aria-valuemin="0"
-												aria-valuemax="100">
-												<span>Bing</span>
-											</div>
-										</div>
-										<div class="progress progress-bar-lg br4 no-boxshadow">
-											<div class="progress-bar progress-bar-gradient-alert"
-												role="progressbar" aria-valuenow="65" aria-valuemin="0"
-												aria-valuemax="100">
-												<span>Twitter</span>
-											</div>
-										</div>
-
-									</div>
-									<div class="col-sm-6 pl35 xsph10">
-										<div class="allcp-form mt10">
-											<!-- Block Widget -->
-											<div class="smart-widget br-b sm-right">
-												<label class="field"> <input type="text" name="sub"
-													id="sub" class="gui-input br-n pn"
-													placeholder="Add Data Source">
-												</label>
-												<button type="submit" class="button br-n pn">
-													<i class="allcp-icon-plus"></i>
-												</button>
-											</div>
-										</div>
-										<div class="legend-widget">
-											<ul class="legend-list">
-												<li class="legend-item danger">
-													<div class="legend-handle">
-														<i class="fa fa-circle fs21"></i>
-													</div>
-													<div class="legend-desc pl25">
-														Google <span class="legend-date">85%</span>
-													</div>
-												</li>
-												<li class="legend-item info">
-													<div class="legend-handle">
-														<i class="fa fa-circle fs21"></i>
-													</div>
-													<div class="legend-desc pl25">
-														Bing <span class="legend-date">35%</span>
-													</div>
-												</li>
-												<li class="legend-item alert">
-													<div class="legend-handle">
-														<i class="fa fa-circle fs21"></i>
-													</div>
-													<div class="legend-desc pl25">
-														Twitter <span class="legend-date">65%</span>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+							<div class="info-block-bottom text-center">
+								<h6>Customers</h6>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
-
-						<!-- Quick Links -->
-						<div class="row mhn">
-							<div class="col-sm-6 pln">
-								<div class="panel panel-tile pn info-block-alt">
-									<div class="panel-heading ">
-										<i class="icon-tool text-dark"></i> <span class="panel-title">Tickets
-											Answered</span>
-									</div>
-									<div class="panel-body br-t">
-										<div class="info-block-middle text-center">
-											<h2>6.794</h2>
-
-										</div>
-										<div class="info-block-bottom text-center">
-											<h6>Answeres</h6>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 prn">
-								<div class="panel panel-tile pn info-block-alt">
-									<div class="panel-heading ">
-										<i class="icon-transport text-dark"></i> <span
-											class="panel-title">Projects Launched</span>
-									</div>
-									<div class="panel-body br-t">
-										<div class="info-block-middle text-center">
-											<h2>457</h2>
-										</div>
-										<div class="info-block-bottom text-center">
-											<h6>Projects</h6>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-					</div>
-
 				</div>
+				<div class="col-sm-6 col-md-4 col-xl-4">
+					<div class="panel panel-tile info-block">
+						<div class="panel-body">
+							<div class="info-block-top">
+								<i class="icon-check text-dark"></i>
+								<div class="text-info">
+									<span>Total Order</span>
+								</div>
+							</div>
+							<div class="info-block-middle text-center">
+								<h2 th:text="${orders}">5627</h2>
 
+							</div>
+							<div class="info-block-bottom text-center">
+								<h6>Orders</h6>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<!-- /Column Center -->
+			<h2 align="center">Dashboard Chart</h2>
+
+			<div id="container"
+				style="width: 550px; height: 400px; margin: 0 auto"></div>
+
+
+			<div id="containerProduct"
+				style="width: 550px; height: 400px; margin: 0 auto"></div>
 		</div>
+</div>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script th:inline="javascript">
+    $(function(){
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Total Price in Month'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [[${surveyMap.keySet()}]],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total Price [in VND]'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} VND</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Month',
+            data: [[${surveyMap.values()}]]
+        }]
+    });
+    });
+</script>
+		<script th:inline="javascript">
+    $(function(){
+    Highcharts.chart('containerProduct', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top Ten Product in Sell'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [[${surveyMapProduct.keySet()}]],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total Count'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Product',
+            data: [[${surveyMapProduct.values()}]]
+        }]
+    });
+    });
+</script>
 	</section>
 	<!-- /Content Overview -->
 	<!-- Content Sales Stat Product -->
@@ -904,570 +449,7 @@
 			<!-- /Column Center -->
 		</div>
 	</section>
-	<!-- Content Sale Stat Setting -->
-	<section id="content" class="animated fadeIn pt35 pb45" th:fragment="sales-stats-general-settings">
-
-		<div th:replace="sidebar::leftcontent" />
-
-		<div class="content-right table-layout">
-
-			<!-- Column Left -->
-			<aside class="chute chute-left chute290 chute-icon-style br5"
-				data-chute-height="match">
-				<div class="chute-icon"></div>
-				<div class="chute-container">
-					<!-- Menu Block -->
-					<div class="allcp-form theme-primary">
-
-						<h6 class="mb15">Store Name</h6>
-
-						<div class="section mb15">
-							<label for="store-name" class="field prepend-icon"> <input
-								type="text" name="store-name" id="store-name" class="gui-input"
-								value="My Store"> <span class="field-icon"> <i
-									class="fa fa-shopping-cart"></i>
-							</span>
-							</label>
-						</div>
-
-						<h6 class="mb15">Store URL</h6>
-
-						<div class="section mb15">
-							<label for="store-url" class="field prepend-icon"> <input
-								type="text" name="store-url" id="store-url" class="gui-input"
-								value="http://yoursite.com/shop"> <span
-								class="field-icon"> <i class="fa fa-link"></i>
-							</span>
-							</label>
-						</div>
-
-						<h6 class="mb15">Store Image</h6>
-
-						<div class="fileupload fileupload-new" data-provides="fileupload">
-							<div class="fileupload-preview thumbnail mb20">
-								<img data-src="holder.js/100%x100" alt="holder">
-							</div>
-							<span class="btn btn-primary light btn-file btn-block ph5">
-								<span class="fileupload-new">Upload image</span> <span
-								class="fileupload-exists">Upload image</span> <input type="file">
-							</span>
-						</div>
-					</div>
-				</div>
-
-			</aside>
-			<!-- /Column Left -->
-
-			<!-- Column Center -->
-			<div class="chute chute-center">
-
-				<div class="mw1000 center-block">
-
-					<!-- General Information -->
-					<div class="panel mb35">
-						<div class="panel-heading">
-							<span class="panel-title">General Information</span>
-						</div>
-						<div class="panel-body br-t">
-							<div class="allcp-form theme-primary">
-								<div class="section row mb10">
-									<label for="name"
-										class="field-label col-sm-2 ph10  text-center">Name:</label>
-
-									<div class="col-sm-10 ph10">
-										<label for="name" class="field prepend-icon"> <input
-											type="text" name="name" id="name" class="gui-input"
-											value="ThemeREX"> <span class="field-icon"> <i
-												class="fa fa-shopping-cart"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-								<div class="section row mb10">
-									<label for="store-phone"
-										class="field-label col-sm-2 ph10 text-center">Phone:</label>
-
-									<div class="col-sm-10 ph10">
-										<label for="store-phone" class="field prepend-icon"> <input
-											type="text" name="store-phone" id="store-phone"
-											class="gui-input" value="123-456-7890"> <span
-											class="field-icon"> <i class="fa fa-mobile-phone"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-								<div class="section row mb10">
-									<label for="store-email"
-										class="field-label col-sm-2 ph10 text-center">Email:</label>
-
-									<div class="col-sm-10 ph10">
-										<label for="store-email" class="field prepend-icon"> <input
-											type="text" name="store-email" id="store-email"
-											class="gui-input" value="info@site.com"> <span
-											class="field-icon"> <i class="fa fa-envelope-o"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-
-								<hr class="short alt">
-
-								<div class="section">
-									<label for="address" class="field prepend-icon"> <input
-										type="text" name="address" id="address" class="gui-input"
-										placeholder="Street address"> <span class="field-icon">
-											<i class="fa fa-building-o"></i>
-									</span>
-									</label>
-								</div>
-								<!-- /section -->
-
-								<div class="section">
-									<label class="field select"> <select id="location"
-										name="location">
-											<option value="">Select country...</option>
-											<option value="AL">Albania</option>
-											<option value="DZ">Algeria</option>
-											<option value="AD">Andorra</option>
-											<option value="AO">Angola</option>
-											<option value="AI">Anguilla</option>
-											<option value="AG">Antigua and Barbuda</option>
-											<option value="AR">Argentina</option>
-											<option value="AM">Armenia</option>
-											<option value="AW">Aruba</option>
-											<option value="AU">Australia</option>
-											<option value="AT">Austria</option>
-											<option value="AZ">Azerbaijan Republic</option>
-											<option value="BS">Bahamas</option>
-											<option value="BH">Bahrain</option>
-											<option value="BB">Barbados</option>
-											<option value="BE">Belgium</option>
-											<option value="BZ">Belize</option>
-											<option value="BJ">Benin</option>
-											<option value="BM">Bermuda</option>
-											<option value="BT">Bhutan</option>
-											<option value="BO">Bolivia</option>
-											<option value="BA">Bosnia and Herzegovina</option>
-											<option value="BW">Botswana</option>
-											<option value="BR">Brazil</option>
-											<option value="BN">Brunei</option>
-											<option value="BG">Bulgaria</option>
-											<option value="BF">Burkina Faso</option>
-											<option value="BI">Burundi</option>
-											<option value="KH">Cambodia</option>
-											<option value="CA">Canada</option>
-											<option value="CV">Cape Verde</option>
-											<option value="KY">Cayman Islands</option>
-											<option value="TD">Chad</option>
-											<option value="CL">Chile</option>
-											<option value="C2">China Worldwide</option>
-											<option value="CO">Colombia</option>
-											<option value="KM">Comoros</option>
-											<option value="CK">Cook Islands</option>
-											<option value="CR">Costa Rica</option>
-											<option value="HR">Croatia</option>
-											<option value="CY">Cyprus</option>
-											<option value="CZ">Czech Republic</option>
-											<option value="CD">Democratic Republic of the Congo</option>
-											<option value="DK">Denmark</option>
-											<option value="DJ">Djibouti</option>
-											<option value="DM">Dominica</option>
-											<option value="DO">Dominican Republic</option>
-											<option value="EC">Ecuador</option>
-											<option value="EG">Egypt</option>
-											<option value="SV">El Salvador</option>
-											<option value="ER">Eritrea</option>
-											<option value="EE">Estonia</option>
-											<option value="ET">Ethiopia</option>
-											<option value="FK">Falkland Islands</option>
-											<option value="FO">Faroe Islands</option>
-											<option value="FJ">Fiji</option>
-											<option value="FI">Finland</option>
-											<option value="FR">France</option>
-											<option value="GF">French Guiana</option>
-											<option value="PF">French Polynesia</option>
-											<option value="GA">Gabon Republic</option>
-											<option value="GM">Gambia</option>
-											<option value="GE">Georgia</option>
-											<option value="DE">Germany</option>
-											<option value="GI">Gibraltar</option>
-											<option value="GR">Greece</option>
-											<option value="GL">Greenland</option>
-											<option value="GD">Grenada</option>
-											<option value="GP">Guadeloupe</option>
-											<option value="GT">Guatemala</option>
-											<option value="GN">Guinea</option>
-											<option value="GW">Guinea Bissau</option>
-											<option value="GY">Guyana</option>
-											<option value="HN">Honduras</option>
-											<option value="HK">Hong Kong</option>
-											<option value="HU">Hungary</option>
-											<option value="IS">Iceland</option>
-											<option value="IN">India</option>
-											<option value="ID">Indonesia</option>
-											<option value="IE">Ireland</option>
-											<option value="IL">Israel</option>
-											<option value="IT">Italy</option>
-											<option value="JM">Jamaica</option>
-											<option value="JP">Japan</option>
-											<option value="JO">Jordan</option>
-											<option value="KZ">Kazakhstan</option>
-											<option value="KE">Kenya</option>
-											<option value="KI">Kiribati</option>
-											<option value="KW">Kuwait</option>
-											<option value="KG">Kyrgyzstan</option>
-											<option value="LA">Laos</option>
-											<option value="LV">Latvia</option>
-											<option value="LS">Lesotho</option>
-											<option value="LI">Liechtenstein</option>
-											<option value="LT">Lithuania</option>
-											<option value="LU">Luxembourg</option>
-											<option value="MG">Madagascar</option>
-											<option value="MW">Malawi</option>
-											<option value="MY">Malaysia</option>
-											<option value="MV">Maldives</option>
-											<option value="ML">Mali</option>
-											<option value="MT">Malta</option>
-											<option value="MH">Marshall Islands</option>
-											<option value="MQ">Martinique</option>
-											<option value="MR">Mauritania</option>
-											<option value="MU">Mauritius</option>
-											<option value="YT">Mayotte</option>
-											<option value="MX">Mexico</option>
-											<option value="FM">Micronesia</option>
-											<option value="MN">Mongolia</option>
-											<option value="MS">Montserrat</option>
-											<option value="MA">Morocco</option>
-											<option value="MZ">Mozambique</option>
-											<option value="NA">Namibia</option>
-											<option value="NR">Nauru</option>
-											<option value="NP">Nepal</option>
-											<option value="NL">Netherlands</option>
-											<option value="AN">Netherlands Antilles</option>
-											<option value="NC">New Caledonia</option>
-											<option value="NZ">New Zealand</option>
-											<option value="NI">Nicaragua</option>
-											<option value="NE">Niger</option>
-											<option value="NU">Niue</option>
-											<option value="NF">Norfolk Island</option>
-											<option value="NO">Norway</option>
-											<option value="OM">Oman</option>
-											<option value="PW">Palau</option>
-											<option value="PA">Panama</option>
-											<option value="PG">Papua New Guinea</option>
-											<option value="PE">Peru</option>
-											<option value="PH">Philippines</option>
-											<option value="PN">Pitcairn Islands</option>
-											<option value="PL">Poland</option>
-											<option value="PT">Portugal</option>
-											<option value="QA">Qatar</option>
-											<option value="CG">Republic of the Congo</option>
-											<option value="RE">Reunion</option>
-											<option value="RO">Romania</option>
-											<option value="RU">Russia</option>
-											<option value="RW">Rwanda</option>
-											<option value="KN">Saint Kitts and Nevis Anguilla</option>
-											<option value="PM">Saint Pierre and Miquelon</option>
-											<option value="VC">Saint Vincent and Grenadines</option>
-											<option value="WS">Samoa</option>
-											<option value="SM">San Marino</option>
-											<option value="ST">São Tomé and Príncipe</option>
-											<option value="SA">Saudi Arabia</option>
-											<option value="SN">Senegal</option>
-											<option value="RS">Serbia</option>
-											<option value="SC">Seychelles</option>
-											<option value="SL">Sierra Leone</option>
-											<option value="SG">Singapore</option>
-											<option value="SK">Slovakia</option>
-											<option value="SI">Slovenia</option>
-											<option value="SB">Solomon Islands</option>
-											<option value="SO">Somalia</option>
-											<option value="ZA">South Africa</option>
-											<option value="KR">South Korea</option>
-											<option value="ES">Spain</option>
-											<option value="LK">Sri Lanka</option>
-											<option value="SH">St. Helena</option>
-											<option value="LC">St. Lucia</option>
-											<option value="SR">Suriname</option>
-											<option value="SJ">Svalbard and Jan Mayen Islands</option>
-											<option value="SZ">Swaziland</option>
-											<option value="SE">Sweden</option>
-											<option value="CH">Switzerland</option>
-											<option value="TW">Taiwan</option>
-											<option value="TJ">Tajikistan</option>
-											<option value="TZ">Tanzania</option>
-											<option value="TH">Thailand</option>
-											<option value="TG">Togo</option>
-											<option value="TO">Tonga</option>
-											<option value="TT">Trinidad and Tobago</option>
-											<option value="TN">Tunisia</option>
-											<option value="TR">Turkey</option>
-											<option value="TM">Turkmenistan</option>
-											<option value="TC">Turks and Caicos Islands</option>
-											<option value="TV">Tuvalu</option>
-											<option value="UG">Uganda</option>
-											<option value="UA">Ukraine</option>
-											<option value="AE">United Arab Emirates</option>
-											<option value="GB">United Kingdom</option>
-											<option value="US">United States</option>
-											<option value="UY">Uruguay</option>
-											<option value="VU">Vanuatu</option>
-											<option value="VA">Vatican City State</option>
-											<option value="VE">Venezuela</option>
-											<option value="VN">Vietnam</option>
-											<option value="VG">Virgin Islands (British)</option>
-											<option value="WF">Wallis and Futuna Islands</option>
-											<option value="YE">Yemen</option>
-											<option value="ZM">Zambia</option>
-									</select> <i class="arrow double"></i>
-									</label>
-								</div>
-								<!-- /section -->
-
-								<div class="section row mbn mh10m">
-									<div class="col-md-3 ph10 mb5">
-										<label for="zip" class="field prepend-icon"> <input
-											type="text" name="zip" id="zip" class="gui-input"
-											placeholder="Zip"> <span class="field-icon"> <i
-												class="fa fa-tasks"></i>
-										</span>
-										</label>
-									</div>
-									<!-- /section -->
-
-									<div class="col-md-4 ph10 mb5">
-										<label for="city" class="field prepend-icon"> <input
-											type="text" name="city" id="city" class="gui-input"
-											placeholder="City"> <span class="field-icon">
-												<i class="fa fa-building-o"></i>
-										</span>
-										</label>
-									</div>
-									<!-- /section -->
-
-									<div class="col-md-5 ph10 mb5">
-										<label for="states" class="field select"> <select
-											id="states" name="states">
-												<option value="">Choose state</option>
-												<option value="AL">Alabama</option>
-												<option value="AK">Alaska</option>
-												<option value="AZ">Arizona</option>
-												<option value="AR">Arkansas</option>
-												<option value="CA">California</option>
-												<option value="CO">Colorado</option>
-												<option value="CT">Connecticut</option>
-												<option value="DE">Delaware</option>
-												<option value="DC">District Of Columbia</option>
-												<option value="FL">Florida</option>
-												<option value="GA">Georgia</option>
-												<option value="HI">Hawaii</option>
-												<option value="ID">Idaho</option>
-												<option value="IL">Illinois</option>
-												<option value="IN">Indiana</option>
-												<option value="IA">Iowa</option>
-												<option value="KS">Kansas</option>
-												<option value="KY">Kentucky</option>
-												<option value="LA">Louisiana</option>
-												<option value="ME">Maine</option>
-												<option value="MD">Maryland</option>
-												<option value="MA">Massachusetts</option>
-												<option value="MI">Michigan</option>
-												<option value="MN">Minnesota</option>
-												<option value="MS">Mississippi</option>
-												<option value="MO">Missouri</option>
-												<option value="MT">Montana</option>
-												<option value="NE">Nebraska</option>
-												<option value="NV">Nevada</option>
-												<option value="NH">New Hampshire</option>
-												<option value="NJ">New Jersey</option>
-												<option value="NM">New Mexico</option>
-												<option value="NY">New York</option>
-												<option value="NC">North Carolina</option>
-												<option value="ND">North Dakota</option>
-												<option value="OH">Ohio</option>
-												<option value="OK">Oklahoma</option>
-												<option value="OR">Oregon</option>
-												<option value="PA">Pennsylvania</option>
-												<option value="RI">Rhode Island</option>
-												<option value="SC">South Carolina</option>
-												<option value="SD">South Dakota</option>
-												<option value="TN">Tennessee</option>
-												<option value="TX">Texas</option>
-												<option value="UT">Utah</option>
-												<option value="VT">Vermont</option>
-												<option value="VA">Virginia</option>
-												<option value="WA">Washington</option>
-												<option value="WV">West Virginia</option>
-												<option value="WI">Wisconsin</option>
-												<option value="WY">Wyoming</option>
-										</select> <i class="arrow double"></i>
-										</label>
-									</div>
-									<!-- /section -->
-
-								</div>
-								<!-- /Section Row -->
-
-							</div>
-						</div>
-					</div>
-
-					<!-- Settings -->
-					<div class="panel mb35">
-						<div class="panel-heading">
-							<span class="panel-title">Settings</span>
-						</div>
-						<div class="panel-body br-t">
-							<div class="allcp-form theme-primary">
-
-								<div class="section row mb10">
-									<label class="field-label col-sm-2 ph10 text-center">Store
-										Timezone:</label>
-
-									<div class="col-sm-10 ph10">
-										<label class="field select"> <select id="set-location"
-											name="set-location">
-												<option value="0" selected="selected">(EDT) -0400
-													UTC New York/USA</option>
-												<option value="1">(EDT) -0400 UTC Washington
-													D.C./USA</option>
-												<option value="2">(PDT) -0700 UTC California/USA</option>
-										</select> <i class="arrow double"></i>
-										</label>
-									</div>
-								</div>
-
-								<div class="section row mb10">
-									<label for="store-currency"
-										class="field-label col-sm-2 ph10 text-center">Store
-										Currency:</label>
-
-									<div class="col-sm-10 ph10">
-										<label for="store-currency" class="field prepend-icon">
-											<input type="text" name="store-currency" id="store-currency"
-											class="gui-input" value="" placeholder="United States Dollar">
-											<span class="field-icon"> <i class="fa fa-usd"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-								<div class="section row mb10">
-									<label for="store-units"
-										class="field-label col-sm-2 ph10 text-center">Store
-										Unit System:</label>
-
-									<div class="col-sm-10 ph10">
-										<label for="store-units" class="field prepend-icon"> <input
-											type="text" name="store-units" id="store-units"
-											class="gui-input" value="" placeholder="Metric"> <span
-											class="field-icon"> <i class="fa fa-barcode"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-								<div class="section row mb10">
-									<label for="store-weight"
-										class="field-label col-sm-2 ph10 text-center">Store
-										Weight Unit:</label>
-
-									<div class="col-sm-10 ph10">
-										<label for="store-weight" class="field prepend-icon">
-											<input type="text" name="store-weight" id="store-weight"
-											class="gui-input" value="" placeholder="Pound(lb)"> <span
-											class="field-icon"> <i class="fa fa-square"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-								<div class="section row mb10">
-									<label for="store-desc"
-										class="field-label col-sm-2 ph10 text-center">Store
-										Description:</label>
-
-									<div class="col-sm-10 ph10">
-										<label class="field prepend-icon"> <textarea
-												class="gui-textarea" id="store-desc" name="store-desc"
-												placeholder="Write a description"></textarea> <span
-											class="field-icon"> <i class="fa fa-file"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-
-							</div>
-						</div>
-					</div>
-
-					<!-- Policies -->
-					<div class="panel mbn">
-						<div class="panel-heading">
-							<span class="panel-title">Policies</span>
-						</div>
-						<div class="panel-body br-t">
-							<div class="allcp-form theme-primary">
-
-
-								<div class="section row mb25">
-									<label for="refund-policy"
-										class="field-label col-sm-2 ph10 text-center">Refund
-										Policy</label>
-
-									<div class="col-sm-10 ph10">
-										<label class="field prepend-icon"> <textarea
-												class="gui-textarea" id="refund-policy" name="refund-policy"
-												placeholder="Refund policy terms and conditions..."></textarea>
-											<span class="field-icon"> <i class="fa fa-credit-card"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-								<div class="section row mb25">
-									<label for="privacy-policy"
-										class="field-label col-sm-2 ph10 text-center">Privacy
-										Policy</label>
-
-									<div class="col-sm-10 ph10">
-										<label class="field prepend-icon"> <textarea
-												class="gui-textarea" id="privacy-policy"
-												name="privacy-policy"
-												placeholder="Privacy policy terms and conditions..."></textarea>
-											<span class="field-icon"> <i class="fa fa-crosshairs"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-								<div class="section row mb15">
-									<label for="store-tos"
-										class="field-label col-sm-2 ph10 text-center">Terms of
-										Service</label>
-
-									<div class="col-sm-10 ph10">
-										<label class="field prepend-icon"> <textarea
-												class="gui-textarea" id="store-tos" name="store-tos"
-												placeholder="Terms of service conditions..."></textarea> <span
-											class="field-icon"> <i class="fa fa-align-justify"></i>
-										</span>
-										</label>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-			<!-- /Column Center -->
-		</div>
-	</section>
+	
 	<!-- /Content Sale Stat Setting -->
 </body>
 </html>
