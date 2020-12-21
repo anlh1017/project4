@@ -811,34 +811,6 @@
 		th:fragment="sales-stats-purchases">
 		<div th:replace="sidebar::leftcontent" />
 		<div class="content-right table-layout">
-			<!-- Column Left -->
-			<aside class="chute chute-left chute290 chute-icon-style br5"
-				data-chute-height="match">
-				<div class="chute-icon"></div>
-				<div class="scroller-chute scroller-primary chute-fh-xs mrn">
-					<!-- Menu Block -->
-					<div class="allcp-form theme-primary">
-
-						<h5 class="pln">Filter Orders By ID</h5>
-						<form action="#" th:action="@{/admin/order/list}"
-							method="GET">
-							<div class="section mb20">
-								<label for="order-id" class="field prepend-icon"> <input
-									th:name="id" type="text" name="order-id"
-									id="order-id" class="gui-input" placeholder="Order ID #">
-									<span class="field-icon"> <i class="fa fa-tag"></i>
-								</span>
-								</label>
-							</div>
-							<hr class="short">
-							<div class="section pb30 clr">
-								<button class="btn btn-primary pull-right ph30" type="submit">Search</button>
-							</div>
-</form>
-							
-
-			</aside>
-			<!-- /Column Left -->
 
 			<!-- Column Center -->
 			<div class="chute chute-center">
@@ -847,7 +819,22 @@
 				
 					<div class="">
 						<div class="">
-						<a th:href="@{/admin/order/export/pdf}">Export to PDF</a>
+						<form th:action=@{/admin/order/export/pdf}>
+							<select id="getMonth" name="getMonth">
+								<option value="1">Thang 1</option>
+								<option value="2">Thang 2</option>
+								<option value="3">Thang 3</option>
+								<option value="4">Thang 4</option>
+								<option value="5">Thang 5</option>
+								<option value="6">Thang 6</option>
+								<option value="7">Thang 7</option>
+								<option value="8">Thang 8</option>
+								<option value="9">Thang 9</option>
+								<option value="10">Thang 10</option>
+								<option value="11">Thang 11</option>
+								<option value="12">Thang 12</option>
+							</select> <input  class="btn btn-info" type="submit" id="exportPdf" value="Export to PDF" />
+						</form>
 							<table id="myTable"
 								class="table allcp-form theme-warning tc-checkbox-1 btn-gradient-grey fs13">
 								<h2>View Order</h2>
@@ -857,6 +844,8 @@
 									<th class="">Order ID</th>
 										<th class="">Order Date</th>			
 										<th class="">Customer</th>
+										<th class="">Shipping Address</th>
+										<th class="">Delivery Time</th>
 										<th class="">Total</th>
 										<th class="text-center">Order Status</th>
 									</tr>
@@ -870,7 +859,8 @@
 										</td>
 										<td class="" th:text="${tempOrder.orderDate}"></td>
 										<td class="" th:text="${tempOrder.customer.customer_name}"></td>
-							
+										<td class="" th:text="${tempOrder.shippingaddress}"></td>
+									<td class="" th:text="${tempOrder.time}"></td>
 										<td class="" th:text="${tempOrder.total} + ' VND'"></td>
 										
 										<td class="">
@@ -1172,7 +1162,7 @@
 											<option value="VC">Saint Vincent and Grenadines</option>
 											<option value="WS">Samoa</option>
 											<option value="SM">San Marino</option>
-											<option value="ST">São Tomé and Príncipe</option>
+											<option value="ST">SÃ£o TomÃ© and PrÃ­ncipe</option>
 											<option value="SA">Saudi Arabia</option>
 											<option value="SN">Senegal</option>
 											<option value="RS">Serbia</option>
