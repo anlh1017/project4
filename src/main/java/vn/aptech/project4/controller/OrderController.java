@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -85,32 +86,10 @@ public class OrderController {
 		return "redirect:/admin/order/list";
 	
 	}
-	@GetMapping("/searchById")
-	public String searchById(@RequestParam(value = "id", required = false) int  orderId, Model theModel) {
-		Optional<Order> theOrder=  orderRepository.findById(orderId);
-		if(theOrder.isPresent()) {
-			theModel.addAttribute("orders", theOrder.get());
-			theModel.addAttribute("activeOrders",new String("active"));
-			theModel.addAttribute("content_view",new String("sales-stats-purchases"));
-		}
-		return "index";
-	
-	}
-	@GetMapping("/invoice/{id}")
-	public String invoice(@PathVariable (value = "id") int orderId, Model theModel) {
-		Optional<Order> theOrder=  orderRepository.findById(orderId);
-		if(theOrder.isPresent()) {
-			List<OrderDetail> theOrderDetail = theOrder.get().getOrderDetails();
-			Customer theCustomer = theOrder.get().getCustomer();
-			
-			theModel.addAttribute("customer", theCustomer);
-			theModel.addAttribute("orderDetails", theOrderDetail);
-		}
-		return "invoice";
-	
-	}
+
+
     @GetMapping("/export/pdf")
-    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+    public void exportToPDF(HttpServletResponse response, @RequestParam(value="getMonth", required = false) int getMonth) throws DocumentException, IOException {
         response.setContentType("application/pdf"); DateFormat dateFormatter = new
                 SimpleDateFormat("yyyy-MM-dd_HH:mm:ss"); String currentDateTime =
                 dateFormatter.format(new Date());
@@ -120,32 +99,18 @@ public class OrderController {
         response.setHeader(headerKey, headerValue);
 
         List<Order> listOrders = orderRepository.findAll();
-
-        OrderPDFExporter exporter = new OrderPDFExporter(listOrders);
+        List<Order> listAllOder = new ArrayList<>();
+        for (Order order : listOrders) {
+			if(order.getOrderDate().getMonth()==(getMonth-1)) {
+				listAllOder.add(order);
+			}
+		}
+        OrderPDFExporter exporter = new OrderPDFExporter(listAllOder);
         exporter.export(response);
 
     }
 
 
-//	@GetMapping("/findByDate")
-//	  public String findByDateBetween(@RequestParam("startdate") Date startdate,@RequestParam("enddate") Date enddate,Model theModel) {
-//		Optional<Order> theOrder= orderRepository.findAllByDateBetween(startdate, enddate);
-//			theModel.addAttribute("orders", theOrder );
-//			theModel.addAttribute("activeOrders",new String("active"));
-//			theModel.addAttribute("content_view",new String("sales-stats-purchases"));
-//		return "index";	  
-//		}
-//	@GetMapping("/findByStatus")
-//	public String filterByStatus(@RequestParam(value="status", required = false)int status, Model theModel) {
-//		Optional<Order> theOrder=  orderRepository.findByStatus(status);
-//		if(theOrder.isPresent()) {
-//			theModel.addAttribute("orders", theOrder.get());
-//			theModel.addAttribute("activeOrders",new String("active"));
-//			theModel.addAttribute("content_view",new String("sales-stats-purchases"));
-//		}
-//		return "index";
-//	
-//	}
 
 	
 	
