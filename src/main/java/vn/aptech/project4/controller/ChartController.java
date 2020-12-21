@@ -44,7 +44,8 @@ public class ChartController {
 			}
 			surveyMap.put(i+1+"", totalOrder);
 		}
-		
+		model.addAttribute("activeDashboard",new String("active"));
+		model.addAttribute("content_view",new String("sales-stats-chart"));
 		model.addAttribute("surveyMap", surveyMap);
 		
 		
