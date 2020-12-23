@@ -99,6 +99,10 @@
 												<p>Product Name:</p>
 												<p th:text="${product.productName}"></p>
 											</div>
+											<p>Cost:</p>
+											<div class="section" th:each="key:${costBySize}">
+												Size <span th:text="${key.key}"></span><span th:text="${key.value}"></span>
+											</div>
 
 											<div class="panel p25">
 												<div class="panel-heading">
@@ -166,6 +170,10 @@
 
 																		</tbody>
 																	</table>
+																	<div>
+																		<a th:href="@{/admin/product/updatePrice/{id}(id=${product.id})}"
+																		   class="btn btn-rounded btn-primary">Update Price</a>
+																	</div>
 																</div>
 															</div>
 														</th:block>
@@ -187,7 +195,7 @@
 
 
 
-												<div class="section">
+									<!--			<div class="section">
 													<label class="field select"> Size <select
 														id="sizeId" name="sizeId">
 															<option th:each="temp:${size}" th:value="${temp.id}"
@@ -195,11 +203,11 @@
 
 													</select> <i class="arrow"></i>
 													</label>
-												</div>
-												<div class="section">
+												</div>-->
+									<!--			<div class="section">
 													Quantity: <input name="quantity" type="number">
 
-												</div>
+												</div>-->
 												<input type="submit" value="Submit" name="submit" />
 											</form>
 

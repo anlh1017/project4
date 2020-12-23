@@ -13,8 +13,13 @@ public class Ingredient {
 	private int id;
 	@Column(name="ingredient_name")
 	private String ingredientName;
-	@Column(name="UMO")
-	private String uMO;
+	@Column(name="UOM")
+	private String unit;
+	@Column(name = "available")
+	private float available;
+	@Transient
+	private float cost;
+
 	/*
 	 * @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE,
 	 * CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
@@ -31,7 +36,7 @@ public class Ingredient {
 
 	@Override
 	public String toString() {
-		return "Ingredient [id=" + id + ", ingredientName=" + ingredientName + ", UMO=" + uMO
+		return "Ingredient [id=" + id + ", ingredientName=" + ingredientName + ", UMO=" + unit
 				+ "]";
 	}
 
@@ -54,12 +59,12 @@ public class Ingredient {
 		this.ingredientName = ingredientName;
 	}
 
-	public String getuMO() {
-		return uMO;
+	public String getUnit() {
+		return unit;
 	}
 
-	public void setuMO(String uMO) {
-		this.uMO = uMO;
+	public void setUnit(String uMO) {
+		this.unit = uMO;
 	}
 
 	public List<ProductIngredient> getProductIngredients() {
@@ -76,5 +81,21 @@ public class Ingredient {
 
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
+	}
+
+	public float getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(float available) {
+		this.available = available;
+	}
+
+	public float getCost() {
+		return cost = this.inventory.getPrice()/this.getInventory().getRatio();
+	}
+
+	public void setCost(float cost) {
+		this.cost = cost;
 	}
 }

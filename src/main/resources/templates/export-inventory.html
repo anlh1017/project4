@@ -92,7 +92,7 @@
 										<i th:if="${message}?'${message}':''"></i>
 										<div class="panel-body pn mt15">
 											<div class="table-responsive">
-												<form th:action="@{/inventory/export/{id}(id=${inventory.id})}" method="post">
+												<form th:action="@{/admin/inventory/export/{id}(id=${inventory.id})}" method="post">
 													<table
 														class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
 														<thead>
@@ -111,11 +111,11 @@
 																<td class=""
 																	th:text="${inventory.ingredient.ingredientName}"></td>
 																			<td class=""
-																	th:text="${inventory.uMO}"></td>
+																	th:text="${inventory.unit}"></td>
 																<td class=""><input type="number" name="quantity"
 																	id="quantity" /></td>
 																				<td class=""
-																	th:text="${inventory.ingredient.uMO}"></td>
+																	th:text="${inventory.ingredient.unit}"></td>
 																<td class=""><input type="number"
 																	name="equiQuantity" id="equiQuantity" /></td>
 															</tr>

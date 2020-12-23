@@ -63,20 +63,19 @@
 								<br>
 							</div>
 							<a
-								th:href="@{/ProductDetail/{id}(id=${tempProduct.productId})}"
+								th:href="@{/ProductDetail/{id}(id=${tempProduct.id})}"
 								class="price float-right btn "><img class="img-fluid" alt=""
 								title="user"
 								th:src="@{${'/files/'+ tempProduct.image}}"></a>
 							<div class="container">
 								<p class="price float-right"
-									th:text="${tempProduct.description}"></p>
-								
-								<p th:text="'S: '+${tempProduct.sizeS}"></p>
-								<p th:text="'M: '+${tempProduct.sizeM}"></p>
-								<p th:text="'L: '+${tempProduct.sizeL}"></p>
+								   th:text="${tempProduct.description}"></p>
+								<th:block th:each="tempSize: ${size}">
+						 <p class="" th:text="${tempProduct.getPrice(tempSize.id)}?'Size '+${tempProduct.getSizeName(tempSize.id)}+' : '+${tempProduct.getPrice(tempSize.id)}:'0'"></p>
+								</th:block>
 								<p>
 									<a class="btn btn-rounded btn-danger"
-										th:href="@{/user/addcartnew/{id}(id=${tempProduct.productId})}">
+									   th:href="@{/user/addcartnew/{id}(id=${tempProduct.id})}">
 										Add To Cart</a>
 								</p>
 							</div>

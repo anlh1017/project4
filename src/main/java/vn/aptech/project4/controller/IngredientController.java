@@ -26,7 +26,7 @@ public class IngredientController {
 
 	@GetMapping("/list")
 	public String showIngredients(Model theModel) {
-		theModel.addAttribute("ingredients", ingredientRepository.findAll());
+			theModel.addAttribute("ingredients", ingredientRepository.findAll() );
 		return "list-ingredients";
 	}
 
@@ -41,10 +41,12 @@ public class IngredientController {
 		theModelMap.addAttribute("ingredient", ingredient);
 		ingredientRepository.save(ingredient);
 		Inventory inventory = new Inventory();
-		inventory.setAvailable(0);
 		inventory.setIngredient(ingredient);
 		inventory.setQuantity(0);
-		inventory.setuMO("N/A");
+		inventory.setPrice(0);
+        inventory.setStatus(1);
+        inventory.setRatio(1);
+		inventory.setUnit("N/A");
 		inventory.setVendorName("N/A");
 		inventoryRepository.save(inventory);
 		return "redirect:/admin/ingredient/list";

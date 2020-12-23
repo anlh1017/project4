@@ -22,20 +22,19 @@ import java.util.Optional;
 @Controller
 public class HomeController {
 
-	ProductRepository productRepository;
-	CategoryRepository categoryRepository;
-	ProductSizeRepository productSizeRepository;
-	ProductService serviceProduct;
-	OrderRepository orderRepository;
-	OrderDetailsRepository orderDetailsRepository;
-
-	@Autowired
+	private ProductRepository productRepository;
+	private CategoryRepository categoryRepository;
+	private ProductSizeRepository productSizeRepository;
+	private ProductService serviceProduct;
+	private OrderRepository orderRepository;
+	private OrderDetailsRepository orderDetailsRepository;
 	private ReviewRepository reviewRepository;
 	private CustomerRepository customerRepository;
 	private MembershipRepository membershipRepository;
+	private SizeRepository sizeRepository;
 	@Autowired
 	public HomeController(CustomerRepository customerRepository, MembershipRepository membershipRepository, ProductRepository productRepository, CategoryRepository categoryRepository,
-			ProductSizeRepository productSizeRepository, ProductService serviceProduct,OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository,  ReviewRepository reviewRepository) {
+			ProductSizeRepository productSizeRepository, ProductService serviceProduct,OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository,  ReviewRepository reviewRepository,SizeRepository sizeRepository) {
 		this.customerRepository = customerRepository;
 		this.membershipRepository = membershipRepository;
 		this.productRepository = productRepository;
@@ -44,6 +43,8 @@ public class HomeController {
 		this.serviceProduct = serviceProduct;
 		this.orderDetailsRepository = orderDetailsRepository;
 		this.orderRepository= orderRepository;
+		this.reviewRepository = reviewRepository;
+		this.sizeRepository = sizeRepository;
 	}
 	//create a mapping for "/hello"
 		@GetMapping("/")
@@ -57,20 +58,8 @@ public class HomeController {
 	@GetMapping("/ShowListProducts")
 	public String ShowListProducts(Model theModel) {
 		List<Product> products = productRepository.findAll();
-		List<ProductEntity> productEntitys = new ArrayList<>();
-		for (Product product : products) {
-			ProductEntity addProduct = new ProductEntity();
-			addProduct.setProductId(product.getId());
-
-			addProduct.setDescription(product.getDescription());
-			addProduct.setCategoryId(product.getCategory().getId());
-			addProduct.setCategoryName(product.getCategory().getName());
-			addProduct.setImage(product.getImage());
-			addProduct.setProductName(product.getProductName());
-			productEntitys.add(addProduct);
-		}
-
-		theModel.addAttribute("products", productEntitys);
+		theModel.addAttribute("size", sizeRepository.findAll());
+		theModel.addAttribute("products", products);
 		theModel.addAttribute("category", categoryRepository.findAll());
 		return "guest/product";
 	}

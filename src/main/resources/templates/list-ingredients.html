@@ -98,7 +98,7 @@
 															<th>No.</th>
 															<th class="">Ingredient Name</th>
 															<th>Available</th>
-															<th class="">UOM</th>
+															<th class="">Unit</th>
 															<th class="">Action</th>
 														</tr>
 													</thead>
@@ -107,9 +107,9 @@
 															<td th:text="${stat.count}"></td>
 															<td class="" th:text="${ingredient.ingredientName}"></td>
 
-															<td th:text="${ingredient.inventory.available}"></td>
+															<td th:text="${ingredient.available}"></td>
 
-															<td class="" th:text="${ingredient.uMO}"></td>
+															<td class="" th:text="${ingredient.unit}"></td>
 															<td class="">
 																<div class="btn-group text-right">
 																	<button type="button"

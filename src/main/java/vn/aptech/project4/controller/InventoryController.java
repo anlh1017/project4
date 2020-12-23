@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.aptech.project4.entity.Ingredient;
 import vn.aptech.project4.entity.Inventory;
+import vn.aptech.project4.repository.IngredientRepository;
 import vn.aptech.project4.repository.InventoryRepository;
 
 import java.util.List;
@@ -16,10 +18,11 @@ import java.util.List;
 @RequestMapping("/admin/inventory")
 public class InventoryController {
 	private InventoryRepository inventoryRepository;
-	
+	private IngredientRepository ingredientRepository;
 	@Autowired
-	public InventoryController(InventoryRepository inventoryRepository) {
+	public InventoryController(InventoryRepository inventoryRepository, IngredientRepository ingredientRepository) {
 		this.inventoryRepository = inventoryRepository;
+		this.ingredientRepository = ingredientRepository;
 	}
 	@GetMapping("")
 	public String showInventory(Model theModel) {
@@ -50,7 +53,7 @@ public class InventoryController {
 		return "export-inventory";
 	}
 	@PostMapping("/export/{id}")
-	public String doExport(Model theModel,@PathVariable(value="id")int id,@RequestParam(value="quantity")int quantity,@RequestParam(value="equiQuantity")int equiQuantity,RedirectAttributes redirectAttributes) {
+	public String doExport(Model theModel,@PathVariable(value="id")int id,@RequestParam(value="quantity")int quantity,RedirectAttributes redirectAttributes) {
 		Inventory inventory = inventoryRepository.findById(id).get();
 		int remain = 	inventory.getQuantity() - quantity;
 		if(remain<0) {
@@ -58,8 +61,14 @@ public class InventoryController {
 			return "redirect:/inventory/export/"+id;
 		}
 		inventory.setQuantity(remain);
+		float available = quantity*inventory.getRatio();
+		Ingredient ingredient = ingredientRepository.findById(inventory.getIngredient().getId()).get();
+		float curAvailable = ingredient.getAvailable();
+		curAvailable += available;
+		ingredient.setAvailable(curAvailable);
+		ingredientRepository.save(ingredient);
 		inventoryRepository.save(inventory);
-		return "redirect:/inventory";
+		return "redirect:/admin/inventory";
 	}
 	@GetMapping("/edit/{id}")
 	public String editInventory(Model theModel,@PathVariable(value="id")int id) {

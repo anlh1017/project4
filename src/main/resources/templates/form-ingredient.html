@@ -98,17 +98,21 @@
 												<div class="col-lg-8">
 													<div class="bs-component">
 														<input type="text" id="ingredientName" class="form-control" th:field="*{ingredientName}"
-															placeholder="Type Here...">
+															placeholder="Enter Ingredient Name">
 													</div>
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="vendorName" class="col-lg-3 control-label">Unit</label>
+												<label class="col-lg-3 control-label">Unit</label>
 
 												<div class="col-lg-8">
 													<div class="bs-component">
-														<input type="text" id="vendorName" class="form-control" th:field="*{uMO}"
-															placeholder="Type Here...">
+														<select class="form-control" th:field="*{unit}">
+															<option value="">--Select--</option>
+															<option value="ml">ml</option>
+															<option value="g">g</option>
+															<option value="piece">piece</option>
+														</select>
 													</div>
 												</div>
 											</div>

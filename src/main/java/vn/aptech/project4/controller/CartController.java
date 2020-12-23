@@ -1,44 +1,20 @@
 package vn.aptech.project4.controller;
 
-import java.security.Principal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vn.aptech.project4.entity.*;
+import vn.aptech.project4.repository.*;
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import vn.aptech.project4.entity.Cart;
-import vn.aptech.project4.entity.Customer;
-import vn.aptech.project4.entity.Ingredient;
-import vn.aptech.project4.entity.Order;
-import vn.aptech.project4.entity.OrderDetail;
-import vn.aptech.project4.entity.Product;
-import vn.aptech.project4.entity.ProductSize;
-import vn.aptech.project4.entity.Products_size;
-import vn.aptech.project4.entity.Size;
-import vn.aptech.project4.repository.CategoryRepository;
-import vn.aptech.project4.repository.CustomerRepository;
-import vn.aptech.project4.repository.OrderDetailsRepository;
-import vn.aptech.project4.repository.OrderRepository;
-import vn.aptech.project4.repository.ProductRepository;
-import vn.aptech.project4.repository.ProductSizeRepository;
-import vn.aptech.project4.repository.SizeRepository;
 @Controller
 public class CartController {
 	private ProductRepository productRepository;
@@ -102,29 +78,24 @@ public class CartController {
 	}
 	@RequestMapping(value = "/user/addcartnew/{id}")
 	private String addnewcart(Model theModel, @PathVariable(value = "id") int id, RedirectAttributes redirectAttributes) {
-		Product product = new Product();
-		for (Product productlist : productRepository.findAll()) {
-			if (productlist.getId() == id) {
-				product = productlist;
-				break;
-			}
+		Optional<Product> theProduct = productRepository.findById(id);
+		if(theProduct.isPresent()){
+			theModel.addAttribute("addproduct", theProduct.get());
+			Cart addnew = new Cart();
+			addnew.setProductId(theProduct.get().getId());
+			addnew.setProductName(theProduct.get().getProductName());
+			addnew.setSizeId(1);
+			addnew.setQuantity(1);
+			redirectAttributes.addFlashAttribute("cartadd",addnew);
 		}
-		theModel.addAttribute("addproduct", product);
-		Cart addnew = new Cart();
-		addnew.setProductId(product.getId());
-		addnew.setProductName(product.getProductName());
-		addnew.setSizeId(1);
-		addnew.setQuantity(1);
-		
-		redirectAttributes.addFlashAttribute("cartadd",addnew);
 		return "redirect:/add";
 	}
 
 	@RequestMapping(value = "/add")
 private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		// Kiem tra ton tai cua gio hang
-		Product product = foreachpro(cartadd);
-		Size sizeadd = foreachsize(cartadd);
+		Product product = getProduct(cartadd);
+		Size sizeadd = getSize(cartadd);
 		ProductSize prosizeadd = foreachprosize(cartadd);
 		
 		if (carts.size() > 0) {
@@ -198,7 +169,7 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 			OrderDetail orderdetail = new OrderDetail();
 			orderdetail.setOrder(order);
 			// aaa.setOrder(bbb);
-			Product adprodcut = foreachpro(cart);
+			Product adprodcut = getProduct(cart);
 			orderdetail.setProductId(adprodcut);
 			orderdetail.setQuantity(cart.getQuantity());
 			ProductSize addprosize = foreachprosize(cart);
@@ -211,23 +182,19 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 		carts = new ArrayList<>();
 		return "redirect:/ShowListProducts";
 	}
-	public Product foreachpro(Cart cart) {
-		Product adprodcut = new Product();
-		for (Product pro : productRepository.findAll()) {
-			if (cart.getProductId() == pro.getId() ) {
-				adprodcut = pro;
-			}
+	public Product getProduct(Cart cart) {
+		Optional<Product> theProduct = productRepository.findById(cart.getProductId());
+		if(theProduct.isPresent()){
+			return theProduct.get();
 		}
-		return adprodcut;
+		return null;
 	}
-	public Size foreachsize(Cart cart) {
-		Size sizeadd = new Size();
-		for (Size size : sizeRepository.findAll()) {
-			if(cart.getSizeId()==size.getId()) {
-				sizeadd=size;
-			}
+	public Size getSize(Cart cart) {
+		Optional<Size> theSize = sizeRepository.findById(cart.getSizeId());
+		if(theSize.isPresent()){
+			return theSize.get();
 		}
-		return sizeadd;
+		return null;
 	}
 	public ProductSize foreachprosize(Cart cart) {
 		ProductSize prosize = new ProductSize();

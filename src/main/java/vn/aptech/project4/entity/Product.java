@@ -1,6 +1,7 @@
 package vn.aptech.project4.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,23 +11,50 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="productId", updatable = false, nullable = false)
-	private int Id;
+	private int id;
+	@NotBlank
+	@Column(name="productName")
+	private String productName;
 
+	@Column(name="description")
+	private String description;
+	
+	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	@JoinColumn(name="category_id")
+	private Category category;
+	
+	@Column(name="image")
+	private String image;
+	/*
+	 * @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE,
+	 * CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	 * 
+	 * @JoinTable(name="product_ingredient", joinColumns
+	 * = @JoinColumn(name="product_id"),inverseJoinColumns
+	 * = @JoinColumn(name="ingredient_id")) private List<Ingredient> ingredients;
+	 * 
+	 * public void addIngredient(Ingredient ingredient) { if(ingredients==null) {
+	 * ingredients = new ArrayList<Ingredient>(); } ingredients.add(ingredient); }
+	 */
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<ProductIngredient> productIngredients;
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "product")
+	private List<ProductSize> sizes;
 	public Product() {
 	}
 	public Product(int id, String productName, String description, Category category, String image) {
-		this.Id = id;
+		this.id = id;
 		this.productName = productName;
 		this.description = description;
 		this.category = category;
 		this.image = image;
 	}
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getProductName() {
@@ -68,37 +96,6 @@ public class Product {
 	public void setProductIngredients(List<ProductIngredient> productIngredients) {
 		this.productIngredients = productIngredients;
 	}
-
-
-
-	@Column(name="productName")
-	private String productName;
-
-	@Column(name="description")
-	private String description;
-	
-	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	@JoinColumn(name="category_id")
-	private Category category;
-	
-	@Column(name="image")
-	private String image;
-	/*
-	 * @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE,
-	 * CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	 * 
-	 * @JoinTable(name="product_ingredient", joinColumns
-	 * = @JoinColumn(name="product_id"),inverseJoinColumns
-	 * = @JoinColumn(name="ingredient_id")) private List<Ingredient> ingredients;
-	 * 
-	 * public void addIngredient(Ingredient ingredient) { if(ingredients==null) {
-	 * ingredients = new ArrayList<Ingredient>(); } ingredients.add(ingredient); }
-	 */
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private List<ProductIngredient> productIngredients;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
-	private List<ProductSize> sizes;
-
 	public List<ProductSize> getSizes() {
 		return sizes;
 	}
@@ -123,7 +120,7 @@ public class Product {
 	}
 	@Override
 	public String toString() {
-		return "Product [id=" + Id + ", productName=" + productName + ", description=" + description + ", category="
+		return "Product [id=" + id + ", productName=" + productName + ", description=" + description + ", category="
 				+ category + "]";
 	}
 	public int getPrice(int sizeId){
@@ -140,11 +137,19 @@ public class Product {
 		}
 		sizes.add(productSize);
 	}
+	public String getSizeName(int sizeId){
+		for (ProductSize temp: sizes) {
+			if(temp.getSize().getId()==sizeId) {
+				return temp.getSize().getName();
+			}
+		}
+		return "";
+	}
 	public boolean hasSize(Size size){
 		if(sizes==null){
 			return false;
 		}else {
-		for (ProductSize productSize: sizes) {
+		for (ProductSize productSize : sizes) {
 			if (productSize.getSize().getId() == size.getId()) {
 				return true;
 			}

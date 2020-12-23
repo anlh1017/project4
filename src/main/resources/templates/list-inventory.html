@@ -101,7 +101,8 @@
 															<th class="">Vendor Name</th>
 															<th class="">Unit</th>
 															<th class="">Stock</th>
-
+															<th class="">Price</th>
+															<th class="">Ratio</th>
 															<th class="">Action</th>
 														</tr>
 													</thead>
@@ -111,9 +112,10 @@
 															<td th:text="${stat.count}"></td>
 															<td class="" th:text="${temp.ingredient.ingredientName}"></td>
 															<td class="" th:text="${temp.vendorName}"></td>
-															<td class="" th:text="${temp.uMO}"></td>
+															<td class="" th:text="${temp.unit}"></td>
 															<td class="" th:text="${temp.quantity}"></td>
-
+															<td class="" th:text="${temp.price}"></td>
+															<td class="" th:text="${temp.ratio}"></td>
 															<td class="">
 																<div class="btn-group text-right">
 																	<button type="button"
@@ -156,7 +158,7 @@
 												<th:block th:if="${unmanagedinventory}">
 													<div class="row" th:each="temp:${unmanagedinventory}">
 														<div class="col-xs-6"><p th:text="${temp.ingredient.ingredientName}"></p></div>
-														<div class="col-xs-6"><a href="#">Manage</a></div>
+														<div class="col-xs-6"><a th:href="@{/admin/inventory/edit/{id}(id=${temp.id})}">Manage</a></div>
 
 													</div>
 												</th:block>

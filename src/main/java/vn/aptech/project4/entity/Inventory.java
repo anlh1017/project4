@@ -14,24 +14,26 @@ public class Inventory {
 	private Ingredient ingredient;
 	@Column(name="vendor_name")
 	private String vendorName;
-	@Column(name="UMO")
-	private String uMO;
+	@Column(name="UOM")
+	private String unit;
 	@Column(name="quantity")
 	private int quantity;
-	@Column(name="available")
-	private int available;
+	@Column(name="price")
+	private Integer price;
+	@Column(name="ratio")
+	private Float ratio;
 	@Column(name="status")
 	private int status;
 
-
 	public Inventory() {
 	}
-	public Inventory(Ingredient ingredient,String vendorName, String uMO, int quantity,int available) {
+	public Inventory(Ingredient ingredient, String vendorName, String unit, int price, float ratio, int status) {
 		this.ingredient = ingredient;
 		this.vendorName = vendorName;
-		this.uMO = uMO;
-		this.quantity = quantity;
-		this.available = available;
+		this.unit = unit;
+		this.price = price;
+		this.ratio = ratio;
+		this.status = status;
 	}
 
 	public int getId() {
@@ -58,14 +60,6 @@ public class Inventory {
 		this.vendorName = vendorName;
 	}
 
-	public String getuMO() {
-		return uMO;
-	}
-
-	public void setuMO(String uMO) {
-		this.uMO = uMO;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -74,19 +68,31 @@ public class Inventory {
 		this.quantity = quantity;
 	}
 
-	public int getAvailable() {
-		return available;
-	}
-
-	public void setAvailable(int available) {
-		this.available = available;
-	}
-	public int getStatus() {
-		return status;
-	}
-
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public float getRatio() {
+		return ratio;
+	}
+
+	public void setRatio(float ratio) {
+		this.ratio = ratio;
 	}
 
 }
