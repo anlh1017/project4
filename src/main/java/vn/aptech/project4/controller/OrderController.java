@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vn.aptech.project4.entity.*;
 import vn.aptech.project4.report.OrderPDFExporter;
-import vn.aptech.project4.repository.CustomerRepository;
-import vn.aptech.project4.repository.MembershipRepository;
-import vn.aptech.project4.repository.OrderDetailsRepository;
-import vn.aptech.project4.repository.OrderRepository;
+import vn.aptech.project4.repository.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -33,16 +30,28 @@ public class OrderController {
 	private OrderDetailsRepository orderdetailsRepository;
 	private MembershipRepository membershipRepository;
 	private CustomerRepository customerRepository;
+	private InventoryRepository inventoryRepository;
+	private int lowStock=0;
 	@Autowired
-	public OrderController(OrderRepository orderRepository, OrderDetailsRepository orderdetailsRepository,MembershipRepository membershipRepository, CustomerRepository customerRepository) {
+	public OrderController(OrderRepository orderRepository, OrderDetailsRepository orderdetailsRepository,MembershipRepository membershipRepository, CustomerRepository customerRepository,InventoryRepository inventoryRepository) {
 		this.orderRepository = orderRepository;
 		this.orderdetailsRepository = orderdetailsRepository;
 		this.membershipRepository = membershipRepository;
 		this.customerRepository = customerRepository;
+		this.inventoryRepository = inventoryRepository;
+	}
+	public void getInventoryNotification(Model theModel){
+		List<Inventory> theList = inventoryRepository.findAll();
+		for(Inventory temp:theList){
+			if(temp.getQuantity()<temp.getSafetyStock()){
+				lowStock+=1;
+			}
+		}
+		theModel.addAttribute("lowInventory", lowStock);
 	}
 	@GetMapping("/list")
 	public String showOrders(Model theModel, @RequestParam(value="id", required = false) String id,@RequestParam(value="status", required = false) String status) {
-		
+		getInventoryNotification(theModel);
 		theModel.addAttribute("activeOrders",new String("active"));
 		theModel.addAttribute("content_view",new String("sales-stats-purchases"));
 		String theId=(id==null)?"NA":id;
@@ -59,7 +68,7 @@ public class OrderController {
 	@GetMapping("/viewDetail/{id}")
 	public String viewOrderDetails(@PathVariable (value = "id") int orderId, Model theModel) {
 		Optional<Order> theOrder=  orderRepository.findById(orderId);
-		
+		getInventoryNotification(theModel);
 		if(theOrder.isPresent()) {
 			List<OrderDetail> theOrderDetail = theOrder.get().getOrderDetails();
 			int tong=0;

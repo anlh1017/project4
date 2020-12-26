@@ -1,52 +1,55 @@
 package vn.aptech.project4.controller;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.lowagie.text.DocumentException;
-
 import vn.aptech.project4.entity.ChartInterface;
-import vn.aptech.project4.entity.ChartModel;
-import vn.aptech.project4.entity.Customer;
 import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.entity.Order;
-import vn.aptech.project4.entity.OrderDetail;
-import vn.aptech.project4.report.InventoryPDFExporter;
 import vn.aptech.project4.report.ProductPDFExporter;
-import vn.aptech.project4.repository.CustomerRepository;
-import vn.aptech.project4.repository.OrderDetailsRepository;
-import vn.aptech.project4.repository.OrderRepository;
-import vn.aptech.project4.repository.ProductRepository;
+import vn.aptech.project4.repository.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/showChart")
 public class ChartController {
-	@Autowired
 	private OrderRepository orderRepository;
-	@Autowired
 	private OrderDetailsRepository orderDetailsRepository;
-	@Autowired
 	private CustomerRepository customerRepository;
-	@Autowired
 	private ProductRepository productRepository;
-	
+	private InventoryRepository inventoryRepository;
+	private int lowStock=0;
+	@Autowired
+	public ChartController( OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository,CustomerRepository customerRepository,ProductRepository productRepository,InventoryRepository inventoryRepository) {
+		this.orderRepository = orderRepository;
+		this.orderDetailsRepository = orderDetailsRepository;
+		this.customerRepository = customerRepository;
+		this.productRepository = productRepository;
+		this.inventoryRepository = inventoryRepository;
+	}
+	public void getInventoryNotification(Model theModel){
+		List<Inventory> theList = inventoryRepository.findAll();
+		for(Inventory temp:theList){
+			if(temp.getQuantity()<temp.getSafetyStock()){
+				lowStock+=1;
+			}
+		}
+		theModel.addAttribute("lowInventory", lowStock);
+	}
 	@GetMapping("/list")
 	public String showChart(Model model) {
+		getInventoryNotification(model);
 		Map<String, Integer> surveyMap = new LinkedHashMap<>();		
 		for (int i = 0; i < 12; i++) {
 			int totalOrder = 0;

@@ -1,59 +1,59 @@
 package vn.aptech.project4.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.lowagie.text.DocumentException;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import com.lowagie.text.DocumentException;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.springframework.web.bind.annotation.*;
 import vn.aptech.project4.entity.Customer;
+import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.report.CustomerPDFExporter;
 import vn.aptech.project4.repository.CustomerRepository;
+import vn.aptech.project4.repository.InventoryRepository;
 import vn.aptech.project4.repository.MembershipRepository;
 import vn.aptech.project4.service.CustomerService1;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 
 @Controller
 @RequestMapping("/admin/customer")
 public class CustomerController {
-	@Autowired
 	private CustomerRepository customerRepository;
-	@Autowired
 	private CustomerService1 service;
-	@Autowired
 	private MembershipRepository membershipRepository;
-	
+	private InventoryRepository inventoryRepository;
+	private int lowStock=0;
+	@Autowired
+	public CustomerController(CustomerRepository customerRepository, CustomerService1 service,MembershipRepository membershipRepository, InventoryRepository inventoryRepository) {
+	 this.customerRepository = customerRepository;
+	 this.membershipRepository = membershipRepository;
+	 this.service = service;
+	 this.inventoryRepository = inventoryRepository;
+	}
+	public void getInventoryNotification(Model theModel){
+		List<Inventory> theList = inventoryRepository.findAll();
+		for(Inventory temp:theList){
+			if(temp.getQuantity()<temp.getSafetyStock()){
+				lowStock+=1;
+			}
+		}
+		theModel.addAttribute("lowInventory", lowStock);
+	}
 	@GetMapping("/list")
 	public String showCustomer(Model theModel, @Param("search") String search) {
+		getInventoryNotification(theModel);
 		List<Customer> customer = service.listAll(search);
 		theModel.addAttribute("customer",customer);
 		theModel.addAttribute("activeClients",new String("active"));
@@ -64,6 +64,7 @@ public class CustomerController {
 	
 	@GetMapping("/createCustomer")
 	public String createCustomer(Model theModel) {
+		getInventoryNotification(theModel);
 		Customer customer = new Customer();
 		theModel.addAttribute("customer", customer);
 		return"create-customer"; 
@@ -81,6 +82,7 @@ public class CustomerController {
 	
 	@GetMapping("/editCustomer/{id}")
 	public String editCustomer(@PathVariable (value = "id") int id, Model theModel) {
+		getInventoryNotification(theModel);
 		Optional<Customer> customer= customerRepository.findById(id);
 		theModel.addAttribute("membership", membershipRepository.findAll());
 		theModel.addAttribute("customer", customer.get());

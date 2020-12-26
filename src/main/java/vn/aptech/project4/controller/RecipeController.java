@@ -18,19 +18,30 @@ public class RecipeController {
     private SizeRepository sizeRepository;
     private RecipeRepository recipeRepository;
     private ProductIngredientRepository productIngredientRepository;
-
+    private InventoryRepository inventoryRepository;
+    private int lowStock=0;
     @Autowired
     public RecipeController(ProductRepository productRepository, IngredientRepository ingredientRepository,
-                            SizeRepository sizeRepository, RecipeRepository recipeRepository, ProductIngredientRepository productIngredientRepository) {
+                            SizeRepository sizeRepository, RecipeRepository recipeRepository, ProductIngredientRepository productIngredientRepository,InventoryRepository inventoryRepository) {
         this.productRepository = productRepository;
         this.ingredientRepository = ingredientRepository;
         this.sizeRepository = sizeRepository;
         this.recipeRepository = recipeRepository;
         this.productIngredientRepository = productIngredientRepository;
+        this.inventoryRepository = inventoryRepository;
     }
-
+    public void getInventoryNotification(Model theModel){
+        List<Inventory> theList = inventoryRepository.findAll();
+        for(Inventory temp:theList){
+            if(temp.getQuantity()<temp.getSafetyStock()){
+                lowStock+=1;
+            }
+        }
+        theModel.addAttribute("lowInventory", lowStock);
+    }
     @GetMapping("/view/{id}")
     public String viewIngredient(@PathVariable(value = "id") int theId, Model theModel) {
+        getInventoryNotification(theModel);
         Product theProduct = productRepository.findById(theId).get();
         List<Recipe> recipes = recipeRepository.findAll();
         List<Recipe> viewRecipes = new ArrayList<Recipe>();
@@ -61,6 +72,7 @@ public class RecipeController {
 
     @GetMapping("/update/{id}")
     public String editIngredient(@PathVariable(value = "id") int theId, Model theModel) {
+        getInventoryNotification(theModel);
         Optional<Recipe> tempRecipe = recipeRepository.findById(theId);
         if (tempRecipe.isPresent()) {
             Recipe theRecipe = tempRecipe.get();
@@ -90,11 +102,6 @@ public class RecipeController {
         if (pro != null) {
 
             if (!pro.hasIngredient(ingre)) {
-                /*
-                 * pro.getProductIngredients().add(new ProductIngredient(ingre,pro,quantity));
-                 * pro2 = productRepository.findById(id).get();
-                 * pro2.setProductIngredients(pro.getProductIngredients());
-                 */
                 ProductIngredient theProductIngredient = new ProductIngredient(ingre, pro);
                 productIngredientRepository.save(theProductIngredient);
                 List<Recipe> recipeList = new ArrayList<>();
@@ -109,27 +116,8 @@ public class RecipeController {
                 theModel.addAttribute("message", "Already Exist!");
                 return "redirect:/admin/recipe/view/" + id;
             }
-
         }
-
-        /*
-         * System.out.println("Product: " +pro);
-         * System.out.println("ProductIngredient: " + pro.getProductIngredients());
-         * List<ProductIngredient> proIngres = pro.getProductIngredients();
-         * System.out.println("ProIngres: " + proIngres);
-         */
-        /*
-         * for( ProductIngredient temp:proIngres) { System.out.println("Inside Loop: "
-         * +temp); List<Recipe> recipes = new ArrayList<Recipe>(); Recipe recipe = new
-         * Recipe(temp.getId(),sizeId, quantity); System.out.println("Recipe: "
-         * +recipe); recipes.add(recipe); temp.setRecipes(recipes);
-         * System.out.println("Inside Loop ProductIngredient: " + temp.getRecipes()); }
-         * pro.setProductIngredients(proIngres); productRepository.save(pro);
-         * System.out.println("ProductIngredient: " + pro.getProductIngredients());
-         */
-
         return "redirect:/admin/recipe/view/" + id;
-
     }
 
     @PostMapping("/update/{id}")
@@ -159,15 +147,6 @@ public class RecipeController {
         for (Recipe temp : theList) {
             recipeRepository.deleteRecipe(temp.getId());
         }
-        // productIngredientRepository.deleteProductIngredientsByProduct_IdAndAndIngredient_Id(deleteRecipe.getProductIngredient().getProduct().getId(), deleteRecipe.getProductIngredient().getIngredient().getId());
-
-
-        /*
-         * if (proIngreId == temp.getId()) { if (temp.getRecipes().size() > 1) {
-         * System.out.println("not delete"); } else { System.out.println("delete");
-         * listProIngre.remove(temp); } }
-         */
-
         return "redirect:/admin/product/list";
     }
 

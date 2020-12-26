@@ -1,6 +1,7 @@
 package vn.aptech.project4.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="inventory")
@@ -26,6 +27,16 @@ public class Inventory {
 	private int status;
 	@Column(name="safety_stock")
 	private int safetyStock;
+	@Column(name = "date", columnDefinition = "date")
+	private Date inventoryDate;
+
+	public Date getInventoryDate() {
+		return inventoryDate;
+	}
+
+	public void setInventoryDate(Date inventoryDate) {
+		this.inventoryDate = inventoryDate;
+	}
 
 	public int getSafetyStock() {
 		return safetyStock;
@@ -36,13 +47,15 @@ public class Inventory {
 	}
 	public Inventory() {
 	}
-	public Inventory(Ingredient ingredient, String vendorName, String unit, int price, float ratio, int status) {
+	public Inventory(Ingredient ingredient, String vendorName, String unit, int price, float ratio, int status, Date inventoryDate,int safetyStock) {
 		this.ingredient = ingredient;
 		this.vendorName = vendorName;
 		this.unit = unit;
 		this.price = price;
 		this.ratio = ratio;
 		this.status = status;
+		this.inventoryDate = inventoryDate;
+		this.safetyStock = safetyStock;
 	}
 
 	public int getId() {

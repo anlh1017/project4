@@ -10,6 +10,7 @@ import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.repository.IngredientRepository;
 import vn.aptech.project4.repository.InventoryRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -17,21 +18,31 @@ import java.util.Optional;
 public class IngredientController {
 	private IngredientRepository ingredientRepository;
 	private InventoryRepository inventoryRepository;
-
+	private int lowStock=0;
 	@Autowired
 	public IngredientController(IngredientRepository ingredientRepository,InventoryRepository inventoryRepository) {
 		this.ingredientRepository = ingredientRepository;
 		this.inventoryRepository = inventoryRepository;
 	}
-
+	public void getInventoryNotification(Model theModel){
+		List<Inventory> theList = inventoryRepository.findAll();
+		for(Inventory temp:theList){
+			if(temp.getQuantity()<temp.getSafetyStock()){
+				lowStock+=1;
+			}
+		}
+		theModel.addAttribute("lowInventory", lowStock);
+	}
 	@GetMapping("/list")
 	public String showIngredients(Model theModel) {
+		getInventoryNotification(theModel);
 			theModel.addAttribute("ingredients", ingredientRepository.findAll() );
 		return "list-ingredients";
 	}
 
 	@GetMapping("/create")
 	public String addIngredient(Model theModel) {
+		getInventoryNotification(theModel);
 		theModel.addAttribute("ingredient", new Ingredient());
 		return "form-ingredient";
 	}
@@ -54,6 +65,7 @@ public class IngredientController {
 
 	@GetMapping("/update/{id}")
 	public String editIngredient(@PathVariable(value = "id") int theId, Model theModel) {
+		getInventoryNotification(theModel);
 		Optional<Ingredient> theIngredient1 = ingredientRepository.findById(theId);
 		if (theIngredient1.isPresent()) {
 			Ingredient theIngredient = theIngredient1.get();
