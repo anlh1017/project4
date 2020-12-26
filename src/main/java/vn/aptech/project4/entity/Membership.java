@@ -1,20 +1,7 @@
 package vn.aptech.project4.entity;
 
+import javax.persistence.*;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="membership")
@@ -30,11 +17,23 @@ public class Membership {
     private String membership_description;
 	@OneToMany(mappedBy = "membership",cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<Customer> customers;
+	@Column(name="discount_value")
+	private float discountValue;
+
+	public float getDiscountValue() {
+		return discountValue;
+	}
+
+	public void setDiscountValue(float discountValue) {
+		this.discountValue = discountValue;
+	}
+
 	public Membership() {
 	}
-	public Membership(String membership_name, String membership_description) {
+	public Membership(String membership_name, String membership_description, Float discountValue) {
 		this.membership_name = membership_name;
 		this.membership_description = membership_description;
+		this.discountValue = discountValue;
 	}
 	public int getMembership_id() {
 		return membership_id;

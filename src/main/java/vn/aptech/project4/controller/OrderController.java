@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import vn.aptech.project4.entity.Customer;
-import vn.aptech.project4.entity.Order;
-import vn.aptech.project4.entity.OrderDetail;
-import vn.aptech.project4.entity.OrderPDFExporter;
+import vn.aptech.project4.entity.*;
+import vn.aptech.project4.report.OrderPDFExporter;
+import vn.aptech.project4.repository.CustomerRepository;
+import vn.aptech.project4.repository.MembershipRepository;
 import vn.aptech.project4.repository.OrderDetailsRepository;
 import vn.aptech.project4.repository.OrderRepository;
 
@@ -28,13 +28,17 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/order")
 public class OrderController {
-	@Autowired
-	private OrderRepository orderRepository;
-	private OrderDetailsRepository orderdetailsRepository;	
 
-	public OrderController(OrderRepository orderRepository, OrderDetailsRepository orderdetailsRepository) {
+	private OrderRepository orderRepository;
+	private OrderDetailsRepository orderdetailsRepository;
+	private MembershipRepository membershipRepository;
+	private CustomerRepository customerRepository;
+	@Autowired
+	public OrderController(OrderRepository orderRepository, OrderDetailsRepository orderdetailsRepository,MembershipRepository membershipRepository, CustomerRepository customerRepository) {
 		this.orderRepository = orderRepository;
 		this.orderdetailsRepository = orderdetailsRepository;
+		this.membershipRepository = membershipRepository;
+		this.customerRepository = customerRepository;
 	}
 	@GetMapping("/list")
 	public String showOrders(Model theModel, @RequestParam(value="id", required = false) String id,@RequestParam(value="status", required = false) String status) {
@@ -75,8 +79,27 @@ public class OrderController {
 	@GetMapping("/updateStatus")
 	public String updateStatus(@RequestParam (value = "id") int orderId,@RequestParam(value="status")int status, Model theModel) {
 		Optional<Order> theOrder=  orderRepository.findById(orderId);
+
 		if(theOrder.isPresent()) {
 			Order savedOrder = theOrder.get();
+			if(status==3){
+				Customer theCustomer = savedOrder.getCustomer();
+				if(theCustomer.getMembership().getMembership_id()!=13){
+					if(theCustomer.getTotal_expense()>=2000000){
+						Membership theMembership = membershipRepository.getOne(2);
+						theCustomer.setMembership(theMembership);
+						customerRepository.save(theCustomer);
+					}else 	if(theCustomer.getTotal_expense()>=3000000){
+						Membership theMembership = membershipRepository.getOne(3);
+						theCustomer.setMembership(theMembership);
+						customerRepository.save(theCustomer);
+					}else 	if(theCustomer.getTotal_expense()>=4000000){
+						Membership theMembership = membershipRepository.getOne(4);
+						theCustomer.setMembership(theMembership);
+						customerRepository.save(theCustomer);
+					}
+				}
+			}
 			savedOrder.setStatus(status);
 			orderRepository.save(savedOrder);
 			theModel.addAttribute("orderDetails", savedOrder);
@@ -105,7 +128,7 @@ public class OrderController {
 				listAllOder.add(order);
 			}
 		}
-        OrderPDFExporter exporter = new OrderPDFExporter(listAllOder);
+        OrderPDFExporter exporter = new OrderPDFExporter(listAllOder,getMonth);
         exporter.export(response);
 
     }

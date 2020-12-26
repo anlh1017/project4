@@ -69,8 +69,8 @@
 			   	
 						
 					<div class="col-lg-6" th:each="tempReview : ${review}" >
-   							<h6><span th:text="${tempReview.customer.customerEmail}"></span></h6>
-  							<span th:text="${tempReview.content}"></span>
+   							<h6><span th:text="${tempReview.customer.customer_name}"></span></h6>
+  							Content: <span th:text="${tempReview.content}"></span>
   									<input class="rating" name="rating"  required="required" type="hidden" readonly th:value="${tempReview.rating}" data-glyphicon="0">
   							Date:<span class="unit" th:text="${tempReview.date}"></span>
 					</div>

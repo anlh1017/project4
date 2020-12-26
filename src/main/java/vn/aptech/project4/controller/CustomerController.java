@@ -2,11 +2,18 @@ package vn.aptech.project4.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -18,7 +25,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import com.lowagie.text.DocumentException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -27,6 +35,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import vn.aptech.project4.entity.Customer;
+import vn.aptech.project4.report.CustomerPDFExporter;
 import vn.aptech.project4.repository.CustomerRepository;
 import vn.aptech.project4.repository.MembershipRepository;
 import vn.aptech.project4.service.CustomerService1;
@@ -61,7 +70,11 @@ public class CustomerController {
 	}
 	@PostMapping("/saveCustomer")
 	public String saveCustomer(@ModelAttribute("customer") Customer customer) {
+		Customer theCustomer = customerRepository.findById(customer.getCustomer_id()).get();
 		customer.getMembership();
+		Date date = new Date();
+		customer.setCustomerDate(date);
+		customer.setMembership(theCustomer.getMembership());
 		customerRepository.save(customer);
 		return"redirect:/admin/customer/list";
 	}
@@ -105,5 +118,27 @@ public class CustomerController {
             return"redirect:/admin/customer/list";
     
 	}
+	 @GetMapping("/export/pdf")
+	    public void exportToPDF(HttpServletResponse response, @RequestParam(value="getMonth", required = false) int getMonth) throws DocumentException, IOException {
+	        response.setContentType("application/pdf"); DateFormat dateFormatter = new
+	                SimpleDateFormat("yyyy-MM-dd_HH:mm:ss"); String currentDateTime =
+	                dateFormatter.format(new Date());
+
+	        String headerKey = "Content-Disposition"; String headerValue =
+	                "attachment; filename=customers_" + currentDateTime + ".pdf";
+	        response.setHeader(headerKey, headerValue);
+
+	        List<Customer> listCustomers = customerRepository.findAll();
+	        List<Customer> listAllCustomer = new ArrayList<>();
+	        for (Customer customer : listCustomers) {
+				if(customer.getCustomerDate().getMonth()==(getMonth-1)) {
+					listAllCustomer.add(customer);
+				}
+			}
+	        CustomerPDFExporter exporter = new CustomerPDFExporter(listAllCustomer,getMonth);
+	        exporter.export(response);
+
+	    }
+
 	
 }

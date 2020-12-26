@@ -17,5 +17,4 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetail, Integ
 
 
 
-
 }

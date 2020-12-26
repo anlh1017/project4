@@ -160,16 +160,17 @@
                                                         th:selected="${tempCategory.id}==*{category.id}"></option>
 
                                             </select> <i class="arrow double"></i>
-                                                <div class="section mb10" style="padding-top: 10px;">
+                                                <div class="section mb10" style="padding-top: 10px;" hidden="true">
                                                     <label for="name21" class="field prepend-icon">
                                                         Size
                                                     </label>
-                                                    <input type="checkbox" name="size"
+                                                    <input  type="checkbox" name="size"
                                                            th:each="tempSize : ${size}"
-                                                           th:text="${tempSize.name}"
-                                                           th:value="${tempSize.id}"
+                                                           th:text="${tempSize.getName()}"
+                                                           th:value="${tempSize.getId()}"
 														   th:checked="${product.hasSize(tempSize)}"
-                                                    />
+                                                    /> 
+
                                                 </div>
                                             </div>
                                         </div>

@@ -117,7 +117,7 @@
 																				<td class=""
 																	th:text="${inventory.ingredient.unit}"></td>
 																<td class=""><input type="number"
-																	name="equiQuantity" id="equiQuantity" /></td>
+																	name="equiQuantity" id="equiQuantity" readonly /></td>
 															</tr>
 															<tr>
 																<td><input type="submit" name="submit"
@@ -193,7 +193,15 @@
 	<script th:src="@{/js/pages/dashboard2.js}"></script>
 	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
 	<!-- /Scripts -->
-
+	<script>
+		/*<![CDATA[*/
+		$('#quantity').on('change input',function () {
+			var quantity = $('#quantity').val();
+			var exQuantity = quantity*[[${inventory.ratio}]];
+			$('#equiQuantity').val(exQuantity);
+		})
+		/*]]>*/
+	</script>
 
 </body>
 

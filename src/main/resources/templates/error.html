@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Meta and Title -->
+    <meta charset="utf-8">
+    <title>AdminK - A Responsive Bootstrap 3 Admin Dashboard Template</title>
+    <meta name="keywords" content="HTML5, Bootstrap 3, Admin Template, UI Theme"/>
+    <meta name="description" content="AdminK - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="ThemeREX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- c3charts -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/c3charts/c3.min.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="error-404 sb-l-o sb-r-c">
+
+<!-- Body Wrap -->
+<div id="main">
+
+   
+
+    
+                <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-link">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-current-item">404 page</li>
+                </ol>
+            </div>
+        </header>
+        <!-- /Topbar -->
+
+        <!-- Content -->
+        <section id="content" class="pn animated fadeIn">
+
+            <div class="center-block mt100 mw800 text-center p20">
+                <img th:src="@{/img/pages/404.png}" alt="" class="img-responsive mauto"/>
+
+                <h2 class="mt40 mb20">The requested page cannot be found</h2>
+
+                <h6>
+                    Can't find what you need?<br/>
+                    Take a moment and do a search below or start from <a th:href="@{(${isUser}? '/' : '/admin/')}">our homepage</a>.
+                </h6>
+            </div>
+            <div class="center-block p20 mw400 text-center">
+                <form class="text-center" role="search">
+                    <div class="input-group add-on mw300">
+
+                        <input type="text" class="form-control" placeholder="Search..." value="">
+
+                        <div class="input-group-btn">
+                            <button class="btn btn-big btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+
+
+</div>
+<!-- /Body Wrap  -->
+
+
+
+<!-- Scripts -->
+
+<!-- jQuery -->
+	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+
+<!-- /Scripts -->
+
+</body>
+
+</html>

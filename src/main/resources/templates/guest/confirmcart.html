@@ -48,7 +48,7 @@ a {
 
 body {
 	position: relative;
-/* 	width: 10cm;
+	/* 	width: 10cm;
 	height: 29.7cm; */
 	margin: 0 auto;
 	color: #001028;
@@ -154,10 +154,9 @@ table td.grand {
 	color: #5D6975;
 	font-size: 1.2em;
 }
-
 </style>
 <body>
-<header th:replace = "@{guest/headerClient}::header"></header>
+	<header th:replace="@{guest/headerClient}::header"></header>
 	<section class="generic-banner relative">
 		<div class="container">
 			<div class="row height align-items-center justify-content-center">
@@ -170,152 +169,106 @@ table td.grand {
 			</div>
 		</div>
 	</section>
-	
+
 	<section class="clearfix">
 
 		<div class="" style="background-color: white">
-		<div class="col-lg-5 col-md-6 col-sm-6">
-			<div class="">
-				<h2 style="color: navy">Information</h2>
-				<i th:text="${message}"></i>
-				<h6>Full Name: <span th:text="${customer.customer_name}"></span>
-				</h6>
-				<br>
-				<h6>Email: <span th:text="${customer.customerEmail}"></span>
-				</h6>
-				<br>
-				<h6>Address: <span th:text="${shippingaddress}"></span></h6>
-				<br>
-				<h6>Delivery Time: <span th:text="${time}"></span></h6>
-				<br>
-				<h6>Phone Number: <span th:text="${customer.customer_phone}"></span></h6>
-				<br>
-				<h6>Order Date: <span th:text="${date}"></span></h6>
-				<br>
+			<div class="col-lg-5 col-md-6 col-sm-6">
+				<div class="">
+					<h2 style="color: navy">Information</h2>
+					<i th:text="${message}"></i>
+					<h6>
+						Full Name: <span th:text="${customer.customer_name}"></span>
+					</h6>
+					<br>
+					<h6>
+						Email: <span th:text="${customer.customerEmail}"></span>
+					</h6>
+					<br>
+					<h6>
+						Address: <span th:text="${shippingaddress}"></span>
+					</h6>
+					<br>
+					<h6>
+						Delivery Time: <span th:text="${time}"></span>
+					</h6>
+					<br>
+					<h6>
+						Phone Number: <span th:text="${customer.customer_phone}"></span>
+					</h6>
+					<br>
+					<h6>
+						Order Date: <span th:text="${date}"></span>
+					</h6>
+					
+				</div>
+
 			</div>
-			<div id="notices">
-			<div>Payment:</div>
-			<div class="notice">Cash on Delivery</div>
 		</div>
-		</div>
-	</div>
 	</section>
-	<br><br>
+	<br>
+	<br>
 	<section>
-	<form th:action=@{/save}>
-	<input type="hidden" id="shippingaddress" name="shippingaddress" th:value="${shippingaddress}" />
-<input type="hidden" id="shippingaddress" name="time" th:value="${time}" />
-		<table>
-			<thead>
-				<tr>
-					<th>No.</th>
-					<th class="service">Product Name</th>
-					<th>Size</th>
-					<th>Quantity</th>
-					<th>Price</th>
-					<th>SubTotal</th>
+		<form th:action=@{/payment}>
+			<input type="hidden" id="shippingaddress" name="shippingaddress"
+				th:value="${shippingaddress}" /> <input type="hidden" id="time"
+				name="time" th:value="${time}" />
+			<table>
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th class="service">Product Name</th>
+						<th>Size</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>SubTotal</th>
 
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="tempProduct,stat : ${carts}">
-					<td class="unit" th:text="${stat.count}"></td>
-					<td class="service" th:text="${tempProduct.productName}"></td>
-					<td class="unit" th:text="${tempProduct.sizeName}"></td>
-					<td class="qty" th:text="${tempProduct.quantity}"></td>
-					<td class="qty" th:text="${tempProduct.price} + ' VND'"></td>
-					<td class="total"
-						th:text="${tempProduct.quantity}*${tempProduct.price} + ' VND'"></td>
-				</tr>
-				<tr>
-					<td colspan="5" class="grand total">GRAND TOTAL</td>
-					<td th:text="${tong} + ' VND'"></td>
-				</tr>
-			</tbody>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="tempProduct,stat : ${carts}">
+						<td class="unit" th:text="${stat.count}"></td>
+						<td class="service" th:text="${tempProduct.productName}"></td>
+						<td class="unit" th:text="${tempProduct.sizeName}"></td>
+						<td class="qty" th:text="${tempProduct.quantity}"></td>
+						<td class="qty" th:text="${tempProduct.price} + ' VND'"></td>
+						<td class="total"
+							th:text="${tempProduct.quantity}*${tempProduct.price} + ' VND'"></td>
+					</tr>
+					<tr>
+						<td colspan="5" class="grand total">TOTAL</td>
+						<td th:text="${tong} + ' VND'"></td>
+					</tr>
+					<tr>
+						<td colspan="5" class="grand total">MEMBERSHIP DISCOUNT</td>
+						<td th:text="${customer.membership.discountValue} + ' %'"></td>
+					</tr>
+					<tr>
+						<td colspan="5" class="grand total">GRAND TOTAL</td>
+						<td th:text="${grandTong} + ' VND'"></td>
+					</tr>
+				</tbody>
 
-		</table>
+			</table>
 
-		<div id="notices">
-			<div>Payment:</div>
-			<div class="notice">Cash on Delivery</div>
-		</div>
-		<div style="text-align: center">
-							<button class="btn btn-success" type="submit" onclick="return Confirm();">Checkout</button>
-						</div>
+
+			<div style="text-align: center">
+				<button class="btn btn-success" type="submit"
+					onclick="return Confirm();">Payment Methods </button>
+			</div>
 		</form>
 	</section>
-	
-	<footer class="footer-area section-gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5 col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>About Us</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-						<p class="footer-text">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;
-							<script>
-								document.write(new Date().getFullYear());
-							</script>
-							All rights reserved | This template is made with <i
-								class="fa fa-heart-o" aria-hidden="true"></i> by <a
-								href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</p>
-					</div>
-				</div>
-				<div class="col-lg-5  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Newsletter</h6>
-						<p>Stay update with our latest</p>
-						<div class="" id="mc_embed_signup">
-							<form target="_blank" novalidate="true"
-								action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-								method="get" class="form-inline">
-								<input class="form-control" name="EMAIL"
-									placeholder="Enter Email" onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Enter Email '" required=""
-									type="email">
-								<button class="click-btn btn btn-default">
-									<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-								</button>
-								<div style="position: absolute; left: -5000px;">
-									<input name="b_36c4fd991d266f23781ded980_aefe40901a"
-										tabindex="-1" value="" type="text">
-								</div>
 
-								<div class="info pt-20"></div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
-					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
-						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-								class="fa fa-twitter"></i></a> <a href="#"><i
-								class="fa fa-dribbble"></i></a> <a href="#"><i
-								class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<script>
-    function Confirm()
-    {
-      var x = confirm("Are you sure you want to Checkout?");
-      if (x)
-          return true;
-      else
-        return false;
-    }
-	</script>
+	<footer th:replace="guest/footerClient"></footer>
+	<!-- <script>
+		function Confirm() {
+			var x = confirm("Are you sure you want to Checkout?");
+			if (x)
+				return true;
+			else
+				return false;
+		}
+	</script> -->
 	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

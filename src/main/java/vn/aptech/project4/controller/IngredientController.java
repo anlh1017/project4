@@ -65,10 +65,16 @@ public class IngredientController {
 	@GetMapping("/delete/{id}")
 	public String deleteIngredient(@PathVariable(value = "id") int theId, Model theModel) {
 		Optional<Ingredient> theIngredient1 = ingredientRepository.findById(theId);
-		if (theIngredient1.isPresent()) {
-			Ingredient theIngredient = theIngredient1.get();
-			ingredientRepository.delete(theIngredient);
+		try {
+			if (theIngredient1.isPresent()) {
+				Ingredient theIngredient = theIngredient1.get();
+				ingredientRepository.delete(theIngredient);
+				theModel.addAttribute("message", "Cannot Delete, Please Check Inventory!");
+			}
+		} catch (Exception e) {
+			theModel.addAttribute("message", "Cannot Delete, Please Check Inventory!");
 		}
+		
 		return "redirect:/admin/ingredient/list";
 	}
 	@PostMapping("/update")

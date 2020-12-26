@@ -19,15 +19,17 @@ public class Ingredient {
 	private float available;
 	@Transient
 	private float cost;
+	@Column(name="safety_stock")
+	private int safetyStock;
 
-	/*
-	 * @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE,
-	 * CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	 * 
-	 * @JoinTable(name="product_ingredient", joinColumns
-	 * = @JoinColumn(name="ingredient_id"),inverseJoinColumns
-	 * = @JoinColumn(name="product_id")) private List<Product> products;
-	 */
+	public int getSafetyStock() {
+		return safetyStock;
+	}
+
+	public void setSafetyStock(int safetyStock) {
+		this.safetyStock = safetyStock;
+	}
+
 	@OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
 	private List<ProductIngredient> productIngredients = new ArrayList<>();
 	@OneToOne

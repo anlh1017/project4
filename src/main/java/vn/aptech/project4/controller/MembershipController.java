@@ -53,8 +53,9 @@ public class MembershipController {
 	public String deleteMembership(@PathVariable (value = "id") int id, RedirectAttributes theModel) {
 		try {
 			this.membershipRepository.deleteById(id);
+			theModel.addAttribute("message","Cannot delete, please check customer !");
 		} catch (Exception e) {
-			theModel.addAttribute("deleteMessage","Cannot delete, please check!");
+			theModel.addAttribute("message",e.getMessage());
 		}
 		
 		return"redirect:/admin/membership/list";

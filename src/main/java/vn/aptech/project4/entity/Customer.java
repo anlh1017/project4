@@ -1,6 +1,8 @@
 package vn.aptech.project4.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,6 +38,11 @@ public class Customer {
 	private String authority;
 	@Column(name="password_token")
 	private String resetPasswordToken;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "auth_provider")
+	private AuthenticationProvider authProvider;
+	@Column(name = "date", columnDefinition = "date")
+    private Date customerDate;
 	public Customer() {
 	}
 
@@ -117,6 +124,31 @@ public class Customer {
 
 	public void setResetPasswordToken(String resetPasswordToken) {
 		this.resetPasswordToken = resetPasswordToken;
+	}
+
+	public AuthenticationProvider getAuthProvider() {
+		return authProvider;
+	}
+
+	public void setAuthProvider(AuthenticationProvider authProvider) {
+		this.authProvider = authProvider;
+	}
+
+	public Date getCustomerDate() {
+		return customerDate;
+	}
+
+	public void setCustomerDate(Date customerDate) {
+		this.customerDate = customerDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customer_id=" + customer_id + ", customerEmail=" + customerEmail + ", customer_password="
+				+ customer_password + ", customer_name=" + customer_name + ", customer_phone=" + customer_phone
+				+ ", address=" + address + ", total_expense=" + total_expense + ", membership=" + membership
+				+ ", authority=" + authority + ", resetPasswordToken=" + resetPasswordToken + ", authProvider="
+				+ authProvider + ", customerDate=" + customerDate + "]";
 	}
 	
 }

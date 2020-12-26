@@ -9,9 +9,9 @@ public class DemoController {
 	//create a mapping for "/hello"
 	@GetMapping("/admin")
 	public String showAdmin(Model theModel) {
-		theModel.addAttribute("activeSales",new String("active"));
-		theModel.addAttribute("content_view", new String("sales-stats-products"));
-		return "redirect:/admin/customer/list";
+		theModel.addAttribute("activeDashboard",new String("active"));
+		theModel.addAttribute("content_view", new String("sales-stats-chart"));
+		return "redirect:/admin/showChart/list";
 	}
 	@GetMapping("/sales")
 	public String showSaleStats(Model theModel) {

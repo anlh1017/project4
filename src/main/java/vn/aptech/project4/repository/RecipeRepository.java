@@ -19,4 +19,10 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
 	List<Recipe> findAllByProductIngredient_Id(Integer id);
 	void deleteRecipesByProductIngredient_Id(Integer id);
+	
+	
+	@Query(value = "Select r.* from recipe r inner join product_ingredient pi on r.pro_ingre_id = pi.id inner join "
+			+ "products p on p.productId = pi.product_id where p.productId = :id group by r.pro_ingre_id",
+			nativeQuery = true)	
+	List<Recipe> getRecipeByProductId(@Param("id") int id);
 }

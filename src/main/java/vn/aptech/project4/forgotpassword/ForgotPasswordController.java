@@ -81,7 +81,7 @@ public class ForgotPasswordController {
 		if (customer == null) {
 			model.addAttribute("title", "Reset your Password");
 			model.addAttribute("message", "Invalid Token");
-			return "message";
+			return "guest/message";
 		}
 		model.addAttribute("token", token);
 		model.addAttribute("pageTitle", "Reset Your Password");
@@ -101,6 +101,6 @@ public class ForgotPasswordController {
 			resetpasswordService.updatePassword(customer, password);
 			model.addAttribute("message", "You have successfully changed your Password!");
 		}
-		return "guest/index";
+		return "guest/message";
 	}
 }

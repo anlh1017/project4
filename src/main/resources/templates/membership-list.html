@@ -48,7 +48,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="sales-stats-page sb-top sb-top-lg">
@@ -89,24 +89,29 @@
 										<div class="panel-heading ">
 											<span class="panel-title ptn">Membership List</span>
 										</div>
+										<div th:if="${message != null}">
+    										<p class="text-warning">[[${message}]]</p>
+										</div>
 										<div><a th:href="createMembership" class="btn btn-rounded btn-primary">Add Membership</a></div>
 										<div class="panel-body pn mt15">
 											<div class="table-responsive">
-												<table
+												<table id="membership"
 													class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
 													<thead>
 														<tr class="">
 															<th class="">Membership Name</th>
 															<th class="">Membership Description</th>
+															<th class="">Membership Discount</th>
 															<th class="">Status</th>
 
 														</tr>
-														<tr><th th:text="${deleteMessage}"></th></tr>
+												
 													</thead>
 													<tbody>
 														<tr th:each="tempMembership : ${membership}">
 															<td class="" th:text="${tempMembership.membership_name}"></td>
 															<td class="" th:text="${tempMembership.membership_description}"></td>
+															<td class="" th:text="${tempMembership.discountValue} + ' %'"></td>
 															<td class="">
 																<div class="btn-group text-right">
 																	<button type="button"
@@ -117,10 +122,7 @@
 																	<ul class="dropdown-menu" role="menu">
 																		<li><a  th:href="@{/admin/membership/editMembership/{id}(id=${tempMembership.membership_id})}" class="btn btn-primary btn-sm mb-3">Edit</a></li>
 																		<li><a th:href="@{/admin/membership/deleteMembership/{id}(id=${tempMembership.membership_id})}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm mb-3">Delete</a></li>
-																		<li><a href="#">Archive</a></li>
-																		<li class="divider"></li>
-																		<li class="active"><a href="#">Active</a></li>
-																		<li><a href="#">Inactive</a></li>
+																		
 																	</ul>
 																</div>
 															</td>
@@ -156,76 +158,37 @@
 
 
 	</div>
-	<!-- /Body Wrap  -->
+<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
 
-	<!-- Scripts -->
+	<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+		
+		<script th:src="@{/stars/star-rating.min.js}"></script>
+		<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
 
-	<!-- jQuery -->
-	<script th:src="@{/js/jquery/jquery-1.12.3.min.js}"></script>
-	<script th:src="@{/js/jquery/jquery_ui/jquery-ui.min.js}"></script>
-
-	<!-- AnimatedSVGIcons -->
-	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
-
-	<!-- Scroll -->
-	<script
-		th:src="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js}"></script>
-	<!-- HighCharts Plugin -->
-	<script th:src="@{/js/plugins/highcharts/highcharts.js}"></script>
-
-	<!-- Plugins -->
-	<script th:src="@{/js/plugins/c3charts/d3.min.js}"></script>
-	<script th:src="@{/js/plugins/c3charts/c3.min.js}"></script>
-	<script th:src="@{/js/plugins/circles/circles.js}"></script>
-
-	<!-- Jvectormap JS -->
-	<script th:src="@{/js/plugins/jvectormap/jquery.jvectormap.min.js}"></script>
-	<script
-		th:src="@{/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js}"></script>
-	<script
-		th:src="@{/js/plugins/jvectormap/assets/jquery-jvectormap-world-mill-en.js}"></script>
-	<!-- Theme Scripts -->
-	<script th:src="@{/js/utility/utility.js}"></script>
-	<script th:src="@{/js/demo/demo.js}"></script>
-	<script th:src="@{/js/main.js}"></script>
-	<script th:src="@{/js/demo/widgets_sidebar.js}"></script>
-	<script th:src="@{/js/pages/dashboard2.js}"></script>
-	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
-	<!-- /Scripts -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<script src="assets/js/demo/charts/highcharts.js"></script>
-
-
+<script>
+		$(document).ready( function () {
+			$('#membership').DataTable();
+		} );
+	</script>
 
 	<!-- /Scripts -->
 

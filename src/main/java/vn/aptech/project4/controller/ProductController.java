@@ -23,7 +23,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/admin/product")
 public class ProductController {
-    @Value("${upload.path}")
+	@Value("${upload.path}")
     private String path;
     private ProductRepository productRepository;
     private ProductSizeRepository productSizeRepository;
@@ -32,10 +32,13 @@ public class ProductController {
     private ProductService serviceProduct;
     private SizeRepository sizeRepository;
     private RecipeRepository recipeRepository;
+    private ProductIngredientRepository productIngredientRepository;
+    private InventoryRepository inventoryRepository;
+    private int lowStock=0;
 
     @Autowired
     public ProductController(ProductRepository productRepository, ProductSizeRepository productSizeRepository,
-                             StorageService storageService, CategoryRepository categoryRepository, ProductService serviceProduct, SizeRepository sizeRepository, RecipeRepository recipeRepository) {
+                             StorageService storageService, CategoryRepository categoryRepository, ProductService serviceProduct, SizeRepository sizeRepository, RecipeRepository recipeRepository, ProductIngredientRepository productIngredientRepository,InventoryRepository inventoryRepository) {
         this.productRepository = productRepository;
         this.productSizeRepository = productSizeRepository;
         this.storageService = storageService;
@@ -43,10 +46,13 @@ public class ProductController {
         this.serviceProduct = serviceProduct;
         this.sizeRepository = sizeRepository;
         this.recipeRepository = recipeRepository;
+        this.productIngredientRepository = productIngredientRepository;
+        this.inventoryRepository = inventoryRepository;
     }
 
     @GetMapping("/list")
     public String ShowListProducts(Model theModel) {
+        getInventoryNotification(theModel);
         List<Product> products = productRepository.findAll();
         theModel.addAttribute("size", sizeRepository.findAll());
         theModel.addAttribute("products", products);
@@ -54,10 +60,19 @@ public class ProductController {
 		theModel.addAttribute("content_view", new String("sales-stats-products"));
         return "index";
     }
-
+    public void getInventoryNotification(Model theModel){
+        List<Inventory> theList = inventoryRepository.findAll();
+        for(Inventory temp:theList){
+            if(temp.getQuantity()<temp.getSafetyStock()){
+                lowStock+=1;
+            }
+        }
+        theModel.addAttribute("lowInventory", lowStock);
+    }
 
     @GetMapping("/create")
     public String createProduct(Model theModel, @RequestParam(value = "message", required = false) String message) {
+        getInventoryNotification(theModel);
         List<Category> category = categoryRepository.findAll();
         List<Size> size = sizeRepository.findAll();
         theModel.addAttribute("size", size);
@@ -73,13 +88,20 @@ public class ProductController {
     public String Addproduct(@ModelAttribute("newproduct") Product theProduct, @RequestParam(value = "size") int[] size, ModelMap modelMap,
                              @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException, FileNotFoundException {
 
+    	for (Product productItem : productRepository.findAll()) {
+			if (productItem.getProductName().equals(theProduct.getProductName())) {
+		         redirectAttributes.addFlashAttribute("messageTest", "true");
+		         return "redirect:/admin/product/create";
+			}
+		}
         //-----Start Upload Image
         String filename = file.getOriginalFilename();
         if (filename.isEmpty()) {
             theProduct.setImage("maucoffee.jpg");
         } else if (storageService.checkFileExist(file)) {
             String message = "File already exist";
-            redirectAttributes.addAttribute("message", message);
+            redirectAttributes.addFlashAttribute("messageExist", "true");
+            redirectAttributes.addFlashAttribute("message", message);
             return "redirect:/admin/product/create";
         } else {
             storageService.store(file);
@@ -184,6 +206,7 @@ public class ProductController {
 	}
 	@GetMapping("/editProduct/{id}")
     public String editProduct(@PathVariable(value = "id") int id, Model theModel, HttpServletRequest request) {
+        getInventoryNotification(theModel);
         Product theProduct = productRepository.findById(id).get();
         List<Category> category = categoryRepository.findAll();
         theModel.addAttribute("category", category);
@@ -196,10 +219,9 @@ public class ProductController {
 
     @PostMapping("/saveUpdate")
     public String editproduct(@ModelAttribute("product") Product product, ModelMap modelMap,
-                              @RequestParam("file") MultipartFile file, @RequestParam(value = "size") int[] size, RedirectAttributes redirectAttributes) throws IOException, FileNotFoundException {
+                              @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException, FileNotFoundException {
 
         modelMap.addAttribute("product", product);
-		checkAndSaveSize(product, size);
 
 		//-----Start Upload Image
         String filename = file.getOriginalFilename();
@@ -239,12 +261,19 @@ public class ProductController {
             productEntity.setCategoryName(theProduct.getCategory().getName());
             productEntity.setImage(theProduct.getImage());
             productEntity.setProductName(theProduct.getProductName());
-
+            productEntity.setSizeS(theProduct.getPrice(1));
+            productEntity.setSizeM(theProduct.getPrice(2));
+            productEntity.setSizeL(theProduct.getPrice(3));
             theModel.addAttribute("product", productEntity);
+            
+            List<Recipe> listRecipe = recipeRepository.getRecipeByProductId(theProduct.getId());
+            
+            theModel.addAttribute("listRecipe", listRecipe);
             return "product-detail";
         }
         @GetMapping("/updatePrice/{id}")
      public String updatePrice(@PathVariable(value = "id") int theId, Model theModel, @ModelAttribute(value = "error")String message){
+            getInventoryNotification(theModel);
             Product theProduct = productRepository.findById(theId).get();
             List<Recipe> recipes = recipeRepository.findAll();
             List<Recipe> viewRecipes = new ArrayList<Recipe>();

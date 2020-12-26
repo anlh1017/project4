@@ -13,14 +13,17 @@
 
             <!-- Sidebar Menu  -->
             <ul class="nav sidebar-menu">
-
-           
-                <li class="">
-                        <li class="active"><a class="accordion-toggle"
+             <li class="active"><a class="accordion-toggle"
 					th:href="@{/admin/showChart/list}"> <span class="caret"></span>
 						<span class="sb-menu-icon fa fa-dashboard"></span> <span
 						class="sidebar-title">Dashboards</span>
 				</a></li>
+           
+
+               
+
+               <li>
+
                     <a class="accordion-toggle" href="#">
                         <span class="caret"></span>
                         <span class="sb-menu-icon fa fa-bar-chart-o"></span>
@@ -96,7 +99,7 @@
     
          <div class="content-left" th:fragment="leftcontent">
                                         <ul class="nav nav-content">
-                                                <li th:class="${activeDashboard}" class=""><a
+                                        <li th:class="${activeDashboard}" class=""><a
 				th:href="@{/admin/showChart/list}"> <i
 					class="sb-menu-icon fa fa-dashboard"></i> <span>Dashboard</span>
 			</a></li>

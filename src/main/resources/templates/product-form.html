@@ -94,6 +94,7 @@
 									</ul> -->
 
 								</div>
+								
 								<i th:text="${message}" style="color: orangered"></i>
 								<div class="panel-body pn">
 									<div class="tab-content pn br-n allcp-form theme-primary">
@@ -170,7 +171,7 @@
 														<input type="checkbox" name="size"
 															   th:each="tempSize : ${size}"
 															   th:text="${tempSize.getName()}"
-															   th:value="${tempSize.getId()}"
+															   th:value="${tempSize.getId()}" checked="checked"
 														/>
 													</div>
 												</div>
@@ -266,7 +267,18 @@
 
 
 	<!-- /Scripts -->
-
+	<script type="text/javascript">
+		var alertWhenCartsNull = [(${messageTest})]+"";
+		if(alertWhenCartsNull == "true"){
+			alert("The productName is exist");
+		}
+	</script>
+	<script type="text/javascript">
+		var alertWhenCartsNull = [(${messageExist})]+"";
+		if(alertWhenCartsNull == "true"){
+			alert("The file Image is exist");
+		}
+	</script>
 </body>
 
 </html>

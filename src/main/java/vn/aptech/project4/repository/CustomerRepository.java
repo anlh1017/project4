@@ -20,5 +20,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 	public Optional<Customer> findByCustomerEmail(String email);
 	
-	
+	@Query("SELECT u FROM Customer u WHERE u.customerEmail = ?1")
+    public Customer findByEmail(String email);
 }

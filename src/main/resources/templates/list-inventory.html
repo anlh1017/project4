@@ -25,7 +25,7 @@
 
 <!-- AnimatedSVGIcons -->
 <link rel="stylesheet" type="text/css"
-	href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+	th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
 
 <!-- c3charts -->
 <link rel="stylesheet" type="text/css"
@@ -101,19 +101,21 @@
 															<th class="">Vendor Name</th>
 															<th class="">Unit</th>
 															<th class="">Stock</th>
+															<th class="">Safety Stock</th>
 															<th class="">Price</th>
 															<th class="">Ratio</th>
 															<th class="">Action</th>
 														</tr>
 													</thead>
 													<tbody>
-														<tr th:each="temp,stat : ${inventory}">
+														<tr th:each="temp,stat : ${inventory}" th:style="${temp.quantity<temp.safetyStock}?'color:red':''">
 
 															<td th:text="${stat.count}"></td>
 															<td class="" th:text="${temp.ingredient.ingredientName}"></td>
 															<td class="" th:text="${temp.vendorName}"></td>
 															<td class="" th:text="${temp.unit}"></td>
 															<td class="" th:text="${temp.quantity}"></td>
+															<td class="" th:text="${temp.safetyStock}"></td>
 															<td class="" th:text="${temp.price}"></td>
 															<td class="" th:text="${temp.ratio}"></td>
 															<td class="">

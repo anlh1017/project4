@@ -24,7 +24,16 @@ public class Inventory {
 	private Float ratio;
 	@Column(name="status")
 	private int status;
+	@Column(name="safety_stock")
+	private int safetyStock;
 
+	public int getSafetyStock() {
+		return safetyStock;
+	}
+
+	public void setSafetyStock(int safetyStock) {
+		this.safetyStock = safetyStock;
+	}
 	public Inventory() {
 	}
 	public Inventory(Ingredient ingredient, String vendorName, String unit, int price, float ratio, int status) {
@@ -58,6 +67,18 @@ public class Inventory {
 
 	public void setVendorName(String vendorName) {
 		this.vendorName = vendorName;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public void setRatio(Float ratio) {
+		this.ratio = ratio;
+	}
+
+	public int getStatus() {
+		return status;
 	}
 
 	public int getQuantity() {

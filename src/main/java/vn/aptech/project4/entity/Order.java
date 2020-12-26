@@ -26,27 +26,29 @@ import java.util.List;
 	    
 	    @Column(name= "status",nullable = false)
 	    private int status;
-		
+	    
 	    @Column(name= "address",nullable = false)
 	    private String shippingaddress;	    
 	    
 	    @Column(name= "time",nullable = false)
 	    private String time;	
 
-	    
-	    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	    @Column(name= "payment",nullable = false)
+	    private String payment;
+		@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	    @JoinColumn(name = "order_id")
 	    private List<OrderDetail> orderDetails;
 
 	public Order() {
 	}
-	public Order(Date orderDate,Customer customer, Long total, int status, String shippingaddress,String time) {
+	public Order(Date orderDate,Customer customer, Long total, int status,String shippingaddress,String time,String payment) {
 		this.orderDate = orderDate;
 		this.customer = customer;
 		this.total = total;
 		this.status = status;
 		this.shippingaddress= shippingaddress;
-		this.time = time;
+		this.time=time;
+		this.payment=payment;
 	}
 
 	public int getId() {
@@ -88,7 +90,7 @@ import java.util.List;
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+
 	public String getShippingaddress() {
 		return shippingaddress;
 	}
@@ -101,8 +103,7 @@ import java.util.List;
 	}
 	public void setTime(String time) {
 		this.time = time;
-	}	
-
+	}
 	public List<OrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
@@ -110,4 +111,17 @@ import java.util.List;
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", orderDate=" + orderDate + ", customer=" + customer + ", total=" + total
+				+ ", status=" + status + ", shippingaddress=" + shippingaddress + ", time=" + time + ", payment="
+				+ payment + ", orderDetails=" + orderDetails + "]";
+	}
+	
 }

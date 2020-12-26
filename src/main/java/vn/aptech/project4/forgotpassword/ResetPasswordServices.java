@@ -2,6 +2,8 @@ package vn.aptech.project4.forgotpassword;
 
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +34,7 @@ public class ResetPasswordServices {
     public void updatePassword(Customer customer, String newPassword) {
         
         customer.setCustomer_password(newPassword);;
-         
+         //customer.setCustomerDate(new Date());
         customer.setResetPasswordToken(null);
         resetpasswordRepo.save(customer);
     }

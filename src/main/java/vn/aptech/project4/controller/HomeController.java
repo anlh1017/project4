@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.extras.springsecurity5.auth.Authorization;
+
 import vn.aptech.project4.entity.*;
 import vn.aptech.project4.repository.*;
 import vn.aptech.project4.service.ProductService;
@@ -55,22 +57,33 @@ public class HomeController {
 			return "guest/index";
 		}
 
-	@GetMapping("/ShowListProducts")
-	public String ShowListProducts(Model theModel) {
-		List<Product> products = productRepository.findAll();
-		theModel.addAttribute("size", sizeRepository.findAll());
-		theModel.addAttribute("products", products);
-		theModel.addAttribute("category", categoryRepository.findAll());
-		return "guest/product";
-	}
+		@GetMapping("/ShowListProducts")
+		public String ShowListProducts(Model theModel) {
+			List<Product> products = productRepository.findAll();
+			theModel.addAttribute("size", sizeRepository.findAll());
+			theModel.addAttribute("products", products);
+			theModel.addAttribute("category", categoryRepository.findAll());
+			return "guest/product";
+		}
 
-	@GetMapping("/showByCategory")
-	public String ShowListProductsByCategory(ModelMap theModel, @RequestParam(value = "id") Integer id) {
-		List<Product> products = productRepository.findAll();
-		List<ProductEntity> productEntitys = new ArrayList<>();
-		for (Product product : products) {
-			if (id != null&&id!=0) {
-				if (product.getCategory().getId() == id) {
+		@GetMapping("/showByCategory")
+		public String ShowListProductsByCategory(ModelMap theModel, @RequestParam(value = "id") Integer id) {
+			List<Product> products = productRepository.findAll();
+			List<ProductEntity> productEntitys = new ArrayList<>();
+			for (Product product : products) {
+				if (id != null&&id!=0) {
+					if (product.getCategory().getId() == id) {
+						ProductEntity addProduct = new ProductEntity();
+						addProduct.setProductId(product.getId());
+
+						addProduct.setDescription(product.getDescription());
+						addProduct.setCategoryId(product.getCategory().getId());
+						addProduct.setCategoryName(product.getCategory().getName());
+						addProduct.setImage(product.getImage());
+						addProduct.setProductName(product.getProductName());
+						productEntitys.add(addProduct);
+					}
+				} else {
 					ProductEntity addProduct = new ProductEntity();
 					addProduct.setProductId(product.getId());
 
@@ -81,54 +94,43 @@ public class HomeController {
 					addProduct.setProductName(product.getProductName());
 					productEntitys.add(addProduct);
 				}
-			} else {
-				ProductEntity addProduct = new ProductEntity();
-				addProduct.setProductId(product.getId());
-
-				addProduct.setDescription(product.getDescription());
-				addProduct.setCategoryId(product.getCategory().getId());
-				addProduct.setCategoryName(product.getCategory().getName());
-				addProduct.setImage(product.getImage());
-				addProduct.setProductName(product.getProductName());
-				productEntitys.add(addProduct);
 			}
+
+			theModel.addAttribute("products", productEntitys);
+			theModel.addAttribute("category", categoryRepository.findAll());
+			return "guest/product::#listProduct";
 		}
-
-		theModel.addAttribute("products", productEntitys);
-		theModel.addAttribute("category", categoryRepository.findAll());
-		return "guest/product::#listProduct";
-	}
-	/*
-	 * public String listCategory(Model theModel,@PathVariable(value = "id") int id)
-	 * { List<Product> products = productRepository.findAll(); List<ProductEntity>
-	 * productEntitys = new ArrayList<>(); for (Product product : products) {
-	 * if(product.getCategory().getId()==id) { newproducts.add(product); } }
-	 * theModel.addAttribute("products",newproducts); return "product-category"; }
-	 */
+		/*
+		 * public String listCategory(Model theModel,@PathVariable(value = "id") int id)
+		 * { List<Product> products = productRepository.findAll(); List<ProductEntity>
+		 * productEntitys = new ArrayList<>(); for (Product product : products) {
+		 * if(product.getCategory().getId()==id) { newproducts.add(product); } }
+		 * theModel.addAttribute("products",newproducts); return "product-category"; }
+		 */
 
 
-//	@GetMapping("/")
-//	public String SHowProduct(Model theModel) {
-//		return "guest/product";
-//	}
-	@GetMapping("/ProductDetail/{id}")
-	public String ProductDetail(@PathVariable(value = "id") int id, Model theModel, HttpServletRequest request) {
-		List<Category> category = categoryRepository.findAll();
-		theModel.addAttribute("category", category);
-		Product theProduct = productRepository.findById(id).get();
-		ProductEntity productEntity = new ProductEntity();
-		productEntity.setProductId(theProduct.getId());
-		productEntity.setCategoryName(theProduct.getProductName());
-		productEntity.setDescription(theProduct.getDescription());
-		productEntity.setCategoryId(theProduct.getCategory().getId());
-		productEntity.setCategoryName(theProduct.getCategory().getName());
-		productEntity.setImage(theProduct.getImage());
-		productEntity.setProductName(theProduct.getProductName());
+//		@GetMapping("/")
+//		public String SHowProduct(Model theModel) {
+//			return "guest/product";
+//		}
+		@GetMapping("/ProductDetail/{id}")
+		public String ProductDetail(@PathVariable(value = "id") int id, Model theModel, HttpServletRequest request) {
+			List<Category> category = categoryRepository.findAll();
+			theModel.addAttribute("category", category);
+			Product theProduct = productRepository.findById(id).get();
+			ProductEntity productEntity = new ProductEntity();
+			productEntity.setProductId(theProduct.getId());
+			productEntity.setCategoryName(theProduct.getProductName());
+			productEntity.setDescription(theProduct.getDescription());
+			productEntity.setCategoryId(theProduct.getCategory().getId());
+			productEntity.setCategoryName(theProduct.getCategory().getName());
+			productEntity.setImage(theProduct.getImage());
+			productEntity.setProductName(theProduct.getProductName());
 
-		theModel.addAttribute("product", productEntity);
+			theModel.addAttribute("product", productEntity);
 
-		return "guest/productDetail";
-	}
+			return "guest/productDetail";
+		}
 
 	@GetMapping("/user")
 	public String Hello(Model theModel) {
@@ -163,6 +165,8 @@ public class HomeController {
 		customer.setMembership(member);
 		customer.setCustomer_password(pw);
 		customer.setAuthority("ROLE_CUSTOMER");
+		Date date = new Date();
+		customer.setCustomerDate(date);
 		customerRepository.save(customer);
 		
 		return"guest/index";
@@ -213,12 +217,25 @@ public class HomeController {
 			theModel.addAttribute("customer", customer);
 			return "guest/change-Customer";
 		}else {
+			theModel.addAttribute("message", "Change Password is Success");
+			theModel.addAttribute("customer", customer);
 			customer.setCustomer_password(pw);
 			customerRepository.save(customer);
-			return "guest/index";
+			return "guest/change-Customer";
 		}
 	}
-	
+	@PostMapping("/editCustomer")
+	public String saveCustomer(@ModelAttribute("customer") Customer customer) {
+		Customer theCustomer = customerRepository.findById(customer.getCustomer_id()).get();
+		customer.setCustomer_password(theCustomer.getCustomer_password());
+		customer.setAuthority(theCustomer.getAuthority());
+		customer.setMembership(theCustomer.getMembership());
+		customer.setTotal_expense(theCustomer.getTotal_expense());
+		customer.setCustomerEmail(theCustomer.getCustomerEmail());
+		customer.setCustomerDate(theCustomer.getCustomerDate());
+		customerRepository.save(customer);
+		return "guest/detail-Customer";
+	}
 	
 	@GetMapping("/{name}/historyOrder")
 	public String viewHistoryOrder(@PathVariable (value = "name") String name, Model theModel) {
@@ -250,6 +267,7 @@ public class HomeController {
 			Customer theCustomer = theOrder.get().getCustomer();
 			theModel.addAttribute("customer", theCustomer);
 			theModel.addAttribute("orderDetails", theOrderDetail);
+			theModel.addAttribute("theOrder", theOrder.get());
 		}
 	
 		return "guest/viewHistoryOrderDetail";
@@ -266,6 +284,7 @@ public class HomeController {
 		 * theModel.addAttribute("review", review);
 		 */
 		review.setCustomer(customer);
+		review.setDate(date);
 		reviewRepository.save(review); 	
 		return "guest/index";
 	}
@@ -293,6 +312,16 @@ public class HomeController {
 		theModel.addAttribute("avgRating",getAvgRating());
 		return "guest/review-all";
 	}
-	
+	@GetMapping("/error")
+	public String errorPage(Authentication authentication, Model theModel) {
+		boolean isUser;
+		if(authentication==null) {
+			isUser = true;
+		}else {
+			isUser= authentication.getAuthorities().equals("CUSTOMER");
+		}
+		theModel.addAttribute("isUser",isUser);
+		return "error";
+	}
 }
 
