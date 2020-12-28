@@ -19,24 +19,35 @@ import java.util.Optional;
 public class MembershipController {
 	private MembershipRepository membershipRepository;
 	private InventoryRepository inventoryRepository;
-	private int lowStock=0;
+	private int lowStock;
 	@Autowired
 	public MembershipController(InventoryRepository inventoryRepository,MembershipRepository membershipRepository) {
 		this.inventoryRepository = inventoryRepository;
 		this.membershipRepository = membershipRepository;
 	}
 	public void getInventoryNotification(Model theModel){
+		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
 				lowStock+=1;
 			}
 		}
+		if(lowStock==1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+		}else if (lowStock>1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}
 		theModel.addAttribute("lowInventory", lowStock);
 	}
 
 	@GetMapping("/list")
-	public String ShowMembership(Model theModel) {
+	public String ShowMembership(Model theModel, @ModelAttribute("successMsg")String message) {
+		getInventoryNotification(theModel);
+		if(message.isEmpty()){
+			message=null;
+		}
+		theModel.addAttribute("successMsg",message);
 		getInventoryNotification(theModel);
 		List<Membership> membership = membershipRepository.findAll();
 		theModel.addAttribute("membership", membership);
@@ -50,9 +61,14 @@ public class MembershipController {
 		return "membership-create";
 	}
 	@PostMapping("/saveMembership")
-	public String saveMembership(@ModelAttribute("membership") Membership membership, ModelMap theModelMap) {
+	public String saveMembership(@ModelAttribute("membership") Membership membership, ModelMap theModelMap,RedirectAttributes redirectAttributes) {
 		theModelMap.addAttribute("membership", membership);
-		membershipRepository.save(membership); 	
+		if(null == membership.getMembership_id()){
+			redirectAttributes.addFlashAttribute("successMsg","Add New Membership ");
+		}else{
+			redirectAttributes.addFlashAttribute("successMsg","Update Membership ");
+		}
+		membershipRepository.save(membership);
 		return"redirect:/admin/membership/list";
 	}
 	@GetMapping("/editMembership/{id}")

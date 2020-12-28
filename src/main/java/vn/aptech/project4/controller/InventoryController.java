@@ -27,7 +27,7 @@ import java.util.List;
 public class InventoryController {
 	private InventoryRepository inventoryRepository;
 	private IngredientRepository ingredientRepository;
-	private int lowStock=0;
+	private int lowStock;
 	@Autowired
 	public InventoryController(InventoryRepository inventoryRepository, IngredientRepository ingredientRepository) {
 		this.inventoryRepository = inventoryRepository;
@@ -50,20 +50,33 @@ public class InventoryController {
 		return "import-inventory";
 	}
 	public void getInventoryNotification(Model theModel){
+		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
 				lowStock+=1;
 			}
 		}
+		if(lowStock==1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+		}else if (lowStock>1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}
 		theModel.addAttribute("lowInventory", lowStock);
 	}
 	@PostMapping("/import/{id}")
-	public String doImport(Model theModel,@PathVariable(value="id")int id,@RequestParam(value="quantity")int quantity) {
+	public String doImport(Model theModel,@PathVariable(value="id")int id,@RequestParam(value="quantity")int quantity, RedirectAttributes redirectAttributes) {
 		Inventory inventory = inventoryRepository.findById(id).get();
 		int remain = 	inventory.getQuantity() +quantity;
+		String unit = "";
+		if(quantity>1){
+			 unit = inventory.getUnit()+"s";
+		}else{
+			 unit = inventory.getUnit();
+		}
 		inventory.setQuantity(remain);
 		inventoryRepository.save(inventory);
+		redirectAttributes.addFlashAttribute("successMsg","Import "+quantity+ " " + unit);
 		return "redirect:/admin/inventory";
 	}
 	@GetMapping("/export/{id}")
@@ -82,12 +95,19 @@ public class InventoryController {
 			redirectAttributes.addFlashAttribute("errorMsg","Not enough stock! Please import!");
 			return "redirect:/admin/inventory/export/"+id;
 		}
+		String unit = "";
+		if(quantity>1){
+			unit = inventory.getUnit()+"s";
+		}else{
+			unit = inventory.getUnit();
+		}
 		inventory.setQuantity(remain);
 		float available = quantity*inventory.getRatio();
 		Ingredient ingredient = ingredientRepository.findById(inventory.getIngredient().getId()).get();
 		float curAvailable = ingredient.getAvailable();
 		curAvailable += available;
 		ingredient.setAvailable(curAvailable);
+		redirectAttributes.addFlashAttribute("successMsg","Export "+quantity+ " " + unit);
 		ingredientRepository.save(ingredient);
 		inventoryRepository.save(inventory);
 		return "redirect:/admin/inventory";
@@ -100,12 +120,13 @@ public class InventoryController {
 		return "update-inventory";
 	}
 	@PostMapping("/saveInventory")
-	public String saveInventory(ModelMap modelMap,@ModelAttribute(value="inventory")Inventory inventory, Model theModel) {
+	public String saveInventory(ModelMap modelMap,@ModelAttribute(value="inventory")Inventory inventory, Model theModel, RedirectAttributes redirectAttributes) {
 		modelMap.addAttribute("inventory",inventory);
+		redirectAttributes.addFlashAttribute("successMsg","Update ");
 		inventory.setStatus(2);
 		inventoryRepository.save(inventory);
 		theModel.addAttribute("inventory", inventory);
-		return "redirect:/admin/inventory/edit/"+inventory.getId();
+		return "redirect:/admin/inventory";
 	}
 	@GetMapping("/export/pdf")
     public void exportToPDF(HttpServletResponse response, @RequestParam(value="getMonth", required = false) int getMonth) throws DocumentException, IOException {

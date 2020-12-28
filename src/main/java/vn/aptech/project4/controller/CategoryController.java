@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.aptech.project4.entity.Category;
 import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.entity.Product;
@@ -29,7 +30,6 @@ public class CategoryController {
 @Autowired
  public CategoryController(ProductRepository productRepository, CategoryRepository categoryRepository,ProductSizeRepository productSizeRepository, InventoryRepository inventoryRepository
 		) {
-	// TODO Auto-generated constructor stub
 	this.productRepository = productRepository;
 	this.categoryRepository = categoryRepository;
 	this.productSizeRepository = productSizeRepository;
@@ -45,7 +45,11 @@ public class CategoryController {
 		theModel.addAttribute("lowInventory", lowStock);
 	}
 @GetMapping("/list")
-public String showCategory(Model theModel) {
+public String showCategory(Model theModel,@ModelAttribute("successMsg")String message) {
+	if(message.isEmpty()){
+		message=null;
+	}
+	theModel.addAttribute("successMsg",message);
 	getInventoryNotification(theModel);
 	List<Category> categorys = categoryRepository.findAll();
 	theModel.addAttribute("categorys",categorys);
@@ -71,14 +75,16 @@ public String create(Model theModel) {
 	return "category-form";
 }
 @PostMapping("/save")
-public String Addproduct(@ModelAttribute("category") Category category, ModelMap modelMap) {		
+public String Addproduct(@ModelAttribute("category") Category category, ModelMap modelMap, RedirectAttributes redirectAttributes) {
 	modelMap.addAttribute("category",category);
 	categoryRepository.save(category);
+	redirectAttributes.addFlashAttribute("successMsg","Add New Category ");
 	return "redirect:/admin/category/list";
 }	
 @GetMapping("deleteCategory/{id}")
-public String deleteCategory(@PathVariable (value = "id") int id) {
+public String deleteCategory(@PathVariable (value = "id") int id, RedirectAttributes redirectAttributes) {
 	this.categoryRepository.deleteById(id);
+	redirectAttributes.addFlashAttribute("successMsg","Delete Category ID ["+id+"]");
 	return"redirect:/admin/category/list";
 }
 

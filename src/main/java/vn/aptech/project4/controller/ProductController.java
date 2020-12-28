@@ -1,7 +1,6 @@
 package vn.aptech.project4.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,13 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/product")
 public class ProductController {
-	@Value("${upload.path}")
-    private String path;
     private ProductRepository productRepository;
     private ProductSizeRepository productSizeRepository;
     private StorageService storageService;
@@ -34,7 +34,7 @@ public class ProductController {
     private RecipeRepository recipeRepository;
     private ProductIngredientRepository productIngredientRepository;
     private InventoryRepository inventoryRepository;
-    private int lowStock=0;
+    private int lowStock;
 
     @Autowired
     public ProductController(ProductRepository productRepository, ProductSizeRepository productSizeRepository,
@@ -51,8 +51,12 @@ public class ProductController {
     }
 
     @GetMapping("/list")
-    public String ShowListProducts(Model theModel) {
+    public String ShowListProducts(Model theModel, @ModelAttribute(value="successMsg") String message) {
         getInventoryNotification(theModel);
+        if(message.isEmpty()){
+            message=null;
+        }
+        theModel.addAttribute("successMsg",message);
         List<Product> products = productRepository.findAll();
         theModel.addAttribute("size", sizeRepository.findAll());
         theModel.addAttribute("products", products);
@@ -61,11 +65,17 @@ public class ProductController {
         return "index";
     }
     public void getInventoryNotification(Model theModel){
+        lowStock=0;
         List<Inventory> theList = inventoryRepository.findAll();
         for(Inventory temp:theList){
             if(temp.getQuantity()<temp.getSafetyStock()){
                 lowStock+=1;
             }
+        }
+        if(lowStock==1){
+            theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+        }else if (lowStock>1){
+            theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
         }
         theModel.addAttribute("lowInventory", lowStock);
     }
@@ -189,19 +199,6 @@ public class ProductController {
                     }
                 }
             }
-/*			List<ProductSize> addProductSizes = new ArrayList<>();
-			for (int i = 0; i < size.length; i++) {
-				ProductSize productSize = null;
-				if (sizeRepository.findById(size[i]).isPresent()) {
-					addSize = sizeRepository.findById(size[i]).get();
-					if(theProduct.hasSize(addSize)){
-                        addProductSizes = theProduct.getSizes();
-                    }else {
-                        productSize = new ProductSize(theProduct, addSize, 0);
-                        addProductSizes.add(productSize);
-                    }
-				}
-			}*/
 		}
 	}
 	@GetMapping("/editProduct/{id}")
@@ -238,14 +235,15 @@ public class ProductController {
             //-----End Upload Image
 
             productRepository.save(product);
-
+        redirectAttributes.addFlashAttribute("successMsg","Update ");
             return "redirect:/admin/product/list";
 
         }
 
         @GetMapping("/deleteProduct/{id}")
-        public String deleteProduct ( @PathVariable(value = "id") int id){
+        public String deleteProduct ( @PathVariable(value = "id") int id,RedirectAttributes redirectAttributes){
             this.productRepository.deleteById(id);
+            redirectAttributes.addFlashAttribute("successMsg","Delete ");
             return "redirect:/admin/product/list";
         }
         @GetMapping("/DetailProduct/{id}")

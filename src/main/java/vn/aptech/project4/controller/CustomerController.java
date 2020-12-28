@@ -43,11 +43,17 @@ public class CustomerController {
 	 this.inventoryRepository = inventoryRepository;
 	}
 	public void getInventoryNotification(Model theModel){
+		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
 				lowStock+=1;
 			}
+		}
+		if(lowStock==1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+		}else if (lowStock>1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
 		}
 		theModel.addAttribute("lowInventory", lowStock);
 	}
@@ -91,6 +97,7 @@ public class CustomerController {
 	}
 	@GetMapping("/deleteCustomer/{id}")
 	public String deleteCustomer(@PathVariable (value = "id") int id) {
+
 		this.customerRepository.deleteById(id);
 		return"redirect:/admin/customer/list";
 	}

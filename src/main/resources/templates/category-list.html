@@ -183,8 +183,10 @@ a {
 	<!-- Scripts -->
 
 	<!-- jQuery -->
-	<script th:src="@{/js/jquery/jquery-1.12.3.min.js}"></script>
-	<script th:src="@{/js/jquery/jquery_ui/jquery-ui.min.js}"></script>
+	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
 
 	<!-- AnimatedSVGIcons -->
 	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
@@ -249,38 +251,30 @@ a {
 	</script>
 	<!-- /end table ----------------- -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<script src="assets/js/demo/charts/highcharts.js"></script>
-
-
-
-	<!-- /Scripts -->
-
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
 </body>
 
 </html>

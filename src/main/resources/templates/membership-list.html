@@ -42,6 +42,8 @@
 <!-- CSS - theme -->
 <link rel="stylesheet" type="text/css"
 	th:href="@{/skin/default_skin/less/theme.css}">
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
 
 <!-- IE8 HTML5 support -->
 <!--[if lt IE 9]>
@@ -158,12 +160,14 @@
 
 
 	</div>
-<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
-		<script
+	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+	<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 			crossorigin="anonymous"></script>
-		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
 
 	<script type="text/javascript"
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
@@ -183,15 +187,56 @@
 		
 		<script th:src="@{/stars/star-rating.min.js}"></script>
 		<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
-
-<script>
+	<script>
 		$(document).ready( function () {
 			$('#membership').DataTable();
 		} );
 	</script>
-
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
+	<script th:if="lowStockMsg">
+	toastr.options = {
+	"closeButton": true,
+	"debug": false,
+	"newestOnTop": false,
+	"progressBar": false,
+	"positionClass": "toast-top-right",
+	"preventDuplicates": false,
+	"onclick": null,
+	"showDuration": "300",
+	"hideDuration": "1000",
+	"timeOut": "5000",
+	"extendedTimeOut": "1000",
+	"showEasing": "swing",
+	"hideEasing": "linear",
+	"showMethod": "fadeIn",
+	"hideMethod": "fadeOut"
+	}
+	var message = "[[${lowStockMsg}]]";
+	toastr.warning(message);
 	<!-- /Scripts -->
-
+	</script>
 </body>
 
 </html>

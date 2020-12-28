@@ -42,6 +42,8 @@
 <!-- CSS - theme -->
 <link rel="stylesheet" type="text/css"
 	th:href="@{/skin/default_skin/less/theme.css}">
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
 
 <!-- IE8 HTML5 support -->
 <!--[if lt IE 9]>
@@ -78,7 +80,7 @@
 				<!-- Content -->
 				<section id="content" class="animated fadeIn pt35 pb45">
 					<!-- Content -->
-					<div id="content" class="animated fadeIn">
+					<div class="animated fadeIn">
 						<div class="row">
 							<div class="col-md-10">
 								<!-- Standard Fields -->
@@ -135,7 +137,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="total expense" class="col-lg-3 control-label">Total expense</label>
+												<label class="col-lg-3 control-label">Total expense</label>
 
 												<div class="col-lg-8">
 													<div class="bs-component">
@@ -144,7 +146,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="total expense" class="col-lg-3 control-label">Membership</label>
+												<label  class="col-lg-3 control-label">Membership</label>
 											<div class="col-lg-8">
 												<div class="bs-component">
 														<input type="text" th:field="*{membership.membership_name}" id="total_expense" class="form-control" readonly="readonly">
@@ -153,14 +155,14 @@
            									 </div>
 											</div>
 											<div class="form-group">
-												<label for="total expense" class="col-lg-3 control-label">Authority</label>
+												<label  class="col-lg-3 control-label">Authority</label>
 												
 												 <div class="custom-control custom-radio custom-control-inline">
-              										  <input type="radio" id="ROLE" name="ROLE" class="custom-control-input" value="ROLE_CUSTOMER" th:field="*{authority}">
+              										  <input type="radio" id="option1" name="ROLE" class="custom-control-input" value="ROLE_CUSTOMER" th:field="*{authority}">
               										  <label class="custom-control-label" for="option1">Active</label>
            										 </div>
            										 <div class="custom-control custom-radio custom-control-inline">
-              										  <input type="radio" id="NULL" name="NULL" class="custom-control-input" value="NULL" th:field="*{authority}">
+              										  <input type="radio" id="option2" name="NULL" class="custom-control-input" value="NULL" th:field="*{authority}">
               										  <label class="custom-control-label" for="option2">Inactive</label>
            										 </div>
 
@@ -211,209 +213,68 @@
 	<!-- Scripts -->
 
 	<!-- jQuery -->
-	<script src="assets/js/jquery/jquery-1.12.3.min.js"></script>
-	<script src="assets/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
 
 	<!-- AnimatedSVGIcons -->
-	<script src="assets/fonts/animatedsvgicons/js/snap.svg-min.js"></script>
-	<script src="assets/fonts/animatedsvgicons/js/svgicons-config.js"></script>
-	<script src="assets/fonts/animatedsvgicons/js/svgicons.js"></script>
-	<script src="assets/fonts/animatedsvgicons/js/svgicons-init.js"></script>
-
-	<!-- Scroll -->
-	<script
-		src="assets/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>
-
-	<!-- Mixitup -->
-
-
-	<!-- Summernote -->
-
-
-
-	<!-- HighCharts Plugin -->
-	<script src="assets/js/plugins/highcharts/highcharts.js"></script>
-
-	<!-- Highlight JS -->
-
-
-	<!-- Date/Month - Pickers -->
-
-
-
-
-
-	<!-- Magnific Popup Plugin -->
-
-
-	<!-- FullCalendar Plugin -->
-
-
-
-	<!-- Plugins -->
-
-
-	<script src="assets/js/plugins/c3charts/d3.min.js"></script>
-	<script src="assets/js/plugins/c3charts/c3.min.js"></script>
-
-
-
-
-
-	<script src="assets/js/plugins/circles/circles.js"></script>
-
-
-
-
-	<!-- Google Map API -->
-
-
-
-
-
-	<!-- Jvectormap JS -->
-	<script src="assets/js/plugins/jvectormap/jquery.jvectormap.min.js"></script>
-	<script
-		src="assets/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js"></script>
-	<script
-		src="assets/js/plugins/jvectormap/assets/jquery-jvectormap-world-mill-en.js"></script>
-
-	<!-- Datatables JS -->
-
-
-
-
-
-	<!-- FooTable JS -->
-
-
-
-	<!-- Validate JS -->
-
-
-
-	<!-- BS Dual Listbox JS -->
-
-
-	<!-- Bootstrap Maxlength JS -->
-
-
-	<!-- Select2 JS -->
-
-
-	<!-- Typeahead JS -->
-
-
-	<!-- TagManager JS -->
-
-
-	<!-- DateRange JS -->
-
-
-	<!-- BS Colorpicker JS -->
-
-
-	<!-- MaskedInput JS -->
-
-
-	<!-- Slick Slider JS -->
-
-
-	<!-- MarkDown JS -->
-
-
-
-
-	<!-- X-edit CSS -->
-
-
-
-
-
-
-	<!-- Dropzone JS -->
-
-
-	<!-- Cropper JS -->
-
-
-	<!-- Zoom JS -->
-
-
-	<!-- Nestable JS -->
-
-
-	<!-- PNotify JS -->
-
-
-	<!-- Fancytree JSs -->
-
-
-
-
-
-
-
-	<!-- Ladda JS -->
-
-
-	<!-- NProgress JS -->
-
-
-	<!-- Countdown JS -->
-
-
-
-	<!-- CanvasBG JS -->
-
-
-	<!-- Theme Scripts -->
-	<script src="assets/js/utility/utility.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/demo/widgets_sidebar.js"></script>
-
-
-
-
-
-
-	<script src="assets/js/pages/dashboard2.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<script src="assets/js/demo/charts/highcharts.js"></script>
-
-
-
+	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+	<!-- /Scripts -->
+	<script>
+		$(document).ready(function() {
+			$('#myTable').DataTable();
+		})
+	</script>
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
+	<script th:if="lowStockMsg">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${lowStockMsg}]]";
+		toastr.warning(message);
+		<!-- /Scripts -->
+	</script>
 	<!-- /Scripts -->
 
 </body>

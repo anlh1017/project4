@@ -39,7 +39,9 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/skin/default_skin/less/theme.css}">
 	<link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-<!-- IE8 HTML5 support -->
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
+	<!-- IE8 HTML5 support -->
 <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -84,7 +86,9 @@
 									<div class="panel">
 										<div class="panel-heading ">
 											<span class="panel-title ptn">Ingredient List</span>
+											<span style="color: red" th:text="${errorMsg}"></span>
 										</div>
+
 										<div>
 											<a th:href="create"
 												class="btn btn-rounded btn-primary">Add New Ingredient</a>
@@ -163,6 +167,7 @@
 	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
 	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
 	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
 
 	<!-- AnimatedSVGIcons -->
 	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
@@ -195,7 +200,51 @@
 			});
 		})
 	</script>
-
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
+	<script th:if="lowStockMsg">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${lowStockMsg}]]";
+		toastr.warning(message);
+		<!-- /Scripts -->
+	</script>
 </body>
 
 </html>

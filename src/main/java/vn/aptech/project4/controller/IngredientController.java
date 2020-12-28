@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.aptech.project4.entity.Ingredient;
 import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.repository.IngredientRepository;
@@ -18,25 +19,35 @@ import java.util.Optional;
 public class IngredientController {
 	private IngredientRepository ingredientRepository;
 	private InventoryRepository inventoryRepository;
-	private int lowStock=0;
+	private int lowStock;
 	@Autowired
 	public IngredientController(IngredientRepository ingredientRepository,InventoryRepository inventoryRepository) {
 		this.ingredientRepository = ingredientRepository;
 		this.inventoryRepository = inventoryRepository;
 	}
 	public void getInventoryNotification(Model theModel){
+		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
 				lowStock+=1;
 			}
 		}
+		if(lowStock==1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+		}else if (lowStock>1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}
 		theModel.addAttribute("lowInventory", lowStock);
 	}
 	@GetMapping("/list")
-	public String showIngredients(Model theModel) {
+	public String showIngredients(Model theModel,@ModelAttribute(value = "successMsg")String message) {
+		if(message.isEmpty()){
+			message=null;
+		}
+		theModel.addAttribute("successMsg",message);
 		getInventoryNotification(theModel);
-			theModel.addAttribute("ingredients", ingredientRepository.findAll() );
+		theModel.addAttribute("ingredients", ingredientRepository.findAll() );
 		return "list-ingredients";
 	}
 
@@ -48,7 +59,7 @@ public class IngredientController {
 	}
 
 	@PostMapping("/create")
-	public String addIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap) {
+	public String addIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap, RedirectAttributes redirectAttributes) {
 		theModelMap.addAttribute("ingredient", ingredient);
 		ingredientRepository.save(ingredient);
 		Inventory inventory = new Inventory();
@@ -60,6 +71,7 @@ public class IngredientController {
 		inventory.setUnit("N/A");
 		inventory.setVendorName("N/A");
 		inventoryRepository.save(inventory);
+		redirectAttributes.addFlashAttribute("successMsg","Add New Ingredient");
 		return "redirect:/admin/ingredient/list";
 	}
 
@@ -90,9 +102,10 @@ public class IngredientController {
 		return "redirect:/admin/ingredient/list";
 	}
 	@PostMapping("/update")
-	public String updateIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap) {
+	public String updateIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap, RedirectAttributes redirectAttributes) {
 		theModelMap.addAttribute("ingredient", ingredient);
 		ingredientRepository.save(ingredient);
+		redirectAttributes.addFlashAttribute("successMsg","Update Ingredient");
 		return "redirect:/admin/ingredient/list";
 	}
 }

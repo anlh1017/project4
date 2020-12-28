@@ -29,7 +29,7 @@ public class ChartController {
 	private CustomerRepository customerRepository;
 	private ProductRepository productRepository;
 	private InventoryRepository inventoryRepository;
-	private int lowStock=0;
+	private int lowStock;
 	@Autowired
 	public ChartController( OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository,CustomerRepository customerRepository,ProductRepository productRepository,InventoryRepository inventoryRepository) {
 		this.orderRepository = orderRepository;
@@ -39,11 +39,17 @@ public class ChartController {
 		this.inventoryRepository = inventoryRepository;
 	}
 	public void getInventoryNotification(Model theModel){
+		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
 				lowStock+=1;
 			}
+		}
+		if(lowStock==1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+		}else if (lowStock>1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
 		}
 		theModel.addAttribute("lowInventory", lowStock);
 	}

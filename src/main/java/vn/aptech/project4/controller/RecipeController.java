@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.aptech.project4.entity.*;
 import vn.aptech.project4.repository.*;
 
@@ -40,7 +41,8 @@ public class RecipeController {
         theModel.addAttribute("lowInventory", lowStock);
     }
     @GetMapping("/view/{id}")
-    public String viewIngredient(@PathVariable(value = "id") int theId, Model theModel) {
+    public String viewIngredient(@PathVariable(value = "id") int theId, Model theModel, @ModelAttribute(value = "errorMsg") String message) {
+        theModel.addAttribute("errorMsg",message);
         getInventoryNotification(theModel);
         Product theProduct = productRepository.findById(theId).get();
         List<Recipe> recipes = recipeRepository.findAll();
@@ -122,10 +124,21 @@ public class RecipeController {
 
     @PostMapping("/update/{id}")
     public String editRecipe(@PathVariable(value = "id") int theId, Model theModel,
-                             @RequestParam(value = "quantity") int quantity) {
+                             @RequestParam(value = "quantity") int quantity, RedirectAttributes redirectAttributes) {
         Recipe tempRecipe = recipeRepository.findById(theId).get();
-        tempRecipe.setQuantity(quantity);
         int proId = tempRecipe.getProductIngredient().getProduct().getId();
+        List<Recipe> theList = recipeRepository.findAllByProductIngredient_Id(tempRecipe.getProductIngredient().getId());
+        for(Recipe temp :theList){
+            int testQuantity = 0;
+            if(temp.getQuantity()>=testQuantity){
+                testQuantity = temp.getQuantity();
+            }else{
+                redirectAttributes.addAttribute("errorMsg", "Quantity must be Size S < Size M < Size L");
+                return "redirect:/admin/recipe/view/" + proId;
+            }
+        }
+        tempRecipe.setQuantity(quantity);
+
         recipeRepository.save(tempRecipe);
         return "redirect:/admin/recipe/view/" + proId;
     }
@@ -133,7 +146,6 @@ public class RecipeController {
     @Transactional
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable(value = "id") int theId, Model theModel) {
-        System.out.println("Finding Recipe by Id: " + theId);
         Optional<Recipe> tempRecipe = recipeRepository.findById(theId);
 
         Recipe deleteRecipe = null;
