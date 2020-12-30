@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -63,16 +64,20 @@ public class ReviewController {
 		theModel.addAttribute("lowInventory", lowStock);
 	}
 	@GetMapping("/list")
-	public String showUsers(Model theModel) {
+	public String showUsers(Model theModel, @ModelAttribute(value="successMsg")String message) {
 		getInventoryNotification(theModel);
 		List<Review> review = reviewRepository.findAll();
+		if(message.isEmpty()) {
+			message=null;
+		}
+		theModel.addAttribute("successMsg",message);
 		theModel.addAttribute("review",review);
 		return "review-list";
 	}
   @GetMapping("/deleteReview/{id}")
 	public String deleteReview(@PathVariable (value = "id") int id, RedirectAttributes theModel) {
 		this.reviewRepository.deleteById(id);
-		theModel.addAttribute("successMsg","Delete Review is");
+		theModel.addFlashAttribute("successMsg","Delete Review is");
 		return"redirect:/admin/review/list";
 	}
 }
