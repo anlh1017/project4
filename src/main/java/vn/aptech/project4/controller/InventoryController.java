@@ -172,12 +172,11 @@ public class InventoryController {
         List<Inventory> listInventory = inventoryRepository.findAll();
         List<Inventory> listAllInventory = new ArrayList<>();
         for (Inventory inventory : listInventory) {
-            if (inventory.getInventoryDate().getMonth() == (getMonth - 1)) {
+            if (inventory.getInventoryDate().getMonth() == (getMonth - 1)&&inventory.getStatus()==2) {
                 listAllInventory.add(inventory);
             }
         }
         InventoryPDFExporter exporter = new InventoryPDFExporter(listAllInventory, getMonth);
         exporter.export(response);
-
     }
 }

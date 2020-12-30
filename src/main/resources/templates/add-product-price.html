@@ -97,7 +97,7 @@
                                         </div>
                                         <p>Cost:</p>
                                         <div class="section" th:each="key:${costBySize}">
-                                            Size <span th:text="${key.key}"></span><span th:text="${key.value}"></span>
+                                            Size <span th:text="${key.key} + ': '"></span><span th:text="${#numbers.formatDecimal(key.value, 0, 'COMMA', 2, 'POINT')}"></span>
                                         </div>
                                         <div class="row mn">
                                             <form th:action="@{/admin/product/updatePrice}"

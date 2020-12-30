@@ -75,7 +75,6 @@ public class RecipeController {
         for (Recipe temp : recipes) {
             if (temp.getProductIngredient().getProduct().getId() == theId) {
                 viewRecipes.add(temp);
-
             }
         }
 
@@ -89,10 +88,11 @@ public class RecipeController {
             }
             costBySize.put(temp.getSize().getName(), cost);
         }
+
         System.out.println(viewRecipes);
         theModel.addAttribute("recipes", viewRecipes);
         theModel.addAttribute("product", theProduct);
-        theModel.addAttribute("ingredients", ingredientRepository.findAll());
+        theModel.addAttribute("ingredients", ingredientRepository.findAllByInventory_Status(2));
         theModel.addAttribute("size", sizeRepository.findAll());
         theModel.addAttribute("costBySize", costBySize);
         return "add-ingredient-product";
