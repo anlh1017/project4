@@ -42,6 +42,7 @@
 <!-- CSS - theme -->
 <link rel="stylesheet" type="text/css"
 	th:href="@{/skin/default_skin/less/theme.css}">
+<link th:rel="stylesheet" type="text/css" th:href="@{/skin/css/star-rating.css}">
 	<link rel="stylesheet" type="text/css"
 		  th:href="@{/skin/css/toastr.min.css}">
 
@@ -50,7 +51,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="sales-stats-page sb-top sb-top-lg">
@@ -89,41 +90,50 @@
 								<div class="col-xs-12">
 									<div class="panel">
 										<div class="panel-heading ">
-											<span class="panel-title ptn">Recipe List</span>
+											<span class="panel-title ptn">Review List</span>
 										</div>
-
+										<div th:if="${message != null}">
+    										<p class="text-warning">[[${message}]]</p>
+										</div>
 										<div class="panel-body pn mt15">
 											<div class="table-responsive">
+												<table id="review"
+													class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+													<thead>
+														<tr class="">
+															<th class="">Email</th>
+															<th class="">Name</th>
+															<th class="">Phone</th>
+															<th class="">Contents</th>
+															<th class="">Rating</th>
+															<th class="">Date</th>
+															<th class="">Action</th>
 
-												<form
-													th:action="@{/admin/recipe/update/{id}(id=${recipe.id})}"
-													method="post">
-													<table
-														class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-														<thead>
-															<tr class="">
-																<th class="">Ingredient Name</th>
-																<th class="">Unit</th>
-																<th class="">Ingredient Quantity</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="tempReview : ${review}">
+															<td class="" th:text="${tempReview.customer.customerEmail}"></td>
+															<td class="" th:text="${tempReview.customer.customer_name}"></td>
+															<td class="" th:text="${tempReview.customer.customer_phone}"></td>
+															<td class="" th:text="${tempReview.content}"></td>
+															<td><input class="rating" name="rating" th:value="${tempReview.rating}"  readonly="readonly" type="hidden" data-glyphicon="0"></td>
+															<td class="" th:text="${tempReview.date}"></td>
+															
+															
+														
+															<td class="">
+																	<ul role="menu">
+																		
+																		<li><a th:href="@{/admin/review/deleteReview/{id}(id=${tempReview.review_id})}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm mb-3" >Delete</a></li>
+																		
+																	</ul>
+																
+															</td>
+														</tr>
 
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td class=""
-																	th:text="${recipe.productIngredient.ingredient.ingredientName}"></td>
-<td class=""
-																	th:text="${recipe.productIngredient.ingredient.unit}"></td>
-																<td class="" th:text="${recipe.quantity}"></td>
-																<td>Quantity: <input name="quantity" type="number"></td>
-
-															</tr>
-															<tr>
-																<td colspan="2"><input type="submit" value="Submit" /></td>
-															</tr>
-														</tbody>
-													</table>
-												</form>
+													</tbody>
+												</table>
 											</div>
 										</div>
 									</div>
@@ -140,7 +150,7 @@
 				<footer id="content-footer">
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<span class="footer-legal">© 2016 All rights reserved. <a
+							<span class="footer-legal">© 2020 All rights reserved. <a
 								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
 						</div>
 					</div>
@@ -155,19 +165,48 @@
 	<!-- /Body Wrap  -->
 
 	<!-- Scripts -->
-	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+
+	<!-- jQuery -->
+	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+	<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
 	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
-	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
 	<script th:src="@{/js/toastr.min.js}"></script>
 
-	<!-- AnimatedSVGIcons -->
-	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+	<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+		
+		<script th:src="@{/stars/star-rating.min.js}"></script>
+		<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
 
-	<script th:if="${lowStockMsg}">
+<script>
+		$(document).ready(function() {
+			$('#review').DataTable();
+		})
+	</script>
+<<<<<<< HEAD
+	<script th:if="${successMsg}">
 		/*<![CDATA[*/
+=======
+	<!-- /Scripts -->
+	<script th:if="${lowStockMsg}">
+>>>>>>> 3e6e6aaf48e63ff3ffa82bf3d4ff5fd52eecbaa4
 		toastr.options = {
 			"closeButton": true,
 			"debug": false,
@@ -185,9 +224,16 @@
 			"showMethod": "fadeIn",
 			"hideMethod": "fadeOut"
 		}
+<<<<<<< HEAD
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
+=======
 		var message = "[[${lowStockMsg}]]";
 		toastr.warning(message);
-		/*]]>*/
+>>>>>>> 3e6e6aaf48e63ff3ffa82bf3d4ff5fd52eecbaa4
+
 	</script>
 	<script th:if="${newOrderMsg}">
 		toastr.options = {
@@ -210,7 +256,7 @@
 		var message = "[[${newOrderMsg}]]";
 		toastr.info(message);
 	</script>
-
+	<!-- /Scripts -->
 </body>
 
 </html>

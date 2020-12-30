@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.aptech.project4.entity.Inventory;
+import vn.aptech.project4.entity.Order;
 import vn.aptech.project4.entity.Review;
 import vn.aptech.project4.repository.InventoryRepository;
+import vn.aptech.project4.repository.OrderRepository;
 import vn.aptech.project4.repository.ReviewRepository;
 
 import java.util.List;
@@ -21,18 +23,42 @@ public class ReviewController {
 
   private ReviewRepository reviewRepository;
 	private InventoryRepository inventoryRepository;
-	private int lowStock=0;
+	private OrderRepository orderRepository;
+	private int lowStock;
+	private int newOrder;
 	@Autowired
-	public ReviewController(ReviewRepository reviewRepository,InventoryRepository inventoryRepository) {
+	public ReviewController(ReviewRepository reviewRepository,InventoryRepository inventoryRepository,OrderRepository orderRepository) {
 		this.inventoryRepository = inventoryRepository;
 		this.reviewRepository = reviewRepository;
+		this.orderRepository = orderRepository;
 	}
 	public void getInventoryNotification(Model theModel){
+		newOrder = 0;
+		List<Order> orders = orderRepository.findAllByStatus(1);
+		for (int i = 0; i < orders.size(); i++) {
+			newOrder++;
+		}
+		if (newOrder == 1) {
+			theModel.addAttribute("newOrderMsg", newOrder + " New Order");
+		} else if (newOrder > 1) {
+			theModel.addAttribute("newOrderMsg", newOrder + " New Orders");
+		} else {
+			theModel.addAttribute("newOrderMsg", null);
+		}
+		theModel.addAttribute("newOrder", newOrder);
+		lowStock = 0;
 		List<Inventory> theList = inventoryRepository.findAll();
-		for(Inventory temp:theList){
-			if(temp.getQuantity()<temp.getSafetyStock()){
-				lowStock+=1;
+		for (Inventory temp : theList) {
+			if (temp.getQuantity() < temp.getSafetyStock()) {
+				lowStock += 1;
 			}
+		}
+		if (lowStock == 1) {
+			theModel.addAttribute("lowStockMsg", lowStock + " Item Inventory Low");
+		} else if (lowStock > 1) {
+			theModel.addAttribute("lowStockMsg", lowStock + " Items Inventory Low");
+		} else {
+			theModel.addAttribute("lowStockMsg", null);
 		}
 		theModel.addAttribute("lowInventory", lowStock);
 	}

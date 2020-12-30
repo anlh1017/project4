@@ -25,38 +25,57 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/order")
 public class OrderController {
-
 	private OrderRepository orderRepository;
-	private OrderDetailsRepository orderdetailsRepository;
 	private MembershipRepository membershipRepository;
 	private CustomerRepository customerRepository;
 	private InventoryRepository inventoryRepository;
-	private int lowStock=0;
+	private int lowStock;
+	private int newOrder;
 	@Autowired
 	public OrderController(OrderRepository orderRepository, OrderDetailsRepository orderdetailsRepository,MembershipRepository membershipRepository, CustomerRepository customerRepository,InventoryRepository inventoryRepository) {
 		this.orderRepository = orderRepository;
-		this.orderdetailsRepository = orderdetailsRepository;
 		this.membershipRepository = membershipRepository;
 		this.customerRepository = customerRepository;
 		this.inventoryRepository = inventoryRepository;
 	}
-	public void getInventoryNotification(Model theModel){
+	public void getNotification(Model theModel){
+		newOrder = 0;
+		List<Order> orders = orderRepository.findAllByStatus(1);
+		for(int i = 0; i<orders.size();i++){
+			newOrder++;
+		}
+		if(newOrder==1){
+			theModel.addAttribute("newOrderMsg",newOrder+" New Order");
+		}else if (newOrder>1){
+			theModel.addAttribute("newOrderMsg",newOrder+" New Orders");
+		}else{
+			theModel.addAttribute("newOrderMsg",null);
+		}
+		theModel.addAttribute("newOrder",newOrder);
+		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
 				lowStock+=1;
 			}
 		}
-		theModel.addAttribute("lowInventory", lowStock);
+		if(lowStock==1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+		}else if (lowStock>1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}else{
+			theModel.addAttribute("lowStockMsg",null);
+		}
+		theModel.addAttribute("lowInventory",lowStock);
 	}
 	@GetMapping("/list")
 	public String showOrders(Model theModel, @RequestParam(value="id", required = false) String id,@RequestParam(value="status", required = false) String status) {
-		getInventoryNotification(theModel);
+		getNotification(theModel);
 		theModel.addAttribute("activeOrders",new String("active"));
 		theModel.addAttribute("content_view",new String("sales-stats-purchases"));
 		String theId=(id==null)?"NA":id;
 		if(theId=="NA"||theId.isEmpty()) {
-			List<Order> orders = orderRepository.findAll();
+			List<Order> orders = orderRepository.findAllByOrderByStatusAsc();
 			theModel.addAttribute("orders",orders);
 		}else {
 			int searchId = Integer.parseInt(id);
@@ -68,7 +87,7 @@ public class OrderController {
 	@GetMapping("/viewDetail/{id}")
 	public String viewOrderDetails(@PathVariable (value = "id") int orderId, Model theModel) {
 		Optional<Order> theOrder=  orderRepository.findById(orderId);
-		getInventoryNotification(theModel);
+		getNotification(theModel);
 		if(theOrder.isPresent()) {
 			List<OrderDetail> theOrderDetail = theOrder.get().getOrderDetails();
 			int tong=0;
@@ -94,16 +113,16 @@ public class OrderController {
 			if(status==3){
 				Customer theCustomer = savedOrder.getCustomer();
 				if(theCustomer.getMembership().getMembership_id()!=13){
-					if(theCustomer.getTotal_expense()>=2000000){
-						Membership theMembership = membershipRepository.getOne(2);
+					if(theCustomer.getTotal_expense()>=4000000){
+						Membership theMembership = membershipRepository.getOne(4);
 						theCustomer.setMembership(theMembership);
 						customerRepository.save(theCustomer);
 					}else 	if(theCustomer.getTotal_expense()>=3000000){
 						Membership theMembership = membershipRepository.getOne(3);
 						theCustomer.setMembership(theMembership);
 						customerRepository.save(theCustomer);
-					}else 	if(theCustomer.getTotal_expense()>=4000000){
-						Membership theMembership = membershipRepository.getOne(4);
+					}else 	if(theCustomer.getTotal_expense()>=2000000){
+						Membership theMembership = membershipRepository.getOne(2);
 						theCustomer.setMembership(theMembership);
 						customerRepository.save(theCustomer);
 					}
@@ -139,11 +158,5 @@ public class OrderController {
 		}
         OrderPDFExporter exporter = new OrderPDFExporter(listAllOder,getMonth);
         exporter.export(response);
-
     }
-
-
-
-	
-	
 }

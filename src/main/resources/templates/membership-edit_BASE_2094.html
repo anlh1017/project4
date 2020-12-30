@@ -84,39 +84,49 @@
 								<!-- Standard Fields -->
 								<div class="panel">
 									<div class="panel-heading">
-										<span class="panel-title">Update Ingredient</span>
+										<span class="panel-title">Update Membership</span>
 									</div>
 									<div class="panel-body">
 
-										<form class="form-horizontal"
-											th:action="@{/admin/ingredient/update}" th:object="${ingredient}"
-											method="post">
-											<input th:field="*{id}" type="hidden" />
+										<form class="form-horizontal" action="#" th:action="@{/admin/membership/saveMembership}" th:object="${membership}" method="POST">
+										
+											
+														<input type="hidden" th:field="*{membership_id}" id="id" class="form-control">
+											
 											<div class="form-group">
-												<label for="ingredientName" class="col-lg-3 control-label">Ingredient Name</label>
+												<label for="membershipname" class="col-lg-3 control-label">Membership Name</label>
 
 												<div class="col-lg-8">
 													<div class="bs-component">
-														<input type="text" id="ingredientName" class="form-control" th:field="*{ingredientName}"
-															placeholder="Type Here...">
+														<input type="text" th:field="*{membership_name}" id="membership_name" class="form-control" required="required">
 													</div>
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="vendorName" class="col-lg-3 control-label">Unit</label>
-
+												<label class="col-lg-3 control-label">Membership Description</label>
+												
 												<div class="col-lg-8">
 													<div class="bs-component">
-														<input type="text" id="vendorName" class="form-control" th:field="*{Unit}"
-															placeholder="Type Here...">
+														<input type="text" th:field="*{membership_description}" id="membership_description" class="form-control" required="required">
 													</div>
+												 
 												</div>
 											</div>
 											<div class="form-group">
+												<label class="col-lg-3 control-label">Discount</label>
+												
+												<div class="col-lg-8">
+												<input type="number" id="discount" class="form-control" th:field="*{discountValue}" required="required">
+												 
+												</div>
+											</div>
+											
+											
+											
+											<div class="form-group">
 												<div class="col-lg-8">
 													<div class="bs-component">
-														<input type="submit" id=""
-															class="btn-primary form-control" />
+														<button type="submit" class="btn btn-info col-2">Update Membership</button>
 													</div>
 												</div>
 											</div>
@@ -152,84 +162,209 @@
 	<!-- Scripts -->
 
 	<!-- jQuery -->
-	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
-	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
-	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
-	<script th:src="@{/js/toastr.min.js}"></script>
+	<script src="assets/js/jquery/jquery-1.12.3.min.js"></script>
+	<script src="assets/js/jquery/jquery_ui/jquery-ui.min.js"></script>
 
 	<!-- AnimatedSVGIcons -->
-	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+	<script src="assets/fonts/animatedsvgicons/js/snap.svg-min.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons-config.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons.js"></script>
+	<script src="assets/fonts/animatedsvgicons/js/svgicons-init.js"></script>
 
 	<!-- Scroll -->
+	<script
+		src="assets/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- Mixitup -->
+
+
+	<!-- Summernote -->
+
+
+
+	<!-- HighCharts Plugin -->
+	<script src="assets/js/plugins/highcharts/highcharts.js"></script>
+
+	<!-- Highlight JS -->
+
+
+	<!-- Date/Month - Pickers -->
+
+
+
+
+
+	<!-- Magnific Popup Plugin -->
+
+
+	<!-- FullCalendar Plugin -->
+
+
+
+	<!-- Plugins -->
+
+
+	<script src="assets/js/plugins/c3charts/d3.min.js"></script>
+	<script src="assets/js/plugins/c3charts/c3.min.js"></script>
+
+
+
+
+
+	<script src="assets/js/plugins/circles/circles.js"></script>
+
+
+
+
+	<!-- Google Map API -->
+
+
+
+
+
+	<!-- Jvectormap JS -->
+	<script src="assets/js/plugins/jvectormap/jquery.jvectormap.min.js"></script>
+	<script
+		src="assets/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js"></script>
+	<script
+		src="assets/js/plugins/jvectormap/assets/jquery-jvectormap-world-mill-en.js"></script>
+
+	<!-- Datatables JS -->
+
+
+
+
+
+	<!-- FooTable JS -->
+
+
+
+	<!-- Validate JS -->
+
+
+
+	<!-- BS Dual Listbox JS -->
+
+
+	<!-- Bootstrap Maxlength JS -->
+
+
+	<!-- Select2 JS -->
+
+
+	<!-- Typeahead JS -->
+
+
+	<!-- TagManager JS -->
+
+
+	<!-- DateRange JS -->
+
+
+	<!-- BS Colorpicker JS -->
+
+
+	<!-- MaskedInput JS -->
+
+
+	<!-- Slick Slider JS -->
+
+
+	<!-- MarkDown JS -->
+
+
+
+
+	<!-- X-edit CSS -->
+
+
+
+
+
+
+	<!-- Dropzone JS -->
+
+
+	<!-- Cropper JS -->
+
+
+	<!-- Zoom JS -->
+
+
+	<!-- Nestable JS -->
+
+
+	<!-- PNotify JS -->
+
+
+	<!-- Fancytree JSs -->
+
+
+
+
+
+
+
+	<!-- Ladda JS -->
+
+
+	<!-- NProgress JS -->
+
+
+	<!-- Countdown JS -->
+
+
+
+	<!-- CanvasBG JS -->
 
 
 	<!-- Theme Scripts -->
-	<!--
-	<script th:src="@{/js/utility/utility.js}"></script>
-	-->
-
-	<script th:src="@{/js/demo/widgets_sidebar.js}"></script>
-	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
-	<!-- /Scripts -->
-
-	<!-- simplebar js -->
+	<script src="assets/js/utility/utility.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/demo/widgets_sidebar.js"></script>
 
 
-	<!--Data Tables js-->
 
-	<!-- Jvectormap JS -->
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable({
-				"autoWidth": true
-			});
-		})
-	</script>
-	<script th:if="${lowStockMsg}">
-		toastr.options = {
-			"closeButton": true,
-			"debug": false,
-			"newestOnTop": false,
-			"progressBar": false,
-			"positionClass": "toast-top-right",
-			"preventDuplicates": false,
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-		}
-		var message = "[[${lowStockMsg}]]";
-		toastr.warning(message);
-	</script>
-	<script th:if="${newOrderMsg}">
-		toastr.options = {
-			"closeButton": true,
-			"debug": false,
-			"newestOnTop": true,
-			"progressBar": false,
-			"positionClass": "toast-top-right",
-			"preventDuplicates": false,
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-		}
-		var message = "[[${newOrderMsg}]]";
-		toastr.info(message);
-	</script>
+
+
+
+	<script src="assets/js/pages/dashboard2.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="assets/js/demo/charts/highcharts.js"></script>
+
+
+
 	<!-- /Scripts -->
 
 </body>

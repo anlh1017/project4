@@ -3,7 +3,6 @@ package vn.aptech.project4.controller;
 import com.lowagie.text.DocumentException;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +10,12 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import vn.aptech.project4.entity.Customer;
 import vn.aptech.project4.entity.Inventory;
+import vn.aptech.project4.entity.Order;
 import vn.aptech.project4.report.CustomerPDFExporter;
 import vn.aptech.project4.repository.CustomerRepository;
 import vn.aptech.project4.repository.InventoryRepository;
 import vn.aptech.project4.repository.MembershipRepository;
+import vn.aptech.project4.repository.OrderRepository;
 import vn.aptech.project4.service.CustomerService1;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,15 +35,34 @@ public class CustomerController {
 	private CustomerService1 service;
 	private MembershipRepository membershipRepository;
 	private InventoryRepository inventoryRepository;
-	private int lowStock=0;
-	@Autowired
-	public CustomerController(CustomerRepository customerRepository, CustomerService1 service,MembershipRepository membershipRepository, InventoryRepository inventoryRepository) {
+	private OrderRepository orderRepository;
+	private int lowStock;
+	private  int newOrder;
+
+	public CustomerController(CustomerRepository customerRepository, CustomerService1 service,MembershipRepository membershipRepository, InventoryRepository inventoryRepository, OrderRepository orderRepository) {
 	 this.customerRepository = customerRepository;
 	 this.membershipRepository = membershipRepository;
 	 this.service = service;
 	 this.inventoryRepository = inventoryRepository;
+	 this.orderRepository = orderRepository;
+	}
+	public void getNewOrderNotification(Model theModel){
+		newOrder = 0;
+		List<Order> orders = orderRepository.findAllByStatus(1);
+		for(int i = 0; i<orders.size();i++){
+			newOrder++;
+		}
+		if(newOrder==1){
+			theModel.addAttribute("newOrderMsg",newOrder+" New Order");
+		}else if (newOrder>1){
+			theModel.addAttribute("newOrderMsg",newOrder+" New Orders");
+		}else{
+			theModel.addAttribute("newOrderMsg",null);
+		}
+		theModel.addAttribute("newOrder",newOrder);
 	}
 	public void getInventoryNotification(Model theModel){
+		getNewOrderNotification(theModel);
 		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
@@ -54,8 +74,10 @@ public class CustomerController {
 			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
 		}else if (lowStock>1){
 			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}else{
+			theModel.addAttribute("lowStockMsg",null);
 		}
-		theModel.addAttribute("lowInventory", lowStock);
+		theModel.addAttribute("lowInventory",lowStock);
 	}
 	@GetMapping("/list")
 	public String showCustomer(Model theModel, @Param("search") String search) {

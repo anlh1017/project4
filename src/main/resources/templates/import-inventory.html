@@ -168,7 +168,7 @@
 	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
 
 	<!-- /Scripts -->
-	<script th:if="lowStockMsg">
+	<script th:if="${lowStockMsg}">
 		toastr.options = {
 			"closeButton": true,
 			"debug": false,

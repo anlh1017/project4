@@ -1,7 +1,5 @@
 package vn.aptech.project4.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,8 +14,9 @@ public class Category {
 	@Column(name="category_name")
 	private String name;
 	
-	@OneToMany(mappedBy = "category",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	@JsonManagedReference
+	@OneToMany(mappedBy = "category",
+				cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH },
+				fetch = FetchType.LAZY)
 	private List<Product> products;
 
 	public Category() {

@@ -79,64 +79,67 @@
 
 				<!-- Content -->
 				<section id="content" class="animated fadeIn pt35 pb45">
-					<div class="content-right table-layout">
+					<!-- Content -->
+					<div id="content" class="animated fadeIn">
+						<div class="row">
+							<div class="col-md-6">
+								<!-- Standard Fields -->
+								<div class="panel">
+									<div class="panel-heading">
+										<span class="panel-title">Update Membership</span>
+									</div>
+									<div class="panel-body">
 
-						<!-- Column Center -->
-						<div class="chute chute-center pbn">
+										<form class="form-horizontal" action="#" th:action="@{/admin/membership/saveMembership}" th:object="${membership}" method="POST">
+										
+											
+														<input type="hidden" th:field="*{membership_id}" id="id" class="form-control">
+											
+											<div class="form-group">
+												<label for="membershipname" class="col-lg-3 control-label">Membership Name</label>
 
-							<!-- Products Status Table -->
-							<div class="row mn">
-								<div class="col-xs-12">
-									<div class="panel">
-										<div class="panel-heading ">
-											<span class="panel-title ptn">Import</span>
-										</div>
-										<i th:if="${message}?'${message}':''"></i>
-										<div class="panel-body pn mt15">
-											<div class="table-responsive">
-												<form th:action="@{/admin/inventory/export/{id}(id=${inventory.id})}" method="post">
-													<table
-														class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-														<thead>
-															<tr class="">
-																<th class="">Ingredient Name</th>
-																<th class="">Unit</th>
-																<th class="">Quantity</th>
-																<th class="">Unit</th>
-																<th class="">Equivalent Quantity</th>
-
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-
-																<td class=""
-																	th:text="${inventory.ingredient.ingredientName}"></td>
-																			<td class=""
-																	th:text="${inventory.unit}"></td>
-																<td class=""><input type="number" name="quantity"
-																	id="quantity" /></td>
-																				<td class=""
-																	th:text="${inventory.ingredient.unit}"></td>
-																<td class=""><input type="number"
-																	name="equiQuantity" id="equiQuantity" readonly /></td>
-															</tr>
-															<tr>
-																<td><input type="submit" name="submit"
-																	value="submit" /></td>
-															</tr>
-														</tbody>
-													</table>
-												</form>
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" th:field="*{membership_name}" id="membership_name" class="form-control" required="required">
+													</div>
+												</div>
 											</div>
-										</div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Membership Description</label>
+												
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<input type="text" th:field="*{membership_description}" id="membership_description" class="form-control" required="required">
+													</div>
+												 
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Discount</label>
+												
+												<div class="col-lg-8">
+												<input type="number" id="discount" class="form-control" th:field="*{discountValue}" required="required">
+												 
+												</div>
+											</div>
+											
+											
+											
+											<div class="form-group">
+												<div class="col-lg-8">
+													<div class="bs-component">
+														<button type="submit" class="btn btn-info col-2">Update Membership</button>
+													</div>
+												</div>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-
 						</div>
-						<!-- /Column Center -->
 					</div>
+					<!-- /Content -->
+
 				</section>
 				<!-- /Content -->
 
@@ -159,27 +162,19 @@
 	<!-- /Body Wrap  -->
 
 	<!-- Scripts -->
-
-	<!-- jQuery -->
 	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
 	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
 	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
 	<script th:src="@{/js/toastr.min.js}"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 	<!-- AnimatedSVGIcons -->
 	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
 	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
 	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
 	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
-
-	<!-- /Scripts -->
-	<script>
-		$(document).ready(function() {
-			$('#myTable').DataTable();
-		})
-	</script>
 	<script th:if="${lowStockMsg}">
-		/*<![CDATA[*/
 		toastr.options = {
 			"closeButton": true,
 			"debug": false,
@@ -199,18 +194,29 @@
 		}
 		var message = "[[${lowStockMsg}]]";
 		toastr.warning(message);
-		/*]]>*/
 	</script>
-	<script>
-		/*<![CDATA[*/
-		$('#quantity').on('change input',function () {
-			var quantity = $('#quantity').val();
-			var exQuantity = quantity*[[${inventory.ratio}]];
-			$('#equiQuantity').val(exQuantity);
-		})
-		/*]]>*/
+	<script th:if="${newOrderMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": true,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${newOrderMsg}]]";
+		toastr.info(message);
 	</script>
-	<!-- /Scripts -->
+
 </body>
 
 </html>

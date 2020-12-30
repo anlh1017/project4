@@ -30,6 +30,7 @@ public class ChartController {
 	private ProductRepository productRepository;
 	private InventoryRepository inventoryRepository;
 	private int lowStock;
+	private int newOrder;
 	@Autowired
 	public ChartController( OrderRepository orderRepository,OrderDetailsRepository orderDetailsRepository,CustomerRepository customerRepository,ProductRepository productRepository,InventoryRepository inventoryRepository) {
 		this.orderRepository = orderRepository;
@@ -38,20 +39,38 @@ public class ChartController {
 		this.productRepository = productRepository;
 		this.inventoryRepository = inventoryRepository;
 	}
+	public void getNewOrderNotification(Model theModel){
+		newOrder = 0;
+		List<Order> orders = orderRepository.findAllByStatus(1);
+		for(int i = 0; i<orders.size();i++){
+			newOrder++;
+		}
+		if(newOrder==1){
+			theModel.addAttribute("newOrderMsg",newOrder+" New Order");
+		}else if (newOrder>1){
+			theModel.addAttribute("newOrderMsg",newOrder+" New Orders");
+		}else{
+			theModel.addAttribute("newOrderMsg",null);
+		}
+		theModel.addAttribute("newOrder",newOrder);
+	}
 	public void getInventoryNotification(Model theModel){
+		getNewOrderNotification(theModel);
 		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
-				lowStock+=1;
+				lowStock++;
 			}
 		}
 		if(lowStock==1){
 			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
 		}else if (lowStock>1){
 			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}else{
+			theModel.addAttribute("lowStockMsg",null);
 		}
-		theModel.addAttribute("lowInventory", lowStock);
+		theModel.addAttribute("lowInventory",lowStock);
 	}
 	@GetMapping("/list")
 	public String showChart(Model model) {
