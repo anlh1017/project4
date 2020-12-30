@@ -86,7 +86,7 @@
 
 												<div class="col-lg-8">
 													<div class="bs-component">
-														<input type="number" th:field="*{customer_phone}" id="phone" class="form-control" required="required">
+														<input type="text" pattern="[0][0-9]{9}" th:field="*{customer_phone}" id="phone" class="form-control" required="required">
 													</div>
 												</div>
 											</div>

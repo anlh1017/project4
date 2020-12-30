@@ -90,7 +90,9 @@
 										<div class="panel-heading ">
 											<span class="panel-title ptn">Review List</span>
 										</div>
-										
+										<div th:if="${message != null}">
+    										<p class="text-warning">[[${message}]]</p>
+										</div>
 										<div class="panel-body pn mt15">
 											<div class="table-responsive">
 												<table id="review"
@@ -121,7 +123,7 @@
 															<td class="">
 																	<ul role="menu">
 																		
-																		<li><a th:href="@{/admin/review/deleteReview/{id}(id=${tempReview.review_id})}" class="btn btn-danger btn-sm mb-3" >Delete</a></li>
+																		<li><a th:href="@{/admin/review/deleteReview/{id}(id=${tempReview.review_id})}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm mb-3" >Delete</a></li>
 																		
 																	</ul>
 																
@@ -164,11 +166,13 @@
 
 	<!-- jQuery -->
 	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
-		<script
+	<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 			crossorigin="anonymous"></script>
-		<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
 
 	<script type="text/javascript"
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
@@ -194,7 +198,29 @@
 			$('#review').DataTable();
 		})
 	</script>
-	<!-- /Scripts -->
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
 
 </body>
 

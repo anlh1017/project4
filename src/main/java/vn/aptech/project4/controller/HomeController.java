@@ -156,6 +156,12 @@ public class HomeController {
 		String pw = customer.getCustomer_password();
 		pw="{noop}"+pw;
 		rpw="{noop}"+rpw;
+		for (Customer theCustomer : customerRepository.findAll()) {
+			if(theCustomer.getCustomerEmail().equals(customer.getCustomerEmail())) {
+				theModel.addAttribute("message","Email already exist");
+				return "guest/register";
+			}
+		}
 		if(!pw.equals(rpw)) {
 			theModel.addAttribute("message", "Password and Confirm Password not match !!");
 			theModel.addAttribute("customer", customer);
@@ -167,9 +173,10 @@ public class HomeController {
 		customer.setAuthority("ROLE_CUSTOMER");
 		Date date = new Date();
 		customer.setCustomerDate(date);
+		theModel.addAttribute("success", "Register is Success");
 		customerRepository.save(customer);
 		
-		return"guest/index";
+		return"guest/register";
 	}
 	@GetMapping("/loginError")
 	  public String loginError(Model model) {

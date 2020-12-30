@@ -91,6 +91,9 @@
 										<div class="panel-heading ">
 											<span class="panel-title ptn">Membership List</span>
 										</div>
+										<div >
+    										<h3 style="color: red" th:text="${messageMembership}"></h3>
+										</div>
 										<div th:if="${message != null}">
     										<p class="text-warning">[[${message}]]</p>
 										</div>

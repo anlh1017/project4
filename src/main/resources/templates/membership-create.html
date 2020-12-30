@@ -86,6 +86,9 @@
 									<div class="panel-heading">
 										<span class="panel-title">Create New Membership</span>
 									</div>
+									<div th:if="${error != null}">
+					 					<h3 class="text-danger" >[[${error}]]</h3>
+									</div>
 									<div class="panel-body">
 
 										<form class="form-horizontal" action="#" th:action="@{/admin/membership/saveMembership}" th:object="${membership}" method="Post">
@@ -112,7 +115,7 @@
 												<label class="col-lg-3 control-label">Discount</label>
 												
 												<div class="col-lg-8">
-												<input type="number" id="discount" class="form-control"
+												<input type="number" min="0" max="100" id="discount" class="form-control"
 															placeholder="Type Here..." th:field="*{discountValue}" required="required">
 												 
 												</div>

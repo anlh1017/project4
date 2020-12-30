@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import vn.aptech.project4.entity.Inventory;
 import vn.aptech.project4.entity.Review;
 import vn.aptech.project4.repository.InventoryRepository;
@@ -42,8 +44,9 @@ public class ReviewController {
 		return "review-list";
 	}
   @GetMapping("/deleteReview/{id}")
-	public String deleteReview(@PathVariable (value = "id") int id) {
+	public String deleteReview(@PathVariable (value = "id") int id, RedirectAttributes theModel) {
 		this.reviewRepository.deleteById(id);
+		theModel.addAttribute("successMsg","Delete Review is");
 		return"redirect:/admin/review/list";
 	}
 }

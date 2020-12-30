@@ -59,7 +59,12 @@
 					<span class="login100-form-title p-b-59">
 						Sign Up
 					</span>
-						<i th:text="${message}"></i>
+						<div th:if="${success != null}">
+					 	<h3 class="text-success" >[[${success}]]</h3>
+					</div>
+					<div th:if="${message != null}">
+					 	<h3 class="text-danger" >[[${message}]]</h3>
+					</div>
 						<input th:value="1" id="membership.membership_id" name="membership.membership_id" type="hidden"/>
 					 <div class="wrap-input100 validate-input" data-validate="Name is required">
 						<span class="label-input100">Full Name</span>
@@ -69,7 +74,7 @@
 					
 					<div class="wrap-input100 validate-input" data-validate="Phone is required">
 						<span class="label-input100">Phone Number</span>
-						<input class="input100" type="number" name="name" th:field="*{customer_phone}" required="required"  placeholder="Phone...">
+						<input class="input100" type="text" pattern="[0][0-9]{9}" name="name" th:field="*{customer_phone}" required="required"  placeholder="Phone...">
 						
 					</div> 
 					
@@ -81,7 +86,7 @@
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="email" th:field="*{customerEmail}" required="required" placeholder="Email addess...">
+						<input class="input100" type="email" name="email" th:field="*{customerEmail}" required="required" placeholder="Email addess...">
 						
 					</div>
 

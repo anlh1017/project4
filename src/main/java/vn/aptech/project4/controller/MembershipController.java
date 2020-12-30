@@ -63,6 +63,13 @@ public class MembershipController {
 	@PostMapping("/saveMembership")
 	public String saveMembership(@ModelAttribute("membership") Membership membership, ModelMap theModelMap,RedirectAttributes redirectAttributes) {
 		theModelMap.addAttribute("membership", membership);
+		for (Membership theMembership : membershipRepository.findAll()) {
+			if(theMembership.getMembership_name().equals(membership.getMembership_name())) {
+				redirectAttributes.addFlashAttribute("error","Membership Name Already Exist !!!");
+				return "redirect:/admin/membership/createMembership";
+			}
+			
+		}
 		if(null == membership.getMembership_id()){
 			redirectAttributes.addFlashAttribute("successMsg","Add New Membership ");
 		}else{
@@ -79,13 +86,22 @@ public class MembershipController {
 		return "membership-edit";
 	
 	}
+	@PostMapping("/editMembership")
+	public String editMembership(@ModelAttribute("membership") Membership membership, Model theModel, RedirectAttributes redirectA) {
+		
+		theModel.addAttribute("membership", membership);
+		redirectA.addFlashAttribute("successMsg", "Update Membership ");
+		
+		membershipRepository.save(membership);	
+		return"redirect:/admin/membership/list";
+	}
 	@GetMapping("/deleteMembership/{id}")
 	public String deleteMembership(@PathVariable (value = "id") int id, RedirectAttributes theModel) {
 		try {
 			this.membershipRepository.deleteById(id);
-			theModel.addAttribute("message","Cannot delete, please check customer !");
+			theModel.addAttribute("successMsg","Delete Membership is");
 		} catch (Exception e) {
-			theModel.addAttribute("message",e.getMessage());
+			theModel.addFlashAttribute("messageMembership","Cannot Delete, Please Check Customer !!!");
 		}
 		
 		return"redirect:/admin/membership/list";
