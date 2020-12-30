@@ -113,16 +113,16 @@ public class OrderController {
 			if(status==3){
 				Customer theCustomer = savedOrder.getCustomer();
 				if(theCustomer.getMembership().getMembership_id()!=13){
-					if(theCustomer.getTotal_expense()>=2000000){
-						Membership theMembership = membershipRepository.getOne(2);
+					if(theCustomer.getTotal_expense()>=4000000){
+						Membership theMembership = membershipRepository.getOne(4);
 						theCustomer.setMembership(theMembership);
 						customerRepository.save(theCustomer);
 					}else 	if(theCustomer.getTotal_expense()>=3000000){
 						Membership theMembership = membershipRepository.getOne(3);
 						theCustomer.setMembership(theMembership);
 						customerRepository.save(theCustomer);
-					}else 	if(theCustomer.getTotal_expense()>=4000000){
-						Membership theMembership = membershipRepository.getOne(4);
+					}else 	if(theCustomer.getTotal_expense()>=2000000){
+						Membership theMembership = membershipRepository.getOne(2);
 						theCustomer.setMembership(theMembership);
 						customerRepository.save(theCustomer);
 					}
