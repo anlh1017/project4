@@ -2,52 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Meta and Title -->
-<meta charset="utf-8">
-<title>Index</title>
-<meta name="keywords"
-	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
-<meta name="description"
-	content="AdminK - A Responsive HTML5 Admin UI Framework">
-<meta name="author" content="ThemeREX">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta and Title -->
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="keywords"
+          content="HTML5, Bootstrap 3, Admin Template, UI Theme"/>
+    <meta name="description"
+          content="AdminK - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="ThemeREX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Favicon -->
-<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}">
 
-<!-- Angular material -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/skin/css/angular-material.min.css}">
+    <!-- Angular material -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/angular-material.min.css}">
 
-<!-- Icomoon -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/fonts/icomoon/icomoon.css}">
+    <!-- Icomoon -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/fonts/icomoon/icomoon.css}">
 
-<!-- AnimatedSVGIcons -->
-<link rel="stylesheet" type="text/css"
-	href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+    <!-- AnimatedSVGIcons -->
+    <link rel="stylesheet" type="text/css"
+          href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
 
-<!-- c3charts -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/js/plugins/c3charts/c3.min.css}">
+    <!-- c3charts -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/plugins/c3charts/c3.min.css}">
 
-<!-- CSS - allcp forms -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/allcp/forms/css/forms.css}">
+    <!-- CSS - allcp forms -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/allcp/forms/css/forms.css}">
 
-<!-- mCustomScrollbar -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+    <!-- mCustomScrollbar -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
 
-<!-- CSS - theme -->
-<link rel="stylesheet" type="text/css"
-	th:href="@{/skin/default_skin/less/theme.css}">
-	<link rel="stylesheet" type="text/css"
-		  th:href="@{/skin/css/toastr.min.css}">
+    <!-- CSS - theme -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/default_skin/less/theme.css}">
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/toastr.min.css}">
 
 
-<!-- IE8 HTML5 support -->
-<!--[if lt IE 9]>
+    <!-- IE8 HTML5 support -->
+    <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -56,262 +56,256 @@
 
 <body class="sales-stats-page sb-top sb-top-lg">
 
-	<!-- Body Wrap -->
-	<div id="main">
+<!-- Body Wrap -->
+<div id="main">
 
-		<!-- Header  -->
-		<header th:replace="header::topheader" />
-		<!-- /Header -->
+    <!-- Header  -->
+    <header th:replace="header::topheader"/>
+    <!-- /Header -->
 
-		<!-- Sidebar  -->
-		<aside th:replace="sidebar::sidebar" id="sidebar_left" />
-		<!-- /Sidebar -->
+    <!-- Sidebar  -->
+    <aside th:replace="sidebar::sidebar" id="sidebar_left"/>
+    <!-- /Sidebar -->
 
-		<!-- Main Wrapper -->
-		<section id="content_wrapper" class="mb80">
-
-
-			<section class="content_container">
-
-				<div th:replace="topbar::wrapper" />
-				<header th:replace="topbar::main" />
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="mb80">
 
 
+        <section class="content_container">
 
-				<!-- Content -->
-				<section id="content" class="animated fadeIn pt35 pb45">
-					<div class="content-right table-layout">
-
-						<!-- Column Center -->
-						<div class="chute chute-center pbn">
-
-							<!-- Products Status Table -->
-							<div class="row mn">
-								<div class="col-xs-12">
-									<div class="panel">
-										<div class="panel-heading ">
-											<span class="panel-title ptn">Recipe</span>
-										</div>
-										<div>
-											<a th:href="@{/admin/ingredient/create}"
-												class="btn btn-rounded btn-primary">Add New Ingredient</a>
-										</div>
-										<div class="panel-body pn mt15">
-											<span style="color: red" th:text="${errorMsg}"></span>
-											<div class="section">
-												<p>Product Name:</p>
-												<p th:text="${product.productName}"></p>
-											</div>
-											<p>Cost:</p>
-											<div class="section" th:each="key:${costBySize}">
-												Size <span th:text="${key.key} + ': '"></span><span th:text="${#numbers.formatDecimal(key.value, 0, 'COMMA', 2, 'POINT')}"></span>
-											</div>
-											<div class="panel p25">
-												<div class="panel-heading">
-													<ul
-														class="nav panel-tabs-border panel-tabs panel-tabs-left">
-														<th:block th:each="temp,stat :${size}">
-															<li th:class="${stat.first} ? 'active' : ''"><a
-																th:href="'#tab1_'+${temp.id}" data-toggle="tab"
-																aria-expanded="true"><span th:text="${temp.name}"></span></a></li>
-														</th:block>
-
-													</ul>
-												</div>
-												<div class="panel-body mt25">
-													<div class="tab-content pn br-n">
-														<th:block th:each="tempSize,stat :${size}">
-															<div th:id="'tab1_'+${tempSize.id}" class="tab-pane"
-																th:classappend="${stat.first} ? 'active' : ''">
-																<div class="table-responsive">
-																	<table
-																		class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
-																		<thead>
-																			<tr class="">
-																				<th class="">Ingredient Name</th>
-																				<th class="">Ingredient Quantity</th>
-																				<th class="">Action</th>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		
-																				<th:block
-																					th:each="tempRecipe:${recipes}">
-											
-																					<tr>
-																						<th:block
-																							th:if="${tempSize.id}==${tempRecipe.size.id}">
-																							<td class=""
-																								th:text="${tempRecipe.productIngredient.ingredient.ingredientName}"></td>
-
-																							<td class="" th:text="${tempRecipe.quantity}"></td>
+            <div th:replace="topbar::wrapper"/>
+            <header th:replace="topbar::main"/>
 
 
-																							<td class="">
-																								<div class="btn-group text-right">
-																									<button type="button"
-																										class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
-																										data-toggle="dropdown" aria-expanded="false">
-																										Action <span class="caret"></span>
-																									</button>
-																									<ul class="dropdown-menu" role="menu">
+            <!-- Content -->
+            <section id="content" class="animated fadeIn pt35 pb45">
+                <div class="content-right table-layout">
+
+                    <!-- Column Center -->
+                    <div class="chute chute-center pbn">
+
+                        <!-- Products Status Table -->
+                        <div class="row mn">
+                            <div class="col-xs-12">
+                                <div class="panel">
+                                    <div class="panel-heading ">
+                                        <span class="panel-title ptn">Recipe</span>
+                                    </div>
+                                    <div>
+                                        <a th:href="@{/admin/ingredient/create}"
+                                           class="btn btn-rounded btn-primary">Add New Ingredient</a>
+                                    </div>
+                                    <div class="panel-body pn mt15">
+                                        <span style="color: red" th:text="${errorMsg}"></span>
+                                        <div class="section">
+                                            <p>Product Name:</p>
+                                            <p th:text="${product.productName}"></p>
+                                        </div>
+                                        <p>Cost:</p>
+                                        <div class="section" th:each="key:${costBySize}">
+                                            Size <span th:text="${key.key} + ': '"></span><span
+                                                th:text="${#numbers.formatDecimal(key.value, 0, 'COMMA', 2, 'POINT')}"></span>
+                                        </div>
+                                        <div class="panel p25">
+                                            <div class="panel-heading">
+                                                <ul
+                                                        class="nav panel-tabs-border panel-tabs panel-tabs-left">
+                                                    <th:block th:each="temp,stat :${size}">
+                                                        <li th:class="${stat.first} ? 'active' : ''"><a
+                                                                th:href="'#tab1_'+${temp.id}" data-toggle="tab"
+                                                                aria-expanded="true"><span
+                                                                th:text="${temp.name}"></span></a></li>
+                                                    </th:block>
+
+                                                </ul>
+                                            </div>
+                                            <div class="panel-body mt25">
+                                                <div class="tab-content pn br-n">
+                                                    <th:block th:each="tempSize,stat :${size}">
+                                                        <div th:id="'tab1_'+${tempSize.id}" class="tab-pane"
+                                                             th:classappend="${stat.first} ? 'active' : ''">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                        class="table allcp-form theme-warning tc-checkbox-1 table-style-2 btn-gradient-grey fs13">
+                                                                    <thead>
+                                                                    <tr class="">
+                                                                        <th class="">Ingredient Name</th>
+                                                                        <th class="">Ingredient Quantity</th>
+                                                                        <th class="">Unit</th>
+                                                                        <th class="">Action</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                    <th:block
+                                                                            th:each="tempRecipe:${recipes}">
+
+                                                                        <tr>
+                                                                            <th:block
+                                                                                    th:if="${tempSize.id}==${tempRecipe.size.id}">
+                                                                                <td class=""
+                                                                                    th:text="${tempRecipe.productIngredient.ingredient.ingredientName}"></td>
+                                                                                <td class=""
+                                                                                    th:text="${tempRecipe.quantity}"></td>
+                                                                                <td class=""
+                                                                                    th:text="${tempRecipe.productIngredient.ingredient.unit}"></td>
+                                                                                <td class="">
+                                                                                    <div class="btn-group text-right">
+                                                                                        <button type="button"
+                                                                                                class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+                                                                                                data-toggle="dropdown"
+                                                                                                aria-expanded="false">
+                                                                                            Action <span
+                                                                                                class="caret"></span>
+                                                                                        </button>
+                                                                                        <ul class="dropdown-menu"
+                                                                                            role="menu">
 
 
-																										<li><a
-																											th:href="@{/admin/recipe/update/{id}(id=${tempRecipe.id})}">Edit</a></li>
+                                                                                            <li><a
+                                                                                                    th:href="@{/admin/recipe/update/{id}(id=${tempRecipe.id})}">Edit</a>
+                                                                                            </li>
 
-																										<li><a th:href="@{/admin/recipe/delete/{id}(id=${tempRecipe.id})}">Delete</a></li>
-																										<li class="divider"></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</th:block>
-																					</tr>
-																				</th:block>
-																
-
-																		</tbody>
-																	</table>
-																	<div>
-																		<a th:href="@{/admin/product/updatePrice/{id}(id=${product.id})}"
-																		   class="btn btn-rounded btn-primary">Update Price</a>
-																	</div>
-																</div>
-															</div>
-														</th:block>
-													</div>
-												</div>
-											</div>
-											<form
-												th:action="@{/admin/recipe/create/{id}/ingredient(id=${product.id})}"
-												method="POST">
-												<div class="section">
-													<label class="field select">Ingredient <select
-														id="ingredientId" name="ingredientId">
-															<option th:each="temp:${ingredients}"
-																th:value="${temp.id}" th:text="${temp.ingredientName}"></option>
-
-													</select> <i class="arrow"></i>
-													</label>
-												</div>
+                                                                                            <li>
+                                                                                                <a th:href="@{/admin/recipe/delete/{id}(id=${tempRecipe.id})}">Delete</a>
+                                                                                            </li>
+                                                                                            <li class="divider"></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </th:block>
+                                                                        </tr>
+                                                                    </th:block>
 
 
+                                                                    </tbody>
+                                                                </table>
+                                                                <div>
+                                                                    <a th:href="@{/admin/product/updatePrice/{id}(id=${product.id})}"
+                                                                       class="btn btn-rounded btn-primary">Update
+                                                                        Price</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form
+                                                th:action="@{/admin/recipe/create/{id}/ingredient(id=${product.id})}"
+                                                method="POST">
+                                            <div class="section">
+                                                <label class="field select">Ingredient <select
+                                                        id="ingredientId" name="ingredientId">
+                                                    <option th:each="temp:${ingredients}"
+                                                            th:value="${temp.id}"
+                                                            th:text="${temp.ingredientName}"></option>
 
-									<!--			<div class="section">
-													<label class="field select"> Size <select
-														id="sizeId" name="sizeId">
-															<option th:each="temp:${size}" th:value="${temp.id}"
-																th:text="${temp.name}"></option>
+                                                </select> <i class="arrow"></i>
+                                                </label>
+                                            </div>
+                                            <input type="submit" value="Add" name="submit"/>
+                                        </form>
 
-													</select> <i class="arrow"></i>
-													</label>
-												</div>-->
-									<!--			<div class="section">
-													Quantity: <input name="quantity" type="number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-												</div>-->
-												<input type="submit" value="Submit" name="submit" />
-											</form>
+                    </div>
+                    <!-- /Column Center -->
+                </div>
+            </section>
+            <!-- /Content -->
 
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<!-- /Column Center -->
-					</div>
-				</section>
-				<!-- /Content -->
-
-				<!-- Page Footer -->
-				<footer id="content-footer">
-					<div class="row">
-						<div class="col-md-12 text-center">
+            <!-- Page Footer -->
+            <footer id="content-footer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
 							<span class="footer-legal">© 2016 All rights reserved. <a
-								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
-						</div>
-					</div>
-				</footer>
-				<!-- /Page Footer -->
+                                    href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- /Page Footer -->
 
-			</section>
-		</section>
+        </section>
+    </section>
 
 
-	</div>
-	<!-- /Body Wrap  -->
+</div>
+<!-- /Body Wrap  -->
 
-	<!-- Scripts -->
-	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
-	<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"></script>
-	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
-	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
-	<script th:src="@{/js/toastr.min.js}"></script>
+<!-- Scripts -->
+<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+<script th:src="@{/js/toastr.min.js}"></script>
 
-	<script type="text/javascript"
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-	<script th:src="@{/js/easing.min.js}"></script>
-	<script th:src="@{/js/hoverIntent.js}"></script>
-	<script th:src="@{/js/superfish.min.js}"></script>
-	<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
-	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
-	<script th:src="@{/js/owl.carousel.min.js}"></script>
-	<script th:src="@{/js/jquery.sticky.js}"></script>
-	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
-	<script th:src="@{/js/parallax.min.js}"></script>
-	<script th:src="@{/js/waypoints.min.js}"></script>
-	<script th:src="@{/js/jquery.counterup.min.js}"></script>
-	<script th:src="@{/js/mail-script.js}"></script>
-	<script th:src="@{/js/main.js}"></script>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+<script th:src="@{/js/easing.min.js}"></script>
+<script th:src="@{/js/hoverIntent.js}"></script>
+<script th:src="@{/js/superfish.min.js}"></script>
+<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/parallax.min.js}"></script>
+<script th:src="@{/js/waypoints.min.js}"></script>
+<script th:src="@{/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/js/mail-script.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 
-	<script th:src="@{/stars/star-rating.min.js}"></script>
-	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
-	<script th:if="${lowStockMsg}">
-		toastr.options = {
-			"closeButton": true,
-			"debug": false,
-			"newestOnTop": false,
-			"progressBar": false,
-			"positionClass": "toast-top-right",
-			"preventDuplicates": false,
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-		}
-		var message = "[[${lowStockMsg}]]";
-		toastr.warning(message);
-	</script>
-	<script th:if="${newOrderMsg}">
-		toastr.options = {
-			"closeButton": true,
-			"debug": false,
-			"newestOnTop": true,
-			"progressBar": false,
-			"positionClass": "toast-top-right",
-			"preventDuplicates": false,
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-		}
-		var message = "[[${newOrderMsg}]]";
-		toastr.info(message);
-	</script>
+<script th:src="@{/stars/star-rating.min.js}"></script>
+<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+<script th:if="${lowStockMsg}">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    var message = "[[${lowStockMsg}]]";
+    toastr.warning(message);
+</script>
+<script th:if="${newOrderMsg}">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    var message = "[[${newOrderMsg}]]";
+    toastr.info(message);
+</script>
 </body>
 
 </html>
