@@ -36,13 +36,21 @@ public class CategoryController {
 	this.inventoryRepository = inventoryRepository;
 }
 	public void getInventoryNotification(Model theModel){
+		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
 			if(temp.getQuantity()<temp.getSafetyStock()){
 				lowStock+=1;
 			}
 		}
-		theModel.addAttribute("lowInventory", lowStock);
+		if(lowStock==1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
+		}else if (lowStock>1){
+			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}else{
+			theModel.addAttribute("lowStockMsg",null);
+		}
+		theModel.addAttribute("lowInventory",lowStock);
 	}
 @GetMapping("/list")
 public String showCategory(Model theModel,@ModelAttribute("successMsg")String message) {

@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.aptech.project4.entity.*;
 import vn.aptech.project4.repository.*;
-import vn.aptech.project4.service.ProductService;
 import vn.aptech.project4.storage.StorageService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,30 +28,28 @@ public class ProductController {
     private ProductSizeRepository productSizeRepository;
     private StorageService storageService;
     private CategoryRepository categoryRepository;
-    private ProductService serviceProduct;
     private SizeRepository sizeRepository;
     private RecipeRepository recipeRepository;
-    private ProductIngredientRepository productIngredientRepository;
     private InventoryRepository inventoryRepository;
+    private OrderRepository orderRepository;
     private int lowStock;
+    private int newOrder;
 
-    @Autowired
     public ProductController(ProductRepository productRepository, ProductSizeRepository productSizeRepository,
-                             StorageService storageService, CategoryRepository categoryRepository, ProductService serviceProduct, SizeRepository sizeRepository, RecipeRepository recipeRepository, ProductIngredientRepository productIngredientRepository,InventoryRepository inventoryRepository) {
+                             StorageService storageService, CategoryRepository categoryRepository, SizeRepository sizeRepository, RecipeRepository recipeRepository,InventoryRepository inventoryRepository,OrderRepository orderRepository) {
         this.productRepository = productRepository;
         this.productSizeRepository = productSizeRepository;
         this.storageService = storageService;
         this.categoryRepository = categoryRepository;
-        this.serviceProduct = serviceProduct;
         this.sizeRepository = sizeRepository;
         this.recipeRepository = recipeRepository;
-        this.productIngredientRepository = productIngredientRepository;
         this.inventoryRepository = inventoryRepository;
+        this.orderRepository = orderRepository;
     }
 
     @GetMapping("/list")
     public String ShowListProducts(Model theModel, @ModelAttribute(value="successMsg") String message) {
-        getInventoryNotification(theModel);
+        getNotification(theModel);
         if(message.isEmpty()){
             message=null;
         }
@@ -64,25 +61,40 @@ public class ProductController {
 		theModel.addAttribute("content_view", new String("sales-stats-products"));
         return "index";
     }
-    public void getInventoryNotification(Model theModel){
-        lowStock=0;
+    public void getNotification(Model theModel){
+        newOrder = 0;
+        List<Order> orders = orderRepository.findAllByStatus(1);
+        for (int i = 0; i < orders.size(); i++) {
+            newOrder++;
+        }
+        if (newOrder == 1) {
+            theModel.addAttribute("newOrderMsg", newOrder + " New Order");
+        } else if (newOrder > 1) {
+            theModel.addAttribute("newOrderMsg", newOrder + " New Orders");
+        } else {
+            theModel.addAttribute("newOrderMsg", null);
+        }
+        theModel.addAttribute("newOrder", newOrder);
+        lowStock = 0;
         List<Inventory> theList = inventoryRepository.findAll();
-        for(Inventory temp:theList){
-            if(temp.getQuantity()<temp.getSafetyStock()){
-                lowStock+=1;
+        for (Inventory temp : theList) {
+            if (temp.getQuantity() < temp.getSafetyStock()) {
+                lowStock += 1;
             }
         }
-        if(lowStock==1){
-            theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
-        }else if (lowStock>1){
-            theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+        if (lowStock == 1) {
+            theModel.addAttribute("lowStockMsg", lowStock + " Item Inventory Low");
+        } else if (lowStock > 1) {
+            theModel.addAttribute("lowStockMsg", lowStock + " Items Inventory Low");
+        } else {
+            theModel.addAttribute("lowStockMsg", null);
         }
         theModel.addAttribute("lowInventory", lowStock);
     }
 
     @GetMapping("/create")
     public String createProduct(Model theModel, @RequestParam(value = "message", required = false) String message) {
-        getInventoryNotification(theModel);
+        getNotification(theModel);
         List<Category> category = categoryRepository.findAll();
         List<Size> size = sizeRepository.findAll();
         theModel.addAttribute("size", size);
@@ -203,7 +215,7 @@ public class ProductController {
 	}
 	@GetMapping("/editProduct/{id}")
     public String editProduct(@PathVariable(value = "id") int id, Model theModel, HttpServletRequest request) {
-        getInventoryNotification(theModel);
+        getNotification(theModel);
         Product theProduct = productRepository.findById(id).get();
         List<Category> category = categoryRepository.findAll();
         theModel.addAttribute("category", category);
@@ -271,7 +283,7 @@ public class ProductController {
         }
         @GetMapping("/updatePrice/{id}")
      public String updatePrice(@PathVariable(value = "id") int theId, Model theModel, @ModelAttribute(value = "error")String message){
-            getInventoryNotification(theModel);
+            getNotification(theModel);
             Product theProduct = productRepository.findById(theId).get();
             List<Recipe> recipes = recipeRepository.findAll();
             List<Recipe> viewRecipes = new ArrayList<Recipe>();

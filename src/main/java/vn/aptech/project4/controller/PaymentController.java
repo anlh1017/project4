@@ -1,12 +1,8 @@
 package vn.aptech.project4.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.paypal.api.payments.Links;
-import com.paypal.api.payments.Payment;
-import com.paypal.base.rest.PayPalRESTException;
-
 import vn.aptech.project4.config.PaypalPaymentIntent;
 import vn.aptech.project4.config.PaypalPaymentMethod;
 import vn.aptech.project4.entity.Cart;
-import vn.aptech.project4.entity.Customer;
-import vn.aptech.project4.entity.Order;
-import vn.aptech.project4.entity.OrderDetail;
 import vn.aptech.project4.entity.Product;
 import vn.aptech.project4.entity.ProductSize;
 import vn.aptech.project4.entity.Utils;
-import vn.aptech.project4.repository.CustomerRepository;
-import vn.aptech.project4.repository.OrderDetailsRepository;
-import vn.aptech.project4.repository.OrderRepository;
-import vn.aptech.project4.repository.ProductRepository;
-import vn.aptech.project4.repository.ProductSizeRepository;
+import vn.aptech.project4.repository.*;
 import vn.aptech.project4.service.PaypalService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Optional;
 
 
 @Controller

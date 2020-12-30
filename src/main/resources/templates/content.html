@@ -390,6 +390,7 @@
 
 							<thead>
 								<tr class="">
+									<th>No.</th>
 									<th class="">Order ID</th>
 									<th class="">Order Date</th>
 									<th class="">Customer</th>
@@ -401,7 +402,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="tempOrder : ${orders}">
+								<tr th:each="tempOrder,stat : ${orders}">
+									<td class="" th:text="${stat.count}"></td>
 									<td class=""><a
 										th:href="@{/admin/order/viewDetail/{id}(id=${tempOrder.id})}">
 											<span th:text="${tempOrder.id}"></span>
@@ -410,7 +412,7 @@
 									<td class="" th:text="${tempOrder.customer.customer_name}"></td>
 									<td class="" th:text="${tempOrder.shippingaddress}"></td>
 									<td class="" th:text="${tempOrder.time}"></td>
-									<td class="" th:text="${tempOrder.total} + ' VND'"></td>
+									<td class="" th:text="${#numbers.formatDecimal(tempOrder.total, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 									<td class="" th:text="${tempOrder.payment}"></td>
 									<td class="">
 										<div class="btn-group text-right">

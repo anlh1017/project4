@@ -1,6 +1,5 @@
 package vn.aptech.project4.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -8,8 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.aptech.project4.entity.Ingredient;
 import vn.aptech.project4.entity.Inventory;
+import vn.aptech.project4.entity.Order;
 import vn.aptech.project4.repository.IngredientRepository;
 import vn.aptech.project4.repository.InventoryRepository;
+import vn.aptech.project4.repository.OrderRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,13 +20,47 @@ import java.util.Optional;
 public class IngredientController {
 	private IngredientRepository ingredientRepository;
 	private InventoryRepository inventoryRepository;
+	private OrderRepository orderRepository;
 	private int lowStock;
-	@Autowired
-	public IngredientController(IngredientRepository ingredientRepository,InventoryRepository inventoryRepository) {
+	private int newOrder;
+
+	public IngredientController(IngredientRepository ingredientRepository,InventoryRepository inventoryRepository, OrderRepository orderRepository) {
 		this.ingredientRepository = ingredientRepository;
 		this.inventoryRepository = inventoryRepository;
+		this.orderRepository = orderRepository;
+	}
+	public void getNewOrderNotification(Model theModel){
+		newOrder = 0;
+		List<Order> orders = orderRepository.findAllByStatus(1);
+		for (int i = 0; i < orders.size(); i++) {
+			newOrder++;
+		}
+		if (newOrder == 1) {
+			theModel.addAttribute("newOrderMsg", newOrder + " New Order");
+		} else if (newOrder > 1) {
+			theModel.addAttribute("newOrderMsg", newOrder + " New Orders");
+		} else {
+			theModel.addAttribute("newOrderMsg", null);
+		}
+		theModel.addAttribute("newOrder", newOrder);
+		lowStock = 0;
+		List<Inventory> theList = inventoryRepository.findAll();
+		for (Inventory temp : theList) {
+			if (temp.getQuantity() < temp.getSafetyStock()) {
+				lowStock += 1;
+			}
+		}
+		if (lowStock == 1) {
+			theModel.addAttribute("lowStockMsg", lowStock + " Item Inventory Low");
+		} else if (lowStock > 1) {
+			theModel.addAttribute("lowStockMsg", lowStock + " Items Inventory Low");
+		} else {
+			theModel.addAttribute("lowStockMsg", null);
+		}
+		theModel.addAttribute("lowInventory", lowStock);
 	}
 	public void getInventoryNotification(Model theModel){
+		getNewOrderNotification(theModel);
 		lowStock=0;
 		List<Inventory> theList = inventoryRepository.findAll();
 		for(Inventory temp:theList){
@@ -37,15 +72,19 @@ public class IngredientController {
 			theModel.addAttribute("lowStockMsg",lowStock+" Item Inventory Low");
 		}else if (lowStock>1){
 			theModel.addAttribute("lowStockMsg",lowStock+" Items Inventory Low");
+		}else{
+			theModel.addAttribute("lowStockMsg",null);
 		}
-		theModel.addAttribute("lowInventory", lowStock);
+		theModel.addAttribute("lowInventory",lowStock);
 	}
 	@GetMapping("/list")
-	public String showIngredients(Model theModel,@ModelAttribute(value = "successMsg")String message) {
+	public String showIngredients(Model theModel,@ModelAttribute(value = "successMsg")String message,@ModelAttribute(value = "errorMsg")String errMessage) {
 		if(message.isEmpty()){
 			message=null;
 		}
+		getInventoryNotification(theModel);
 		theModel.addAttribute("successMsg",message);
+		theModel.addAttribute("errorMsg",errMessage);
 		getInventoryNotification(theModel);
 		theModel.addAttribute("ingredients", ingredientRepository.findAll() );
 		return "list-ingredients";
@@ -61,6 +100,11 @@ public class IngredientController {
 	@PostMapping("/create")
 	public String addIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap, RedirectAttributes redirectAttributes) {
 		theModelMap.addAttribute("ingredient", ingredient);
+		Optional<Ingredient> testIngredient = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
+		if(testIngredient.isPresent()){
+			redirectAttributes.addFlashAttribute("errorMsg","Ingredient Name already exists!");
+			return "redirect:/admin/ingredient/list";
+		}
 		ingredientRepository.save(ingredient);
 		Inventory inventory = new Inventory();
 		inventory.setIngredient(ingredient);

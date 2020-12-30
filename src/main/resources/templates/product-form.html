@@ -264,7 +264,49 @@
 	<script th:src="@{/js/pages/dashboard2.js}"></script>
 	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
 
-
+	<script th:if="${lowStockMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": true,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${lowStockMsg}]]";
+		toastr.warning(message);
+		<!-- /Scripts -->
+	</script>
+	<script th:if="${newOrderMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": true,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${newOrderMsg}]]";
+		toastr.info(message);
+	</script>
 
 	<!-- /Scripts -->
 	<script type="text/javascript">
@@ -273,7 +315,7 @@
 			alert("The productName is exist");
 		}
 	</script>
-	<script type="text/javascript">
+	<script type="text/javascript" th:if="${messageExist}">
 		var alertWhenCartsNull = [(${messageExist})]+"";
 		if(alertWhenCartsNull == "true"){
 			alert("The file Image is exist");

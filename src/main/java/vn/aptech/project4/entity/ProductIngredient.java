@@ -1,7 +1,6 @@
 package vn.aptech.project4.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -59,17 +58,7 @@ public class ProductIngredient {
 		this.ingredient = ingredient;
 		this.product = product;
 	}
-	public void addRecipe(Recipe recipe) {
-		if(recipes==null) {
-			recipes= new ArrayList<>();
-		}
-		recipes.add(recipe);
-	}
-	public void removeRecipe(Recipe recipe) {
-		if(recipes.contains(recipe)) {
-			recipes.remove(recipe);
-		}
-	}
+
 	@Override
 	public String toString() {
 		return "ProductIngredient [id=" + id + ", ingredientId=" + ingredient.getId() + ", productId=" + product.getId() + ", recipes="

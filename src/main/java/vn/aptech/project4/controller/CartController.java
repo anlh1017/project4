@@ -44,20 +44,10 @@ public class CartController {
 		this.customerRepository=customerRepository;
 		this.inventoryRepository = inventoryRepository;
 	}
-	public void getInventoryNotification(Model theModel){
-		List<Inventory> theList = inventoryRepository.findAll();
-		for(Inventory temp:theList){
-			if(temp.getQuantity()<temp.getSafetyStock()){
-				lowStock+=1;
-			}
-		}
-		theModel.addAttribute("lowInventory", lowStock);
-	}
 	public static List<Cart> carts = new ArrayList<>();
 	String alertWhenCartsNull = "";
 	@RequestMapping(value = "/cart")
 	private String showCart(Model theModel, HttpSession session,Authentication authentication) {
-		getInventoryNotification(theModel);
 		String cusEmail = authentication.getName();
 		Customer customer = customerRepository.findByCustomerEmail(cusEmail).get();
 		theModel.addAttribute("customer", customer);
@@ -80,7 +70,6 @@ public class CartController {
 			alertWhenCartsNull = "true";
 			return "redirect:/cart";
 		}
-		getInventoryNotification(theModel);
 		String cusEmail = authentication.getName();
 		Customer customer = customerRepository.findByCustomerEmail(cusEmail).get();
 		theModel.addAttribute("customer", customer);
@@ -293,7 +282,6 @@ prosize=prosizes;
 	
 	@GetMapping("/payment")
 	public String payment(Model theModel,HttpServletRequest request, Authentication authentication, @RequestParam(value="shippingaddress")String shippingAddress,@RequestParam(value="time")String time) {
-		getInventoryNotification(theModel);
 		String cusEmail = authentication.getName();
 		Customer customer = customerRepository.findByCustomerEmail(cusEmail).get();
 		int tong = 0;

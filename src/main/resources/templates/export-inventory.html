@@ -178,7 +178,7 @@
 			$('#myTable').DataTable();
 		})
 	</script>
-	<script th:if="lowStockMsg">
+	<script th:if="${lowStockMsg}">
 		/*<![CDATA[*/
 		toastr.options = {
 			"closeButton": true,

@@ -42,6 +42,9 @@
 <!-- CSS - theme -->
 <link rel="stylesheet" type="text/css"
 	th:href="@{/skin/default_skin/less/theme.css}">
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
+
 
 <!-- IE8 HTML5 support -->
 <!--[if lt IE 9]>
@@ -94,16 +97,15 @@
 												class="btn btn-rounded btn-primary">Add New Ingredient</a>
 										</div>
 										<div class="panel-body pn mt15">
-
+											<span style="color: red" th:text="${errorMsg}"></span>
 											<div class="section">
 												<p>Product Name:</p>
 												<p th:text="${product.productName}"></p>
 											</div>
 											<p>Cost:</p>
 											<div class="section" th:each="key:${costBySize}">
-												Size <span th:text="${key.key}"></span><span th:text="${key.value}"></span>
+												Size <span th:text="${key.key} + ': '"></span><span th:text="${#numbers.formatDecimal(key.value, 0, 'COMMA', 2, 'POINT')}"></span>
 											</div>
-
 											<div class="panel p25">
 												<div class="panel-heading">
 													<ul
@@ -241,45 +243,75 @@
 	<!-- /Body Wrap  -->
 
 	<!-- Scripts -->
-
-	<!-- jQuery -->
-	<script th:src="@{/js/jquery/jquery-1.12.3.min.js}"></script>
-	<script th:src="@{/js/jquery/jquery_ui/jquery-ui.min.js}"></script>
-
-	<!-- AnimatedSVGIcons -->
-	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
-	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
-
-	<!-- Scroll -->
+	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
 	<script
-		th:src="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js}"></script>
-	<!-- HighCharts Plugin -->
-	<script th:src="@{/js/plugins/highcharts/highcharts.js}"></script>
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
 
-	<!-- Plugins -->
-	<script th:src="@{/js/plugins/c3charts/d3.min.js}"></script>
-	<script th:src="@{/js/plugins/c3charts/c3.min.js}"></script>
-	<script th:src="@{/js/plugins/circles/circles.js}"></script>
-
-	<!-- Jvectormap JS -->
-	<script th:src="@{/js/plugins/jvectormap/jquery.jvectormap.min.js}"></script>
-	<script
-		th:src="@{/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js}"></script>
-	<script
-		th:src="@{/js/plugins/jvectormap/assets/jquery-jvectormap-world-mill-en.js}"></script>
-	<!-- Theme Scripts -->
-	<script th:src="@{/js/utility/utility.js}"></script>
-	<script th:src="@{/js/demo/demo.js}"></script>
+	<script type="text/javascript"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script th:src="@{/js/easing.min.js}"></script>
+	<script th:src="@{/js/hoverIntent.js}"></script>
+	<script th:src="@{/js/superfish.min.js}"></script>
+	<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.sticky.js}"></script>
+	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/js/parallax.min.js}"></script>
+	<script th:src="@{/js/waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.counterup.min.js}"></script>
+	<script th:src="@{/js/mail-script.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
-	<script th:src="@{/js/demo/widgets_sidebar.js}"></script>
-	<script th:src="@{/js/pages/dashboard2.js}"></script>
-	<script th:src="@{/js/demo/charts/highcharts.js}"></script>
-	<!-- /Scripts -->
 
-	<!-- /Scripts -->
-
+	<script th:src="@{/stars/star-rating.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:if="${lowStockMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${lowStockMsg}]]";
+		toastr.warning(message);
+	</script>
+	<script th:if="${newOrderMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": true,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${newOrderMsg}]]";
+		toastr.info(message);
+	</script>
 </body>
 
 </html>

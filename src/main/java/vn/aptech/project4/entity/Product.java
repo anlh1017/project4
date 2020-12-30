@@ -1,7 +1,5 @@
 package vn.aptech.project4.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -13,17 +11,16 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="productId", updatable = false, nullable = false)
-	private int id;
+	protected int id;
 	@NotBlank
 	@Column(name="productName")
-	private String productName;
+	protected String productName;
 
 	@Column(name="description")
-	private String description;
+	protected String description;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinColumn(name="category_id")
-	@JsonBackReference
 	private Category category;
 	
 	@Column(name="image")
@@ -42,7 +39,6 @@ public class Product {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ProductIngredient> productIngredients;
 	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "product")
-
 	private List<ProductSize> sizes;
 	public Product() {
 	}

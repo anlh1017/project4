@@ -13,7 +13,7 @@ public class Size {
 	@Column(name="name")
 	private String name;
 	@OneToMany(mappedBy = "size")
-	private List<ProductSize> products = new ArrayList<ProductSize>();
+	private List<ProductSize> products;
 	public Size() {
 	}
 	public Size(int id, String name) {
