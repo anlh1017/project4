@@ -139,8 +139,9 @@ public class InventoryController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editInventory(Model theModel, @PathVariable(value = "id") int id) {
+    public String editInventory(Model theModel, @PathVariable(value = "id") int id, @ModelAttribute(value = "errorMsg")String message) {
         getNotification(theModel);
+        theModel.addAttribute("errorMsg",message);
         Inventory inventory = inventoryRepository.findById(id).get();
         theModel.addAttribute("inventory", inventory);
         return "update-inventory";
@@ -150,6 +151,18 @@ public class InventoryController {
     public String saveInventory(ModelMap modelMap, @ModelAttribute(value = "inventory") Inventory inventory, Model theModel, RedirectAttributes redirectAttributes) {
         modelMap.addAttribute("inventory", inventory);
         redirectAttributes.addFlashAttribute("successMsg", "Update ");
+        if(inventory.getUnit().equals("N/A")||inventory.getUnit().isEmpty()){
+            redirectAttributes.addFlashAttribute("errorMsg","Invalid Unit!");
+            return "redirect:/admin/inventory/edit/"+inventory.getId();
+        }
+        if(inventory.getVendorName().equals("N/A")||inventory.getVendorName().isEmpty()){
+            redirectAttributes.addFlashAttribute("errorMsg","Invalid Vendor Name!");
+            return "redirect:/admin/inventory/edit/"+inventory.getId();
+        }
+        if(inventory.getPrice()<=0){
+            redirectAttributes.addFlashAttribute("errorMsg","Price must be greater than 0!");
+            return "redirect:/admin/inventory/edit/"+inventory.getId();
+        }
         inventory.setStatus(2);
         inventoryRepository.save(inventory);
         theModel.addAttribute("inventory", inventory);

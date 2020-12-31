@@ -38,6 +38,8 @@
 	th:href="@{/allcp/forms/css/forms.css}">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
 </head>
 <body>
 	<header th:replace="guest/headerClient::header"></header>
@@ -55,6 +57,8 @@
 			</div>
 		</div>
 	</section>
+	<!-- <div class="alert alert-danger" style="text-align: center;" role="alert" th:text="${cartnull}" th:if="${cartnull}"></div> -->
+	
 	<section style="background-color: white;"
 		class="animated fadeIn pt35 pb45" th:fragment="sales-stats-purchases">
 		<div class="content-right table-layout">
@@ -79,13 +83,7 @@
 									Address:<input th:value="${customer.address}" type="text"
 										id="addressSend" name="addressSend" />
 								</h6>
-								<!-- <div id="notices">
-									<div>Payment:</div>
-									<input type="radio" value="${order.payment}"
-										th:field="*{order.payment}" /><br>
-										 <input	type="radio" value="" th:field="*{order.payment}" id="paymentSend" name="paymentSend"/>Paypal
-
-								</div> -->
+			
 								
 								<h6>
 									Delivery Time:<input type="text" name="time" id="time" />
@@ -145,9 +143,9 @@
 											th:name="${tempProduct.idCart}"
 											th:onchange="updateQuantity(this.name)" /></td>
 
-										<td class="" th:text="${tempProduct.price} + ' VND'"></td>
+										<td class="" th:text="${#numbers.formatDecimal(tempProduct.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 										<td class=""><span
-											th:text="${tempProduct.quantity}*${tempProduct.price} + ' VND'"></span></td>
+											th:text="${#numbers.formatDecimal(tempProduct.quantity*tempProduct.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></span></td>
 										<td class="">
 											<div class="btn-group text-right">
 												<a class="btn btn-danger"
@@ -160,7 +158,7 @@
 								</tbody>
 							</table>
 							<h3 class="text-right">
-								Total: <span class="" th:text="${tong} + ' VND'"></span>
+								Total: <span class="" th:text="${#numbers.formatDecimal(tong, 0, 'COMMA', 0, 'POINT')} + ' VND'"></span>
 							</h3>
 							<div>
 								<p style="text-align: center">
@@ -186,27 +184,31 @@
 
 	<script th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
 	<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
+
 	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-	<script th:src="@{/js/easing.min.js}"></script>
-	<script th:src="@{/js/hoverIntent.js}"></script>
-	<script th:src="@{/js/superfish.min.js}"></script>
-	<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
-	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
-	<script th:src="@{/js/owl.carousel.min.js}"></script>
-	<script th:src="@{/js/jquery.sticky.js}"></script>
-	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
-	<script th:src="@{/js/parallax.min.js}"></script>
-	<script th:src="@{/js/waypoints.min.js}"></script>
-	<script th:src="@{/js/jquery.counterup.min.js}"></script>
-	<script th:src="@{/js/mail-script.js}"></script>
-	<script th:src="@{/js/main.js}"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script th:src="@{/js/easing.min.js}"></script>
+		<script th:src="@{/js/hoverIntent.js}"></script>
+		<script th:src="@{/js/superfish.min.js}"></script>
+		<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+		<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+		<script th:src="@{/js/owl.carousel.min.js}"></script>
+		<script th:src="@{/js/jquery.sticky.js}"></script>
+		<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+		<script th:src="@{/js/parallax.min.js}"></script>
+		<script th:src="@{/js/waypoints.min.js}"></script>
+		<script th:src="@{/js/jquery.counterup.min.js}"></script>
+		<script th:src="@{/js/mail-script.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+		
+		<script th:src="@{/stars/star-rating.min.js}"></script>
+		<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
 	<script type="text/javascript">
 		$('#time').timepicker({
 			timeFormat : 'h:mm p',
@@ -253,11 +255,12 @@
 			//alert("a"+$("#address1").val());
 		});
 	</script>
-	<script type="text/javascript">
+
+	<!-- <script type="text/javascript">
 		var alertWhenCartsNull = [(${alertWhenCartsNull})]+"";
 		if(alertWhenCartsNull == "true"){
 			alert("No Products In The Shopping Cart");
 		}
-	</script>
+	</script> -->
 </body>
 </html>

@@ -231,13 +231,13 @@ table td.grand {
 						<td class="service" th:text="${tempProduct.productName}"></td>
 						<td class="unit" th:text="${tempProduct.sizeName}"></td>
 						<td class="qty" th:text="${tempProduct.quantity}"></td>
-						<td class="qty" th:text="${tempProduct.price} + ' VND'"></td>
+						<td class="qty" th:text="${#numbers.formatDecimal(tempProduct.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 						<td class="total"
-							th:text="${tempProduct.quantity}*${tempProduct.price} + ' VND'"></td>
+							th:text="${#numbers.formatDecimal(tempProduct.quantity*tempProduct.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 					</tr>
 					<tr>
 						<td colspan="5" class="grand total">TOTAL</td>
-						<td th:text="${tong} + ' VND'"></td>
+						<td th:text="${#numbers.formatDecimal(tong, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 					</tr>
 					<tr>
 						<td colspan="5" class="grand total">MEMBERSHIP DISCOUNT</td>
@@ -245,7 +245,7 @@ table td.grand {
 					</tr>
 					<tr>
 						<td colspan="5" class="grand total">GRAND TOTAL</td>
-						<td th:text="${grandTong} + ' VND'"></td>
+						<td th:text="${#numbers.formatDecimal(grandTong, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 					</tr>
 				</tbody>
 

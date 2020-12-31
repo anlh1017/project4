@@ -203,20 +203,20 @@ table td.grand {
 															<div class="" th:case="3">L</div>
 														</td>
 														<td class="" th:text="${tempOrderDetail.quantity}"></td>
-														<td class="" th:text="${tempOrderDetail.price} + ' VND'"></td>
+														<td class="" th:text="${#numbers.formatDecimal(tempOrderDetail.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 														<td class=""
-															th:text="${tempOrderDetail.price}*${tempOrderDetail.quantity} + ' VND'"></td>
+															th:text="${#numbers.formatDecimal(tempOrderDetail.price*tempOrderDetail.quantity, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 													</tr>
 
 												</tbody>
 											</table>
 											<h6 class="text-right">
-												Total: <span class="" th:text="${tong} + ' VND'"></span>
+												Total: <span class="" th:text="${#numbers.formatDecimal(tong, 0, 'COMMA', 0, 'POINT')} + ' VND'"></span>
 												</h6>
 												<h6 class="text-right">Discount: 
 												 <span class="" th:text="${customer.membership.discountValue} + ' %'"></span>
 												</h6>
-												<h6 class="text-right">Grand Total: <span class="" th:text="${theOrder.total} + ' VND'"></span>
+												<h6 class="text-right">Grand Total: <span class="" th:text="${#numbers.formatDecimal(theOrder.total, 0, 'COMMA', 0, 'POINT')} + ' VND'"></span>
 												</h6>
 											
 										</div>

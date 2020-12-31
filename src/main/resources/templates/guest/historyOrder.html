@@ -199,7 +199,7 @@ table td.grand {
 													th:text="${tempOrder.id}"></span>
 											</a></td>
 											<td class="unit" th:text="${tempOrder.orderDate}"></td>										
-											<td class="unit" th:text="${tempOrder.total} + ' VND'"></td>
+											<td class="unit" th:text="${#numbers.formatDecimal(tempOrder.total, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 
 											<td class="">
 												<div class="btn-group text-right">

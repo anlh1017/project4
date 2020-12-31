@@ -47,27 +47,34 @@ public class CartController {
 	public static List<Cart> carts = new ArrayList<>();
 	String alertWhenCartsNull = "";
 	@RequestMapping(value = "/cart")
-	private String showCart(Model theModel, HttpSession session,Authentication authentication) {
+	private String showCart(Model theModel, HttpSession session,Authentication authentication,RedirectAttributes redirectAttributes) {
+
 		String cusEmail = authentication.getName();
 		Customer customer = customerRepository.findByCustomerEmail(cusEmail).get();
 		theModel.addAttribute("customer", customer);
 		theModel.addAttribute("carts", carts);
-		int tong = 0;
+
+		int tong = 0;		if (carts.size()==0) {
+			alertWhenCartsNull = "true";
+			redirectAttributes.addFlashAttribute("cartnull","Cart Empty! Add Products Please!!!");
+			return "redirect:/";
+		}
 		for (Cart cart : carts) {
 			int subtotal = cart.getPrice()*cart.getQuantity();
 			tong+= subtotal;
 		}
-		
 		theModel.addAttribute("size",sizeRepository.findAll());
 		theModel.addAttribute("tong", tong);		
-		theModel.addAttribute("alertWhenCartsNull", alertWhenCartsNull);
+		
 		return "guest/cart";
 	}
 
 	@GetMapping(value ="/confirmcart")
-	public String confrimcart(Authentication authentication, Model theModel,@RequestParam(value="addressSend")String address,@RequestParam(value="time")String time) {
+	public String confrimcart(Authentication authentication, Model theModel,RedirectAttributes redirectAttributes,@RequestParam(value="addressSend")String address,@RequestParam(value="time")String time) {
+		
 		if (carts.size()==0) {
 			alertWhenCartsNull = "true";
+			redirectAttributes.addFlashAttribute("cartnull","Add Products Please!!!");
 			return "redirect:/cart";
 		}
 		String cusEmail = authentication.getName();
@@ -214,7 +221,8 @@ private String addProductToCart(@ModelAttribute("cartadd") Cart cartadd) {
 
 		carts = new ArrayList<>();
 		request.getSession().setAttribute("PAYPAL","");//reset session
-		return "redirect:/ShowListProducts";
+		redirectAttributes.addFlashAttribute("successMsg","Success Purchases!");
+		return "redirect:/";
 	}
 	public Product getProduct(Cart cart) {
 		Optional<Product> theProduct = productRepository.findById(cart.getProductId());

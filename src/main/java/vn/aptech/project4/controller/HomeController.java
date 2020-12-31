@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.extras.springsecurity5.auth.Authorization;
 
 import vn.aptech.project4.entity.*;
@@ -48,10 +49,12 @@ public class HomeController {
 		this.reviewRepository = reviewRepository;
 		this.sizeRepository = sizeRepository;
 	}
-	//create a mapping for "/hello"
+
 		@GetMapping("/")
-		public String index(Model theModel) {
+		public String index(Model theModel,@ModelAttribute(value="cartnull")String errMsg,@ModelAttribute(value="successMsg")String message) {
 			List<Review> review = reviewRepository.findAll();
+			theModel.addAttribute("cartnull",errMsg);
+			theModel.addAttribute("successMsg",message);
 			theModel.addAttribute("review",review);
 			theModel.addAttribute("avgRating",getAvgRating());
 			return "guest/index";
@@ -134,10 +137,11 @@ public class HomeController {
 
 	@GetMapping("/user")
 	public String Hello(Model theModel) {
-		return "guest/index";
+		return "redirect:/";
 	}
 	@GetMapping("/loginCustomer")
-	public String showLogin(Model theModel) {
+	public String showLogin(Model model) {
+		
 		return "guest/login-customer";
 	}
 	@GetMapping("/user/access-denied")
@@ -152,7 +156,7 @@ public class HomeController {
 		return "guest/register";
 	}
 	@PostMapping("/saveCustomerClient")
-	public String saveCustomerClient(@ModelAttribute("customer") Customer customer,Model theModel,  @RequestParam(value="repeat-pass")String rpw) {
+	public String saveCustomerClient(@ModelAttribute("customer") Customer customer, Model theModel, @RequestParam(value="repeat-pass")String rpw, RedirectAttributes redirectAttributes) {
 		String pw = customer.getCustomer_password();
 		pw="{noop}"+pw;
 		rpw="{noop}"+rpw;
@@ -173,10 +177,10 @@ public class HomeController {
 		customer.setAuthority("ROLE_CUSTOMER");
 		Date date = new Date();
 		customer.setCustomerDate(date);
-		theModel.addAttribute("success", "Register is Success");
+		redirectAttributes.addFlashAttribute("successMsg", "Register Successfully!");
 		customerRepository.save(customer);
 		
-		return"guest/register";
+		return"redirect:/";
 	}
 	@GetMapping("/loginError")
 	  public String loginError(Model model) {
@@ -209,7 +213,7 @@ public class HomeController {
 		return "guest/change-Customer";
 	}
 	@PostMapping("/updateCustomer/{id}")
-	public String updateCustomer(@PathVariable(value="id")int id, Model theModel, @RequestParam(value="password")String pw, @RequestParam(value="password2")String pw2, @RequestParam(value="oldpassword")String oldpw) {
+	public String updateCustomer(@PathVariable(value="id")int id, Model theModel, @RequestParam(value="password")String pw, @RequestParam(value="password2")String pw2, @RequestParam(value="oldpassword")String oldpw, RedirectAttributes redirectAttributes) {
 		pw= "{noop}"+pw;
 		pw2= "{noop}"+pw2;
 		oldpw = "{noop}"+oldpw;
@@ -224,11 +228,11 @@ public class HomeController {
 			theModel.addAttribute("customer", customer);
 			return "guest/change-Customer";
 		}else {
-			theModel.addAttribute("message", "Change Password is Success");
+			redirectAttributes.addFlashAttribute("successMsg", "Password Changed Successfully!");
 			theModel.addAttribute("customer", customer);
 			customer.setCustomer_password(pw);
 			customerRepository.save(customer);
-			return "guest/change-Customer";
+			return "redirect:/";
 		}
 	}
 	@PostMapping("/editCustomer")

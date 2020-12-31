@@ -141,7 +141,8 @@
 
 												<div class="col-lg-8">
 													<div class="bs-component">
-														<input type="text" th:field="*{total_expense}" id="total_expense" class="form-control" readonly="readonly">
+														<input type="hidden" th:field="*{total_expense}" id="total_expense" class="form-control" readonly="readonly">
+														<span th:text="*{#numbers.formatDecimal(total_expense, 0, 'COMMA', 0, 'POINT')}"></span> VND
 													</div>
 												</div>
 											</div>

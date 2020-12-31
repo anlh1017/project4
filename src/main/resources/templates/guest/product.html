@@ -42,7 +42,7 @@
 		</div>
 	</section>
 	<!-- End banner Area -->
-
+<div class="alert alert-primary" style="text-align: center;" role="alert" th:text="${success}" th:if="${success}"></div>
 	<!-- About Generic Start -->
 	<div class="main-wrapper">
 
@@ -71,7 +71,7 @@
 								<p class="price float-right"
 								   th:text="${tempProduct.description}"></p>
 								<th:block th:each="tempSize: ${size}">
-						 <p class="" th:text="${tempProduct.getPrice(tempSize.id)}?'Size '+${tempProduct.getSizeName(tempSize.id)}+' : '+${tempProduct.getPrice(tempSize.id)}:'0'"></p>
+						 <p class="" th:text="${#numbers.formatDecimal(tempProduct.getPrice(tempSize.id), 0, 'COMMA', 0, 'POINT')}?'Size '+${tempProduct.getSizeName(tempSize.id)}+' : '+${#numbers.formatDecimal(tempProduct.getPrice(tempSize.id), 0, 'COMMA', 0, 'POINT')}:'0' "></p>
 								</th:block>
 								<p>
 									<a class="btn btn-rounded btn-danger"

@@ -91,7 +91,8 @@ public class IngredientController {
 	}
 
 	@GetMapping("/create")
-	public String addIngredient(Model theModel) {
+	public String addIngredient(Model theModel,@ModelAttribute(value = "errorMsg")String message) {
+		theModel.addAttribute("errorMsg",message);
 		getInventoryNotification(theModel);
 		theModel.addAttribute("ingredient", new Ingredient());
 		return "form-ingredient";
@@ -100,10 +101,18 @@ public class IngredientController {
 	@PostMapping("/create")
 	public String addIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap, RedirectAttributes redirectAttributes) {
 		theModelMap.addAttribute("ingredient", ingredient);
-		Optional<Ingredient> testIngredient = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
+		if(ingredient.getIngredientName().trim().isEmpty()){
+			redirectAttributes.addFlashAttribute("errorMsg","Ingredient Name must not be empty!");
+			return "redirect:/admin/ingredient/create";
+		}
+		if(ingredient.getUnit().isEmpty()){
+			redirectAttributes.addFlashAttribute("errorMsg","Please select Unit!");
+			return "redirect:/admin/ingredient/create";
+		}
+		Optional<Ingredient> testIngredient = ingredientRepository.findByIngredientName(ingredient.getIngredientName().trim());
 		if(testIngredient.isPresent()){
 			redirectAttributes.addFlashAttribute("errorMsg","Ingredient Name already exists!");
-			return "redirect:/admin/ingredient/list";
+			return "redirect:/admin/ingredient/create";
 		}
 		ingredientRepository.save(ingredient);
 		Inventory inventory = new Inventory();
@@ -115,7 +124,7 @@ public class IngredientController {
 		inventory.setUnit("N/A");
 		inventory.setVendorName("N/A");
 		inventoryRepository.save(inventory);
-		redirectAttributes.addFlashAttribute("successMsg","Add New Ingredient");
+		redirectAttributes.addFlashAttribute("successMsg","Add New Ingredient Successfully");
 		return "redirect:/admin/ingredient/list";
 	}
 
@@ -131,16 +140,19 @@ public class IngredientController {
 	}
 
 	@GetMapping("/delete/{id}")
-	public String deleteIngredient(@PathVariable(value = "id") int theId, Model theModel) {
+	public String deleteIngredient(@PathVariable(value = "id") int theId, Model theModel, RedirectAttributes redirectAttributes) {
 		Optional<Ingredient> theIngredient1 = ingredientRepository.findById(theId);
 		try {
 			if (theIngredient1.isPresent()) {
 				Ingredient theIngredient = theIngredient1.get();
+				if(theIngredient.getInventory().getStatus()==1){
+					inventoryRepository.delete(theIngredient.getInventory());
+				}
 				ingredientRepository.delete(theIngredient);
-				theModel.addAttribute("message", "Cannot Delete, Please Check Inventory!");
+				redirectAttributes.addFlashAttribute("successMsg", "Delete Successfully!");
 			}
 		} catch (Exception e) {
-			theModel.addAttribute("message", "Cannot Delete, Please Check Inventory!");
+			redirectAttributes.addFlashAttribute("errorMsg", "Cannot Delete, Please Check Inventory!");
 		}
 		
 		return "redirect:/admin/ingredient/list";
@@ -149,7 +161,7 @@ public class IngredientController {
 	public String updateIngredient(@ModelAttribute(value = "ingredient") Ingredient ingredient, ModelMap theModelMap, RedirectAttributes redirectAttributes) {
 		theModelMap.addAttribute("ingredient", ingredient);
 		ingredientRepository.save(ingredient);
-		redirectAttributes.addFlashAttribute("successMsg","Update Ingredient");
+		redirectAttributes.addFlashAttribute("successMsg","Update Ingredient Successfully");
 		return "redirect:/admin/ingredient/list";
 	}
 }

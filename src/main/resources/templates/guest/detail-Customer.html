@@ -103,7 +103,7 @@
 												<label for="total expense" class="col-lg-3 control-label">Total expense</label>
 
 												<div class="col-lg-8">
-													<h6><span th:text="*{total_expense}"></span> VND</h6>
+													<h6><span th:text="*{#numbers.formatDecimal(total_expense, 0, 'COMMA', 0, 'POINT')}"></span> VND</h6>
 													
 												</div>
 											</div>

@@ -114,6 +114,7 @@
 															<option value="ml">ml</option>
 															<option value="g">g</option>
 															<option value="piece">piece</option>
+															<option value="piece">bag</option>
 														</select>
 													</div>
 												</div>
@@ -186,7 +187,7 @@
 	<!--Data Tables js-->
 
 	<!-- Jvectormap JS -->
-	<script th:if="${successMsg}">
+	<script th:if="${errorMsg!=''}">
 		/*<![CDATA[*/
 		toastr.options = {
 			"closeButton": true,
@@ -205,8 +206,8 @@
 			"showMethod": "fadeIn",
 			"hideMethod": "fadeOut"
 		}
-		var message = "[[${successMsg}]]" + " successfully!";
-		toastr.success(message);
+		var message = "[[${errorMsg}]]";
+		toastr.error(message);
 		/*]]>*/
 	</script>
 	<script th:if="${lowStockMsg}">

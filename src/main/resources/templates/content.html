@@ -55,7 +55,7 @@
 										<td class="" th:text="${tempProduct.getDescription()}"></td>
 										<td class="" th:text="${tempProduct.getCategory().getName()}"></td>
 										<th:block th:each="tempSize: ${size}">
-											<td class="" th:text="${tempProduct.getPrice(tempSize.id)}?:'0'"></td>
+											<td class="" th:text="${#numbers.formatDecimal(tempProduct.getPrice(tempSize.id), 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 										</th:block>
 										<td class="">
 											<button type="button"
@@ -66,7 +66,7 @@
 												<li><a th:href="@{/admin/recipe/view/{id}(id=${tempProduct.getId()})}">View Recipe</a></li>
 												<li><a th:href="@{/admin/product/editProduct/{id}(id=${tempProduct.getId()})}">Edit</a></li>
 												<li><a th:href="@{/admin/product/DetailProduct/{id}(id=${tempProduct.getId()})}">Detail</a></li>
-												<li><a th:href="@{/admin/product/deleteProduct/{id}(id=${tempProduct.getId()})} "onclick="return confirm('Are you sure?')">Delete</a></li>
+												<li><a th:href="@{/admin/product/deleteProduct/{id}(id=${tempProduct.getId()})}">Delete</a></li>
 											</ul>
 										</td>
 									</tr>
@@ -147,11 +147,10 @@
 						</div>
 					</div>
 				</div>
-				<h2 align="center">Dashboard Chart</h2>
 
 				<div id="container"
 					style="width: 550px; height: 400px; margin: 0 auto"></div>
-
+<br>
 
 				<div id="containerProduct"
 					style="width: 550px; height: 400px; margin: 0 auto"></div>
@@ -319,7 +318,7 @@
 
 										<td class="" th:text="${tempCustomer.customer_phone}"></td>
 										<td class="" th:text="${tempCustomer.address}"></td>
-										<td class="" th:text="${tempCustomer.total_expense} + ' VND'"></td>
+										<td class="" th:text="${#numbers.formatDecimal(tempCustomer.total_expense, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
 										<td class=""><span
 											th:text="${tempCustomer.membership.membership_name}"></span></td>
 

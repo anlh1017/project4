@@ -135,7 +135,7 @@
 															<td class="" th:text="${temp.unit}"></td>
 															<td class="" th:text="${temp.quantity}"></td>
 															<td class="" th:text="${temp.safetyStock}"></td>
-															<td class="" th:text="${temp.price}"></td>
+															<td class="" th:text="${#numbers.formatDecimal(temp.price, 0, 'COMMA', 0, 'POINT')+ ' VND'}"></td>
 															<td class="" th:text="${temp.ratio}"></td>
 															<td class="">
 																<div class="btn-group text-right">
@@ -296,6 +296,7 @@
 		var message = "[[${newOrderMsg}]]";
 		toastr.info(message);
 	</script>
+
 	<!-- /Scripts -->
 </body>
 
