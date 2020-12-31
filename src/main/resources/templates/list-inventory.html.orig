@@ -1,0 +1,920 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Meta and Title -->
+<meta charset="utf-8">
+<title>Index</title>
+<meta name="keywords"
+	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+<meta name="description"
+	content="AdminK - A Responsive HTML5 Admin UI Framework">
+<meta name="author" content="ThemeREX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- c3charts -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/c3charts/c3.min.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+	<link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
+	<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+	<!-- Body Wrap -->
+	<div id="main">
+
+		<!-- Header  -->
+		<header th:replace="header::topheader" />
+		<!-- /Header -->
+
+		<!-- Sidebar  -->
+		<aside th:replace="sidebar::sidebar" id="sidebar_left" />
+		<!-- /Sidebar -->
+
+		<!-- Main Wrapper -->
+		<section id="content_wrapper" class="mb80">
+
+
+			<section class="content_container">
+
+				<div th:replace="topbar::wrapper" />
+				<header th:replace="topbar::main" />
+
+
+
+				<!-- Content -->
+				<section id="content" class="animated fadeIn pt35 pb45">
+					<div class="content-right table-layout">
+
+						<!-- Column Center -->
+						<div class="chute chute-center pbn">
+
+							<!-- Products Status Table -->
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<form th:action="@{/admin/inventory/export/pdf}">
+											<select id="getMonth" name="getMonth">
+												<option value="1">January</option>
+												<option value="2">February</option>
+												<option value="3">March</option>
+												<option value="4">April</option>
+												<option value="5">May</option>
+												<option value="6">June</option>
+												<option value="7">July</option>
+												<option value="8">August</option>
+												<option value="9">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+											</select> <input class="btn btn-info" type="submit" id="exportPdf"
+															 value="Export to PDF" />
+											</form>
+											<span class="panel-title ptn">Inventory</span>
+										</div>
+
+										<div class="panel-body pn mt15">
+											<div class="table-responsive">
+												<table id="myTable"
+													class="table-responsive">
+													<thead>
+														<tr class="">
+															<th>No.</th>
+															<th class="">Ingredient Name</th>
+															<th class="">Vendor Name</th>
+															<th class="">Unit</th>
+															<th class="">Stock</th>
+															<th class="">Safety Stock</th>
+															<th class="">Price</th>
+															<th class="">Ratio</th>
+															<th class="">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="temp,stat : ${inventory}" th:style="${temp.quantity<temp.safetyStock}?'color:red':''">
+
+															<td th:text="${stat.count}"></td>
+															<td class="" th:text="${temp.ingredient.ingredientName}"></td>
+															<td class="" th:text="${temp.vendorName}"></td>
+															<td class="" th:text="${temp.unit}"></td>
+															<td class="" th:text="${temp.quantity}"></td>
+															<td class="" th:text="${temp.safetyStock}"></td>
+															<td class="" th:text="${#numbers.formatDecimal(temp.price, 0, 'COMMA', 0, 'POINT')+ ' VND'}"></td>
+															<td class="" th:text="${temp.ratio}"></td>
+															<td class="">
+																<div class="btn-group text-right">
+																	<button type="button"
+																		class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																		data-toggle="dropdown" aria-expanded="false">
+																		Action <span class="caret"></span>
+																	</button>
+																	<ul class="dropdown-menu" role="menu">
+																		<li><a
+																			th:href="@{/admin/inventory/edit/{id}(id=${temp.id})}">Edit</a></li>
+																		<li><a
+																			th:href="@{/admin/inventory/import/{id}(id=${temp.id})}">Import</a></li>
+																		<li><a
+																			th:href="@{/admin/inventory/export/{id}(id=${temp.id})}">Export</a></li>
+
+																	</ul>
+																</div>
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /Column Center -->
+						<div class="chute chute-right pbn">
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<span class="panel-title ptn">Unmanaged Ingredients</span>
+										</div>
+										<div class="panel-body pn mt15">
+											<div class="table-responsive">
+												<th:block th:if="${unmanagedinventory}">
+													<div class="row" th:each="temp:${unmanagedinventory}">
+														<div class="col-xs-6"><p th:text="${temp.ingredient.ingredientName}"></p></div>
+														<div class="col-xs-6"><a th:href="@{/admin/inventory/edit/{id}(id=${temp.id})}">Manage</a></div>
+
+													</div>
+												</th:block>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- /Content -->
+
+				<!-- Page Footer -->
+				<footer id="content-footer">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+						</div>
+					</div>
+				</footer>
+				<!-- /Page Footer -->
+
+			</section>
+		</section>
+
+
+	</div>
+	<!-- /Body Wrap  -->
+
+	<!-- Scripts -->
+
+	<!-- jQuery -->
+	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+	<!-- /Scripts -->
+	<script>
+		$(document).ready( function () {
+			$('#myTable').DataTable();
+		} );
+	</script>
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
+	<script th:if="${lowStockMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${lowStockMsg}]]";
+		toastr.warning(message);
+	</script>
+	<script th:if="${newOrderMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": true,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${newOrderMsg}]]";
+		toastr.info(message);
+	</script>
+
+	<!-- /Scripts -->
+</body>
+
+</html>
+
+
+
+||||||| 5d7fd6e
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Meta and Title -->
+<meta charset="utf-8">
+<title>Index</title>
+<meta name="keywords"
+	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+<meta name="description"
+	content="AdminK - A Responsive HTML5 Admin UI Framework">
+<meta name="author" content="ThemeREX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- c3charts -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/c3charts/c3.min.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+	<link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
+	<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+	<!-- Body Wrap -->
+	<div id="main">
+
+		<!-- Header  -->
+		<header th:replace="header::topheader" />
+		<!-- /Header -->
+
+		<!-- Sidebar  -->
+		<aside th:replace="sidebar::sidebar" id="sidebar_left" />
+		<!-- /Sidebar -->
+
+		<!-- Main Wrapper -->
+		<section id="content_wrapper" class="mb80">
+
+
+			<section class="content_container">
+
+				<div th:replace="topbar::wrapper" />
+				<header th:replace="topbar::main" />
+
+
+
+				<!-- Content -->
+				<section id="content" class="animated fadeIn pt35 pb45">
+					<div class="content-right table-layout">
+
+						<!-- Column Center -->
+						<div class="chute chute-center pbn">
+
+							<!-- Products Status Table -->
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<form th:action="@{/admin/inventory/export/pdf}">
+											<select id="getMonth" name="getMonth">
+												<option value="1">January</option>
+												<option value="2">February</option>
+												<option value="3">March</option>
+												<option value="4">April</option>
+												<option value="5">May</option>
+												<option value="6">June</option>
+												<option value="7">July</option>
+												<option value="8">August</option>
+												<option value="9">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+											</select> <input class="btn btn-info" type="submit" id="exportPdf"
+															 value="Export to PDF" />
+											</form>
+											<span class="panel-title ptn">Inventory</span>
+										</div>
+
+										<div class="panel-body pn mt15">
+											<div class="table-responsive">
+												<table id="myTable"
+													class="table-responsive">
+													<thead>
+														<tr class="">
+															<th>No.</th>
+															<th class="">Ingredient Name</th>
+															<th class="">Vendor Name</th>
+															<th class="">Unit</th>
+															<th class="">Stock</th>
+															<th class="">Safety Stock</th>
+															<th class="">Price</th>
+															<th class="">Ratio</th>
+															<th class="">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="temp,stat : ${inventory}" th:style="${temp.quantity<temp.safetyStock}?'color:red':''">
+
+															<td th:text="${stat.count}"></td>
+															<td class="" th:text="${temp.ingredient.ingredientName}"></td>
+															<td class="" th:text="${temp.vendorName}"></td>
+															<td class="" th:text="${temp.unit}"></td>
+															<td class="" th:text="${temp.quantity}"></td>
+															<td class="" th:text="${temp.safetyStock}"></td>
+															<td class="" th:text="${temp.price}"></td>
+															<td class="" th:text="${temp.ratio}"></td>
+															<td class="">
+																<div class="btn-group text-right">
+																	<button type="button"
+																		class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																		data-toggle="dropdown" aria-expanded="false">
+																		Action <span class="caret"></span>
+																	</button>
+																	<ul class="dropdown-menu" role="menu">
+																		<li><a
+																			th:href="@{/admin/inventory/edit/{id}(id=${temp.id})}">Edit</a></li>
+																		<li><a
+																			th:href="@{/admin/inventory/import/{id}(id=${temp.id})}">Import</a></li>
+																		<li><a
+																			th:href="@{/admin/inventory/export/{id}(id=${temp.id})}">Export</a></li>
+
+																	</ul>
+																</div>
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /Column Center -->
+						<div class="chute chute-right pbn">
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<span class="panel-title ptn">Unmanaged Ingredients</span>
+										</div>
+										<div class="panel-body pn mt15">
+											<div class="table-responsive">
+												<th:block th:if="${unmanagedinventory}">
+													<div class="row" th:each="temp:${unmanagedinventory}">
+														<div class="col-xs-6"><p th:text="${temp.ingredient.ingredientName}"></p></div>
+														<div class="col-xs-6"><a th:href="@{/admin/inventory/edit/{id}(id=${temp.id})}">Manage</a></div>
+
+													</div>
+												</th:block>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- /Content -->
+
+				<!-- Page Footer -->
+				<footer id="content-footer">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+						</div>
+					</div>
+				</footer>
+				<!-- /Page Footer -->
+
+			</section>
+		</section>
+
+
+	</div>
+	<!-- /Body Wrap  -->
+
+	<!-- Scripts -->
+
+	<!-- jQuery -->
+	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+	<!-- /Scripts -->
+	<script>
+		$(document).ready( function () {
+			$('#myTable').DataTable();
+		} );
+	</script>
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
+	<script th:if="${lowStockMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${lowStockMsg}]]";
+		toastr.warning(message);
+	</script>
+	<script th:if="${newOrderMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": true,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${newOrderMsg}]]";
+		toastr.info(message);
+	</script>
+	<!-- /Scripts -->
+</body>
+
+</html>
+
+
+
+=======
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Meta and Title -->
+<meta charset="utf-8">
+<title>Index</title>
+<meta name="keywords"
+	content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+<meta name="description"
+	content="AdminK - A Responsive HTML5 Admin UI Framework">
+<meta name="author" content="ThemeREX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+<!-- Angular material -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/css/angular-material.min.css}">
+
+<!-- Icomoon -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/icomoon/icomoon.css}">
+
+<!-- AnimatedSVGIcons -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+<!-- c3charts -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/plugins/c3charts/c3.min.css}">
+
+<!-- CSS - allcp forms -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/allcp/forms/css/forms.css}">
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+<!-- CSS - theme -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/skin/default_skin/less/theme.css}">
+	<link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/skin/css/toastr.min.css}">
+	<!-- IE8 HTML5 support -->
+<!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+	<!-- Body Wrap -->
+	<div id="main">
+
+		<!-- Header  -->
+		<header th:replace="header::topheader" />
+		<!-- /Header -->
+
+		<!-- Sidebar  -->
+		<aside th:replace="sidebar::sidebar" id="sidebar_left" />
+		<!-- /Sidebar -->
+
+		<!-- Main Wrapper -->
+		<section id="content_wrapper" class="mb80">
+
+
+			<section class="content_container">
+
+				<div th:replace="topbar::wrapper" />
+				<header th:replace="topbar::main" />
+
+
+
+				<!-- Content -->
+				<section id="content" class="animated fadeIn pt35 pb45">
+					<div class="content-right table-layout">
+
+						<!-- Column Center -->
+						<div class="chute chute-center pbn">
+
+							<!-- Products Status Table -->
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<form th:action="@{/admin/inventory/export/pdf}">
+											<select id="getMonth" name="getMonth">
+												<option value="1">January</option>
+												<option value="2">February</option>
+												<option value="3">March</option>
+												<option value="4">April</option>
+												<option value="5">May</option>
+												<option value="6">June</option>
+												<option value="7">July</option>
+												<option value="8">August</option>
+												<option value="9">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+											</select> <input class="btn btn-info" type="submit" id="exportPdf"
+															 value="Export to PDF" />
+											</form>
+											<span class="panel-title ptn">Inventory</span>
+										</div>
+
+										<div class="panel-body pn mt15">
+											<div class="table-responsive">
+												<table id="myTable"
+													class="table-responsive">
+													<thead>
+														<tr class="">
+															<th>No.</th>
+															<th class="">Ingredient Name</th>
+															<th class="">Vendor Name</th>
+															<th class="">Unit</th>
+															<th class="">Stock</th>
+															<th class="">Safety Stock</th>
+															<th class="">Price</th>
+															<th class="">Ratio</th>
+															<th class="">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="temp,stat : ${inventory}" th:style="${temp.quantity<temp.safetyStock}?'color:red':''">
+
+															<td th:text="${stat.count}"></td>
+															<td class="" th:text="${temp.ingredient.ingredientName}"></td>
+															<td class="" th:text="${temp.vendorName}"></td>
+															<td class="" th:text="${temp.unit}"></td>
+															<td class="" th:text="${temp.quantity}"></td>
+															<td class="" th:text="${temp.safetyStock}"></td>
+															<td class="" th:text="${temp.price}"></td>
+															<td class="" th:text="${temp.ratio}"></td>
+															<td class="">
+																<div class="btn-group text-right">
+																	<button type="button"
+																		class="btn btn-info br2 btn-xs fs10 fw700 dropdown-toggle"
+																		data-toggle="dropdown" aria-expanded="false">
+																		Action <span class="caret"></span>
+																	</button>
+																	<ul class="dropdown-menu" role="menu">
+																		<li><a
+																			th:href="@{/admin/inventory/edit/{id}(id=${temp.id})}">Edit</a></li>
+																		<li><a
+																			th:href="@{/admin/inventory/import/{id}(id=${temp.id})}">Import</a></li>
+																		<li><a
+																			th:href="@{/admin/inventory/export/{id}(id=${temp.id})}">Export</a></li>
+
+																	</ul>
+																</div>
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /Column Center -->
+						<div class="chute chute-right pbn">
+							<div class="row mn">
+								<div class="col-xs-12">
+									<div class="panel">
+										<div class="panel-heading ">
+											<span class="panel-title ptn">Unmanaged Ingredients</span>
+										</div>
+										<div class="panel-body pn mt15">
+											<div class="table-responsive">
+												<th:block th:if="${unmanagedinventory}">
+													<div class="row" th:each="temp:${unmanagedinventory}">
+														<div class="col-xs-6"><p th:text="${temp.ingredient.ingredientName}"></p></div>
+														<div class="col-xs-6"><a th:href="@{/admin/inventory/edit/{id}(id=${temp.id})}">Manage</a></div>
+
+													</div>
+												</th:block>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- /Content -->
+
+				<!-- Page Footer -->
+				<footer id="content-footer">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+								href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+						</div>
+					</div>
+				</footer>
+				<!-- /Page Footer -->
+
+			</section>
+		</section>
+
+
+	</div>
+	<!-- /Body Wrap  -->
+
+	<!-- Scripts -->
+
+	<!-- jQuery -->
+	<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+	<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+	<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+	<script th:src="@{/js/toastr.min.js}"></script>
+
+	<!-- AnimatedSVGIcons -->
+	<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+	<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+	<!-- /Scripts -->
+	<script>
+		$(document).ready( function () {
+			$('#myTable').DataTable();
+		} );
+	</script>
+	<script th:if="${successMsg}">
+		/*<![CDATA[*/
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${successMsg}]]" + " successfully!";
+		toastr.success(message);
+		/*]]>*/
+	</script>
+	<script th:if="${lowStockMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${lowStockMsg}]]";
+		toastr.warning(message);
+	</script>
+	<script th:if="${newOrderMsg}">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": true,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		var message = "[[${newOrderMsg}]]";
+		toastr.info(message);
+	</script>
+	<!-- /Scripts -->
+</body>
+
+</html>
+
+
+
+>>>>>>> 51a7ac473d5209cf9fba4237db0f25a56092f34c

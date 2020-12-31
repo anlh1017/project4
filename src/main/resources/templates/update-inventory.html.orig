@@ -1,0 +1,800 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Meta and Title -->
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="keywords"
+          content="HTML5, Bootstrap 3, Admin Template, UI Theme"/>
+    <meta name="description"
+          content="AdminK - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="ThemeREX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+    <!-- Angular material -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/angular-material.min.css}">
+
+    <!-- Icomoon -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/fonts/icomoon/icomoon.css}">
+
+    <!-- AnimatedSVGIcons -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+    <!-- c3charts -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/plugins/c3charts/c3.min.css}">
+    <!-- select2 CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/js/plugins/select2/css/core.css}">
+    <!-- CSS - allcp forms -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/allcp/forms/css/forms.css}">
+
+    <!-- mCustomScrollbar -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+    <!-- CSS - theme -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/default_skin/less/theme.css}">
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/toastr.min.css}">
+
+    <!-- IE8 HTML5 support -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+<!-- Body Wrap -->
+<div id="main">
+
+    <!-- Header  -->
+    <header th:replace="header::topheader"/>
+    <!-- /Header -->
+
+    <!-- Sidebar  -->
+    <aside th:replace="sidebar::sidebar" id="sidebar_left"/>
+    <!-- /Sidebar -->
+
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="mb80">
+
+
+        <section class="content_container">
+
+            <div th:replace="topbar::wrapper"/>
+            <header th:replace="topbar::main"/>
+
+
+            <!-- Content -->
+            <section id="content" class="animated fadeIn pt35 pb45">
+                <div class="content-right table-layout">
+
+                    <!-- Column Center -->
+                    <div class="chute chute-center pbn">
+
+                        <!-- Products Status Table -->
+                        <div class="row mn">
+                            <form th:action="@{/admin/inventory/saveInventory}"
+                                  method="post" th:object="${inventory}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}"/>
+                                <input type="hidden" th:field="*{ingredient.id}"/>
+                                <input type="hidden" th:field="*{quantity}"/>
+                                <input type="hidden" th:field="*{status}"/>
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <!-- Standard Fields -->
+                                            <div class="panel">
+                                                <div class="panel-heading">
+                                                    <span class="panel-title">Magage Inventory</span>
+                                                </div>
+                                                <span style="color: red" th:text="${errorMsg}"></span>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">Ingredient Name</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <p class="form-control-static text-muted"
+                                                                   th:text="*{ingredient.ingredientName}"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="labelName" class="col-lg-3 control-label">Vendor
+                                                            Name <span style="color: red">(*)</span></label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="text" id="labelName" class="form-control"
+                                                                       placeholder="Type Here..."
+                                                                       th:field="*{vendorName}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price" class="col-lg-3 control-label">Price <span style="color: red">(*)</span></label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="price" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{price}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mbn">
+                                                        <label for="ratio" class="col-lg-3 control-label">Ratio</label>
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="ratio" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{ratio}">
+                                                                <span class="help-block mt5">
+                                              <i class="fa fa-bell"></i> Exchange ratio</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">Unit <span style="color: red">(*)</span></label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <select class="form-control" th:field="*{unit}">
+                                                                    <option value="">--Select</option>
+                                                                    <option value="bag">Bag</option>
+                                                                    <option value="can">Can</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="safetyStock" class="col-lg-3 control-label">Safety Stock</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="safetyStock" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{safetyStock}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6" style="display: inline">
+                                                            <div class="row">
+
+                                                                <button type="submit" class="btn btn-success">
+                                                                    <i class="fa fa-save"></i>
+                                                                    <span> Save</span>
+                                                                </button>
+
+
+                                                                <button type="reset" class="btn btn-warning">
+                                                                    <i class="fa fa-close"></i>
+                                                                    <span> Cancel</span>
+                                                                </button>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- /Column Center -->
+                </div>
+            </section>
+            <!-- /Content -->
+
+            <!-- Page Footer -->
+            <footer id="content-footer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+                                    href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- /Page Footer -->
+
+        </section>
+    </section>
+
+
+</div>
+<!-- /Body Wrap  -->
+<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/js/toastr.min.js}"></script>
+
+<!-- AnimatedSVGIcons -->
+<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+<!-- /Scripts -->
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    })
+</script>
+<script th:if="${lowStockMsg}">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    var message = "[[${lowStockMsg}]]";
+    toastr.warning(message);
+    <!-- /Scripts -->
+</script>
+<!-- /Scripts -->
+
+</body>
+
+</html>
+
+
+
+||||||| 5d7fd6e
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Meta and Title -->
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="keywords"
+          content="HTML5, Bootstrap 3, Admin Template, UI Theme"/>
+    <meta name="description"
+          content="AdminK - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="ThemeREX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+    <!-- Angular material -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/angular-material.min.css}">
+
+    <!-- Icomoon -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/fonts/icomoon/icomoon.css}">
+
+    <!-- AnimatedSVGIcons -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+    <!-- c3charts -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/plugins/c3charts/c3.min.css}">
+    <!-- select2 CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/js/plugins/select2/css/core.css}">
+    <!-- CSS - allcp forms -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/allcp/forms/css/forms.css}">
+
+    <!-- mCustomScrollbar -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+    <!-- CSS - theme -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/default_skin/less/theme.css}">
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/toastr.min.css}">
+
+    <!-- IE8 HTML5 support -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+<!-- Body Wrap -->
+<div id="main">
+
+    <!-- Header  -->
+    <header th:replace="header::topheader"/>
+    <!-- /Header -->
+
+    <!-- Sidebar  -->
+    <aside th:replace="sidebar::sidebar" id="sidebar_left"/>
+    <!-- /Sidebar -->
+
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="mb80">
+
+
+        <section class="content_container">
+
+            <div th:replace="topbar::wrapper"/>
+            <header th:replace="topbar::main"/>
+
+
+            <!-- Content -->
+            <section id="content" class="animated fadeIn pt35 pb45">
+                <div class="content-right table-layout">
+
+                    <!-- Column Center -->
+                    <div class="chute chute-center pbn">
+
+                        <!-- Products Status Table -->
+                        <div class="row mn">
+                            <form th:action="@{/admin/inventory/saveInventory}"
+                                  method="post" th:object="${inventory}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}"/>
+                                <input type="hidden" th:field="*{ingredient.id}"/>
+                                <input type="hidden" th:field="*{quantity}"/>
+                                <input type="hidden" th:field="*{status}"/>
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <!-- Standard Fields -->
+                                            <div class="panel">
+                                                <div class="panel-heading">
+                                                    <span class="panel-title">Magage Inventory</span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">Ingredient Name</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <p class="form-control-static text-muted"
+                                                                   th:text="*{ingredient.ingredientName}"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="labelName" class="col-lg-3 control-label">Vendor
+                                                            Name</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="text" id="labelName" class="form-control"
+                                                                       placeholder="Type Here..."
+                                                                       th:field="*{vendorName}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price" class="col-lg-3 control-label">Price</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="price" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{price}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mbn">
+                                                        <label for="ratio" class="col-lg-3 control-label">Ratio</label>
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="ratio" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{ratio}">
+                                                                <span class="help-block mt5">
+                                              <i class="fa fa-bell"></i> Exchange ratio</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">Unit</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <select class="form-control" th:field="*{unit}">
+                                                                    <option value="">--Select</option>
+                                                                    <option value="bag">Bag</option>
+                                                                    <option value="can">Can</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="safetyStock" class="col-lg-3 control-label">Safety Stock</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="safetyStock" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{safetyStock}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6" style="display: inline">
+                                                            <div class="row">
+
+                                                                <button type="submit" class="btn btn-success">
+                                                                    <i class="fa fa-save"></i>
+                                                                    <span> Save</span>
+                                                                </button>
+
+
+                                                                <button type="reset" class="btn btn-warning">
+                                                                    <i class="fa fa-close"></i>
+                                                                    <span> Cancel</span>
+                                                                </button>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- /Column Center -->
+                </div>
+            </section>
+            <!-- /Content -->
+
+            <!-- Page Footer -->
+            <footer id="content-footer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+                                    href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- /Page Footer -->
+
+        </section>
+    </section>
+
+
+</div>
+<!-- /Body Wrap  -->
+<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/js/toastr.min.js}"></script>
+
+<!-- AnimatedSVGIcons -->
+<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+<!-- /Scripts -->
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    })
+</script>
+<script th:if="${lowStockMsg}">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    var message = "[[${lowStockMsg}]]";
+    toastr.warning(message);
+    <!-- /Scripts -->
+</script>
+<!-- /Scripts -->
+
+</body>
+
+</html>
+
+
+
+=======
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Meta and Title -->
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="keywords"
+          content="HTML5, Bootstrap 3, Admin Template, UI Theme"/>
+    <meta name="description"
+          content="AdminK - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="ThemeREX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}">
+
+    <!-- Angular material -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/angular-material.min.css}">
+
+    <!-- Icomoon -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/fonts/icomoon/icomoon.css}">
+
+    <!-- AnimatedSVGIcons -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/fonts/animatedsvgicons/css/codropsicons.css}">
+
+    <!-- c3charts -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/plugins/c3charts/c3.min.css}">
+    <!-- select2 CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/js/plugins/select2/css/core.css}">
+    <!-- CSS - allcp forms -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/allcp/forms/css/forms.css}">
+
+    <!-- mCustomScrollbar -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css}">
+
+    <!-- CSS - theme -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/default_skin/less/theme.css}">
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/skin/css/toastr.min.css}">
+
+    <!-- IE8 HTML5 support -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sales-stats-page sb-top sb-top-lg">
+
+<!-- Body Wrap -->
+<div id="main">
+
+    <!-- Header  -->
+    <header th:replace="header::topheader"/>
+    <!-- /Header -->
+
+    <!-- Sidebar  -->
+    <aside th:replace="sidebar::sidebar" id="sidebar_left"/>
+    <!-- /Sidebar -->
+
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="mb80">
+
+
+        <section class="content_container">
+
+            <div th:replace="topbar::wrapper"/>
+            <header th:replace="topbar::main"/>
+
+
+            <!-- Content -->
+            <section id="content" class="animated fadeIn pt35 pb45">
+                <div class="content-right table-layout">
+
+                    <!-- Column Center -->
+                    <div class="chute chute-center pbn">
+
+                        <!-- Products Status Table -->
+                        <div class="row mn">
+                            <form th:action="@{/admin/inventory/saveInventory}"
+                                  method="post" th:object="${inventory}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}"/>
+                                <input type="hidden" th:field="*{ingredient.id}"/>
+                                <input type="hidden" th:field="*{quantity}"/>
+                                <input type="hidden" th:field="*{status}"/>
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <!-- Standard Fields -->
+                                            <div class="panel">
+                                                <div class="panel-heading">
+                                                    <span class="panel-title">Magage Inventory</span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">Ingredient Name</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <p class="form-control-static text-muted"
+                                                                   th:text="*{ingredient.ingredientName}"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="labelName" class="col-lg-3 control-label">Vendor
+                                                            Name</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="text" id="labelName" class="form-control"
+                                                                       placeholder="Type Here..."
+                                                                       th:field="*{vendorName}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price" class="col-lg-3 control-label">Price</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="price" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{price}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mbn">
+                                                        <label for="ratio" class="col-lg-3 control-label">Ratio</label>
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="ratio" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{ratio}">
+                                                                <span class="help-block mt5">
+                                              <i class="fa fa-bell"></i> Exchange ratio</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">Unit</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <select class="form-control" th:field="*{unit}">
+                                                                    <option value="">--Select</option>
+                                                                    <option value="bag">Bag</option>
+                                                                    <option value="can">Can</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="safetyStock" class="col-lg-3 control-label">Safety Stock</label>
+
+                                                        <div class="col-lg-8">
+                                                            <div class="bs-component">
+                                                                <input type="number" id="safetyStock" class="form-control"
+                                                                       placeholder="Type Here..." th:field="*{safetyStock}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6" style="display: inline">
+                                                            <div class="row">
+
+                                                                <button type="submit" class="btn btn-success">
+                                                                    <i class="fa fa-save"></i>
+                                                                    <span> Save</span>
+                                                                </button>
+
+
+                                                                <button type="reset" class="btn btn-warning">
+                                                                    <i class="fa fa-close"></i>
+                                                                    <span> Cancel</span>
+                                                                </button>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- /Column Center -->
+                </div>
+            </section>
+            <!-- /Content -->
+
+            <!-- Page Footer -->
+            <footer id="content-footer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+							<span class="footer-legal">© 2016 All rights reserved. <a
+                                    href="#">Therms of use</a> and <a href="#">Privacy policy</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- /Page Footer -->
+
+        </section>
+    </section>
+
+
+</div>
+<!-- /Body Wrap  -->
+<script th:src="@{http://code.jquery.com/jquery-2.1.1.min.js}"></script>
+<script src="//datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+<script th:src="@{/js/utility/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/js/toastr.min.js}"></script>
+
+<!-- AnimatedSVGIcons -->
+<script th:src="@{/fonts/animatedsvgicons/js/snap.svg-min.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons-config.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons.js}"></script>
+<script th:src="@{/fonts/animatedsvgicons/js/svgicons-init.js}"></script>
+
+<!-- /Scripts -->
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    })
+</script>
+<script th:if="${lowStockMsg}">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    var message = "[[${lowStockMsg}]]";
+    toastr.warning(message);
+    <!-- /Scripts -->
+</script>
+<!-- /Scripts -->
+
+</body>
+
+</html>
+
+
+
+>>>>>>> 51a7ac473d5209cf9fba4237db0f25a56092f34c
